@@ -14,7 +14,7 @@ export function getLocaleMetadata(locale: Locale): LocaleMetadata {
   return {
     code: locale,
     name: localeNames[locale],
-    nativeName: locale === 'th' ? 'ไทย' : 'English',
+    nativeName: locale === 'fr' ? 'Français' : 'English',
     flag: localeFlags[locale],
     direction: getTextDirection(locale),
     fontVariant: getFontVariant(locale),
@@ -25,7 +25,7 @@ export function getLocaleMetadata(locale: Locale): LocaleMetadata {
  * Get text direction for a locale
  */
 export function getTextDirection(locale: Locale): TextDirection {
-  // Neither English nor Thai are RTL languages
+  // Neither English nor French are RTL languages
   const rtlLocales: string[] = ['ar', 'he', 'fa', 'ur'];
   return rtlLocales.includes(locale) ? 'rtl' : 'ltr';
 }
@@ -35,8 +35,8 @@ export function getTextDirection(locale: Locale): TextDirection {
  */
 export function getFontVariant(locale: Locale): FontVariant {
   switch (locale) {
-    case 'th':
-      return 'thai';
+    case 'fr':
+      return 'ui';
     default:
       return 'ui';
   }
@@ -46,8 +46,8 @@ export function getFontVariant(locale: Locale): FontVariant {
  * Get CSS class for locale-specific font
  */
 export function getFontClass(locale: Locale, variant?: 'heading' | 'body' | 'ui'): string {
-  if (locale === 'th') {
-    return 'font-thai';
+  if (locale === 'fr') {
+    return 'font-ui';
   }
   
   switch (variant) {
@@ -225,7 +225,7 @@ export function getDefaultLocale(): Locale {
  * Get opposite locale (for quick toggle)
  */
 export function getOppositeLocale(currentLocale: Locale): Locale {
-  return currentLocale === 'en' ? 'th' : 'en';
+  return currentLocale === 'en' ? 'fr' : 'en';
 }
 
 /**
