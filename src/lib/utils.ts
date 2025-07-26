@@ -30,14 +30,14 @@ export function formatNumber(number: number, locale: string, options?: Intl.Numb
 
 // Utility function to get appropriate text direction for locale
 export function getTextDirection(locale: string): 'ltr' | 'rtl' {
-  // Neither English nor Thai are RTL languages
+  // Neither English nor French are RTL languages
   const rtlLocales = ['ar', 'he', 'fa', 'ur'];
   return rtlLocales.includes(locale) ? 'rtl' : 'ltr';
 }
 
-// Utility function to check if locale uses Thai script
-export function isThaiLocale(locale: string): boolean {
-  return locale === 'th';
+// Utility function to check if locale uses French
+export function isFrenchLocale(locale: string): boolean {
+  return locale === 'fr';
 }
 
 // Utility function for tablet-optimized touch target sizes
