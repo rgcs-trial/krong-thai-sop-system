@@ -224,10 +224,10 @@ async function getOfflineQueryData(queryKey: unknown[]): Promise<any> {
       return await offlineStorage.getSOP(sopId);
     } else if (key.includes('sop-categories')) {
       const language = (queryKey[1] as string) || 'en';
-      return await offlineStorage.getCategories(language as 'en' | 'th');
+      return await offlineStorage.getCategories(language as 'en' | 'fr');
     } else if (key.includes('critical-sops')) {
       const language = (queryKey[1] as string) || 'en';
-      return await offlineStorage.getCriticalSOPs(language as 'en' | 'th');
+      return await offlineStorage.getCriticalSOPs(language as 'en' | 'fr');
     }
     
     return null;
