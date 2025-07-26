@@ -14,7 +14,7 @@ interface SOPOfflineDB extends DBSchema {
       title: string;
       content: string;
       category: string;
-      language: 'en' | 'th';
+      language: 'en' | 'fr';
       lastUpdated: string;
       isCritical: boolean;
       mediaFiles?: Array<{
@@ -55,7 +55,7 @@ interface SOPOfflineDB extends DBSchema {
       id: string;
       name: string;
       description: string;
-      language: 'en' | 'th';
+      language: 'en' | 'fr';
       sopIds: string[];
       lastUpdated: string;
     };
@@ -190,7 +190,7 @@ class OfflineStorage {
     }
   }
 
-  async getSOPsByCategory(category: string, language: 'en' | 'th'): Promise<SOPOfflineDB['sopDocuments']['value'][]> {
+  async getSOPsByCategory(category: string, language: 'en' | 'fr'): Promise<SOPOfflineDB['sopDocuments']['value'][]> {
     if (!this.db) await this.init();
     
     try {
@@ -202,7 +202,7 @@ class OfflineStorage {
     }
   }
 
-  async getCriticalSOPs(language: 'en' | 'th'): Promise<SOPOfflineDB['sopDocuments']['value'][]> {
+  async getCriticalSOPs(language: 'en' | 'fr'): Promise<SOPOfflineDB['sopDocuments']['value'][]> {
     if (!this.db) await this.init();
     
     try {
@@ -270,7 +270,7 @@ class OfflineStorage {
     }
   }
 
-  async getCategories(language: 'en' | 'th'): Promise<SOPOfflineDB['sopCategories']['value'][]> {
+  async getCategories(language: 'en' | 'fr'): Promise<SOPOfflineDB['sopCategories']['value'][]> {
     if (!this.db) await this.init();
     
     try {
