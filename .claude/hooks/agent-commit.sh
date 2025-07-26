@@ -91,21 +91,34 @@ should_update_docs() {
 
 # Check if we should update documentation
 STAGED_FILES=$(git diff --cached --name-only)
+info "🔍 Checking staged files for documentation updates:"
+echo "$STAGED_FILES" | while read file; do
+    info "  - $file"
+done
+
 if should_update_docs "$STAGED_FILES"; then
     info "📚 Significant changes detected - updating documentation..."
     
     # Run the update-docs command using Claude
     if command -v claude >/dev/null 2>&1; then
-        if claude /update-docs 2>/dev/null; then
+        info "🤖 Running claude /update-docs..."
+        if claude /update-docs 2>&1; then
             log "✅ Documentation updated successfully"
             # Stage any new documentation changes
+            info "📝 Staging any new documentation changes..."
             git add -A
+            info "📊 Files now staged:"
+            git diff --cached --name-only | while read file; do
+                info "  - $file"
+            done
         else
             warn "⚠️ Documentation update failed, continuing with commit..."
         fi
     else
         warn "⚠️ Claude command not found, skipping documentation update"
     fi
+else
+    info "ℹ️ No significant changes detected for documentation update"
 fi
 
 info "🤖 Analyzing changes with Claude agent..."
