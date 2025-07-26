@@ -8,8 +8,8 @@ import { z } from 'zod';
 // Base validation schemas
 export const UUIDSchema = z.string().uuid('Invalid UUID format');
 
-export const LocaleSchema = z.enum(['en', 'th'], {
-  errorMap: () => ({ message: 'Locale must be either "en" or "th"' })
+export const LocaleSchema = z.enum(['en', 'fr'], {
+  errorMap: () => ({ message: 'Locale must be either "en" or "fr"' })
 });
 
 export const DateStringSchema = z.string().refine(
@@ -39,15 +39,15 @@ export const CreateCategorySchema = z.object({
     .min(1, 'Name is required')
     .max(255, 'Name must not exceed 255 characters')
     .trim(),
-  nameTh: z.string()
-    .min(1, 'Thai name is required')
-    .max(255, 'Thai name must not exceed 255 characters')
+  nameFr: z.string()
+    .min(1, 'French name is required')
+    .max(255, 'French name must not exceed 255 characters')
     .trim(),
   description: z.string()
     .max(1000, 'Description must not exceed 1000 characters')
     .optional(),
-  descriptionTh: z.string()
-    .max(1000, 'Thai description must not exceed 1000 characters')
+  descriptionFr: z.string()
+    .max(1000, 'French description must not exceed 1000 characters')
     .optional(),
   icon: z.string()
     .max(50, 'Icon name must not exceed 50 characters')
