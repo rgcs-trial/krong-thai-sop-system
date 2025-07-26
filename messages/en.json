@@ -1,0 +1,63 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "next": "Next",
+    "previous": "Previous",
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "welcome": "Welcome",
+    "language": "Language",
+    "english": "English",
+    "french": "French"
+  },
+  "auth": {
+    "title": "Restaurant Krong Thai",
+    "subtitle": "SOP Management System",
+    "pinRequired": "Please enter your 4-digit PIN",
+    "pinPlaceholder": "Enter PIN",
+    "loginButton": "Login",
+    "invalidPin": "Invalid PIN. Please try again.",
+    "loginFailed": "Login failed. Please check your credentials.",
+    "selectLocation": "Select Restaurant Location",
+    "locationRequired": "Please select a location to continue"
+  },
+  "sop": {
+    "title": "Standard Operating Procedures",
+    "categories": "Categories",
+    "documents": "Documents",
+    "search": "Search SOPs",
+    "noResults": "No SOPs found",
+    "loading": "Loading SOPs...",
+    "emergency": "Emergency Procedures",
+    "foodSafety": "Food Safety",
+    "kitchenOps": "Kitchen Operations",
+    "serviceStandards": "Service Standards"
+  },
+  "navigation": {
+    "home": "Home",
+    "sops": "SOPs",
+    "training": "Training",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "network": "Network error. Please check your connection.",
+    "unauthorized": "You are not authorized to access this resource",
+    "notFound": "The requested resource was not found",
+    "validation": "Please check your input and try again"
+  }
+}

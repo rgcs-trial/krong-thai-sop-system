@@ -1,0 +1,63 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "welcome": "Bienvenue",
+    "language": "Langue",
+    "english": "Anglais",
+    "french": "Français"
+  },
+  "auth": {
+    "title": "Restaurant Krong Thai",
+    "subtitle": "Système de gestion des POS",
+    "pinRequired": "Veuillez saisir votre code PIN à 4 chiffres",
+    "pinPlaceholder": "Saisir le PIN",
+    "loginButton": "Se connecter",
+    "invalidPin": "PIN invalide. Veuillez réessayer.",
+    "loginFailed": "Échec de la connexion. Veuillez vérifier vos identifiants.",
+    "selectLocation": "Sélectionner l'emplacement du restaurant",
+    "locationRequired": "Veuillez sélectionner un emplacement pour continuer"
+  },
+  "sop": {
+    "title": "Procédures opérationnelles standard",
+    "categories": "Catégories",
+    "documents": "Documents",
+    "search": "Rechercher des POS",
+    "noResults": "Aucune POS trouvée",
+    "loading": "Chargement des POS...",
+    "emergency": "Procédures d'urgence",
+    "foodSafety": "Sécurité alimentaire",
+    "kitchenOps": "Opérations de cuisine",
+    "serviceStandards": "Standards de service"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "sops": "POS",
+    "training": "Formation",
+    "dashboard": "Tableau de bord",
+    "settings": "Paramètres"
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "unauthorized": "Vous n'êtes pas autorisé à accéder à cette ressource",
+    "notFound": "La ressource demandée n'a pas été trouvée",
+    "validation": "Veuillez vérifier votre saisie et réessayer"
+  }
+}
