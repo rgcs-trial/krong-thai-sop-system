@@ -650,7 +650,66 @@ pnpm build
 
 ## Troubleshooting
 
-### Common Issues
+### Critical Build Issues (Current Project State)
+
+#### 1. **Prerender Errors on Dashboard Pages**
+```bash
+# Error: Error occurred prerendering page "/en/dashboard"
+# This prevents production builds from completing
+
+# Debug steps:
+1. Check dashboard page for client-side only code
+2. Verify all components have proper error boundaries
+3. Test individual components for SSR compatibility
+
+# Quick fixes:
+pnpm build --debug  # Run with debug output
+# Look for client-side hooks or browser APIs in dashboard components
+# Move client-side logic to useEffect or dynamic imports
+```
+
+#### 2. **Large Project Size (1.2GB)**
+```bash
+# Current project size is 1.2GB with 34,053 files
+# This indicates dependency bloat or unnecessary files
+
+# Analysis commands:
+du -sh node_modules    # Check node_modules size
+find . -name "*.log" -delete  # Remove log files
+find . -name ".DS_Store" -delete  # Remove system files
+
+# Optimization steps:
+pnpm list --depth=0    # Check top-level dependencies
+npx depcheck          # Find unused dependencies
+npx bundle-analyzer   # Analyze bundle size
+```
+
+#### 3. **Environment Variable Security Issues**
+```bash
+# Security audit for environment variables
+echo "Checking for exposed secrets..."
+grep -r "NEXT_PUBLIC_" .env* 2>/dev/null || echo "No .env files"
+grep -r "SECRET\|KEY\|PASSWORD" .env* 2>/dev/null | grep -v "EXAMPLE"
+
+# Secure configuration:
+# 1. Never commit .env files
+# 2. Use NEXT_PUBLIC_ only for client-safe variables
+# 3. Store sensitive data in server-only environment variables
+```
+
+#### 4. **Database Schema Inconsistencies**
+```bash
+# Check if database types match actual schema
+pnpm type-check  # Will show type errors if schema misaligned
+
+# Fix schema issues:
+pnpm supabase:status  # Check Supabase status
+pnpm db:reset         # Reset local database
+pnpm db:migrate       # Apply all migrations
+pnpm db:generate-types # Regenerate TypeScript types
+```
+
+### Standard Installation Issues
 
 1. **Node.js Version**: Ensure using Node.js 20.x
    ```bash
@@ -675,19 +734,45 @@ pnpm build
    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
    ```
 
-### Useful Commands
+### Emergency Recovery Commands
 ```bash
-# Reset dependencies
-rm -rf node_modules pnpm-lock.yaml
+# Complete project reset (use with caution)
+rm -rf node_modules pnpm-lock.yaml .next
 pnpm install
+pnpm build
 
-# Reset Supabase
-npx supabase stop
-npx supabase start
+# Database reset
+pnpm supabase:stop
+pnpm supabase:start
+pnpm db:reset
+pnpm db:migrate
 
-# Generate fresh types
+# Type regeneration
 pnpm db:generate-types
+pnpm type-check
+
+# Security audit
+npm audit
+pnpm audit
 ```
+
+### Build Success Verification
+```bash
+# Test complete build pipeline
+pnpm lint          # Code quality check
+pnpm type-check    # TypeScript validation
+pnpm test          # Unit tests
+pnpm build         # Production build
+pnpm start         # Production server test
+```
+
+### Getting Help
+If critical issues persist:
+1. Check project logs in `.next/` directory
+2. Review error messages in build output
+3. Verify all dependencies are compatible with Next.js 15.4.4
+4. Consider downgrading problematic packages
+5. Document all error messages for debugging
 
 ## Next Steps
 
