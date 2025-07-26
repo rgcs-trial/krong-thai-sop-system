@@ -147,6 +147,58 @@ RATE_LIMIT: {
 }
 ```
 
+### Production Security Requirements
+
+#### ❌ Critical Issues Requiring Resolution
+
+1. **Environment Variable Exposure**
+   - Risk: Sensitive configuration data may be exposed in client bundles
+   - Impact: API keys, database credentials, secrets could be compromised
+   - Solution: Implement proper environment variable validation and client/server separation
+
+2. **Secret Management**
+   - Risk: Development secrets used in production environment
+   - Impact: Weak security in production deployment
+   - Solution: Implement proper secret rotation and production-grade secret management
+
+3. **Build Security**
+   - Risk: Security configurations may not be properly applied in production builds
+   - Impact: Security features disabled or misconfigured in production
+   - Solution: Security configuration validation in build pipeline
+
+#### 🔧 Immediate Security Hardening Steps
+
+```bash
+# 1. Audit environment variables
+echo "Checking for exposed environment variables..."
+grep -r "NEXT_PUBLIC_" .env* || echo "No .env files found"
+
+# 2. Validate secret management
+echo "Validating secret configurations..."
+grep -r "SECRET\|KEY\|PASSWORD" .env* | grep -v "EXAMPLE" || echo "No secrets found"
+
+# 3. Check for hardcoded credentials
+echo "Scanning for hardcoded secrets..."
+grep -r "sk_\|pk_\|secret\|password" src/ --exclude-dir=node_modules || echo "No hardcoded secrets found"
+
+# 4. Verify security headers
+echo "Testing security headers..."
+curl -I http://localhost:3000 | grep -i "security\|x-\|content-security"
+```
+
+#### 📋 Production Security Checklist
+
+- [ ] Environment variables properly separated (client vs server)
+- [ ] Secrets stored in secure environment-specific storage
+- [ ] Security headers implemented and tested
+- [ ] Authentication system production-ready
+- [ ] Rate limiting properly configured
+- [ ] Audit logging operational
+- [ ] HTTPS enforced in production
+- [ ] Database connections secured
+- [ ] API endpoints protected
+- [ ] Input validation implemented
+
 ### Restaurant-Specific Security Features
 
 1. **Shift-Based Access**: Sessions aligned with restaurant operating hours
