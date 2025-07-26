@@ -1,8 +1,26 @@
 # Frontend Architecture - Restaurant Krong Thai SOP System
 
+## ⚠️ FRONTEND ARCHITECTURE ISSUES
+
+**Current Status**: Frontend experiencing critical build and structural issues  
+**Build Status**: FAILING - Prerender errors on dashboard components  
+**Component State**: Mixed implementation with inconsistencies  
+**Health Score**: 4/10 - Requires architectural review and stabilization  
+**Last Updated**: July 26, 2025
+
+### Critical Frontend Issues
+- ❌ **Dashboard Prerender Failures**: `/en/dashboard` page cannot be statically generated
+- ❌ **Component Architecture**: Inconsistent patterns across component library
+- ⚠️ **Type Safety**: Component props may not align with TypeScript interfaces
+- ⚠️ **Performance**: Large bundle size impacting tablet performance
+
+---
+
 ## Overview
 
 This document outlines the frontend architecture for Restaurant Krong Thai SOP Management System, built with Next.js 15.4.4, React 19.1.0, and shadcn/ui components, optimized for tablet usage in restaurant environments.
+
+**CURRENT STATUS**: Architecture requires significant refactoring to resolve build issues and improve maintainability.
 
 ## Technology Stack
 
