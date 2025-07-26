@@ -155,7 +155,6 @@ Generate a conventional commit message following this format:
 - Be specific about what changed
 - Title line under 72 characters
 - Add body with bullet points describing key changes (required for non-trivial changes)
-- If documentation was auto-updated, mention it briefly in the body
 
 Examples:
 feat(auth): implement PIN validation with session management
