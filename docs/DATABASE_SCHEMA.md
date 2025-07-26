@@ -23,6 +23,36 @@ The database supports a bilingual (English/Thai) restaurant SOP system with role
 - **Form Submissions**: Digital form capture and management
 - **Row Level Security (RLS)**: Tenant isolation and data protection
 
+### Current Schema Issues
+
+#### ❌ Critical Issues Requiring Resolution
+1. **Type Generation Mismatch**: Generated TypeScript types don't match actual database schema
+2. **Missing Tables**: Some tables referenced in code may not exist in current migration
+3. **Column Definition Drift**: Column types and constraints may have diverged from documentation
+4. **Migration State**: Database may not be in sync with latest migration files
+
+#### 🔧 Required Actions
+1. **Schema Audit**: Compare actual database schema with documentation
+2. **Type Regeneration**: Update TypeScript types to match current schema
+3. **Migration Review**: Ensure all migrations have been applied correctly
+4. **Test Data Validation**: Verify sample data matches current schema requirements
+
+#### 📋 Resolution Steps
+```bash
+# 1. Check current migration status
+pnpm supabase:status
+
+# 2. Reset and reapply migrations
+pnpm db:reset
+pnpm db:migrate
+
+# 3. Regenerate TypeScript types
+pnpm db:generate-types
+
+# 4. Verify schema alignment
+pnpm type-check
+```
+
 ## Database Tables
 
 ### 1. Authentication & Users
