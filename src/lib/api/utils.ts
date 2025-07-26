@@ -428,23 +428,23 @@ export function hasPermission(
 }
 
 /**
- * Get error message in Thai
+ * Get error message in French
  */
-export function getThaiErrorMessage(errorCode: string): string {
-  const thaiMessages: Record<string, string> = {
-    'VALIDATION_ERROR': 'ข้อมูลไม่ถูกต้อง',
-    'AUTHENTICATION_REQUIRED': 'จำเป็นต้องเข้าสู่ระบบ',
-    'INSUFFICIENT_PRIVILEGES': 'สิทธิ์ไม่เพียงพอ',
-    'RESOURCE_NOT_FOUND': 'ไม่พบข้อมูลที่ต้องการ',
-    'DUPLICATE_RESOURCE': 'ข้อมูลซ้ำกันในระบบ',
-    'RATE_LIMIT_EXCEEDED': 'เกินขีดจำกัดการใช้งาน',
-    'INTERNAL_SERVER_ERROR': 'เกิดข้อผิดพลาดของระบบ',
-    'INVALID_REQUEST': 'คำขอไม่ถูกต้อง',
-    'FILE_TOO_LARGE': 'ไฟล์มีขนาดใหญ่เกินไป',
-    'INVALID_FILE_TYPE': 'ประเภทไฟล์ไม่ถูกต้อง',
+export function getFrenchErrorMessage(errorCode: string): string {
+  const frenchMessages: Record<string, string> = {
+    'VALIDATION_ERROR': 'Données incorrectes',
+    'AUTHENTICATION_REQUIRED': 'Connexion requise',
+    'INSUFFICIENT_PRIVILEGES': 'Privilèges insuffisants',
+    'RESOURCE_NOT_FOUND': 'Ressource non trouvée',
+    'DUPLICATE_RESOURCE': 'Ressource dupliquée',
+    'RATE_LIMIT_EXCEEDED': 'Limite d’utilisation dépassée',
+    'INTERNAL_SERVER_ERROR': 'Erreur interne du serveur',
+    'INVALID_REQUEST': 'Requête invalide',
+    'FILE_TOO_LARGE': 'Fichier trop volumineux',
+    'INVALID_FILE_TYPE': 'Type de fichier invalide',
   };
 
-  return thaiMessages[errorCode] || 'เกิดข้อผิดพลาด';
+  return frenchMessages[errorCode] || 'Une erreur est survenue';
 }
 
 /**
