@@ -9,7 +9,7 @@ export const defaultLocale: Locale = 'en';
 
 export const localeNames = {
   en: 'English',
-  th: 'ไทย'
+  fr: 'Français'
 } as const;
 
 export const localeFlags = {
