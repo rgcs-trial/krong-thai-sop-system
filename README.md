@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Restaurant Krong Thai SOP Management System
+
+> **Latest Update**: Automated documentation system with smart detection implemented ✅
+
+This is a [Next.js](https://nextjs.org) project for tablet-optimized restaurant SOP management.
 
 ## Getting Started
 
