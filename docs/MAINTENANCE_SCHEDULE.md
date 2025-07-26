@@ -1,6 +1,47 @@
 # Maintenance Schedule - Krong Thai SOP System
 
-## Weekly System Maintenance Tasks
+## ⚠️ CRITICAL ISSUES REQUIRING IMMEDIATE ATTENTION
+
+**Status**: Emergency maintenance required - Health Score 4/10  
+**Priority**: URGENT - Address before regular maintenance  
+**Last Updated**: July 26, 2025
+
+### 🚨 Emergency Tasks (Complete Within 48 Hours)
+
+#### **Critical Build System Repair**
+- [ ] **URGENT**: Fix prerender errors on `/en/dashboard` page
+- [ ] **URGENT**: Resolve database schema inconsistencies  
+- [ ] **URGENT**: Secure environment variable configuration
+- [ ] **URGENT**: Optimize project size (currently 1.2GB)
+- [ ] **URGENT**: Complete TypeScript type alignment
+- [ ] **URGENT**: Establish working production build pipeline
+
+#### **Security Hardening (Immediate)**
+- [ ] **HIGH**: Audit all environment variables for exposure risks
+- [ ] **HIGH**: Implement proper secret management for production
+- [ ] **HIGH**: Review authentication implementation for vulnerabilities
+- [ ] **HIGH**: Validate security headers and configuration
+
+#### **Database Stabilization (Within 24 Hours)**
+- [ ] **CRITICAL**: Reset and validate database schema
+- [ ] **CRITICAL**: Regenerate TypeScript types from current schema
+- [ ] **CRITICAL**: Test all database connections and migrations
+- [ ] **CRITICAL**: Verify Row Level Security policies
+
+### 📋 Critical Issue Resolution Tracking
+
+| Issue | Status | Assigned | Due Date | Priority |
+|-------|--------|----------|----------|----------|
+| Build Failures | 🔴 Open | TBD | Immediate | Critical |
+| Schema Misalignment | 🔴 Open | TBD | 24 hours | Critical |
+| Security Concerns | 🔴 Open | TBD | 48 hours | High |
+| Project Size | 🔴 Open | TBD | 48 hours | High |
+
+---
+
+## Regular Weekly System Maintenance Tasks
+
+**Note**: Regular maintenance should resume ONLY after critical issues are resolved.
 
 ### **Monday: System Performance Review** (30 minutes)
 
