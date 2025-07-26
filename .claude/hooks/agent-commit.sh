@@ -102,8 +102,8 @@ if should_update_docs "$STAGED_FILES"; then
     # Run the update-docs command using Claude
     if command -v claude >/dev/null 2>&1; then
         info "🤖 Running documentation update with restaurant-tech-docs-specialist..."
-        # Use the agent directly since slash commands may not be available
-        if echo "Update all documentation files in the Krong Thai SOP Management System project. Analyze recent changes and ensure all documentation reflects current codebase state. Focus on CLAUDE.md, README.md, and all files in docs/ directory." | claude --agent restaurant-tech-docs-specialist 2>&1; then
+        # Use the agent via --print to trigger documentation updates
+        if echo "Use the restaurant-tech-docs-specialist agent to update all documentation files in the Krong Thai SOP Management System project. Analyze recent changes and ensure all documentation reflects current codebase state. Focus on CLAUDE.md, README.md, and all files in docs/ directory." | claude --print 2>&1; then
             log "✅ Documentation updated successfully"
             # Stage any new documentation changes
             info "📝 Staging any new documentation changes..."
