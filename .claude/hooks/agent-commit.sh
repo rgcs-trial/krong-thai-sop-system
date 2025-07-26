@@ -158,6 +158,7 @@ Generate a conventional commit message following this format:
 - Be specific about what changed
 - Title line under 72 characters
 - Add body with bullet points describing key changes (required for non-trivial changes)
+- If documentation was auto-updated, mention it briefly in the body
 
 Examples:
 feat(auth): implement PIN validation with session management
@@ -165,12 +166,19 @@ feat(auth): implement PIN validation with session management
 - Add 4-digit PIN input component with touch optimization
 - Implement session storage with 8-hour expiration
 - Add authentication middleware for protected routes
+- Update technical documentation to reflect new auth flow
 
 fix(ui): resolve tablet touch responsiveness in SOP cards
 
 - Increase touch target sizes for better accessibility
 - Fix scrolling issues on tablet devices
 - Update hover states for touch interfaces
+
+docs: update installation guide and technical specifications
+
+- Refresh dependency versions in installation guide
+- Update architecture diagrams for new components
+- Synchronize API documentation with current endpoints
 
 Return ONLY the commit message (title + body), nothing else. No explanations or additional text."
 
