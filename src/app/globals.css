@@ -1,26 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond+SC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Restaurant Krong Thai Brand Colors as CSS Variables */
+  --krong-red: 227 27 35; /* #E31B23 */
+  --krong-black: 35 31 32; /* #231F20 */
+  --krong-white: 252 252 252; /* #FCFCFC */
+  --golden-saffron: 212 175 55; /* #D4AF37 */
+  --jade-green: 0 139 139; /* #008B8B */
+  --earthen-beige: 210 180 140; /* #D2B48C */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* shadcn/ui CSS Variables mapped to Restaurant Branding */
+  --background: var(--krong-white);
+  --foreground: var(--krong-black);
+  --card: var(--krong-white);
+  --card-foreground: var(--krong-black);
+  --popover: var(--krong-white);
+  --popover-foreground: var(--krong-black);
+  --primary: var(--krong-red);
+  --primary-foreground: var(--krong-white);
+  --secondary: var(--earthen-beige);
+  --secondary-foreground: var(--krong-black);
+  --muted: 210 40% 95%;
+  --muted-foreground: var(--krong-black);
+  --accent: var(--golden-saffron);
+  --accent-foreground: var(--krong-black);
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: var(--krong-white);
+  --border: 210 40% 85%;
+  --input: 210 40% 90%;
+  --ring: var(--krong-red);
+  --radius: 0.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--krong-black);
+    --foreground: var(--krong-white);
+    --card: var(--krong-black);
+    --card-foreground: var(--krong-white);
+    --popover: var(--krong-black);
+    --popover-foreground: var(--krong-white);
+    --primary: var(--krong-red);
+    --primary-foreground: var(--krong-white);
+    --secondary: 30 25% 15%;
+    --secondary-foreground: var(--krong-white);
+    --muted: 30 25% 15%;
+    --muted-foreground: var(--krong-white);
+    --accent: var(--golden-saffron);
+    --accent-foreground: var(--krong-black);
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: var(--krong-white);
+    --border: 30 25% 25%;
+    --input: 30 25% 20%;
+    --ring: var(--krong-red);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: "Inter", sans-serif;
+  /* Optimize for tablet interactions */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Typography Classes for Restaurant Branding */
+.font-heading {
+  font-family: "EB Garamond SC", "Trajan Pro 3", serif;
+}
+
+.font-body {
+  font-family: "Source Serif Pro", "Minion Pro", serif;
+}
+
+.font-ui {
+  font-family: "Inter", sans-serif;
+}
+
+.font-thai {
+  font-family: "Noto Sans Thai", sans-serif;
+}
+
+/* Tablet-optimized base styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "EB Garamond SC", "Trajan Pro 3", serif;
+}
+
+p, span, div {
+  font-family: "Source Serif Pro", "Minion Pro", serif;
+}
+
+button, input, select, textarea {
+  font-family: "Inter", sans-serif;
+  /* Ensure touch targets are adequate for tablets */
+  min-height: 44px;
+}
+
+/* Thai text styling */
+.text-thai {
+  font-family: "Noto Sans Thai", sans-serif;
+  line-height: 1.6; /* Better line spacing for Thai characters */
+}
+
+/* Restaurant brand utility classes */
+.text-krong-red {
+  color: rgb(227 27 35);
+}
+
+.text-krong-black {
+  color: rgb(35 31 32);
+}
+
+.text-krong-white {
+  color: rgb(252 252 252);
+}
+
+.bg-krong-red {
+  background-color: rgb(227 27 35);
+}
+
+.bg-krong-black {
+  background-color: rgb(35 31 32);
+}
+
+.bg-krong-white {
+  background-color: rgb(252 252 252);
+}
+
+.border-krong-red {
+  border-color: rgb(227 27 35);
+}
+
+/* Accent colors */
+.text-golden-saffron {
+  color: rgb(212 175 55);
+}
+
+.text-jade-green {
+  color: rgb(0 139 139);
+}
+
+.text-earthen-beige {
+  color: rgb(210 180 140);
+}
+
+.bg-golden-saffron {
+  background-color: rgb(212 175 55);
+}
+
+.bg-jade-green {
+  background-color: rgb(0 139 139);
+}
+
+.bg-earthen-beige {
+  background-color: rgb(210 180 140);
 }

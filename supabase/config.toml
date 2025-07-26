@@ -1,0 +1,134 @@
+# Supabase Configuration for Restaurant Krong Thai SOP Management System
+# Auto-generated config file for running locally with `supabase start`
+
+project_id = "krong-thai-sop-system"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[auth]
+enabled = true
+port = 54324
+site_url = "http://localhost:3000"
+
+# JWT settings for PIN-based authentication
+[auth.jwt]
+aud = "authenticated"
+role_claim_key = ".role"
+default_role = "authenticated"
+
+# PIN-based authentication settings
+[auth.email]
+enabled = true
+double_confirm_changes = false
+enable_confirmations = false
+secure_email_change_enabled = false
+
+# External auth providers disabled for PIN-only system
+[auth.external.apple]
+enabled = false
+
+[auth.external.azure]
+enabled = false
+
+[auth.external.bitbucket]
+enabled = false
+
+[auth.external.discord]
+enabled = false
+
+[auth.external.facebook]
+enabled = false
+
+[auth.external.figma]
+enabled = false
+
+[auth.external.github]
+enabled = false
+
+[auth.external.gitlab]
+enabled = false
+
+[auth.external.google]
+enabled = false
+
+[auth.external.keycloak]
+enabled = false
+
+[auth.external.linkedin]
+enabled = false
+
+[auth.external.notion]
+enabled = false
+
+[auth.external.twitch]
+enabled = false
+
+[auth.external.twitter]
+enabled = false
+
+[auth.external.slack]
+enabled = false
+
+[auth.external.spotify]
+enabled = false
+
+[auth.external.workos]
+enabled = false
+
+[auth.external.zoom]
+enabled = false
+
+[auth.sms]
+enabled = false
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+# Database optimizations for restaurant operations
+[db.pooler]
+enabled = false
+port = 54329
+pool_mode = "transaction"
+default_pool_size = 20
+max_client_conn = 100
+
+[realtime]
+enabled = true
+port = 54323
+ip_version = "dual"
+
+[storage]
+enabled = true
+port = 54324
+file_size_limit = "50MiB"
+buckets = [
+  { name = "sop-attachments", public = false },
+  { name = "form-attachments", public = false },
+  { name = "user-avatars", public = true }
+]
+
+[inbucket]
+enabled = true
+port = 54325
+# SMTP server for testing emails
+smtp_port = 54326
+pop3_port = 54327
+
+[functions]
+enabled = true
+port = 54324
+
+[analytics]
+enabled = false
+
+[edge_runtime]
+enabled = true
+port = 54326
+ip_version = "dual"

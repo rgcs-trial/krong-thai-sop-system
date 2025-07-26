@@ -1,0 +1,191 @@
+/**
+ * Main Authentication API Route
+ * Handles both manager and staff login with PIN validation
+ */
+
+import { NextRequest, NextResponse } from 'next/server';
+import { createServerClient } from '@supabase/ssr';
+import bcrypt from 'bcryptjs';
+
+// Logger utility
+function logError(context: string, error: any, metadata?: any) {
+  const timestamp = new Date().toISOString();
+  const errorLog = {
+    timestamp,
+    context,
+    error: error instanceof Error ? {
+      name: error.name,
+      message: error.message,
+      stack: error.stack
+    } : error,
+    metadata
+  };
+  
+  console.error(`[AUTH-ERROR] ${timestamp}:`, JSON.stringify(errorLog, null, 2));
+}
+
+// Create Supabase client
+function createSupabaseClient(request: NextRequest) {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    const error = new Error('Supabase configuration missing');
+    logError('SUPABASE_CONFIG', error, {
+      hasUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    });
+    throw error;
+  }
+
+  try {
+    return createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      {
+        cookies: {
+          get(name) {
+            return request.cookies.get(name)?.value;
+          },
+          set(name, value, options) {
+            // Will be handled by response cookies
+          },
+          remove(name, options) {
+            // Will be handled by response cookies
+          },
+        },
+      }
+    );
+  } catch (error) {
+    logError('SUPABASE_CLIENT_INIT', error);
+    throw error;
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { email, pin, deviceFingerprint } = body;
+
+    // Validate input
+    if (!email || !pin) {
+      return NextResponse.json(
+        { success: false, error: 'Email and PIN are required' },
+        { status: 400 }
+      );
+    }
+
+    if (pin.length !== 4 || !/^\d{4}$/.test(pin)) {
+      return NextResponse.json(
+        { success: false, error: 'PIN must be exactly 4 digits' },
+        { status: 400 }
+      );
+    }
+
+    // Create Supabase client and authenticate
+    const supabase = createSupabaseClient(request);
+
+    // Use Supabase for authentication
+    const { data: user, error } = await supabase
+      .from('auth_users')
+      .select('*')
+      .eq('email', email.toLowerCase())
+      .eq('is_active', true)
+      .single();
+
+    if (error) {
+      logError('DATABASE_QUERY', error, {
+        operation: 'auth_users_lookup',
+        email: email.toLowerCase(),
+        userAgent: request.headers.get('user-agent'),
+        ip: request.headers.get('x-forwarded-for') || 'unknown'
+      });
+      
+      return NextResponse.json(
+        { success: false, error: 'Service temporarily unavailable', code: 'SERVICE_DOWN' },
+        { status: 503 }
+      );
+    }
+
+    if (!user) {
+      // Log failed login attempt (don't log the actual PIN)
+      logError('AUTH_FAILED', 'User not found or inactive', {
+        email: email.toLowerCase(),
+        userAgent: request.headers.get('user-agent'),
+        ip: request.headers.get('x-forwarded-for') || 'unknown'
+      });
+      
+      return NextResponse.json(
+        { success: false, error: 'Invalid credentials' },
+        { status: 401 }
+      );
+    }
+
+    // Verify PIN
+    const pinValid = await bcrypt.compare(pin, user.pin_hash);
+    if (!pinValid) {
+      logError('AUTH_FAILED', 'Invalid PIN', {
+        userId: user.id,
+        email: email.toLowerCase(),
+        userAgent: request.headers.get('user-agent'),
+        ip: request.headers.get('x-forwarded-for') || 'unknown'
+      });
+      
+      return NextResponse.json(
+        { success: false, error: 'Invalid credentials' },
+        { status: 401 }
+      );
+    }
+
+    // Create session token (simplified for development)
+    const sessionToken = Buffer.from(JSON.stringify({
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      restaurantId: user.restaurant_id,
+      deviceFingerprint,
+      loginTime: new Date().toISOString(),
+      expiresAt: new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString() // 8 hours
+    })).toString('base64');
+
+    // Create response
+    const response = NextResponse.json({
+      success: true,
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        fullName: user.full_name,
+        restaurantId: user.restaurant_id
+      },
+      message: 'Authentication successful'
+    });
+
+    // Set secure session cookie
+    response.cookies.set('auth-session', sessionToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 8 * 60 * 60, // 8 hours
+      path: '/'
+    });
+
+    return response;
+
+  } catch (error) {
+    logError('UNEXPECTED_ERROR', error, {
+      operation: 'login',
+      userAgent: request.headers.get('user-agent'),
+      ip: request.headers.get('x-forwarded-for') || 'unknown'
+    });
+    
+    return NextResponse.json(
+      { success: false, error: 'Service temporarily unavailable', code: 'SERVICE_DOWN' },
+      { status: 503 }
+    );
+  }
+}
+
+export async function GET() {
+  return NextResponse.json(
+    { error: 'Method not allowed' },
+    { status: 405 }
+  );
+}

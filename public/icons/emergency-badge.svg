@@ -1,0 +1,21 @@
+
+<svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .emergency { fill: #FF4444; }
+      .white { fill: #FFFFFF; }
+      .black { fill: #000000; }
+    </style>
+  </defs>
+  
+  <!-- Emergency background -->
+  <rect width="72" height="72" rx="10.799999999999999" class="emergency"/>
+  
+  <!-- Warning triangle -->
+  <path d="M36,14.4 L57.6,50.4 L14.4,50.4 Z" 
+        class="white" stroke="#000" stroke-width="2"/>
+  
+  <!-- Exclamation mark -->
+  <rect x="33.839999999999996" y="25.2" width="4.32" height="18" class="black"/>
+  <circle cx="36" cy="46.800000000000004" r="2.16" class="black"/>
+</svg>

@@ -1,0 +1,33 @@
+
+<svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .primary { fill: #E31B23; }
+      .white { fill: #FCFCFC; }
+      .black { fill: #231F20; }
+      .saffron { fill: #D4AF37; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="72" height="72" rx="10.799999999999999" class="white"/>
+  
+  <!-- Main Red Circle -->
+  <circle cx="36" cy="36" r="25.2" class="primary"/>
+  
+  <!-- Inner White Circle -->
+  <circle cx="36" cy="36" r="18" class="white"/>
+  
+  <!-- Thai Pattern/Symbol -->
+  <g transform="translate(36, 36)">
+    <!-- Simple Thai-inspired geometric pattern -->
+    <path d="M-7.2,-7.2 L7.2,-7.2 L0,7.2 Z" class="primary"/>
+    <path d="M-3.6,1.44 L3.6,1.44 L0,5.76 Z" class="saffron"/>
+  </g>
+  
+  <!-- Text/Logo area -->
+  <text x="36" y="61.199999999999996" text-anchor="middle" 
+        font-family="serif" font-size="5.76" class="black" font-weight="bold">
+    KRONG THAI
+  </text>
+</svg>
