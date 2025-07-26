@@ -43,9 +43,10 @@
 ### Technical Requirements
 
 **Server/Hosting Platform:**
-- Vercel (recommended) or similar Node.js hosting
-- Node.js 18.0+ support
+- Vercel (recommended) or similar Node.js hosting  
+- Node.js 20.0+ support (updated requirement)
 - Edge computing capabilities for optimal performance
+- **CRITICAL**: Deployment currently blocked due to build failures
 
 **Database:**
 - Supabase (PostgreSQL with Real-time subscriptions)
