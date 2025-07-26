@@ -144,17 +144,30 @@ Create a comprehensive digital Standard Operating Procedures (SOP) management sy
 
 ## ⚠️ RISK ASSESSMENT
 
+### Critical-Risk Items 🔴 (Immediate Action Required)
+1. **Build System Failure** (90% probability - ACTIVE)
+   - Current Impact: Cannot create production builds
+   - Mitigation: Emergency debugging session, component-by-component testing
+2. **Database Schema Corruption** (80% probability - ACTIVE)
+   - Current Impact: Type mismatches, potential data integrity issues
+   - Mitigation: Schema audit, migration rollback, type regeneration
+3. **Security Vulnerabilities** (70% probability - ACTIVE)
+   - Current Impact: Environment variable exposure risks
+   - Mitigation: Immediate security audit, configuration hardening
+
 ### High-Risk Items 🔴
-1. **Incomplete Requirements Definition** (70% probability)
-   - Mitigation: Thorough stakeholder interviews, detailed user stories
-2. **Restaurant Operations Disruption** (40% probability)
-   - Mitigation: Phased rollout, parallel systems during transition
+1. **Project Size and Performance** (85% probability)
+   - Current Impact: 1.2GB project size affecting development speed
+   - Mitigation: Dependency audit, code splitting, optimization
+2. **Production Deployment Readiness** (90% probability)
+   - Current Impact: Cannot deploy to production due to build failures
+   - Mitigation: Complete system stabilization before deployment
 
 ### Medium-Risk Items 🟡
 1. **Staff Adoption Resistance** (50% probability)
    - Mitigation: Involve staff in design, comprehensive training
-2. **Technical Complexity Underestimation** (45% probability)
-   - Mitigation: MVP approach, 20% buffer in estimates
+2. **Technical Debt Accumulation** (60% probability)
+   - Mitigation: Regular code reviews, refactoring schedule
 
 ---
 
