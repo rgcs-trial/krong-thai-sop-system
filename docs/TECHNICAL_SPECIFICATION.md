@@ -14,12 +14,20 @@
 
 The Restaurant Krong Thai Internal SOP Website is a tablet-optimized web application designed to provide secure, bilingual access to Standard Operating Procedures for restaurant staff. The system features PIN-based authentication, comprehensive SOP management across 16 categories, and 25 core features including offline capability, search functionality, and administrative tools.
 
+**CURRENT STATUS**: The project is experiencing critical issues that must be resolved before production deployment. Build failures, database schema inconsistencies, and security concerns require immediate attention.
+
 ### Key Objectives
 - Provide secure, easy access to restaurant SOPs
 - Ensure tablet-friendly user experience
 - Support bilingual operations (English/Thai)
 - Enable offline access to critical procedures
 - Facilitate content management and staff tracking
+
+### Critical Issues Requiring Resolution
+- ❌ **Build System Failures**: Prerender errors preventing production builds
+- ❌ **Database Schema Misalignment**: TypeScript types don't match actual Supabase schema
+- ⚠️ **Security Configuration**: Environment variable exposure concerns
+- ⚠️ **Project Performance**: 1.2GB project size indicates optimization needs
 
 ---
 
