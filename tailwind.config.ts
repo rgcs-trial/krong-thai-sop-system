@@ -100,7 +100,7 @@ const config: Config = {
         heading: ["var(--font-eb-garamond)", "EB Garamond SC", "Trajan Pro 3", ...defaultTheme.fontFamily.serif],
         body: ["var(--font-source-serif-4)", "Source Serif 4", "Minion Pro", ...defaultTheme.fontFamily.serif],
         ui: ["var(--font-inter)", "Inter", ...defaultTheme.fontFamily.sans],
-        thai: ["var(--font-noto-sans-thai)", "Noto Sans Thai", ...defaultTheme.fontFamily.sans],
+        french: ["var(--font-inter)", "Inter", ...defaultTheme.fontFamily.sans],
         sans: ["var(--font-inter)", "Inter", ...defaultTheme.fontFamily.sans],
         serif: ["var(--font-source-serif-4)", "Source Serif 4", "Minion Pro", ...defaultTheme.fontFamily.serif],
       },
