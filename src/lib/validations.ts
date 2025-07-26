@@ -87,21 +87,21 @@ export const CreateSOPSchema = z.object({
     .min(1, 'Title is required')
     .max(500, 'Title must not exceed 500 characters')
     .trim(),
-  titleTh: z.string()
-    .min(1, 'Thai title is required')
-    .max(500, 'Thai title must not exceed 500 characters')
+  titleFr: z.string()
+    .min(1, 'French title is required')
+    .max(500, 'French title must not exceed 500 characters')
     .trim(),
   content: z.string()
     .min(1, 'Content is required')
     .max(50000, 'Content must not exceed 50,000 characters'),
-  contentTh: z.string()
-    .min(1, 'Thai content is required')
-    .max(50000, 'Thai content must not exceed 50,000 characters'),
+  contentFr: z.string()
+    .min(1, 'French content is required')
+    .max(50000, 'French content must not exceed 50,000 characters'),
   steps: z.array(SOPStepSchema).optional(),
-  stepsTh: z.array(SOPStepSchema).optional(),
+  stepsFr: z.array(SOPStepSchema).optional(),
   attachments: z.array(z.string().url('Invalid attachment URL')).default([]),
   tags: z.array(z.string().max(50, 'Tag must not exceed 50 characters')).default([]),
-  tagsTh: z.array(z.string().max(50, 'Thai tag must not exceed 50 characters')).default([]),
+  tagsFr: z.array(z.string().max(50, 'French tag must not exceed 50 characters')).default([]),
   priority: SOPPrioritySchema.default('medium'),
   effectiveDate: DateStringSchema.optional(),
   reviewDate: DateStringSchema.optional(),
@@ -158,13 +158,13 @@ export const SearchRequestSchema = z.object({
 export const CreateBookmarkSchema = z.object({
   sopId: UUIDSchema,
   notes: z.string().max(1000, 'Notes must not exceed 1000 characters').optional(),
-  notesTh: z.string().max(1000, 'Thai notes must not exceed 1000 characters').optional(),
+  notesFr: z.string().max(1000, 'French notes must not exceed 1000 characters').optional(),
 });
 
 export const UpdateBookmarkSchema = z.object({
   id: UUIDSchema,
   notes: z.string().max(1000, 'Notes must not exceed 1000 characters').optional(),
-  notesTh: z.string().max(1000, 'Thai notes must not exceed 1000 characters').optional(),
+  notesFr: z.string().max(1000, 'French notes must not exceed 1000 characters').optional(),
 });
 
 export const BookmarkListParamsSchema = z.object({
