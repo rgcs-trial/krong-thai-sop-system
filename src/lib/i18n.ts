@@ -14,7 +14,7 @@ export const localeNames = {
 
 export const localeFlags = {
   en: '🇺🇸',
-  th: '🇹🇭'
+  fr: '🇫🇷'
 } as const;
 
 export default getRequestConfig(async ({ locale }) => {
