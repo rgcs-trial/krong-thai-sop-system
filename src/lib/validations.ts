@@ -276,10 +276,10 @@ export const RateLimitSchema = z.object({
 });
 
 // Custom validation functions
-export const validateThai = (text: string): boolean => {
-  // Check if text contains Thai characters (Unicode range U+0E00-U+0E7F)
-  const thaiRegex = /[\u0E00-\u0E7F]/;
-  return thaiRegex.test(text);
+export const validateFrench = (text: string): boolean => {
+  // Check if text contains French characters including accents
+  const frenchRegex = /^[A-Za-z0-9\s\.,!?\-_()'"/\\@#$%^&*+={}[\]:;|<>~`àâäçéèêëïîôöùûüÿñæœÀÂÄÇÉÈÊËÏÎÔÖÙÛÜŸÑÆŒ]+$/;
+  return frenchRegex.test(text);
 };
 
 export const validateEnglish = (text: string): boolean => {
@@ -300,7 +300,7 @@ export const sanitizeHtml = (html: string): string => {
 export interface ValidationErrorDetail {
   field: string;
   message: string;
-  messageTh?: string;
+  messageFr?: string;
   code: string;
   value?: any;
 }
@@ -309,19 +309,19 @@ export const formatValidationErrors = (error: z.ZodError): ValidationErrorDetail
   return error.errors.map((err) => ({
     field: err.path.join('.'),
     message: err.message,
-    messageTh: getThaiErrorMessage(err.code, err.path.join('.')),
+    messageFr: getFrenchErrorMessage(err.code, err.path.join('.')),
     code: err.code,
     value: err.path.length > 0 ? err.path.reduce((obj, key) => obj?.[key], error as any) : undefined,
   }));
 };
 
-const getThaiErrorMessage = (code: string, field: string): string => {
+const getFrenchErrorMessage = (code: string, field: string): string => {
   const errorMessages: Record<string, string> = {
-    'invalid_type': `ประเภทข้อมูลของ ${field} ไม่ถูกต้อง`,
-    'too_small': `${field} มีขนาดเล็กเกินไป`,
-    'too_big': `${field} มีขนาดใหญ่เกินไป`,
-    'invalid_string': `รูปแบบของ ${field} ไม่ถูกต้อง`,
-    'invalid_email': 'รูปแบบอีเมลไม่ถูกต้อง',
+    'invalid_type': `Le type de données de ${field} est incorrect`,
+    'too_small': `${field} est trop petit`,
+    'too_big': `${field} est trop grand`,
+    'invalid_string': `Le format de ${field} est incorrect`,
+    'invalid_email': 'Le format de l\'email est incorrect',
     'invalid_url': 'รูปแบบ URL ไม่ถูกต้อง',
     'custom': `ข้อมูลของ ${field} ไม่ถูกต้อง`,
   };
