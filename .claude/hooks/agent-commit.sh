@@ -5,6 +5,15 @@
 
 set -e  # Exit on any error
 
+# Cleanup function for unexpected exits
+cleanup_on_exit() {
+    # Kill any Claude processes that might still be running from this script
+    pkill -f "claude --print" 2>/dev/null || true
+}
+
+# Set trap to cleanup on script exit
+trap cleanup_on_exit EXIT
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -15,6 +24,55 @@ NC='\033[0m' # No Color
 # Function to log with timestamp
 log() {
     echo -e "${GREEN}[$(date '+%H:%M:%S')] $1${NC}"
+}
+
+# Safe Claude wrapper that ensures cleanup
+run_claude_contained() {
+    local prompt="$1"
+    local temp_file=""
+    local exit_code=0
+    local claude_pid=""
+    
+    # Validate input
+    if [ -z "$prompt" ]; then
+        error "No prompt provided to run_claude_contained"
+        return 1
+    fi
+    
+    # Secure temp file creation
+    if ! temp_file=$(mktemp); then
+        error "Failed to create temporary file"
+        return 1
+    fi
+    
+    # Run Claude with timeout and proper process management
+    (
+        # Use printf for safe output and timeout for safety
+        printf '%s\n' "$prompt" | timeout 60 claude --print > "$temp_file" 2>/dev/null &
+        claude_pid=$!
+        
+        # Wait for Claude to complete naturally
+        wait $claude_pid 2>/dev/null
+        exit_code=$?
+        
+        # Safety check - kill if somehow still running
+        if ps -p $claude_pid > /dev/null 2>&1; then
+            kill $claude_pid 2>/dev/null || true
+        fi
+        
+        exit $exit_code
+    )
+    exit_code=$?
+    
+    # Read and return the result
+    if [ $exit_code -eq 0 ] && [ -f "$temp_file" ] && [ -s "$temp_file" ]; then
+        cat "$temp_file"
+        rm "$temp_file"
+        return 0
+    else
+        rm "$temp_file" 2>/dev/null || true
+        return 1
+    fi
 }
 
 warn() {
@@ -102,8 +160,8 @@ if should_update_docs "$STAGED_FILES"; then
     # Run the update-docs command using Claude
     if command -v claude >/dev/null 2>&1; then
         info "🤖 Running documentation update with restaurant-tech-docs-specialist..."
-        # Use the agent via --print to trigger documentation updates
-        if echo "Use the restaurant-tech-docs-specialist agent to update all documentation files in the Krong Thai SOP Management System project. Analyze recent changes and ensure all documentation reflects current codebase state. Focus on CLAUDE.md, README.md, and all files in docs/ directory." | claude --print 2>&1; then
+        # Use the safe wrapper to trigger documentation updates
+        if run_claude_contained "Use the restaurant-tech-docs-specialist agent to update all documentation files in the Krong Thai SOP Management System project. Analyze recent changes and ensure all documentation reflects current codebase state. Focus on CLAUDE.md, README.md, and all files in docs/ directory."; then
             log "✅ Documentation updated successfully"
             # Stage any new documentation changes
             info "📝 Staging any new documentation changes..."
@@ -202,7 +260,7 @@ if command -v claude >/dev/null 2>&1; then
     info "Calling Claude agent for commit message analysis..."
     
     # Try to get commit message from agent
-    if COMMIT_MSG=$(echo "$AGENT_PROMPT" | claude --print 2>/dev/null); then
+    if COMMIT_MSG=$(run_claude_contained "$AGENT_PROMPT"); then
         # Clean up the response (preserve multi-line format but trim whitespace)
         COMMIT_MSG=$(echo "$COMMIT_MSG" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         
