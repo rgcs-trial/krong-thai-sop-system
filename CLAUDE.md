@@ -94,6 +94,62 @@ docs/             # Project documentation
 
 TypeScript strict mode, ESLint Next.js rules, path aliases (@/*), tablet-first responsive design
 
+## Troubleshooting
+
+### Build Issues
+
+**Prerender Errors on Dashboard Pages**
+```bash
+# Error: Error occurred prerendering page "/en/dashboard"
+# Fix: Check for client-side only code in dashboard components
+pnpm build --debug  # Run build with debug output
+```
+
+**TypeScript Compilation Errors**
+```bash
+# Run type checking to identify issues
+pnpm type-check
+
+# Generate fresh Supabase types
+pnpm db:generate-types
+```
+
+**Large Project Size Optimization**
+```bash
+# Analyze bundle size
+npx @next/bundle-analyzer
+
+# Clean node_modules and reinstall
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
+
+# Check for duplicate dependencies
+pnpm list --depth=0
+```
+
+### Database Issues
+
+**Schema Inconsistencies**
+```bash
+# Reset local database and apply migrations
+pnpm db:reset
+pnpm db:migrate
+
+# Regenerate types from current schema
+pnpm db:generate-types
+```
+
+### Development Environment
+
+**Environment Variable Issues**
+```bash
+# Verify .env.local exists and contains required variables
+cat .env.local
+
+# Check for missing environment variables
+pnpm dev --debug
+```
+
 ## Documentation
 
 **Key docs**: `docs/TECHNICAL_SPECIFICATION.md`, `docs/DATABASE_SCHEMA.md`, `docs/INSTALLATION_GUIDE.md`
