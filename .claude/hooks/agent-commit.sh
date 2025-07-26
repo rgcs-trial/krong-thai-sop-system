@@ -162,7 +162,6 @@ feat(auth): implement PIN validation with session management
 - Add 4-digit PIN input component with touch optimization
 - Implement session storage with 8-hour expiration
 - Add authentication middleware for protected routes
-- Update technical documentation to reflect new auth flow
 
 fix(ui): resolve tablet touch responsiveness in SOP cards
 
