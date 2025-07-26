@@ -59,10 +59,28 @@ src/
 │   ├── error.tsx                 # Global error UI
 │   └── not-found.tsx             # 404 page
 ├── components/                   # Reusable components
-│   ├── ui/                       # shadcn/ui components
-│   ├── forms/                    # Form components
-│   ├── layout/                   # Layout components
-│   └── restaurant/               # Domain-specific components
+│   ├── ui/                       # shadcn/ui components (IMPLEMENTED)
+│   │   ├── alert.tsx
+│   │   ├── badge.tsx
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   ├── dialog.tsx
+│   │   ├── input.tsx
+│   │   └── [12 more UI components]
+│   ├── auth/                     # Authentication components (PARTIAL)
+│   │   ├── location-selector.tsx
+│   │   ├── restaurant-auth-flow.tsx
+│   │   └── staff-pin-login.tsx
+│   ├── sop/                      # SOP management components (IMPLEMENTED)
+│   │   ├── sop-categories-dashboard.tsx
+│   │   ├── sop-document-viewer.tsx
+│   │   ├── sop-navigation-main.tsx
+│   │   └── [6 more SOP components]
+│   ├── training/                 # Training components (PARTIAL)
+│   │   ├── training-analytics-dashboard.tsx
+│   │   ├── training-assessment.tsx
+│   │   └── training-session.tsx
+│   └── [test components and utilities]
 ├── lib/                          # Utilities and configurations
 │   ├── utils.ts
 │   ├── validations/
