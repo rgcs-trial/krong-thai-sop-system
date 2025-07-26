@@ -4,7 +4,7 @@
 
 Tablet-optimized internal SOP management website with bilingual (EN/FR) content, PIN-based authentication, and 16 SOP categories.
 
-**Status**: Basic Next.js setup complete, core features not implemented  
+**Status**: Basic Next.js setup complete, automatic documentation system implemented  
 **Stack**: Next.js 15.4.4, React 19.1.0, TypeScript 5.8.3, Tailwind CSS 4.1
 
 ## Development Commands
