@@ -131,11 +131,6 @@ Sample changes:
 $(echo "$DIFF_CONTENT" | head -50)"
 fi
 
-# Check if documentation was updated in this commit
-DOCS_UPDATED=""
-if echo "$STAGED_FILES" | grep -E "(CLAUDE\.md|README\.md|docs/)" > /dev/null; then
-    DOCS_UPDATED=" with documentation updates"
-fi
 
 # Create context for agent
 CONTEXT="Project: Restaurant Krong Thai SOP Management System (Next.js/React/TypeScript)
