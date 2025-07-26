@@ -109,7 +109,7 @@ export function LanguageToggle({
               <span className="text-lg" role="img" aria-label={localeNames[loc]}>
                 {localeFlags[loc]}
               </span>
-              <span className={`flex-1 ${loc === 'th' ? 'font-thai' : 'font-ui'}`}>
+              <span className={`flex-1 ${loc === 'fr' ? 'font-ui' : 'font-ui'}`}>
                 {localeNames[loc]}
               </span>
               {loc === locale && (
@@ -144,7 +144,7 @@ export function LanguageToggle({
                 {currentFlag}
               </span>
             )}
-            <span className={locale === 'th' ? 'font-thai' : 'font-ui'}>
+            <span className="font-ui">
               {locale.toUpperCase()}
             </span>
             <Languages size={iconSizes[size]} className="opacity-60" />
@@ -171,7 +171,7 @@ export function LanguageToggle({
               <span className="text-lg" role="img" aria-label={localeNames[loc]}>
                 {localeFlags[loc]}
               </span>
-              <span className={`flex-1 ${loc === 'th' ? 'font-thai' : 'font-ui'}`}>
+              <span className={`flex-1 ${loc === 'fr' ? 'font-ui' : 'font-ui'}`}>
                 {localeNames[loc]}
               </span>
               {loc === locale && (
@@ -206,7 +206,7 @@ export function LanguageToggle({
               {currentFlag}
             </span>
           )}
-          <span className={`${locale === 'th' ? 'font-thai' : 'font-ui'} font-medium`}>
+          <span className="font-ui font-medium">
             {currentName}
           </span>
           <Languages size={iconSizes[size]} className="opacity-60" />
@@ -236,7 +236,7 @@ export function LanguageToggle({
             <span className="text-lg" role="img" aria-label={localeNames[loc]}>
               {localeFlags[loc]}
             </span>
-            <span className={`flex-1 ${loc === 'th' ? 'font-thai' : 'font-ui'} font-medium`}>
+            <span className={`flex-1 ${loc === 'fr' ? 'font-ui' : 'font-ui'} font-medium`}>
               {localeNames[loc]}
             </span>
             {loc === locale && (
@@ -256,7 +256,7 @@ export function QuickLanguageToggle({ className = '' }: { className?: string }) 
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  const otherLocale = locale === 'en' ? 'th' : 'en';
+  const otherLocale = locale === 'en' ? 'fr' : 'en';
 
   const handleToggle = () => {
     startTransition(() => {
@@ -286,7 +286,7 @@ export function QuickLanguageToggle({ className = '' }: { className?: string }) 
       <span className="text-sm" role="img" aria-label={localeNames[otherLocale]}>
         {localeFlags[otherLocale]}
       </span>
-      <span className={`text-sm font-medium ${otherLocale === 'th' ? 'font-thai' : 'font-ui'}`}>
+      <span className={`text-sm font-medium ${otherLocale === 'fr' ? 'font-ui' : 'font-ui'}`}>
         {otherLocale.toUpperCase()}
       </span>
     </Button>
