@@ -2,6 +2,24 @@
 
 This document provides comprehensive descriptions for recreating all specialized Claude agents for the Restaurant Krong Thai SOP Management System project.
 
+## 🔄 Agent-Commit Hook Implementation
+
+**Status**: IMPLEMENTED and SIMPLIFIED  
+**Version**: v1.0 (Current)  
+**Last Updated**: July 26, 2025  
+
+### Current Implementation
+- **Hook Location**: Git commit hooks (husky configuration)
+- **Function**: Automatically invokes documentation update agent after commits
+- **Status**: Active and functioning
+- **Simplification**: Hook has been streamlined for better performance and reliability
+
+### Agent-Commit Hook Features
+- Automatic documentation synchronization on commits
+- Integration with documentation update workflows
+- Simplified trigger mechanism for better reliability
+- Reduced overhead and improved performance
+
 ## Project Context
 
 **Technology Stack:**
