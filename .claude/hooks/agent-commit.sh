@@ -113,11 +113,11 @@ Return ONLY the commit message (title + body), nothing else. No explanations or 
 
 # Call Claude agent with --no-tools to prevent recursion
 COMMIT_MSG=""
-if command -v claude-code >/dev/null 2>&1; then
+if command -v claude >/dev/null 2>&1; then
     info "Calling Claude agent for commit message analysis..."
     
     # Try to get commit message from agent
-    if COMMIT_MSG=$(echo "$AGENT_PROMPT" | claude-code --agent general-purpose --no-tools 2>/dev/null); then
+    if COMMIT_MSG=$(echo "$AGENT_PROMPT" | claude --print 2>/dev/null); then
         # Clean up the response (preserve multi-line format but trim whitespace)
         COMMIT_MSG=$(echo "$COMMIT_MSG" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         
