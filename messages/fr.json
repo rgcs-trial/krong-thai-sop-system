@@ -59,5 +59,16 @@
     "unauthorized": "Vous n'êtes pas autorisé à accéder à cette ressource",
     "notFound": "La ressource demandée n'a pas été trouvée",
     "validation": "Veuillez vérifier votre saisie et réessayer"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue sur votre tableau de bord",
+    "totalSops": "Total des POS",
+    "activeCategories": "Catégories actives",
+    "lastLogin": "Dernière connexion",
+    "systemStatus": "État du système",
+    "online": "En ligne",
+    "quickAccess": "Accès rapide",
+    "recentlyViewed": "Récemment consultés",
+    "noRecentSops": "Aucune POS récente"
   }
 }
