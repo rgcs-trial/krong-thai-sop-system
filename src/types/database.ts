@@ -12,9 +12,9 @@ export type AuditAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'LOGIN' | 'LOGOUT' | 
 export interface Restaurant {
   id: string;
   name: string;
-  name_th?: string;
+  name_fr?: string;
   address?: string;
-  address_th?: string;
+  address_fr?: string;
   phone?: string;
   email?: string;
   timezone: string;
@@ -30,7 +30,7 @@ export interface AuthUser {
   pin_hash?: string;
   role: UserRole;
   full_name: string;
-  full_name_th?: string;
+  full_name_fr?: string;
   phone?: string;
   position?: string;
   position_th?: string;
@@ -52,7 +52,7 @@ export interface SOPCategory {
   id: string;
   code: string;
   name: string;
-  name_th: string;
+  name_fr: string;
   description?: string;
   description_th?: string;
   icon?: string;
@@ -68,9 +68,9 @@ export interface SOPDocument {
   category_id: string;
   restaurant_id: string;
   title: string;
-  title_th: string;
+  title_fr: string;
   content: string;
-  content_th: string;
+  content_fr: string;
   steps?: SOPStep[];
   steps_th?: SOPStep[];
   attachments: string[];
@@ -111,7 +111,7 @@ export interface FormTemplate {
   id: string;
   restaurant_id: string;
   name: string;
-  name_th: string;
+  name_fr: string;
   description?: string;
   description_th?: string;
   category?: string;
@@ -316,7 +316,7 @@ export interface TrainingModule {
   restaurant_id: string;
   sop_document_id: string;
   title: string;
-  title_th: string;
+  title_fr: string;
   description?: string;
   description_th?: string;
   duration_minutes: number;
@@ -344,9 +344,9 @@ export interface TrainingSection {
   module_id: string;
   section_number: number;
   title: string;
-  title_th: string;
+  title_fr: string;
   content: string;
-  content_th: string;
+  content_fr: string;
   media_urls: string[];
   estimated_minutes: number;
   is_required: boolean;
@@ -490,7 +490,7 @@ export interface TrainingReminder {
   module_id: string;
   reminder_type: ReminderType;
   title: string;
-  title_th: string;
+  title_fr: string;
   message: string;
   message_th: string;
   scheduled_for: string;
@@ -526,7 +526,7 @@ export interface TrainingAnalytics {
 export interface CreateTrainingModuleRequest {
   sop_document_id: string;
   title: string;
-  title_th: string;
+  title_fr: string;
   description?: string;
   description_th?: string;
   duration_minutes?: number;
@@ -541,9 +541,9 @@ export interface CreateTrainingModuleRequest {
 export interface CreateTrainingSectionRequest {
   section_number: number;
   title: string;
-  title_th: string;
+  title_fr: string;
   content: string;
-  content_th: string;
+  content_fr: string;
   media_urls?: string[];
   estimated_minutes?: number;
   is_required?: boolean;
