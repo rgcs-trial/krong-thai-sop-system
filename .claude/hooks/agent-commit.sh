@@ -51,6 +51,63 @@ if git diff --cached --quiet; then
     exit 0
 fi
 
+# Smart documentation update detection
+should_update_docs() {
+    local staged_files="$1"
+    
+    # Always update docs for these patterns
+    if echo "$staged_files" | grep -E "(package\.json|pnpm-lock\.yaml|CLAUDE\.md|README\.md)" > /dev/null; then
+        return 0  # true
+    fi
+    
+    # Always update for docs directory changes
+    if echo "$staged_files" | grep "^docs/" > /dev/null; then
+        return 0
+    fi
+    
+    # Always update for database/schema changes
+    if echo "$staged_files" | grep -E "(supabase/|\.sql$|database\.ts|types/.*\.ts)" > /dev/null; then
+        return 0
+    fi
+    
+    # Always update for major config changes
+    if echo "$staged_files" | grep -E "(next\.config\.ts|tailwind\.config\.ts|tsconfig\.json)" > /dev/null; then
+        return 0
+    fi
+    
+    # Update for new components/pages (detect new files in key directories)
+    local new_component_files=$(echo "$staged_files" | grep -E "src/(components|app)/.*\.(tsx|ts)$")
+    if [ -n "$new_component_files" ]; then
+        # Check if these are actually new files (not just modifications)
+        for file in $new_component_files; do
+            if ! git log --oneline -- "$file" | head -1 > /dev/null 2>&1; then
+                return 0  # New file detected
+            fi
+        done
+    fi
+    
+    return 1  # false
+}
+
+# Check if we should update documentation
+STAGED_FILES=$(git diff --cached --name-only)
+if should_update_docs "$STAGED_FILES"; then
+    info "📚 Significant changes detected - updating documentation..."
+    
+    # Run the update-docs command using Claude
+    if command -v claude >/dev/null 2>&1; then
+        if claude /update-docs 2>/dev/null; then
+            log "✅ Documentation updated successfully"
+            # Stage any new documentation changes
+            git add -A
+        else
+            warn "⚠️ Documentation update failed, continuing with commit..."
+        fi
+    else
+        warn "⚠️ Claude command not found, skipping documentation update"
+    fi
+fi
+
 info "🤖 Analyzing changes with Claude agent..."
 
 # Collect git change data for agent analysis
