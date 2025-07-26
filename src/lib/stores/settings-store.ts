@@ -11,7 +11,7 @@ import type { BilingualContent, ApiResponse } from '@/types/database';
 // Types
 export interface AppSettings {
   // Language and localization
-  language: 'en' | 'th';
+  language: 'en' | 'fr';
   dateFormat: 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD';
   timeFormat: '12h' | '24h';
   timezone: string;
@@ -181,7 +181,7 @@ export interface SettingsActions {
   // App settings actions
   updateAppSettings: (settings: Partial<AppSettings>) => Promise<void>;
   resetAppSettings: () => Promise<void>;
-  setLanguage: (language: 'en' | 'th') => Promise<void>;
+  setLanguage: (language: 'en' | 'fr') => Promise<void>;
   setTheme: (theme: 'light' | 'dark' | 'auto') => Promise<void>;
   toggleOfflineMode: () => Promise<void>;
   
@@ -430,7 +430,7 @@ export const useSettingsStore = create<SettingsStore>()(
         await get().saveSettings();
       },
 
-      setLanguage: async (language: 'en' | 'th'): Promise<void> => {
+      setLanguage: async (language: 'en' | 'fr'): Promise<void> => {
         await get().updateAppSettings({ language });
         
         // Apply language change immediately
