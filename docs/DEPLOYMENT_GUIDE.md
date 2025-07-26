@@ -475,19 +475,53 @@ pnpm test:e2e     # Run integration tests
 
 ### Vercel Deployment (Recommended)
 
-#### Step 1: Prepare for Deployment
+#### Step 1: Resolve Critical Issues BEFORE Deployment
 
-1. **Verify Build Success**
+⚠️ **DEPLOYMENT CURRENTLY BLOCKED** - Complete these steps first:
+
+1. **Fix Build Failures**
    ```bash
-   pnpm build
-   pnpm start
+   # CURRENT STATUS: BUILD FAILING
+   pnpm build  # Error: prerender failure on /en/dashboard
+   
+   # Required fixes:
+   # 1. Identify client-side code in dashboard components
+   # 2. Move browser APIs to useEffect or dynamic imports
+   # 3. Add proper error boundaries
    ```
 
-2. **Run Production Tests**
+2. **Resolve Database Issues**
    ```bash
-   pnpm test
-   pnpm test:e2e
-   pnpm lint
+   # Fix schema inconsistencies
+   pnpm db:reset
+   pnpm db:migrate
+   pnpm db:generate-types
+   pnpm type-check  # Must pass without errors
+   ```
+
+3. **Security Hardening**
+   ```bash
+   # Audit environment variables
+   grep -r "NEXT_PUBLIC_" .env* 2>/dev/null
+   # Ensure no sensitive data exposed to client
+   ```
+
+4. **Optimize Project Size**
+   ```bash
+   # Current size: 1.2GB (too large for efficient deployment)
+   du -sh node_modules
+   pnpm list --depth=0  # Review dependencies
+   # Remove unnecessary files and optimize bundles
+   ```
+
+5. **Verify All Systems**
+   ```bash
+   # Only proceed if ALL these pass:
+   pnpm lint          # ✅ Code quality
+   pnpm type-check    # ✅ TypeScript validation  
+   pnpm test          # ✅ Unit tests
+   pnpm build         # ✅ Production build (CURRENTLY FAILING)
+   pnpm start         # ✅ Production server
    ```
 
 #### Step 2: Deploy to Vercel
