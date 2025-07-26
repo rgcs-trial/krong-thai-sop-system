@@ -35,8 +35,9 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
     exit 0
 fi
 
-# Check if there are any changes to commit
-if git diff --quiet && git diff --cached --quiet; then
+# Check if there are any changes to commit (including untracked files)
+UNTRACKED_FILES=$(git ls-files --others --exclude-standard)
+if git diff --quiet && git diff --cached --quiet && [ -z "$UNTRACKED_FILES" ]; then
     log "No changes detected. Skipping auto-commit."
     exit 0
 fi
