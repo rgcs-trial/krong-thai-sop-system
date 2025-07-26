@@ -59,5 +59,16 @@
     "unauthorized": "You are not authorized to access this resource",
     "notFound": "The requested resource was not found",
     "validation": "Please check your input and try again"
+  },
+  "dashboard": {
+    "welcome": "Welcome to your Dashboard",
+    "totalSops": "Total SOPs",
+    "activeCategories": "Active Categories",
+    "lastLogin": "Last Login",
+    "systemStatus": "System Status",
+    "online": "Online",
+    "quickAccess": "Quick Access",
+    "recentlyViewed": "Recently Viewed",
+    "noRecentSops": "No recent SOPs"
   }
 }
