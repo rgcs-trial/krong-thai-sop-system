@@ -80,7 +80,7 @@ should_update_docs() {
     if [ -n "$new_component_files" ]; then
         # Check if these are actually new files (not just modifications)
         for file in $new_component_files; do
-            if ! git log --oneline -- "$file" | head -1 > /dev/null 2>&1; then
+            if [ ! -f "$file" ] || [ "$(git log --oneline -- "$file" 2>/dev/null | wc -l)" -le 1 ]; then
                 return 0  # New file detected
             fi
         done
