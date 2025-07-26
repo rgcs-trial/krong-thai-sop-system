@@ -2,6 +2,19 @@
 
 Complete setup instructions for the Restaurant Krong Thai Standard Operating Procedures website using the latest 2025 technology stack with Next.js 15.4.4, React 19.1.0, and shadcn/ui.
 
+## ⚠️ CRITICAL INSTALLATION ISSUES
+
+**Current Status**: Installation process has critical issues that must be resolved  
+**Project Health**: 4/10 - Requires significant troubleshooting  
+**Build Status**: FAILING - Prerender errors prevent production builds  
+**Last Updated**: July 26, 2025
+
+### Known Issues
+- ❌ **Build Failures**: Prerender errors on dashboard pages
+- ❌ **Dependency Bloat**: 1.2GB project size with 34,053 files
+- ⚠️ **Environment Security**: Configuration hardening required
+- ⚠️ **Schema Misalignment**: Database types don't match implementation
+
 ## Prerequisites
 
 ### System Requirements
