@@ -2,6 +2,13 @@
 
 This document provides a comprehensive overview of the PostgreSQL database schema for the Restaurant Krong Thai Standard Operating Procedures (SOP) management system, deployed on Supabase.
 
+## ⚠️ CRITICAL NOTICE - Schema Inconsistencies Detected
+
+**Status**: Schema misalignment between TypeScript types and actual database implementation  
+**Impact**: Type safety compromised, potential runtime errors  
+**Required Action**: Immediate schema audit and type regeneration needed  
+**Last Updated**: July 26, 2025
+
 ## Overview
 
 The database supports a bilingual (English/Thai) restaurant SOP system with role-based access control, audit logging, and form submissions. The system is designed for multi-tenant restaurant operations with comprehensive tracking and reporting capabilities.
