@@ -10,7 +10,7 @@ interface GlobalState {
   currentTheme: 'light' | 'dark';
   
   // User Preferences
-  language: 'en' | 'th';
+  language: 'en' | 'fr';
   tabletMode: boolean;
   offlineMode: boolean;
   
@@ -34,7 +34,7 @@ interface GlobalState {
   // Actions
   setLoading: (loading: boolean) => void;
   toggleSidebar: () => void;
-  setLanguage: (language: 'en' | 'th') => void;
+  setLanguage: (language: 'en' | 'fr') => void;
   setCurrentPage: (page: string) => void;
   setBreadcrumbs: (breadcrumbs: Array<{ id: string; label: string; href: string }>) => void;
   addNotification: (notification: Omit<GlobalState['notifications'][0], 'id' | 'timestamp'>) => void;
@@ -71,7 +71,7 @@ export const useGlobalStore = create<GlobalState>()(
           state.isSidebarOpen = !state.isSidebarOpen;
         }),
 
-      setLanguage: (language: 'en' | 'th') =>
+      setLanguage: (language: 'en' | 'fr') =>
         set((state) => {
           state.language = language;
         }),
