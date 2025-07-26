@@ -1,5 +1,26 @@
 # Restaurant Krong Thai SOP Management System - Deployment Guide
 
+## 🚨 CRITICAL DEPLOYMENT NOTICE
+
+**DEPLOYMENT STATUS**: BLOCKED - Critical issues prevent production deployment  
+**Health Score**: 4/10 - Requires immediate resolution before deployment  
+**Last Updated**: July 26, 2025  
+
+### ❌ Deployment Blockers
+- **Build Failures**: Prerender errors on dashboard pages prevent production builds
+- **Database Issues**: Schema inconsistencies cause type safety failures
+- **Security Concerns**: Environment variable configuration needs hardening
+- **Performance Issues**: 1.2GB project size may cause deployment timeouts
+
+### ⚠️ Required Actions Before Deployment
+1. Fix all build failures and prerender errors
+2. Resolve database schema inconsistencies
+3. Implement proper environment variable security
+4. Optimize project size and dependencies
+5. Complete security audit and hardening
+
+---
+
 ## Table of Contents
 
 1. [Prerequisites & Requirements](#prerequisites--requirements)
