@@ -617,3 +617,34 @@ export interface TrainingSearchParams {
   search?: string;
   tags?: string[];
 }
+
+// Database schema type for Supabase
+export interface Database {
+  public: {
+    Tables: {
+      restaurants: {
+        Row: Restaurant;
+        Insert: Omit<Restaurant, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<Restaurant, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      auth_users: {
+        Row: AuthUser;
+        Insert: Omit<AuthUser, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<AuthUser, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      sop_categories: {
+        Row: SOPCategory;
+        Insert: Omit<SOPCategory, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<SOPCategory, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      sop_documents: {
+        Row: SOPDocument;
+        Insert: Omit<SOPDocument, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<SOPDocument, 'id' | 'created_at' | 'updated_at'>>;
+      };
+    };
+    Views: {};
+    Functions: {};
+    Enums: {};
+  };
+}
