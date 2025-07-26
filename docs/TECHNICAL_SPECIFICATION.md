@@ -54,8 +54,15 @@ The Restaurant Krong Thai Internal SOP Website is a tablet-optimized web applica
 - **Package Manager**: pnpm
 - **Code Quality**: ESLint, Prettier, TypeScript
 - **Testing**: Vitest, React Testing Library, Playwright
-- **Deployment**: Vercel (recommended)
+- **Deployment**: Vercel (recommended) - **CURRENTLY BLOCKED**
 - **Monitoring**: Vercel Analytics + Custom logging
+
+### 2.4 Current Development Issues
+- **Build System**: Prerender errors on `/en/dashboard` preventing production builds
+- **Dependencies**: Project size (1.2GB) with 34,053 source files indicating potential dependency bloat
+- **Type Safety**: Misalignment between generated Supabase types and actual database schema
+- **Security**: Environment variable configuration needs hardening for production
+- **Performance**: Large bundle sizes may impact tablet performance
 
 ---
 
