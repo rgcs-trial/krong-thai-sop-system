@@ -167,6 +167,15 @@ if git commit -m "$FULL_COMMIT_MSG"; then
     
     # Show the commit
     git log --oneline -1
+    
+    # Push to remote
+    info "🚀 Pushing to remote repository..."
+    if git push; then
+        log "✅ Push successful!"
+    else
+        warn "⚠️ Push failed - commit was successful but push encountered an error"
+        # Don't exit with error since commit was successful
+    fi
 else
     error "❌ Commit failed!"
     exit 1
