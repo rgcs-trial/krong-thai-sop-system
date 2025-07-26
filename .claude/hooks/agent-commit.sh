@@ -130,7 +130,7 @@ if command -v claude >/dev/null 2>&1; then
         warn "Claude agent call failed. Using fallback commit message."
     fi
 else
-    warn "claude-code command not found. Using fallback commit message."
+    warn "claude command not found. Using fallback commit message."
 fi
 
 # Fallback commit message if agent fails
