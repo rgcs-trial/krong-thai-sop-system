@@ -1,9 +1,0 @@
-Testing Claude auto-commit hook functionality
-
-This file is created to test the agent-based auto-commit hook.
-
-Features being tested:
-- Agent analysis of file changes
-- Intelligent commit message generation
-- Conventional commit format
-- Descriptive commit body with bullet points
