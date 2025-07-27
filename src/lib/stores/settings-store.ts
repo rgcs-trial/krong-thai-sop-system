@@ -430,12 +430,26 @@ export const useSettingsStore = create<SettingsStore>()(
         await get().saveSettings();
       },
 
-      setLanguage: async (language: 'en' | 'fr'): Promise<void> => {
+      setLanguage: async (language: 'en' | 'th' | 'fr'): Promise<void> => {
         await get().updateAppSettings({ language });
         
         // Apply language change immediately
         if (typeof document !== 'undefined') {
           document.documentElement.lang = language;
+          
+          // Add Thai language specific class for font rendering
+          if (language === 'th') {
+            document.documentElement.classList.add('lang-thai');
+            document.documentElement.classList.remove('lang-french');
+          } else if (language === 'fr') {
+            document.documentElement.classList.add('lang-french');
+            document.documentElement.classList.remove('lang-thai');
+          } else {
+            document.documentElement.classList.remove('lang-thai', 'lang-french');
+          }
+          
+          // Set text direction attribute for future RTL support
+          document.documentElement.dir = 'ltr'; // Thai is LTR, keeping for future expansion
         }
       },
 
