@@ -47,7 +47,7 @@ export function LanguageToggle({
     startTransition(async () => {
       try {
         // Update language preference in settings store
-        await setLanguage(newLocale as 'en' | 'fr' | 'th');
+        await setLanguage(newLocale as 'en' | 'fr');
         
         // Store language preference in session storage for immediate persistence
         sessionStorage.setItem('preferred-language', newLocale);
@@ -136,7 +136,7 @@ export function LanguageToggle({
               <span className="text-lg" role="img" aria-label={localeNames[loc]}>
                 {localeFlags[loc]}
               </span>
-              <span className={`flex-1 ${loc === 'th' ? 'font-thai' : 'font-ui'}`}>
+              <span className={`flex-1 ${font-ui}`}>
                 {localeNames[loc]}
               </span>
               {isPending ? (
@@ -200,7 +200,7 @@ export function LanguageToggle({
               <span className="text-lg" role="img" aria-label={localeNames[loc]}>
                 {localeFlags[loc]}
               </span>
-              <span className={`flex-1 ${loc === 'th' ? 'font-thai' : 'font-ui'}`}>
+              <span className={`flex-1 ${font-ui}`}>
                 {localeNames[loc]}
               </span>
               {isPending ? (
@@ -298,7 +298,7 @@ export function LanguageToggle({
 // Quick toggle between languages for space-constrained areas
 export function QuickLanguageToggle({ 
   className = '',
-  preferredLanguages = ['en', 'th'] 
+  preferredLanguages = ['en', 'fr'] 
 }: { 
   className?: string;
   preferredLanguages?: Locale[];
@@ -322,7 +322,7 @@ export function QuickLanguageToggle({
     startTransition(async () => {
       try {
         // Update language preference in settings store
-        await setLanguage(nextLocale as 'en' | 'fr' | 'th');
+        await setLanguage(nextLocale as 'en' | 'fr');
         
         // Store language preference in session storage for immediate persistence
         sessionStorage.setItem('preferred-language', nextLocale);
@@ -368,7 +368,7 @@ export function QuickLanguageToggle({
           <span className="text-sm" role="img" aria-label={localeNames[nextLocale]}>
             {localeFlags[nextLocale]}
           </span>
-          <span className={`text-sm font-medium ${nextLocale === 'th' ? 'font-thai' : 'font-ui'}`}>
+          <span className={`text-sm font-medium ${font-ui}`}>
             {nextLocale.toUpperCase()}
           </span>
         </>
