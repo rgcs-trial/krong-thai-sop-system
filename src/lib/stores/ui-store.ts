@@ -836,7 +836,7 @@ export const useUIStore = create<UIStore>()(
 
       hideToast: (id: string) => {
         set((state) => {
-          const index = state.notifications.toasts.findIndex(t => t.id === id);
+          const index = state.notifications.toasts.findIndex((t: any) => t.id === id);
           if (index >= 0) {
             state.notifications.toasts.splice(index, 1);
           }
