@@ -120,7 +120,7 @@ Next Review Date: [Date]
 
 **Day 1-2: Content Development**
 - [ ] Subject matter expert creates draft content
-- [ ] Bilingual translation (EN/TH) completion
+- [ ] Bilingual translation (EN/FR) completion
 - [ ] Supporting media (images, videos) preparation
 - [ ] Initial formatting and structure review
 - [ ] Draft saved in system with "Development" status
