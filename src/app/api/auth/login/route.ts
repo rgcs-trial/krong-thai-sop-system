@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
     
     // Determine locale from Accept-Language header or default to 'en'
     const acceptLanguage = request.headers.get('accept-language') || '';
-    const locale = acceptLanguage.includes('th') ? 'th' : 'en';
+    const locale = acceptLanguage.includes('fr') ? 'fr' : 'en';
     
     console.log('[AUTH-DEBUG] Login attempt:', { email, pinLength: pin?.length, locale });
 
