@@ -101,6 +101,12 @@ export function TrainingAssessment({
   const [showExplanation, setShowExplanation] = useState(false);
   const [completedAssessment, setCompletedAssessment] = useState<AssessmentType | null>(null);
   const [showRetakeDialog, setShowRetakeDialog] = useState(false);
+  const [showQuestionFeedback, setShowQuestionFeedback] = useState(false);
+  const [feedbackQuestion, setFeedbackQuestion] = useState<TrainingQuestion | null>(null);
+  const [feedbackCorrect, setFeedbackCorrect] = useState<boolean | null>(null);
+  const [instantFeedbackEnabled, setInstantFeedbackEnabled] = useState(true);
+  const [adaptiveDifficulty, setAdaptiveDifficulty] = useState(true);
+  const [answeredQuestions, setAnsweredQuestions] = useState<Set<string>>(new Set());
 
   // Initialize assessment
   useEffect(() => {
