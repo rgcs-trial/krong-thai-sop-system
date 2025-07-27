@@ -41,6 +41,7 @@ export {
 } from "./select"
 export { Separator } from "./separator"
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs"
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./tooltip"
 export { 
   Toast, 
   ToastProvider, 
