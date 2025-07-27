@@ -50,7 +50,7 @@ export default function AdminSettingsPage() {
           </TabsTrigger>
           <TabsTrigger value="users" className="flex flex-col items-center gap-1 text-xs">
             <Users size={16} />
-            {t('admin.settings.users')}
+            Users
           </TabsTrigger>
           <TabsTrigger value="database" className="flex flex-col items-center gap-1 text-xs">
             <Database size={16} />
