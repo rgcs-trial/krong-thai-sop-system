@@ -281,7 +281,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
           setShowLocationSelector(false);
           setManagerUser(null);
         }}
-        locale={locale}
+        locale={locale as 'en' | 'fr'}
         isLoading={isSubmitting}
       />
     );
