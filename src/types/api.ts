@@ -126,7 +126,7 @@ export interface SOPResponse extends Omit<SOPDocument, 'creator' | 'updater' | '
 // Search API types
 export interface SearchRequest {
   query: string;
-  language?: 'en' | 'th' | 'both';
+  language?: 'en' | 'fr' | 'both';
   categoryId?: string;
   status?: SOPStatus;
   priority?: SOPPriority;
@@ -309,7 +309,7 @@ export interface MiddlewareContext {
   timestamp: string;
   ipAddress?: string;
   userAgent?: string;
-  locale: 'en' | 'th';
+  locale: 'en' | 'fr';
 }
 
 // Rate limiting types
