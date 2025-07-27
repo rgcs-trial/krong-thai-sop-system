@@ -145,7 +145,7 @@ export const SearchRequestSchema = z.object({
     .min(1, 'Search query is required')
     .max(500, 'Search query must not exceed 500 characters')
     .trim(),
-  language: z.enum(['en', 'th', 'both']).default('both'),
+  language: z.enum(['en', 'fr', 'both']).default('both'),
   categoryId: UUIDSchema.optional(),
   status: SOPStatusSchema.optional(),
   priority: SOPPrioritySchema.optional(),
