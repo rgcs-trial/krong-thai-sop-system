@@ -211,7 +211,7 @@ export function useSearch(locale: string = 'en') {
       ${titleSearch}.ilike.%${query}%,
       ${contentSearch}.ilike.%${query}%,
       tags.cs.{${query}},
-      tags_th.cs.{${query}}
+      tags_fr.cs.{${query}}
     `);
 
     // Apply filters
