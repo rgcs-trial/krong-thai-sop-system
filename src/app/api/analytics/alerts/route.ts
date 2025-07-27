@@ -151,7 +151,7 @@ export async function POST(request: NextRequest) {
         { 
           success: false,
           error: 'Failed to store alert',
-          details: dbError.message 
+          details: dbError instanceof Error ? dbError.message : 'Unknown database error'
         },
         { status: 500 }
       );
