@@ -39,8 +39,7 @@ import { toast } from '@/hooks/use-toast';
 
 interface BilingualContent {
   en: string;
-  th: string;
-  fr?: string;
+  fr: string;
 }
 
 interface ContentMetadata {
@@ -153,7 +152,7 @@ export function BilingualContentRenderer({
 
   // Text length utilities
   const getReadingTime = (text: string, language: Locale): number => {
-    const wordsPerMinute = language === 'th' ? 200 : 250; // Thai typically reads slower
+    const wordsPerMinute = 250; // Standard reading speed
     const words = text.split(/\s+/).length;
     return Math.ceil(words / wordsPerMinute);
   };
@@ -176,11 +175,8 @@ export function BilingualContentRenderer({
     }
   };
 
-  const getThaiTextClass = () => {
-    const baseClass = activeLanguage === 'th' ? 'font-thai' : 'font-body';
-    const lengthClass = content.content[activeLanguage]?.length > 1000 ? 'thai-long' : 
-                       content.content[activeLanguage]?.length > 300 ? 'thai-medium' : 'thai-short';
-    return `${baseClass} ${activeLanguage === 'th' ? lengthClass : ''}`;
+  const getTextClass = () => {
+    return 'font-body';
   };
 
   // Render content by mode
@@ -189,7 +185,7 @@ export function BilingualContentRenderer({
       {/* Title */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <h1 className={`text-2xl font-heading font-bold ${getThaiTextClass()} ${getFontSizeClass()}`}>
+          <h1 className={`text-2xl font-heading font-bold ${getTextClass()} ${getFontSizeClass()}`}>
             {processedContent.title}
           </h1>
           <div className="flex items-center gap-2">
@@ -232,7 +228,7 @@ export function BilingualContentRenderer({
       </div>
 
       {/* Content */}
-      <div className={`prose max-w-none ${getThaiTextClass()} ${getFontSizeClass()}`}>
+      <div className={`prose max-w-none ${getTextClass()} ${getFontSizeClass()}`}>
         <div 
           className="whitespace-pre-wrap leading-relaxed"
           dangerouslySetInnerHTML={{ 
@@ -246,7 +242,7 @@ export function BilingualContentRenderer({
   const renderSideBySide = () => {
     const languages = preferences.languagePreferences.secondaryLanguage 
       ? [preferences.languagePreferences.primaryLanguage, preferences.languagePreferences.secondaryLanguage]
-      : ['en', 'th'];
+      : ['en', 'fr'];
 
     return (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
