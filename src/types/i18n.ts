@@ -193,7 +193,7 @@ export type TranslationKey = {
 export type TextDirection = 'ltr' | 'rtl';
 
 // Font variant types for different locales
-export type FontVariant = 'heading' | 'body' | 'ui' | 'thai';
+export type FontVariant = 'heading' | 'body' | 'ui';
 
 // Locale metadata interface
 export interface LocaleMetadata {
