@@ -202,6 +202,7 @@ src/
 │   └── layout.tsx                         # Root layout with PWA support
 ├── components/                            # Component Library (67+ components)
 │   ├── ui/                                # shadcn/ui foundation (25+ components)
+│   ├── admin/                             # Translation admin interface (7 components)
 │   ├── auth/                              # Authentication system (4 components)
 │   ├── sop/                               # SOP management (15 components)
 │   ├── training/                          # Training system (7 components)
