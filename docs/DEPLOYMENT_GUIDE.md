@@ -417,10 +417,10 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 git clone [repository-url]
 cd krong-thai-sop-system
 
-# Install dependencies using pnpm
+# Install dependencies using pnpm@9.0.0
 pnpm install
 
-# Copy environment template
+# Copy environment template (if available)
 cp .env.example .env.local
 ```
 
