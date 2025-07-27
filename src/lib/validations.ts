@@ -306,12 +306,12 @@ export interface ValidationErrorDetail {
 }
 
 export const formatValidationErrors = (error: z.ZodError): ValidationErrorDetail[] => {
-  return error.errors.map((err) => ({
+  return error.issues.map((err: any) => ({
     field: err.path.join('.'),
     message: err.message,
     messageFr: getFrenchErrorMessage(err.code, err.path.join('.')),
     code: err.code,
-    value: err.path.length > 0 ? err.path.reduce((obj, key) => obj?.[key], error as any) : undefined,
+    value: err.path.length > 0 ? err.path.reduce((obj: any, key: any) => obj?.[key], error as any) : undefined,
   }));
 };
 
