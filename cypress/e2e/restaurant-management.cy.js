@@ -1,0 +1,78 @@
+describe('Restaurant Management', () => {
+  beforeEach(() => {
+    // Login as admin first
+    cy.visit('/')
+    cy.get('input[type="email"]').type(Cypress.env('ADMIN_EMAIL'))
+    cy.get('input[type="password"]').type(Cypress.env('ADMIN_PIN'))
+    cy.get('button[type="submit"]').click()
+  })
+
+  it('should display restaurant management interface', () => {
+    cy.contains('restaurant', { matchCase: false }).should('be.visible')
+    cy.contains('add location', { matchCase: false }).should('be.visible')
+  })
+
+  it('should open restaurant creation form', () => {
+    cy.contains('add location', { matchCase: false }).click()
+    
+    // Should show restaurant form
+    cy.get('input[name="name"]').should('be.visible')
+    cy.get('input[name="address"]').should('be.visible')
+    cy.get('input[name="phone"]').should('be.visible')
+    cy.get('input[name="email"]').should('be.visible')
+  })
+
+  it('should validate required fields in restaurant form', () => {
+    cy.contains('add location', { matchCase: false }).click()
+    
+    // Try to submit empty form
+    cy.get('button[type="submit"]').click()
+    cy.contains('required').should('be.visible')
+  })
+
+  it('should create a new restaurant location', () => {
+    cy.contains('add location', { matchCase: false }).click()
+    
+    // Fill out the form
+    cy.get('input[name="name"]').type('Test Restaurant Location')
+    cy.get('input[name="name_th"]').type('สาขาทดสอบ')
+    cy.get('input[name="address"]').type('123 Test Street, Bangkok')
+    cy.get('input[name="address_th"]').type('123 ถนนทดสอบ กรุงเทพ')
+    cy.get('input[name="phone"]').type('02-123-4567')
+    cy.get('input[name="email"]').type('test@krongthai.com')
+    
+    // Submit the form
+    cy.get('button[type="submit"]').click()
+    
+    // Should show success message
+    cy.contains('success', { matchCase: false }).should('be.visible')
+  })
+
+  it('should handle bilingual content properly', () => {
+    cy.contains('add location', { matchCase: false }).click()
+    
+    // Check for Thai language support
+    cy.get('label').contains('ชื่อร้าน').should('be.visible')
+    cy.get('label').contains('ที่อยู่').should('be.visible')
+  })
+
+  it('should validate email format', () => {
+    cy.contains('add location', { matchCase: false }).click()
+    
+    cy.get('input[name="name"]').type('Test Restaurant')
+    cy.get('input[name="email"]').type('invalid-email')
+    cy.get('button[type="submit"]').click()
+    
+    cy.contains('valid email', { matchCase: false }).should('be.visible')
+  })
+
+  it('should validate phone number format', () => {
+    cy.contains('add location', { matchCase: false }).click()
+    
+    cy.get('input[name="name"]').type('Test Restaurant')
+    cy.get('input[name="phone"]').type('invalid-phone')
+    cy.get('button[type="submit"]').click()
+    
+    cy.contains('valid phone', { matchCase: false }).should('be.visible')
+  })
+})
