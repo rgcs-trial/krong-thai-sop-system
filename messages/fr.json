@@ -375,5 +375,28 @@
     "performance_targets": "Objectifs de performance",
     "overall_efficiency": "Efficacité globale",
     "compliance_rate": "Taux de conformité"
+  },
+  "admin": {
+    "settings": {
+      "title": "Paramètres d'administration",
+      "subtitle": "Gérer les paramètres et la configuration du système",
+      "adminOnly": "Administrateur uniquement",
+      "translations": "Traductions",
+      "users": "Utilisateurs",
+      "database": "Base de données",
+      "security": "Sécurité",
+      "notifications": "Notifications",
+      "appearance": "Apparence",
+      "userManagement": "Gestion des utilisateurs",
+      "userManagementPlaceholder": "Fonctionnalités de gestion des utilisateurs à venir",
+      "databaseManagement": "Gestion de la base de données",
+      "databaseManagementPlaceholder": "Fonctionnalités de gestion de la base de données à venir",
+      "securitySettings": "Paramètres de sécurité",
+      "securitySettingsPlaceholder": "Paramètres de sécurité à venir",
+      "notificationSettings": "Paramètres de notification",
+      "notificationSettingsPlaceholder": "Paramètres de notification à venir",
+      "appearanceSettings": "Paramètres d'apparence",
+      "appearanceSettingsPlaceholder": "Paramètres d'apparence à venir"
+    }
   }
 }
