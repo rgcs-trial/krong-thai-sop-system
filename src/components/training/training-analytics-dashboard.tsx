@@ -29,7 +29,7 @@ import {
   Zap,
   DollarSign,
   Calculator,
-  TrendingRight,
+  ArrowRight,
   Activity,
   Brain,
   FileBarChart
