@@ -527,7 +527,7 @@ export const useSettingsStore = create<SettingsStore>()(
 
       unpinDocument: (documentId: string) => {
         set((state) => {
-          state.user.pinnedDocuments = state.user.pinnedDocuments.filter(id => id !== documentId);
+          state.user.pinnedDocuments = state.user.pinnedDocuments.filter((id: string) => id !== documentId);
           state.hasUnsavedChanges = true;
         });
       },
@@ -535,7 +535,7 @@ export const useSettingsStore = create<SettingsStore>()(
       addToRecentlyViewed: (documentId: string) => {
         set((state) => {
           // Remove if already exists
-          state.user.recentlyViewed = state.user.recentlyViewed.filter(id => id !== documentId);
+          state.user.recentlyViewed = state.user.recentlyViewed.filter((id: string) => id !== documentId);
           // Add to beginning
           state.user.recentlyViewed.unshift(documentId);
           // Keep only last 20 items
