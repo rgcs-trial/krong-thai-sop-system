@@ -262,24 +262,103 @@ CREATE TABLE training_certificates (
 
 ---
 
-## 5. Authentication Strategy
+## 5. API Architecture
 
-### 5.1 PIN-Based Authentication
-- 4-digit PIN system for restaurant environment
-- Device binding for security
-- Session management with 8-hour timeout
-- Rate limiting to prevent brute force attacks
+### 5.1 API Endpoints Structure
+```
+src/app/api/
+├── auth/                           # Authentication endpoints
+│   ├── login/route.ts             # Standard login endpoint
+│   ├── staff-pin-login/route.ts   # PIN-based staff authentication
+│   └── location-session/          # Tablet location binding
+│       ├── create/route.ts        # Create location session
+│       └── check/route.ts         # Validate location session
+├── restaurants/route.ts           # Restaurant management
+└── security/
+    └── csp-report/route.ts        # CSP violation reporting
+```
 
-### 5.2 Security Implementation
+### 5.2 Authentication Strategy
+
+#### PIN-Based Authentication Flow
 ```typescript
-interface AuthFlow {
-  step1: "PIN Entry (4 digits)";
-  step2: "Client-side validation";
-  step3: "Hash PIN with salt";
-  step4: "Server verification";
-  step5: "JWT token generation";
-  step6: "Session storage";
-  step7: "Automatic logout (8 hours)";
+interface AuthenticationFlow {
+  step1: "Device fingerprint generation";
+  step2: "PIN entry (4 digits)";
+  step3: "Email + PIN validation";
+  step4: "bcrypt PIN verification";
+  step5: "Location session binding";
+  step6: "Cookie-based session creation";
+  step7: "User profile loading";
+  step8: "Automatic session refresh";
+}
+```
+
+#### Location Session Management
+```typescript
+// Location-bound sessions for tablet authentication
+interface LocationSession {
+  tablet_device_id: string;      // Device fingerprint
+  session_token: string;         // Secure session token
+  restaurant_id: string;         // Multi-tenant isolation
+  name: string;                  // "Kitchen Station #1"
+  expires_at: Date;              // 24-hour expiry
+  last_staff_login_at?: Date;    // Last successful login
+}
+```
+
+#### Security Implementation
+```typescript
+// Authentication middleware with comprehensive protection
+interface SecurityFeatures {
+  pinAuthentication: {
+    hashAlgorithm: "bcrypt";
+    attempts: "rate_limited";
+    lockout: "progressive";
+    deviceBinding: "fingerprint_based";
+  };
+  sessionManagement: {
+    storage: "httpOnly_cookies";
+    duration: "8_hours";
+    refresh: "automatic";
+    locationBound: "tablet_specific";
+  };
+  protection: {
+    csrf: "token_based";
+    rateLimiting: "endpoint_specific";
+    headers: "security_hardened";
+    audit: "comprehensive_logging";
+  };
+}
+```
+
+### 5.3 State Management Architecture
+
+#### Zustand Stores Implementation
+```typescript
+// Store organization by domain
+src/lib/stores/
+├── auth-store.ts      # Authentication state & actions
+├── sop-store.ts       # SOP management state
+├── training-store.ts  # Training system state
+├── ui-store.ts        # UI state & preferences
+├── settings-store.ts  # User settings & configuration
+└── global-store.ts    # Global application state
+
+// Auth store example with production features
+interface AuthStore {
+  // State
+  user: SessionUser | null;
+  sessionToken: string | null;
+  deviceFingerprint: string | null;
+  lastActivity: Date | null;
+  
+  // Actions
+  login: (email: string, pin: string) => Promise<boolean>;
+  logout: () => Promise<void>;
+  refreshSession: () => Promise<boolean>;
+  generateDeviceFingerprint: () => Promise<string>;
+  updateLastActivity: () => void;
 }
 ```
 
