@@ -74,12 +74,34 @@ export default function DashboardPage({ params }: DashboardPageProps) {
     resolveParams();
   }, [params]);
 
-  // Update activity only on client side
+  // Initialize auth store only on client side
   useEffect(() => {
     if (isClient) {
-      updateLastActivity();
+      // Dynamic import to prevent SSR issues
+      import('@/lib/stores/auth-store').then(({ useAuth, useSession }) => {
+        // This is a bit of a hack - we need to get the current state
+        // In a real implementation, you'd want a more sophisticated solution
+        const authStore = useAuth.getState?.() || {
+          user: null,
+          userProfile: null,
+          isAuthenticated: false,
+          logout: async () => {},
+        };
+        
+        const sessionStore = useSession.getState?.() || {
+          expiresAt: null,
+          lastActivity: null,
+          updateLastActivity: () => {},
+        };
+        
+        setAuthState(authStore);
+        setSessionState(sessionStore);
+        
+        // Update activity
+        sessionStore.updateLastActivity?.();
+      }).catch(console.error);
     }
-  }, [isClient, updateLastActivity]);
+  }, [isClient]);
 
   // Handle logout
   const handleLogout = async () => {
