@@ -84,15 +84,15 @@ INSERT INTO sop_documents (
 
 -- Daily Food Safety Checklist Template
 INSERT INTO form_templates (
-    id, restaurant_id, name, name_th, description, description_th,
-    category, schema, schema_th, validation_rules, created_by
+    id, restaurant_id, name, name_fr, description, description_fr,
+    category, schema, schema_fr, validation_rules, created_by
 ) VALUES (
     '992e8400-e29b-41d4-a716-446655440000',
     '550e8400-e29b-41d4-a716-446655440000',
     'Daily Food Safety Checklist',
-    'รายการตรวจสอบความปลอดภัยอาหารประจำวัน',
+    'Liste de Contrôle Quotidienne de Sécurité Alimentaire',
     'Daily checklist to ensure food safety standards compliance',
-    'รายการตรวจสอบประจำวันเพื่อให้แน่ใจว่าปฏิบัติตามมาตรฐานความปลอดภัยอาหาร',
+    'Liste de contrôle quotidienne pour assurer la conformité aux normes de sécurité alimentaire',
     'food_safety',
     '{
         "fields": [
@@ -144,7 +144,7 @@ INSERT INTO form_templates (
             {
                 "id": "refrigerator_temp",
                 "type": "number", 
-                "label": "อุณหภูมิตู้เย็น (°C)",
+                "label": "Température du réfrigérateur (°C)",
                 "required": true,
                 "min": 0,
                 "max": 5
@@ -152,7 +152,7 @@ INSERT INTO form_templates (
             {
                 "id": "freezer_temp",
                 "type": "number",
-                "label": "อุณหภูมิตู้แช่แข็ง (°C)", 
+                "label": "Température du congélateur (°C)", 
                 "required": true,
                 "min": -20,
                 "max": -15
@@ -160,26 +160,26 @@ INSERT INTO form_templates (
             {
                 "id": "hand_wash_stations",
                 "type": "checkbox",
-                "label": "จุดล้างมือมีสิ่งของครบ",
+                "label": "Stations de lavage des mains approvisionnées",
                 "required": true
             },
             {
                 "id": "sanitizer_levels",
                 "type": "select",
-                "label": "ระดับน้ำยาฆ่าเชื้อ",
-                "options": ["เต็ม", "ครึ่ง", "น้อย", "หมด"],
+                "label": "Niveaux de désinfectant",
+                "options": ["Plein", "Moitié", "Faible", "Vide"],
                 "required": true
             },
             {
                 "id": "food_storage_check",
                 "type": "checkbox", 
-                "label": "พื้นที่เก็บอาหารสะอาดและเป็นระเบียบ",
+                "label": "Zones de stockage alimentaire propres et organisées",
                 "required": true
             },
             {
                 "id": "notes",
                 "type": "textarea",
-                "label": "หมายเหตุเพิ่มเติม",
+                "label": "Notes supplémentaires",
                 "required": false
             }
         ]
