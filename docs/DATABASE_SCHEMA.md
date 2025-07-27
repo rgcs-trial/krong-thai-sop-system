@@ -210,31 +210,101 @@ CREATE INDEX idx_sop_documents_search_th ON sop_documents
     USING GIN(to_tsvector('simple', title_th || ' ' || content_th));
 ```
 
-### 3. SOP Categories
+### 3. Training System
 
-#### `sop_categories`
-The 16 standard categories for restaurant operations.
-
+#### `training_modules` - Interactive Training
 ```sql
-CREATE TABLE sop_categories (
+CREATE TABLE training_modules (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    code VARCHAR(20) UNIQUE NOT NULL, -- e.g., 'FOOD_SAFETY', 'CLEANING'
-    name VARCHAR(255) NOT NULL,
-    name_th VARCHAR(255) NOT NULL, -- Thai name
+    restaurant_id UUID NOT NULL,
+    sop_document_id UUID NOT NULL,          -- Links training to specific SOP
+    title VARCHAR(500) NOT NULL,
+    title_th VARCHAR(500) NOT NULL,         -- Thai title
     description TEXT,
-    description_th TEXT, -- Thai description
-    icon VARCHAR(50), -- Icon identifier
-    color VARCHAR(7), -- Hex color code
-    sort_order INTEGER NOT NULL DEFAULT 0,
+    description_th TEXT,                    -- Thai description
+    duration_minutes INTEGER DEFAULT 30,    -- Expected completion time
+    passing_score INTEGER DEFAULT 80,       -- Minimum score to pass (0-100)
+    max_attempts INTEGER DEFAULT 3,         -- Maximum assessment attempts
+    validity_days INTEGER DEFAULT 365,      -- Certificate validity period
+    is_mandatory BOOLEAN DEFAULT false,     -- Required for all staff
     is_active BOOLEAN DEFAULT true,
+    created_by UUID NOT NULL,
+    updated_by UUID,
     created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_training_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
+    CONSTRAINT fk_training_sop FOREIGN KEY (sop_document_id) REFERENCES sop_documents(id),
+    CONSTRAINT fk_training_created FOREIGN KEY (created_by) REFERENCES auth_users(id)
 );
+```
 
--- Indexes
-CREATE INDEX idx_sop_categories_code ON sop_categories(code);
-CREATE INDEX idx_sop_categories_active ON sop_categories(is_active);
-CREATE INDEX idx_sop_categories_sort ON sop_categories(sort_order);
+#### `training_sections` - Module Content Breakdown
+```sql
+CREATE TABLE training_sections (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    module_id UUID NOT NULL,
+    section_number INTEGER NOT NULL,
+    title VARCHAR(500) NOT NULL,
+    title_th VARCHAR(500) NOT NULL,         -- Thai title
+    content TEXT NOT NULL,
+    content_th TEXT NOT NULL,               -- Thai content
+    media_urls JSONB DEFAULT '[]',          -- Images, videos, documents
+    estimated_minutes INTEGER DEFAULT 5,    -- Time for this section
+    is_required BOOLEAN DEFAULT true,       -- Must complete to progress
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_section_module FOREIGN KEY (module_id) REFERENCES training_modules(id) ON DELETE CASCADE,
+    CONSTRAINT unique_section_number UNIQUE (module_id, section_number)
+);
+```
+
+#### `training_certificates` - Digital Certification
+```sql
+CREATE TABLE training_certificates (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    module_id UUID NOT NULL,
+    assessment_id UUID NOT NULL,
+    certificate_number VARCHAR(50) UNIQUE NOT NULL, -- e.g., 'KT-FS-001-2024-001'
+    status certificate_status DEFAULT 'active',     -- active, expired, revoked
+    issued_at TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ,                         -- Based on module validity_days
+    revoked_at TIMESTAMPTZ,
+    revoked_by UUID,
+    revoked_reason TEXT,
+    certificate_data JSONB NOT NULL,               -- PDF metadata, template info
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_certificate_user FOREIGN KEY (user_id) REFERENCES auth_users(id),
+    CONSTRAINT fk_certificate_module FOREIGN KEY (module_id) REFERENCES training_modules(id),
+    CONSTRAINT fk_certificate_revoker FOREIGN KEY (revoked_by) REFERENCES auth_users(id)
+);
+```
+
+#### `user_training_progress` - Progress Tracking
+```sql
+CREATE TABLE user_training_progress (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    module_id UUID NOT NULL,
+    status training_status DEFAULT 'not_started', -- not_started, in_progress, completed, failed, expired
+    progress_percentage INTEGER DEFAULT 0 CHECK (progress_percentage >= 0 AND progress_percentage <= 100),
+    current_section_id UUID,                      -- Current position in training
+    started_at TIMESTAMPTZ,
+    last_accessed_at TIMESTAMPTZ,
+    completed_at TIMESTAMPTZ,
+    time_spent_minutes INTEGER DEFAULT 0,
+    attempt_number INTEGER DEFAULT 1,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_progress_user FOREIGN KEY (user_id) REFERENCES auth_users(id),
+    CONSTRAINT fk_progress_module FOREIGN KEY (module_id) REFERENCES training_modules(id),
+    CONSTRAINT unique_user_module_attempt UNIQUE (user_id, module_id, attempt_number)
+);
 ```
 
 ### 4. SOP Documents
