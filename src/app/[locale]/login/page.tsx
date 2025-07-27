@@ -535,7 +535,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
 
         {/* Footer */}
         <div className="text-center mt-6 text-sm text-gray-500">
-          <p>&copy; 2025 Restaurant Krong Thai. {locale === 'en' ? 'All rights reserved' : 'สงวนลิขสิทธิ์ทุกประการ'}.</p>
+          <p>&copy; 2025 Restaurant Krong Thai. {locale === 'en' ? 'All rights reserved' : 'Tous droits réservés'}.</p>
           <p className="mt-1">
             {locale === 'en' ? 'Contact Support' : 'ติดต่อฝ่ายสนับสนุน'}: support@krongthai.com
           </p>
