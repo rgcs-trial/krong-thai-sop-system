@@ -101,60 +101,75 @@ src/components/training/
 
 ## Project Structure
 
-### Next.js 15.4.4 App Router Structure
+### ✅ Production-Ready App Router Implementation
 
 ```
 src/
-├── app/                          # App Router directory
-│   ├── (auth)/                   # Route groups
-│   │   ├── login/
-│   │   └── layout.tsx
-│   ├── (dashboard)/
-│   │   ├── sop/
-│   │   │   ├── [category]/
-│   │   │   └── page.tsx
-│   │   ├── training/
-│   │   ├── analytics/
-│   │   └── layout.tsx
-│   ├── api/                      # API routes
+├── app/                                    # Next.js 15.4.4 App Router
+│   ├── [locale]/                          # Internationalization routing (EN/TH)
 │   │   ├── auth/
-│   │   └── sop/
-│   ├── globals.css
-│   ├── layout.tsx                # Root layout
-│   ├── loading.tsx               # Global loading UI
-│   ├── error.tsx                 # Global error UI
-│   └── not-found.tsx             # 404 page
-├── components/                   # Reusable components
-│   ├── ui/                       # shadcn/ui components (IMPLEMENTED)
-│   │   ├── alert.tsx
-│   │   ├── badge.tsx
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── dialog.tsx
-│   │   ├── input.tsx
-│   │   └── [12 more UI components]
-│   ├── auth/                     # Authentication components (PARTIAL)
-│   │   ├── location-selector.tsx
-│   │   ├── restaurant-auth-flow.tsx
-│   │   └── staff-pin-login.tsx
-│   ├── sop/                      # SOP management components (IMPLEMENTED)
-│   │   ├── sop-categories-dashboard.tsx
-│   │   ├── sop-document-viewer.tsx
-│   │   ├── sop-navigation-main.tsx
-│   │   └── [6 more SOP components]
-│   ├── training/                 # Training components (PARTIAL)
-│   │   ├── training-analytics-dashboard.tsx
-│   │   ├── training-assessment.tsx
-│   │   └── training-session.tsx
-│   └── [test components and utilities]
-├── lib/                          # Utilities and configurations
-│   ├── utils.ts
-│   ├── validations/
-│   └── constants/
-├── stores/                       # Zustand stores
-├── hooks/                        # Custom hooks
-├── types/                        # TypeScript type definitions
-└── i18n/                        # Internationalization
+│   │   │   └── restaurant-flow/
+│   │   │       └── page.tsx               # Restaurant authentication flow
+│   │   ├── dashboard/
+│   │   │   ├── dashboard-content.tsx      # Main dashboard component
+│   │   │   └── page.tsx                   # Dashboard page
+│   │   ├── login/
+│   │   │   └── page.tsx                   # Login interface
+│   │   ├── test/
+│   │   │   └── page.tsx                   # Development testing
+│   │   ├── layout.tsx                     # Locale-specific layout
+│   │   └── page.tsx                       # Home page
+│   ├── api/                               # API Routes (4 endpoints)
+│   │   ├── auth/
+│   │   │   ├── location-session/
+│   │   │   │   ├── check/route.ts         # Validate location session
+│   │   │   │   └── create/route.ts        # Create location session
+│   │   │   ├── login/route.ts             # Standard login
+│   │   │   └── staff-pin-login/route.ts   # PIN authentication
+│   │   ├── restaurants/route.ts           # Restaurant management
+│   │   └── security/
+│   │       └── csp-report/route.ts        # CSP violation reporting
+│   ├── components-test/                   # Component testing pages
+│   ├── offline/                           # PWA offline page
+│   ├── sop-demo/                          # SOP demonstration
+│   ├── tablet-demo/                       # Tablet interface demo
+│   ├── globals.css                        # Global styles with touch optimization
+│   └── layout.tsx                         # Root layout with PWA support
+├── components/                            # Component Library (30+ components)
+│   ├── ui/                                # shadcn/ui foundation (15 components)
+│   ├── auth/                              # Authentication system (3 components)
+│   ├── sop/                               # SOP management (9 components)
+│   ├── training/                          # Training system (3 components)
+│   ├── language-toggle.tsx                # Language switcher
+│   ├── optimized-image.tsx                # Performance-optimized images
+│   └── pwa-install-prompt.tsx             # PWA installation UI
+├── lib/                                   # Business Logic & Utilities
+│   ├── stores/                            # Zustand stores (6 domains)
+│   │   ├── auth-store.ts                  # Authentication state
+│   │   ├── sop-store.ts                   # SOP management
+│   │   ├── training-store.ts              # Training system
+│   │   ├── ui-store.ts                    # UI preferences
+│   │   ├── settings-store.ts              # User settings
+│   │   └── global-store.ts                # Global state
+│   ├── security/                          # Security implementations
+│   │   ├── csrf-protection.ts             # CSRF middleware
+│   │   ├── pin-auth.ts                    # PIN authentication
+│   │   └── security-headers.ts            # Security headers
+│   ├── supabase/                          # Database integration
+│   │   └── client.ts                      # Supabase client configuration
+│   ├── hooks/                             # Custom React hooks
+│   ├── i18n.ts                            # Internationalization setup
+│   └── utils.ts                           # Utility functions
+├── hooks/                                 # Custom Hooks (3 hooks)
+│   ├── use-favorites.ts                   # Bookmark management
+│   ├── use-i18n.ts                        # Internationalization
+│   └── use-toast.ts                       # Toast notifications
+├── types/                                 # TypeScript Definitions
+│   ├── database.ts                        # Database types (620+ lines)
+│   ├── api.ts                             # API interfaces
+│   ├── security.ts                        # Security types
+│   └── supabase.ts                        # Generated Supabase types
+└── middleware.ts                          # Next.js middleware for auth & i18n
 ```
 
 ## shadcn/ui Integration Strategy
