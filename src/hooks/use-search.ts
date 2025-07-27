@@ -340,9 +340,9 @@ export function useSearch(locale: string = 'en') {
   // Generate search result highlights
   const generateHighlights = (item: any, query: string, locale: string) => {
     const queryLower = query.toLowerCase();
-    const title = locale === 'th' ? item.title_th : item.title_en;
-    const content = locale === 'th' ? item.content_th : item.content_en;
-    const tags = locale === 'th' ? (item.tags_th || []) : (item.tags || []);
+    const title = locale === 'fr' ? item.title_fr : item.title_en;
+    const content = locale === 'fr' ? item.content_fr : item.content_en;
+    const tags = locale === 'fr' ? (item.tags_fr || []) : (item.tags || []);
 
     const highlight: any = {};
 
