@@ -604,27 +604,99 @@ CREATE TRIGGER update_training_modules_updated_at
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 ```
 
-## Sample Data
+### 8. Sample Data Implementation
 
-### 1. Restaurant
+The database includes comprehensive sample data for development and testing:
+
+#### Restaurant Configuration
 ```sql
-INSERT INTO restaurants (id, name, name_th, address, address_th, phone, email) VALUES
-('550e8400-e29b-41d4-a716-446655440000', 'Krong Thai Restaurant', 'ร้านกรองไทย', '123 Main Street, Bangkok', '123 ถนนใหญ่ กรุงเทพฯ', '+66-2-123-4567', 'info@krongthai.com');
+-- Krong Thai Restaurant with Thai localization
+INSERT INTO restaurants (id, name, name_th, address, address_th, phone, email, settings) VALUES
+('550e8400-e29b-41d4-a716-446655440000', 
+ 'Krong Thai Restaurant', 
+ 'ร้านกรองไทย', 
+ '123 Main Street, Bangkok 10110, Thailand', 
+ '123 ถนนใหญ่ กรุงเทพฯ 10110', 
+ '+66-2-123-4567', 
+ 'info@krongthai.com',
+ '{"language_default": "th", "timezone": "Asia/Bangkok", "currency": "THB"}'::JSONB);
 ```
 
-### 2. SOP Categories (16 Standard Categories)
+#### Complete 16 SOP Categories
 ```sql
+-- All 16 standard restaurant operation categories with Thai translations
 INSERT INTO sop_categories (code, name, name_th, description, description_th, icon, color, sort_order) VALUES
 ('FOOD_SAFETY', 'Food Safety & Hygiene', 'ความปลอดภัยและสุขอนามัยอาหาร', 'Food handling, storage, and safety procedures', 'ขั้นตอนการจัดการ เก็บรักษา และความปลอดภัยของอาหาร', 'shield-check', '#e74c3c', 1),
 ('CLEANING', 'Cleaning & Sanitation', 'การทำความสะอาดและสุขาภิบาล', 'Cleaning schedules, sanitization procedures', 'ตารางการทำความสะอาด ขั้นตอนการฆ่าเชื้อ', 'spray-can', '#3498db', 2),
-('CUSTOMER_SERVICE', 'Customer Service', 'การบริการลูกค้า', 'Guest interaction, complaint handling, service standards', 'การปฏิสัมพันธ์กับแขก การจัดการข้อร้องเรียน มาตรฐานการบริการ', 'users', '#2ecc71', 3);
+('CUSTOMER_SERVICE', 'Customer Service', 'การบริการลูกค้า', 'Guest interaction, complaint handling, service standards', 'การปฏิสัมพันธ์กับแขก การจัดการข้อร้องเรียน มาตรฐานการบริการ', 'users', '#2ecc71', 3),
+('KITCHEN_OPS', 'Kitchen Operations', 'การดำเนินงานครัว', 'Cooking procedures, equipment operation, kitchen workflow', 'ขั้นตอนการทำอาหาร การใช้เครื่องมือ ขั้นตอนการทำงานในครัว', 'chef-hat', '#f39c12', 4),
+('INVENTORY', 'Inventory Management', 'การจัดการสินค้าคงคลัง', 'Stock control, ordering, supplier management', 'การควบคุมสต็อก การสั่งซื้อ การจัดการผู้จัดจำหน่าย', 'package', '#9b59b6', 5),
+('EMERGENCY', 'Emergency Procedures', 'ขั้นตอนฉุกเฉิน', 'Crisis management, emergency contacts, evacuation plans', 'การจัดการวิกฤต ผู้ติดต่อฉุกเฉิน แผนการอพยพ', 'alert-triangle', '#e74c3c', 16);
+-- ... (full 16 categories in actual implementation)
 ```
 
-### 3. Sample Users
+#### Test User Accounts with Working PINs
 ```sql
+-- Admin user with PIN 1234
 INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, position, position_th, restaurant_id) VALUES
-('660e8400-e29b-41d4-a716-446655440000', 'manager@krongthai.com', crypt('1234', gen_salt('bf')), 'manager', 'Somchai Jaidee', 'สมชาย ใจดี', 'Restaurant Manager', 'ผู้จัดการร้านอาหาร', '550e8400-e29b-41d4-a716-446655440000');
+('660e8400-e29b-41d4-a716-446655440000', 
+ 'admin@krongthai.com', 
+ crypt('1234', gen_salt('bf')), 
+ 'admin', 
+ 'Admin User', 
+ 'ผู้ดูแลระบบ', 
+ 'System Administrator', 
+ 'ผู้ดูแลระบบ', 
+ '550e8400-e29b-41d4-a716-446655440000');
+
+-- Manager user with PIN 5678
+INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, position, position_th, restaurant_id) VALUES
+('770e8400-e29b-41d4-a716-446655440000', 
+ 'manager@krongthai.com', 
+ crypt('5678', gen_salt('bf')), 
+ 'manager', 
+ 'Somchai Jaidee', 
+ 'สมชาย ใจดี', 
+ 'Restaurant Manager', 
+ 'ผู้จัดการร้านอาหาร', 
+ '550e8400-e29b-41d4-a716-446655440000');
+
+-- Staff user with PIN 9999
+INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, position, position_th, restaurant_id) VALUES
+('880e8400-e29b-41d4-a716-446655440000', 
+ 'staff@krongthai.com', 
+ crypt('9999', gen_salt('bf')), 
+ 'staff', 
+ 'Malee Suksan', 
+ 'มาลี สุขสาร', 
+ 'Server', 
+ 'พนักงานเสิร์ฟ', 
+ '550e8400-e29b-41d4-a716-446655440000');
 ```
+
+---
+
+## Database Health & Performance
+
+### ✅ Performance Optimization
+- **Strategic Indexing**: 25+ performance indexes including GIN indexes for full-text search
+- **Query Optimization**: Composite indexes for common query patterns
+- **Connection Pooling**: Efficient Supabase connection management
+- **JSONB Optimization**: Structured data storage with proper indexing
+
+### ✅ Data Integrity
+- **Foreign Key Constraints**: Complete referential integrity
+- **Check Constraints**: Data validation at database level
+- **Unique Constraints**: Preventing duplicate records
+- **Cascade Operations**: Proper cleanup on record deletion
+
+### ✅ Security Implementation
+- **Row Level Security**: Multi-tenant data isolation
+- **Role-based Access**: Granular permission control
+- **Audit Logging**: Comprehensive activity tracking
+- **PIN Security**: bcrypt hashing with progressive lockout
+
+This comprehensive database schema supports a full-featured restaurant SOP management system with bilingual content, training modules, progress tracking, and enterprise-grade security suitable for multi-restaurant operations.
 
 ## Database Functions & Triggers
 
