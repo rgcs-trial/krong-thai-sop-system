@@ -20,8 +20,8 @@ describe('Authentication Flow', () => {
     cy.get('input[inputmode="numeric"]').first().type('1')
     cy.get('input[inputmode="numeric"]').eq(1).type('2')
     cy.get('input[inputmode="numeric"]').eq(2).type('3')
-    cy.get('button[type="submit"]').click()
-    cy.contains('valid email and 4-digit PIN', { matchCase: false }).should('be.visible')
+    // Button should remain disabled with incomplete PIN
+    cy.get('button[type="submit"]').should('be.disabled')
   })
 
   it('should successfully login with admin credentials', () => {
