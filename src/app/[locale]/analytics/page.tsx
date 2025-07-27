@@ -25,13 +25,14 @@ import {
 } from 'lucide-react';
 
 interface AnalyticsPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: AnalyticsPageProps): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
   
   return {
     title: t('analytics_dashboard'),
@@ -40,7 +41,8 @@ export async function generateMetadata({ params }: AnalyticsPageProps): Promise<
 }
 
 export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
-  const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
   
   // Validate locale
   const validLocales = ['en', 'fr', 'th'];
