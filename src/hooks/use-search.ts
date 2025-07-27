@@ -526,7 +526,7 @@ export function useSearch(locale: string = 'en') {
   }, [setSearchQuery, setSearchResults]);
 
   // Save search
-  const saveSearch = useCallback((name: string, name_th: string) => {
+  const saveSearch = useCallback((name: string, name_fr: string) => {
     if (!searchQuery.trim()) return;
 
     const savedSearch: SavedSearch = {
