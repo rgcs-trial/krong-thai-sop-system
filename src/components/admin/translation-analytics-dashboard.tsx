@@ -122,7 +122,6 @@ export function TranslationAnalyticsDashboard({
               <SelectItem value="all">{t('admin.translation.allLocales')}</SelectItem>
               <SelectItem value="en">English</SelectItem>
               <SelectItem value="fr">Français</SelectItem>
-              <SelectItem value="th">ไทย</SelectItem>
             </SelectContent>
           </Select>
           <Button variant="outline" onClick={() => refetch()} disabled={isLoading}>
@@ -240,7 +239,7 @@ export function TranslationAnalyticsDashboard({
               <CardContent>
                 {analyticsData?.usage_trends?.length > 0 ? (
                   <div className="space-y-4">
-                    {(['en', 'fr', 'th'] as Locale[]).map(locale => (
+                    {(['en', 'fr'] as Locale[]).map(locale => (
                       <div key={locale} className="space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-medium">{locale.toUpperCase()}</span>
