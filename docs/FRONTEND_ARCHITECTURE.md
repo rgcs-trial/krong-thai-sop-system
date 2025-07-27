@@ -40,7 +40,7 @@ This document outlines the production-ready frontend architecture for Restaurant
 - **shadcn/ui**: Complete component library with Radix UI primitives
 - **Zustand**: v5.0.6 state management with persistence and middleware
 - **TanStack Query**: v5.83.0 for server state and caching
-- **next-intl**: v4.3.4 for bilingual (EN/FR) support
+- **next-intl**: v4.3.4 for database-driven bilingual (EN/FR) support
 
 ### ✅ Complete Component Implementation
 
