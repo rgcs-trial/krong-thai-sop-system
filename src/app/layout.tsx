@@ -73,10 +73,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Apply font classes
+  const fontClasses = [
+    inter.variable,
+    ebGaramond.variable,
+    sourceSerif4.variable,
+    notoSans.variable,
+    'font-ui', // Default to Inter for UI elements
+  ].join(' ');
+
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
-      <body className="font-sans antialiased">
+    <html lang="en" suppressHydrationWarning className={fontClasses}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+        <meta name="theme-color" content="#E31B23" />
+      </head>
+      <body 
+        className="font-sans antialiased bg-background text-foreground touch-manipulation"
+        style={{
+          WebkitTapHighlightColor: 'transparent',
+          WebkitTouchCallout: 'none',
+        }}
+      >
         {children}
       </body>
     </html>
