@@ -18,11 +18,11 @@ The Restaurant Krong Thai SOP Management System is an enterprise-grade tablet-op
 
 ### Key Objectives
 - Provide secure, tablet-optimized access to restaurant SOPs with real-time collaboration
-- Enable bilingual operations (English/French) with professional translation management
+- Enable database-driven bilingual operations (English/French) with admin translation management
 - Support PIN-based authentication with device fingerprinting and session management
-- Deliver interactive training modules with certification tracking and analytics
-- Facilitate comprehensive content management with voice search and AI-powered recommendations
-- Enable offline access to critical procedures with progressive web app capabilities
+- Deliver comprehensive translation workflow with approval system and version control
+- Facilitate interactive training modules with certification tracking and analytics
+- Enable intelligent caching and real-time translation updates via WebSocket
 - Provide executive-grade analytics and operational insights for restaurant optimization
 - Support 100+ concurrent tablet connections with enterprise-grade performance monitoring
 
