@@ -95,6 +95,19 @@
     "medium": "Medium",
     "high": "High",
     "critical": "Critical",
+    "status": {
+      "draft": "Draft",
+      "review": "Under Review",
+      "approved": "Approved",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "critical": "Critical"
+    },
     "admin": {
       "title": "SOP Management",
       "subtitle": "Create, edit, and manage standard operating procedures",
