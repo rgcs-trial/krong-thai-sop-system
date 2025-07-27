@@ -427,7 +427,7 @@ export function OperationalInsightsDashboard({ className }: OperationalInsightsD
       case 'down':
         return <TrendingDown className="h-4 w-4 text-red-500" />;
       default:
-        return <TrendingRight className="h-4 w-4 text-gray-500" />;
+        return <ArrowRight className="h-4 w-4 text-gray-500" />;
     }
   };
 
