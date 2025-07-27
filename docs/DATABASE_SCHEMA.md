@@ -403,80 +403,40 @@ CREATE TABLE uploaded_files (
 );
 ```
 
-### 5. Form Management
+### 5. Database Enums & Types
 
-#### `form_templates`
-Template definitions for data collection forms.
-
-```sql
-CREATE TABLE form_templates (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    restaurant_id UUID NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    name_th VARCHAR(255) NOT NULL, -- Thai name
-    description TEXT,
-    description_th TEXT, -- Thai description
-    category VARCHAR(100),
-    schema JSONB NOT NULL, -- Form field definitions
-    schema_th JSONB, -- Thai form schema
-    validation_rules JSONB DEFAULT '{}',
-    settings JSONB DEFAULT '{}',
-    is_active BOOLEAN DEFAULT true,
-    created_by UUID NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW(),
-    
-    CONSTRAINT fk_form_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
-    CONSTRAINT fk_form_created_by FOREIGN KEY (created_by) REFERENCES auth_users(id)
-);
-
--- Indexes
-CREATE INDEX idx_form_templates_restaurant ON form_templates(restaurant_id);
-CREATE INDEX idx_form_templates_category ON form_templates(category);
-CREATE INDEX idx_form_templates_active ON form_templates(is_active);
-```
-
-#### `form_submissions`
-Captured form data from staff submissions.
+The database uses PostgreSQL enums for type safety and data consistency:
 
 ```sql
-CREATE TABLE form_submissions (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    template_id UUID NOT NULL,
-    restaurant_id UUID NOT NULL,
-    submitted_by UUID NOT NULL,
-    data JSONB NOT NULL, -- Form field values
-    attachments JSONB DEFAULT '[]', -- File attachments
-    location VARCHAR(255), -- Where form was submitted
-    ip_address INET,
-    user_agent TEXT,
-    submission_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    status submission_status DEFAULT 'submitted',
-    reviewed_by UUID,
-    reviewed_at TIMESTAMPTZ,
-    notes TEXT,
-    notes_th TEXT, -- Thai notes
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW(),
-    
-    CONSTRAINT fk_submission_template FOREIGN KEY (template_id) REFERENCES form_templates(id),
-    CONSTRAINT fk_submission_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
-    CONSTRAINT fk_submission_user FOREIGN KEY (submitted_by) REFERENCES auth_users(id),
-    CONSTRAINT fk_submission_reviewer FOREIGN KEY (reviewed_by) REFERENCES auth_users(id)
-);
+-- User roles for role-based access control
+CREATE TYPE user_role AS ENUM ('admin', 'manager', 'staff');
 
--- Indexes
-CREATE INDEX idx_form_submissions_template ON form_submissions(template_id);
-CREATE INDEX idx_form_submissions_restaurant ON form_submissions(restaurant_id);
-CREATE INDEX idx_form_submissions_user ON form_submissions(submitted_by);
-CREATE INDEX idx_form_submissions_date ON form_submissions(submission_date);
-CREATE INDEX idx_form_submissions_status ON form_submissions(status);
-CREATE INDEX idx_form_submissions_data ON form_submissions USING GIN(data);
-```
+-- SOP document status workflow
+CREATE TYPE sop_status AS ENUM ('draft', 'review', 'approved', 'archived');
 
-#### Submission Status Enum
-```sql
+-- SOP priority levels for operational importance
+CREATE TYPE sop_priority AS ENUM ('low', 'medium', 'high', 'critical');
+
+-- Form submission workflow states
 CREATE TYPE submission_status AS ENUM ('submitted', 'reviewed', 'approved', 'rejected');
+
+-- Audit trail action types
+CREATE TYPE audit_action AS ENUM (
+    'CREATE', 'UPDATE', 'DELETE', 'LOGIN', 'LOGOUT', 
+    'VIEW', 'DOWNLOAD', 'UPLOAD', 'APPROVE', 'REJECT'
+);
+
+-- Device types for user device management
+CREATE TYPE device_type AS ENUM ('tablet', 'desktop', 'mobile');
+
+-- Training progress states
+CREATE TYPE training_status AS ENUM ('not_started', 'in_progress', 'completed', 'failed', 'expired');
+
+-- Assessment results
+CREATE TYPE assessment_status AS ENUM ('pending', 'passed', 'failed', 'retake_required');
+
+-- Certificate management
+CREATE TYPE certificate_status AS ENUM ('active', 'expired', 'revoked');
 ```
 
 ### 6. Audit & Logging
