@@ -101,7 +101,7 @@ export default function AdminSettingsPage() {
             <CardContent>
               <div className="text-center py-12 text-muted-foreground">
                 <Users size={48} className="mx-auto mb-4 opacity-20" />
-                <p>{t('admin.settings.userManagementPlaceholder')}</p>
+                <p>User management features coming soon</p>
               </div>
             </CardContent>
           </Card>
