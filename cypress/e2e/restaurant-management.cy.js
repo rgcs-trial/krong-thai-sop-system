@@ -3,7 +3,10 @@ describe('Restaurant Management', () => {
     // Login as admin first
     cy.visit('/')
     cy.get('input[type="email"]').type(Cypress.env('ADMIN_EMAIL'))
-    cy.get('input[type="password"]').type(Cypress.env('ADMIN_PIN'))
+    const pin = Cypress.env('ADMIN_PIN')
+    for (let i = 0; i < 4; i++) {
+      cy.get('input[inputmode="numeric"]').eq(i).type(pin[i])
+    }
     cy.get('button[type="submit"]').click()
   })
 
