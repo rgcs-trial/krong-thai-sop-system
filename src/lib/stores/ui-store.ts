@@ -742,7 +742,7 @@ export const useUIStore = create<UIStore>()(
 
       markNotificationRead: (id: string) => {
         set((state) => {
-          const notification = state.notifications.notifications.find(n => n.id === id);
+          const notification = state.notifications.notifications.find((n: any) => n.id === id);
           if (notification && !notification.read) {
             notification.read = true;
             state.notifications.unreadCount--;
