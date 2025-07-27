@@ -55,6 +55,8 @@ Use these credentials to test the PIN authentication system:
 - **Bilingual EN/TH Support**: Professional content management with proper Thai typography
 - **Training System**: Interactive modules, assessments, and certificates
 - **Analytics Dashboards**: Executive, operational, and training analytics with Recharts
+- **Restaurant Management**: Complete location setup with operational configuration
+- **Error Handling**: User-friendly bilingual error system with severity levels and error codes
 - **Real-time Features**: WebSocket subscriptions and live monitoring
 - **Performance Optimized**: Production-ready tablet deployment
 
