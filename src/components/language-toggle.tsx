@@ -33,15 +33,39 @@ export function LanguageToggle({
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
+  const { setLanguage } = useSettingsStore();
+  const [isMounted, setIsMounted] = useState(false);
 
-  const handleLocaleChange = (newLocale: Locale) => {
+  // Ensure component is mounted before showing content (hydration safety)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const handleLocaleChange = async (newLocale: Locale) => {
     if (newLocale === locale) return;
 
-    startTransition(() => {
-      // Replace the current locale in the pathname with the new one
-      const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`);
-      router.push(newPathname);
-      router.refresh();
+    startTransition(async () => {
+      try {
+        // Update language preference in settings store
+        await setLanguage(newLocale as 'en' | 'fr' | 'th');
+        
+        // Store language preference in session storage for immediate persistence
+        sessionStorage.setItem('preferred-language', newLocale);
+        
+        // Replace the current locale in the pathname with the new one
+        const segments = pathname.split('/');
+        if (locales.includes(segments[1] as Locale)) {
+          segments[1] = newLocale;
+        } else {
+          segments.splice(1, 0, newLocale);
+        }
+        const newPathname = segments.join('/');
+        
+        router.push(newPathname);
+        router.refresh();
+      } catch (error) {
+        console.error('Failed to change language:', error);
+      }
     });
   };
 
