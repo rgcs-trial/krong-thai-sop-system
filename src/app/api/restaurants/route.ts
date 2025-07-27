@@ -25,7 +25,7 @@ const CreateRestaurantSchema = z.object({
     closed: z.boolean().optional()
   })).optional(),
   capacity: z.number().min(1, 'Capacity must be at least 1').optional(),
-  settings: z.record(z.any()).optional()
+  settings: z.record(z.string(), z.any()).optional()
 });
 
 const UpdateRestaurantSchema = CreateRestaurantSchema.partial();
