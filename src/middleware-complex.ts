@@ -163,24 +163,24 @@ export default async function middleware(request: NextRequest) {
       // If security middleware returns a redirect
       // if (securityResponse.status === 302 || securityResponse.status === 307) {
       //   const location = securityResponse.headers.get('location');
-        if (location) {
-          const redirectUrl = new URL(location, request.url);
-          // Add locale prefix to the redirect if it's not an API route
-          if (!redirectUrl.pathname.startsWith('/api') && !redirectUrl.pathname.startsWith(`/${locale}`)) {
-            redirectUrl.pathname = `/${locale}${redirectUrl.pathname}`;
-          }
-          return NextResponse.redirect(redirectUrl);
-        }
-      }
+      //   if (location) {
+      //     const redirectUrl = new URL(location, request.url);
+      //     // Add locale prefix to the redirect if it's not an API route
+      //     if (!redirectUrl.pathname.startsWith('/api') && !redirectUrl.pathname.startsWith(`/${locale}`)) {
+      //       redirectUrl.pathname = `/${locale}${redirectUrl.pathname}`;
+      //     }
+      //     return NextResponse.redirect(redirectUrl);
+      //   }
+      // }
 
       // If it's an error response, redirect to login with locale
-      if (securityResponse.status === 401) {
-        const loginUrl = new URL(`/${locale}/login`, request.url);
-        loginUrl.searchParams.set('redirect', pathWithoutLocale);
-        return NextResponse.redirect(loginUrl);
-      }
+      // if (securityResponse.status === 401) {
+      //   const loginUrl = new URL(`/${locale}/login`, request.url);
+      //   loginUrl.searchParams.set('redirect', pathWithoutLocale);
+      //   return NextResponse.redirect(loginUrl);
+      // }
 
-      // For other responses, continue
+      // For other responses, continue (security disabled during development)
       return NextResponse.next();
     } catch (error) {
       console.error('Security middleware error:', error);
