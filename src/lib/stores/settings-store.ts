@@ -11,7 +11,7 @@ import type { BilingualContent, ApiResponse } from '@/types/database';
 // Types
 export interface AppSettings {
   // Language and localization
-  language: 'en' | 'th' | 'fr';
+  language: 'en' | 'fr';
   dateFormat: 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD';
   timeFormat: '12h' | '24h';
   timezone: string;
@@ -86,13 +86,13 @@ export interface UserPreferences {
   
   // Language-specific preferences
   languagePreferences: {
-    primaryLanguage: 'en' | 'th' | 'fr';
-    secondaryLanguage?: 'en' | 'th' | 'fr';
+    primaryLanguage: 'en' | 'fr';
+    secondaryLanguage?: 'en' | 'fr';
     showTranslations: boolean;
     autoTranslate: boolean;
     translationQuality: 'fast' | 'balanced' | 'accurate';
-    preferredLanguageForContent: 'auto' | 'en' | 'th' | 'fr';
-    fallbackLanguage: 'en' | 'th' | 'fr';
+    preferredLanguageForContent: 'auto' | 'en' | 'fr';
+    fallbackLanguage: 'en' | 'fr';
   };
   
   // Content management preferences
@@ -108,7 +108,7 @@ export interface UserPreferences {
   searchHistory: string[];
   searchFilters: Record<string, any>;
   saveSearchHistory: boolean;
-  searchLanguages: ('en' | 'th' | 'fr')[];
+  searchLanguages: ('en' | 'fr')[];
   
   // Training preferences
   preferredLearningPath: string | null;
@@ -202,7 +202,7 @@ export interface SettingsActions {
   // App settings actions
   updateAppSettings: (settings: Partial<AppSettings>) => Promise<void>;
   resetAppSettings: () => Promise<void>;
-  setLanguage: (language: 'en' | 'th' | 'fr') => Promise<void>;
+  setLanguage: (language: 'en' | 'fr') => Promise<void>;
   setTheme: (theme: 'light' | 'dark' | 'auto') => Promise<void>;
   toggleOfflineMode: () => Promise<void>;
   
@@ -340,7 +340,7 @@ const defaultUserPreferences: UserPreferences = {
   // Language-specific preferences
   languagePreferences: {
     primaryLanguage: 'en',
-    secondaryLanguage: 'th',
+    secondaryLanguage: 'fr',
     showTranslations: true,
     autoTranslate: false,
     translationQuality: 'balanced',
@@ -360,7 +360,7 @@ const defaultUserPreferences: UserPreferences = {
   searchHistory: [],
   searchFilters: {},
   saveSearchHistory: true,
-  searchLanguages: ['en', 'th'],
+  searchLanguages: ['en', 'fr'],
   preferredLearningPath: null,
   studyReminders: {
     enabled: false,
@@ -473,26 +473,22 @@ export const useSettingsStore = create<SettingsStore>()(
         await get().saveSettings();
       },
 
-      setLanguage: async (language: 'en' | 'th' | 'fr'): Promise<void> => {
+      setLanguage: async (language: 'en' | 'fr'): Promise<void> => {
         await get().updateAppSettings({ language });
         
         // Apply language change immediately
         if (typeof document !== 'undefined') {
           document.documentElement.lang = language;
           
-          // Add Thai language specific class for font rendering
-          if (language === 'th') {
-            document.documentElement.classList.add('lang-thai');
-            document.documentElement.classList.remove('lang-french');
-          } else if (language === 'fr') {
+          // Add French language specific class for font rendering
+          if (language === 'fr') {
             document.documentElement.classList.add('lang-french');
-            document.documentElement.classList.remove('lang-thai');
           } else {
-            document.documentElement.classList.remove('lang-thai', 'lang-french');
+            document.documentElement.classList.remove('lang-french');
           }
           
           // Set text direction attribute for future RTL support
-          document.documentElement.dir = 'ltr'; // Thai is LTR, keeping for future expansion
+          document.documentElement.dir = 'ltr'; // French is LTR, keeping for future expansion
         }
       },
 
