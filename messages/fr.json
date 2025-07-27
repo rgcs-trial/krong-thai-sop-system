@@ -40,12 +40,26 @@
     "categories": "Catégories",
     "documents": "Documents",
     "search": "Rechercher des POS",
+    "searchPlaceholder": "Rechercher des POS, procédures ou mots-clés...",
     "noResults": "Aucune POS trouvée",
     "loading": "Chargement des POS...",
     "emergency": "Procédures d'urgence",
     "foodSafety": "Sécurité alimentaire",
     "kitchenOps": "Opérations de cuisine",
-    "serviceStandards": "Standards de service"
+    "serviceStandards": "Standards de service",
+    "status": {
+      "draft": "Brouillon",
+      "review": "En révision",
+      "approved": "Approuvé",
+      "published": "Publié",
+      "archived": "Archivé"
+    },
+    "priority": {
+      "low": "Bas",
+      "medium": "Moyen",
+      "high": "Élevé",
+      "critical": "Critique"
+    }
   },
   "navigation": {
     "home": "Accueil",
