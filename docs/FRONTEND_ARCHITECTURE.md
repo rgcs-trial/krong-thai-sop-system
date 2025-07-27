@@ -385,69 +385,162 @@ export function TouchButton({ children, className, ...props }: ButtonProps) {
 }
 ```
 
-## Bilingual Content Handling
+## ✅ Bilingual Architecture (EN/TH)
 
-### I18n Architecture
+### Production i18n Implementation
 
 ```typescript
-// i18n/config.ts
-export const locales = ['th', 'en'] as const
-export type Locale = typeof locales[number]
+// lib/i18n.ts - Complete internationalization setup
+import { getRequestConfig } from 'next-intl/server';
 
-export const i18nConfig = {
-  defaultLocale: 'th' as Locale,
-  locales,
-  localeCurrency: {
-    th: 'THB',
-    en: 'THB'
+export const locales = ['en', 'th'] as const;
+export type Locale = typeof locales[number];
+
+export default getRequestConfig(async ({ locale }) => ({
+  messages: (await import(`../messages/${locale}.json`)).default,
+  timeZone: 'Asia/Bangkok',
+  now: new Date(),
+  formats: {
+    dateTime: {
+      short: {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      }
+    },
+    number: {
+      precise: {
+        maximumFractionDigits: 2
+      }
+    }
   }
-}
+}));
 ```
 
-### Translation Structure
+### Message Structure (Production Ready)
 
-```typescript
-// i18n/messages/th.json
+```json
+// messages/th.json - Thai translations
 {
   "common": {
     "loading": "กำลังโหลด...",
     "error": "เกิดข้อผิดพลาด",
     "save": "บันทึก",
-    "cancel": "ยกเลิก"
+    "cancel": "ยกเลิก",
+    "search": "ค้นหา",
+    "filter": "กรอง",
+    "back": "กลับ",
+    "next": "ถัดไป",
+    "previous": "ก่อนหน้า",
+    "confirm": "ยืนยัน"
+  },
+  "auth": {
+    "login": "เข้าสู่ระบบ",
+    "logout": "ออกจากระบบ",
+    "pin": "รหัส PIN",
+    "enterPin": "กรุณาใส่รหัส PIN 4 หลัก",
+    "invalidPin": "รหัส PIN ไม่ถูกต้อง",
+    "welcomeBack": "ยินดีต้อนรับกลับ"
   },
   "sop": {
-    "title": "ขั้นตอนการปฏิบัติงาน",
-    "categories": {
-      "food_safety": "ความปลอดภัยอาหาร",
-      "cleaning": "การทำความสะอาด",
-      "service": "การบริการ"
-    }
+    "title": "คู่มือการปฏิบัติงาน",
+    "categories": "หมวดหมู่",
+    "documents": "เอกสาร",
+    "search": "ค้นหาคู่มือ",
+    "bookmark": "บุ๊คมาร์ค",
+    "progress": "ความคืบหน้า",
+    "lastViewed": "ดูล่าสุด"
+  },
+  "training": {
+    "modules": "โมดูลการฝึกอบรม",
+    "progress": "ความคืบหน้า",
+    "certificate": "ใบประกาศนียบัตร",
+    "assessment": "การประเมิน",
+    "score": "คะแนน",
+    "passed": "ผ่าน",
+    "failed": "ไม่ผ่าน"
+  }
+}
+
+// messages/en.json - English translations
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "filter": "Filter",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "pin": "PIN Code",
+    "enterPin": "Please enter your 4-digit PIN",
+    "invalidPin": "Invalid PIN code",
+    "welcomeBack": "Welcome back"
+  },
+  "sop": {
+    "title": "Standard Operating Procedures",
+    "categories": "Categories",
+    "documents": "Documents",
+    "search": "Search SOPs",
+    "bookmark": "Bookmark",
+    "progress": "Progress",
+    "lastViewed": "Last Viewed"
+  },
+  "training": {
+    "modules": "Training Modules",
+    "progress": "Progress",
+    "certificate": "Certificate",
+    "assessment": "Assessment",
+    "score": "Score",
+    "passed": "Passed",
+    "failed": "Failed"
   }
 }
 ```
 
-### Context-Aware Translation Hook
+### Language Toggle Component
 
 ```typescript
-// hooks/useTranslation.ts
-export function useTranslation(namespace?: string) {
-  const locale = useLocaleStore(state => state.locale)
-  
-  const t = useCallback((key: string, values?: Record<string, any>) => {
-    const fullKey = namespace ? `${namespace}.${key}` : key
-    let translation = getTranslation(fullKey, locale)
+// components/language-toggle.tsx - Production language switcher
+import { useTransition } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter, usePathname } from 'next/navigation';
+
+export function LanguageToggle() {
+  const [isPending, startTransition] = useTransition();
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const t = useTranslations('common');
+
+  const toggleLanguage = () => {
+    const nextLocale = locale === 'en' ? 'th' : 'en';
+    const newPathname = pathname.replace(`/${locale}`, `/${nextLocale}`);
     
-    // Replace placeholders
-    if (values && translation) {
-      Object.entries(values).forEach(([placeholder, value]) => {
-        translation = translation.replace(`{${placeholder}}`, String(value))
-      })
-    }
-    
-    return translation || key
-  }, [locale, namespace])
-  
-  return { t, locale }
+    startTransition(() => {
+      router.replace(newPathname);
+    });
+  };
+
+  return (
+    <Button
+      variant="outline"
+      size="touch"
+      onClick={toggleLanguage}
+      disabled={isPending}
+      className="min-w-[80px] font-medium"
+    >
+      {locale === 'en' ? 'ไทย' : 'ENG'}
+      {isPending && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
+    </Button>
+  );
 }
 ```
 
