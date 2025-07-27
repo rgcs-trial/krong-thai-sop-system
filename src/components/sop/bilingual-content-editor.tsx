@@ -66,8 +66,7 @@ import { locales, localeNames, localeFlags, type Locale } from '@/lib/i18n';
 
 interface BilingualContent {
   en: string;
-  th: string;
-  fr?: string;
+  fr: string;
 }
 
 interface ContentValidation {
@@ -108,7 +107,7 @@ export function BilingualContentEditor({
   readOnly = false,
   showPreview = true,
   enableTranslationAssist = true,
-  requiredLanguages = ['en', 'th'],
+  requiredLanguages = ['en', 'fr'],
   maxLength = 10000,
   placeholder
 }: BilingualContentEditorProps) {
@@ -118,10 +117,10 @@ export function BilingualContentEditor({
   
   // Content state
   const [title, setTitle] = useState<BilingualContent>(
-    initialTitle || { en: '', th: '', fr: '' }
+    initialTitle || { en: '', fr: '' }
   );
   const [content, setContent] = useState<BilingualContent>(
-    initialContent || { en: '', th: '', fr: '' }
+    initialContent || { en: '', fr: '' }
   );
   
   // Editor state
@@ -150,12 +149,10 @@ export function BilingualContentEditor({
   const autoSaveTimer = useRef<NodeJS.Timeout | null>(null);
   const titleRefs = useRef<Record<Locale, HTMLInputElement | null>>({
     en: null,
-    th: null,
     fr: null
   });
   const contentRefs = useRef<Record<Locale, HTMLTextAreaElement | null>>({
     en: null,
-    th: null,
     fr: null
   });
 
@@ -193,14 +190,14 @@ export function BilingualContentEditor({
 
     // Check for length mismatches (warning level)
     const enContentLength = content.en?.length || 0;
-    const thContentLength = content.th?.length || 0;
+    const frContentLength = content.fr?.length || 0;
     
-    if (enContentLength > 0 && thContentLength > 0) {
-      const lengthRatio = Math.abs(enContentLength - thContentLength) / Math.max(enContentLength, thContentLength);
+    if (enContentLength > 0 && frContentLength > 0) {
+      const lengthRatio = Math.abs(enContentLength - frContentLength) / Math.max(enContentLength, frContentLength);
       if (lengthRatio > 0.5) {
         issues.push({
           type: 'length_mismatch',
-          message: 'Content length differs significantly between English and Thai',
+          message: 'Content length differs significantly between English and French',
           severity: 'warning'
         });
       }
