@@ -1002,3 +1002,5 @@ Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcom
   "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
   "ip": "::ffff:127.0.0.1"
 }
+ ✓ Compiled in 244ms (875 modules)
+ ✓ Compiled in 76ms (366 modules)

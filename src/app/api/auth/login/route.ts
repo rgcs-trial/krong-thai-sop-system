@@ -72,7 +72,21 @@ export async function POST(request: NextRequest) {
       supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 30) + '...'
     });
 
-    const body = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch (error) {
+      logError('JSON_PARSE_ERROR', error, {
+        operation: 'login',
+        userAgent: request.headers.get('user-agent'),
+        ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip')
+      });
+      return NextResponse.json(
+        { success: false, error: 'Invalid request format' },
+        { status: 400 }
+      );
+    }
+    
     const { email, pin, deviceFingerprint } = body;
     
     // Determine locale from Accept-Language header or default to 'en'
