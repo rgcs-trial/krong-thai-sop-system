@@ -106,7 +106,7 @@ export const useGlobalStore = create<GlobalState>()(
 
       removeNotification: (id: string) =>
         set((state) => {
-          state.notifications = state.notifications.filter(n => n.id !== id);
+          state.notifications = state.notifications.filter((n: any) => n.id !== id);
         }),
 
       clearNotifications: () =>
