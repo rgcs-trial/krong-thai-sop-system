@@ -22,6 +22,13 @@ export { default as SOPFavoritesDashboard } from './sop-favorites-dashboard';
 export { default as SOPBreadcrumb } from './sop-breadcrumb';
 export { default as SOPSearch } from './sop-search';
 
+// Bilingual content management components
+export { 
+  BilingualContentEditor, 
+  BilingualTitleEditor, 
+  QuickBilingualInput 
+} from './bilingual-content-editor';
+
 // Types and interfaces
 export type { SOPCategory } from './sop-categories-dashboard';
 export type { SOPDocument } from './sop-document-viewer';
