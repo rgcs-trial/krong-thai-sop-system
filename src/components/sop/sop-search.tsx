@@ -1,218 +1,244 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import { Search, Filter, X, SortAsc, SortDesc, Calendar, Star } from 'lucide-react';
+import { Search, Filter, X, SortAsc, SortDesc, Calendar, Star, Mic, Save, History, Bookmark, Clock, Zap } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
+import { useSearch, SearchFilters, SortOption, SearchSuggestion } from '@/hooks/use-search';
 import { SOPCategory } from './sop-categories-dashboard';
 import { SOPDocument } from './sop-document-viewer';
 
-interface SearchFilters {
-  categories: string[];
-  statuses: string[];
-  priorities: string[];
-  tags: string[];
-  dateRange: {
-    from?: string;
-    to?: string;
-  };
-}
-
-interface SortOption {
-  field: 'title' | 'updated_at' | 'priority' | 'created_at';
-  direction: 'asc' | 'desc';
-}
+// Types are now imported from the search hook
 
 interface SOPSearchProps {
   locale: string;
   categories?: SOPCategory[];
-  onSearch: (query: string, filters: SearchFilters, sort: SortOption) => void;
-  onClear: () => void;
+  onSearch?: (query: string, filters: SearchFilters, sort: SortOption) => void;
+  onClear?: () => void;
+  onResultSelect?: (result: any) => void;
   placeholder?: string;
   className?: string;
   showFilters?: boolean;
   showSort?: boolean;
+  showVoiceSearch?: boolean;
+  showSavedSearches?: boolean;
+  autoSearch?: boolean;
+  compact?: boolean;
 }
 
-// Mock SOPs for search demonstration
-const mockSOPs: SOPDocument[] = [
-  {
-    id: '1',
-    category_id: '1',
-    title: 'Food Temperature Control',
-    title_th: 'การควบคุมอุณหภูมิอาหาร',
-    content: 'Temperature monitoring procedures',
-    content_th: 'ขั้นตอนการตรวจสอบอุณหภูมิ',
-    steps: [],
-    steps_th: [],
-    attachments: [],
-    tags: ['food safety', 'temperature', 'monitoring'],
-    tags_th: ['ความปลอดภัยอาหาร', 'อุณหภูมิ', 'การตรวจสอบ'],
-    version: 2,
-    status: 'approved',
-    priority: 'high',
-    effective_date: '2024-01-01',
-    review_date: '2024-06-01',
-    created_by: 'Chef Manager',
-    approved_by: 'Restaurant Manager',
-    created_at: '2024-01-10T09:00:00Z',
-    updated_at: '2024-01-15T10:30:00Z'
-  },
-  {
-    id: '2',
-    category_id: '2',
-    title: 'Kitchen Equipment Cleaning',
-    title_th: 'การทำความสะอาดอุปกรณ์ครัว',
-    content: 'Daily cleaning procedures for kitchen equipment',
-    content_th: 'ขั้นตอนการทำความสะอาดอุปกรณ์ครัวรายวัน',
-    steps: [],
-    steps_th: [],
-    attachments: [],
-    tags: ['cleaning', 'equipment', 'daily tasks'],
-    tags_th: ['การทำความสะอาด', 'อุปกรณ์', 'งานประจำวัน'],
-    version: 1,
-    status: 'approved',
-    priority: 'medium',
-    effective_date: '2024-01-01',
-    review_date: '2024-07-01',
-    created_by: 'Kitchen Supervisor',
-    approved_by: 'Chef Manager',
-    created_at: '2024-01-05T14:00:00Z',
-    updated_at: '2024-01-12T16:45:00Z'
-  }
-];
+// Voice search support check
+const isVoiceSearchSupported = () => {
+  return typeof window !== 'undefined' && 
+         'webkitSpeechRecognition' in window || 
+         'SpeechRecognition' in window;
+};
 
 export default function SOPSearch({
   locale,
   categories = [],
   onSearch,
   onClear,
+  onResultSelect,
   placeholder,
   className,
   showFilters = true,
-  showSort = true
+  showSort = true,
+  showVoiceSearch = true,
+  showSavedSearches = true,
+  autoSearch = true,
+  compact = false
 }: SOPSearchProps) {
   const t = useTranslations();
-  const [query, setQuery] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
-  const [filters, setFilters] = useState<SearchFilters>({
-    categories: [],
-    statuses: [],
-    priorities: [],
-    tags: [],
-    dateRange: {}
-  });
-  const [sort, setSort] = useState<SortOption>({
-    field: 'updated_at',
-    direction: 'desc'
-  });
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [saveSearchName, setSaveSearchName] = useState('');
+  const [saveSearchNameTh, setSaveSearchNameTh] = useState('');
+  const recognitionRef = useRef<any>(null);
 
-  // Search suggestions based on mock data
-  const searchSuggestions = useMemo(() => {
-    if (!query || query.length < 2) return [];
-    
-    const suggestions = new Set<string>();
-    const queryLower = query.toLowerCase();
-    
-    mockSOPs.forEach(sop => {
-      const title = locale === 'th' ? sop.title_th : sop.title;
-      const tags = locale === 'th' ? sop.tags_th : sop.tags;
-      
-      if (title.toLowerCase().includes(queryLower)) {
-        suggestions.add(title);
+  // Use the enhanced search hook
+  const {
+    query,
+    results,
+    filters,
+    sort,
+    isSearching,
+    suggestions,
+    searchHistory,
+    savedSearches,
+    search,
+    clearSearch,
+    setFilters,
+    setSort,
+    saveSearch,
+    loadSavedSearch,
+    deleteSavedSearch,
+    error
+  } = useSearch(locale);
+
+  // Initialize voice recognition
+  useEffect(() => {
+    if (isVoiceSearchSupported() && showVoiceSearch) {
+      const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = locale === 'th' ? 'th-TH' : 'en-US';
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        search(transcript, filters, sort);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
       }
-      
-      tags.forEach(tag => {
-        if (tag.toLowerCase().includes(queryLower)) {
-          suggestions.add(tag);
-        }
-      });
-    });
-    
-    return Array.from(suggestions).slice(0, 5);
-  }, [query, locale]);
+    };
+  }, [locale, showVoiceSearch, search, filters, sort]);
 
   // Available filter options
-  const statusOptions = ['draft', 'review', 'approved', 'archived'];
+  const statusOptions = ['published', 'draft', 'review', 'archived'];
   const priorityOptions = ['low', 'medium', 'high', 'critical'];
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    mockSOPs.forEach(sop => {
-      const sopTags = locale === 'th' ? sop.tags_th : sop.tags;
-      sopTags.forEach(tag => tags.add(tag));
-    });
-    return Array.from(tags);
-  }, [locale]);
+  
+  // Voice search function
+  const startVoiceSearch = () => {
+    if (recognitionRef.current && !isListening) {
+      setIsListening(true);
+      recognitionRef.current.start();
+    }
+  };
+
+  // Stop voice search
+  const stopVoiceSearch = () => {
+    if (recognitionRef.current && isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    }
+  };
 
   // Handle search
   const handleSearch = () => {
-    onSearch(query, filters, sort);
+    if (query.trim()) {
+      search(query, filters, sort);
+      setShowSuggestions(false);
+      onSearch?.(query, filters, sort);
+    }
   };
 
   // Handle clear
   const handleClear = () => {
-    setQuery('');
-    setFilters({
-      categories: [],
-      statuses: [],
-      priorities: [],
-      tags: [],
-      dateRange: {}
-    });
-    setSort({
-      field: 'updated_at',
-      direction: 'desc'
-    });
-    onClear();
+    clearSearch();
+    setShowSuggestions(false);
+    onClear?.();
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion: SearchSuggestion) => {
+    if (suggestion.type === 'query') {
+      search(suggestion.text, filters, sort);
+    } else if (suggestion.type === 'category' && suggestion.id) {
+      setFilters({ ...filters, categoryId: suggestion.id });
+      search(query, { ...filters, categoryId: suggestion.id }, sort);
+    } else if (suggestion.type === 'document') {
+      search(suggestion.text, filters, sort);
+    }
+    setShowSuggestions(false);
+  };
+
+  // Handle result selection
+  const handleResultSelect = (result: any) => {
+    onResultSelect?.(result);
+    setShowSuggestions(false);
+  };
+
+  // Handle save search
+  const handleSaveSearch = () => {
+    if (saveSearchName.trim()) {
+      saveSearch(saveSearchName, saveSearchNameTh || saveSearchName);
+      setSaveSearchName('');
+      setSaveSearchNameTh('');
+      setShowSaveDialog(false);
+    }
   };
 
   // Handle filter change
   const handleFilterChange = (
-    filterType: keyof SearchFilters,
-    value: string,
-    action: 'add' | 'remove'
+    filterType: string,
+    value: string | boolean,
+    action?: 'add' | 'remove'
   ) => {
-    setFilters(prev => {
-      const newFilters = { ...prev };
-      
-      if (filterType === 'dateRange') {
-        // Handle date range separately
-        return newFilters;
-      }
-      
-      const currentValues = newFilters[filterType] as string[];
-      
-      if (action === 'add' && !currentValues.includes(value)) {
-        (newFilters[filterType] as string[]) = [...currentValues, value];
+    const newFilters = { ...filters };
+    
+    if (filterType === 'categoryId') {
+      newFilters.categoryId = value as string;
+    } else if (filterType === 'status') {
+      newFilters.status = value as any;
+    } else if (filterType === 'priority') {
+      newFilters.priority = value as any;
+    } else if (filterType === 'hasMedia') {
+      newFilters.hasMedia = value as boolean;
+    } else if (filterType === 'tags') {
+      if (!newFilters.tags) newFilters.tags = [];
+      if (action === 'add' && !newFilters.tags.includes(value as string)) {
+        newFilters.tags = [...newFilters.tags, value as string];
       } else if (action === 'remove') {
-        (newFilters[filterType] as string[]) = currentValues.filter(v => v !== value);
+        newFilters.tags = newFilters.tags.filter(tag => tag !== value);
       }
-      
-      return newFilters;
-    });
+    }
+    
+    setFilters(newFilters);
+    if (autoSearch && query.trim()) {
+      search(query, newFilters, sort);
+    }
   };
 
   // Handle sort change
   const handleSortChange = (field: SortOption['field']) => {
-    setSort(prev => ({
+    const newSort: SortOption = {
       field,
-      direction: prev.field === field && prev.direction === 'asc' ? 'desc' : 'asc'
-    }));
+      direction: sort.field === field && sort.direction === 'asc' ? 'desc' : 'asc'
+    };
+    setSort(newSort);
+    if (autoSearch && query.trim()) {
+      search(query, filters, newSort);
+    }
   };
 
   // Get active filter count
   const activeFilterCount = useMemo(() => {
-    return filters.categories.length + 
-           filters.statuses.length + 
-           filters.priorities.length + 
-           filters.tags.length +
-           (filters.dateRange.from || filters.dateRange.to ? 1 : 0);
+    let count = 0;
+    if (filters.categoryId) count++;
+    if (filters.status) count++;
+    if (filters.priority) count++;
+    if (filters.hasMedia) count++;
+    if (filters.tags?.length) count += filters.tags.length;
+    if (filters.dateRange?.from || filters.dateRange?.to) count++;
+    return count;
   }, [filters]);
+
+  // Show suggestions when input is focused and has suggestions
+  const shouldShowSuggestions = showSuggestions && (suggestions.length > 0 || searchHistory.length > 0 || results.length > 0);
 
   return (
     <div className={cn("space-y-4", className)}>
