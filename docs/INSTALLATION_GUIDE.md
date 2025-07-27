@@ -20,12 +20,13 @@ Complete setup instructions for the Restaurant Krong Thai Standard Operating Pro
 
 ### System Requirements
 - **Node.js 20.x LTS** (recommended: 20.11.0 or later)
-- **pnpm** (recommended) or **npm**
+- **pnpm@9.0.0** (package manager - specified in package.json)
 - **Git** for version control
 - **VS Code** or preferred code editor
 - **GitHub account** for version control and CI/CD
 - **Vercel account** for deployment
 - **Supabase account** for database and authentication
+- **Tablet devices** running Android 8.0+ or iOS 12+ for restaurant operations
 
 ### Technology Stack Overview
 - **Frontend**: Next.js 15.4.4 with App Router
