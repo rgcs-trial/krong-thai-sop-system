@@ -29,8 +29,6 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/api-disabled-backup",
-    "src/lib/security"
+    "node_modules"
   ]
 }
