@@ -318,7 +318,7 @@ export interface TrainingModule {
   title: string;
   title_fr: string;
   description?: string;
-  description_th?: string;
+  description_fr?: string;
   duration_minutes: number;
   passing_score: number;
   max_attempts: number;
@@ -528,7 +528,7 @@ export interface CreateTrainingModuleRequest {
   title: string;
   title_fr: string;
   description?: string;
-  description_th?: string;
+  description_fr?: string;
   duration_minutes?: number;
   passing_score?: number;
   max_attempts?: number;
