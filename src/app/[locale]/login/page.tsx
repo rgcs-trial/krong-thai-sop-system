@@ -372,8 +372,8 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
                 <div className="flex items-center justify-between">
                   <label className="text-sm font-medium text-gray-700">
                     {authMode === 'manager' 
-                      ? (locale === 'en' ? 'Manager PIN (4 digits)' : 'รหัส PIN ผู้จัดการ (4 หลัก)')
-                      : (locale === 'en' ? 'Your 4-digit PIN' : 'รหัส PIN 4 หลักของคุณ')
+                      ? (locale === 'en' ? 'Manager PIN (4 digits)' : 'Code PIN Gestionnaire (4 chiffres)')
+                      : (locale === 'en' ? 'Your 4-digit PIN' : 'Votre code PIN à 4 chiffres')
                     }
                   </label>
                   <button
