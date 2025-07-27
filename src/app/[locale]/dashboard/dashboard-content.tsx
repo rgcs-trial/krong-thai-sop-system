@@ -103,7 +103,7 @@ export default function DashboardContent({ locale }: DashboardContentProps) {
               <div className="flex items-center space-x-3">
                 <div className="text-right">
                   <p className="text-sm font-medium text-gray-900">
-                    {user.fullName || user.email}
+                    {user.full_name || user.email}
                   </p>
                   <p className="text-xs text-gray-500 capitalize">
                     {user.role}
