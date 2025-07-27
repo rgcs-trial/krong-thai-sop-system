@@ -239,3 +239,36 @@
  ✓ Compiled in 115ms (366 modules)
  ✓ Compiled in 82ms (366 modules)
  ✓ Compiled in 75ms (366 modules)
+ ✓ Compiled in 73ms (366 modules)
+ ✓ Compiled in 99ms (366 modules)
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json',
+  page: '/en/login'
+}
+ ⨯ Failed to generate static paths for /[locale]/login:
+[Error: ENOENT: no such file or directory, open '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json'
+}
+ ⨯ Failed to generate static paths for /[locale]/login:
+[Error: ENOENT: no such file or directory, open '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 965ms (1188 modules)
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/rgcs-admin/workspace/krong-thai-sop-system/.next/prerender-manifest.json'
+}
+ GET /en/login?redirect=%2F 500 in 2418ms
+ ✓ Compiled in 101ms (513 modules)

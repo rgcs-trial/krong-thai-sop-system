@@ -70,7 +70,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { DatePicker } from '@/components/ui/date-picker';
+// import { DatePicker } from '@/components/ui/date-picker';
 import { toast } from '@/hooks/use-toast';
 
 import { useTrainingStore } from '@/lib/stores/training-store';
