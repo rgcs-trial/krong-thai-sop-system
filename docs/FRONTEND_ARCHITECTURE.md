@@ -227,10 +227,12 @@ src/
 │   ├── hooks/                             # Custom React hooks
 │   ├── i18n.ts                            # Internationalization setup
 │   └── utils.ts                           # Utility functions
-├── hooks/                                 # Custom Hooks (3 hooks)
+├── hooks/                                 # Custom Hooks (5 hooks)
 │   ├── use-favorites.ts                   # Bookmark management
 │   ├── use-i18n.ts                        # Internationalization
-│   └── use-toast.ts                       # Toast notifications
+│   ├── use-toast.ts                       # Toast notifications
+│   ├── use-translations-db.ts             # Database-driven translation operations
+│   └── use-translation-admin.ts           # Translation admin workflow management
 ├── types/                                 # TypeScript Definitions
 │   ├── database.ts                        # Database types (620+ lines)
 │   ├── api.ts                             # API interfaces
