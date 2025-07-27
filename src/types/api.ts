@@ -116,7 +116,7 @@ export interface SOPListParams {
   limit?: number;
 }
 
-export interface SOPResponse extends SOPDocument {
+export interface SOPResponse extends Omit<SOPDocument, 'creator' | 'updater' | 'approver'> {
   category: SOPCategory;
   creator: Pick<AuthUser, 'id' | 'full_name' | 'full_name_th' | 'position' | 'position_th'>;
   updater?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_th' | 'position' | 'position_th'>;
