@@ -290,7 +290,7 @@ export interface AuditLogParams {
 }
 
 export interface AuditLogResponse extends Omit<AuditLog, 'user'> {
-  user?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_th' | 'email' | 'role'>;
+  user?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_fr' | 'email' | 'role'>;
 }
 
 // Authentication context for API
