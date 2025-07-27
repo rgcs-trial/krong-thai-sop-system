@@ -259,11 +259,11 @@ export function BilingualContentRenderer({
             </div>
             
             <div className="space-y-3">
-              <h2 className={`text-xl font-heading font-bold ${lang === 'th' ? 'font-thai' : 'font-body'}`}>
+              <h2 className={`text-xl font-heading font-bold ${'font-body'}`}>
                 {content.title[lang] || `[No translation available]`}
               </h2>
               
-              <div className={`prose prose-sm max-w-none ${lang === 'th' ? 'font-thai' : 'font-body'}`}>
+              <div className={`prose prose-sm max-w-none ${'font-body'}`}>
                 <div 
                   className="whitespace-pre-wrap leading-relaxed"
                   dangerouslySetInnerHTML={{ 
@@ -295,10 +295,10 @@ export function BilingualContentRenderer({
       {locales.map(lang => (
         <TabsContent key={lang} value={lang} className="mt-4">
           <div className="space-y-4">
-            <h1 className={`text-2xl font-heading font-bold ${lang === 'th' ? 'font-thai' : 'font-body'}`}>
+            <h1 className={`text-2xl font-heading font-bold ${'font-body'}`}>
               {content.title[lang] || '[No translation available]'}
             </h1>
-            <div className={`prose max-w-none ${lang === 'th' ? 'font-thai' : 'font-body'}`}>
+            <div className={`prose max-w-none ${'font-body'}`}>
               <div 
                 className="whitespace-pre-wrap leading-relaxed"
                 dangerouslySetInnerHTML={{ 
@@ -472,7 +472,7 @@ export function BilingualContentSummary({
       <CardContent className="pt-4">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className={`font-semibold line-clamp-1 ${language === 'th' ? 'font-thai' : 'font-body'}`}>
+            <h3 className={`font-semibold line-clamp-1 font-body`}>
               {content.title[language] || content.title.en || '[No title]'}
             </h3>
             <div className="flex items-center gap-1">
@@ -483,7 +483,7 @@ export function BilingualContentSummary({
             </div>
           </div>
           
-          <p className={`text-sm text-muted-foreground line-clamp-2 ${language === 'th' ? 'font-thai' : 'font-body'}`}>
+          <p className={`text-sm text-muted-foreground line-clamp-2 font-body`}>
             {getExcerpt(content.content[language] || content.content.en || '')}
           </p>
           
