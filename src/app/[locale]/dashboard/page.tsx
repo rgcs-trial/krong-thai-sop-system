@@ -34,102 +34,33 @@ interface DashboardPageProps {
   }>;
 }
 
+// Create a dynamic component that won't be rendered during SSR
+const DashboardContent = dynamic(() => import('./dashboard-content'), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-600 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading Dashboard...</p>
+      </div>
+    </div>
+  ),
+});
+
 export default function DashboardPage({ params }: DashboardPageProps) {
   const [locale, setLocale] = useState('en');
-  const [isClient, setIsClient] = useState(false);
-  const [authState, setAuthState] = useState<{
-    user: any;
-    userProfile: any;
-    isAuthenticated: boolean;
-    logout: () => Promise<void>;
-  }>({
-    user: null,
-    userProfile: null,
-    isAuthenticated: false,
-    logout: async () => {},
-  });
-  const [sessionState, setSessionState] = useState<{
-    expiresAt: Date | null;
-    lastActivity: Date | null;
-    updateLastActivity: () => void;
-  }>({
-    expiresAt: null,
-    lastActivity: null,
-    updateLastActivity: () => {},
-  });
-  
-  const t = useTranslations('dashboard');
-  const tCommon = useTranslations('common');
-  const tAuth = useTranslations('auth');
 
-  // Resolve params and set client ready state
   useEffect(() => {
     const resolveParams = async () => {
       const { locale: paramLocale } = await params;
       setLocale(paramLocale);
-      setIsClient(true);
     };
     
     resolveParams();
   }, [params]);
 
-  // Initialize auth store only on client side
-  useEffect(() => {
-    if (isClient) {
-      // Dynamic import to prevent SSR issues
-      import('@/lib/stores/auth-store').then(({ useAuth, useSession }) => {
-        // This is a bit of a hack - we need to get the current state
-        // In a real implementation, you'd want a more sophisticated solution
-        const authStore = useAuth.getState?.() || {
-          user: null,
-          userProfile: null,
-          isAuthenticated: false,
-          logout: async () => {},
-        };
-        
-        const sessionStore = useSession.getState?.() || {
-          expiresAt: null,
-          lastActivity: null,
-          updateLastActivity: () => {},
-        };
-        
-        setAuthState(authStore);
-        setSessionState(sessionStore);
-        
-        // Update activity
-        sessionStore.updateLastActivity?.();
-      }).catch(console.error);
-    }
-  }, [isClient]);
-
-  // Handle logout
-  const handleLogout = async () => {
-    await logout();
-  };
-
-  // Show loading state during SSR or while resolving params
-  if (!isClient) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Show authentication loading state if not authenticated
-  if (!isAuthenticated || !user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">{tCommon('loading')}</p>
-        </div>
-      </div>
-    );
-  }
+  return <DashboardContent locale={locale} />;
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50">
