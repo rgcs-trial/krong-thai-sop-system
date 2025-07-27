@@ -310,11 +310,13 @@
 ## Manager Verification Checklist
 
 ### **System Access Verification:**
-- [ ] Staff can login independently
+- [ ] Staff can login independently with PIN
 - [ ] Appropriate category access confirmed
-- [ ] Language preference set correctly
+- [ ] Language preference set correctly (EN/FR)
 - [ ] Training assignments visible
 - [ ] Emergency procedures accessible
+- [ ] Device binding properly configured
+- [ ] Offline mode functional
 
 ### **Skill Demonstration:**
 - [ ] Tablet operation proficiency
