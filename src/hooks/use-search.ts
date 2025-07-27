@@ -397,8 +397,8 @@ export function useSearch(locale: string = 'en') {
       // Get category suggestions
       const { data: categories } = await supabase
         .from('sop_categories')
-        .select('id, name_en, name_th')
-        .or(`name_en.ilike.%${searchQuery}%,name_th.ilike.%${searchQuery}%`)
+        .select('id, name_en, name_fr')
+        .or(`name_en.ilike.%${searchQuery}%,name_fr.ilike.%${searchQuery}%`)
         .limit(3);
 
       categories?.forEach(category => {
