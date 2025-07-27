@@ -38,23 +38,30 @@ interface DashboardPageProps {
 export default function DashboardPage({ params }: DashboardPageProps) {
   const [locale, setLocale] = useState('en');
   const [isClient, setIsClient] = useState(false);
+  const [authState, setAuthState] = useState<{
+    user: any;
+    userProfile: any;
+    isAuthenticated: boolean;
+    logout: () => Promise<void>;
+  }>({
+    user: null,
+    userProfile: null,
+    isAuthenticated: false,
+    logout: async () => {},
+  });
+  const [sessionState, setSessionState] = useState<{
+    expiresAt: Date | null;
+    lastActivity: Date | null;
+    updateLastActivity: () => void;
+  }>({
+    expiresAt: null,
+    lastActivity: null,
+    updateLastActivity: () => {},
+  });
+  
   const t = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const tAuth = useTranslations('auth');
-  
-  // Auth store - only access after client hydration
-  const { 
-    user, 
-    userProfile, 
-    isAuthenticated, 
-    logout 
-  } = useAuth();
-  
-  const { 
-    expiresAt, 
-    lastActivity, 
-    updateLastActivity 
-  } = useSession();
 
   // Resolve params and set client ready state
   useEffect(() => {
