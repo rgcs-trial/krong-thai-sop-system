@@ -204,8 +204,8 @@ export function useSearch(locale: string = 'en') {
     const searchTerms = query.trim().split(/\s+/).join(' | ');
     
     // Search in both English and Thai content
-    const titleSearch = locale === 'th' ? 'title_th' : 'title_en';
-    const contentSearch = locale === 'th' ? 'content_th' : 'content_en';
+    const titleSearch = locale === 'fr' ? 'title_fr' : 'title_en';
+    const contentSearch = locale === 'fr' ? 'content_fr' : 'content_en';
     
     searchQuery = searchQuery.or(`
       ${titleSearch}.ilike.%${query}%,

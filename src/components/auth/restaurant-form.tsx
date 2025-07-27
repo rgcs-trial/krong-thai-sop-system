@@ -39,7 +39,7 @@ interface RestaurantFormProps {
   initialData?: Partial<RestaurantFormData>;
   onSubmit: (data: RestaurantFormData) => Promise<void>;
   onCancel: () => void;
-  locale: 'en' | 'th';
+  locale: 'en' | 'fr';
   isSubmitting?: boolean;
 }
 
