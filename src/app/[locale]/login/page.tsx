@@ -194,7 +194,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
       setServiceError({ 
         error: locale === 'en' 
           ? 'Unable to connect to authentication service' 
-          : 'ไม่สามารถเชื่อมต่อกับบริการยืนยันตัวตนได้',
+          : 'Impossible de se connecter au service d\'authentification',
         code: 'NETWORK_ERROR'
       });
     } finally {
