@@ -54,5 +54,11 @@ export {
 } from "./toast"
 export { Toaster } from "./toaster"
 
+// Additional Components  
+export { Progress } from "./progress"
+export { Calendar } from "./calendar"
+export { DatePicker, DateRangePicker } from "./date-picker"
+export { Popover, PopoverTrigger, PopoverContent } from "./popover"
+
 // Hooks
 export { useToast, toast } from "../../hooks/use-toast"
