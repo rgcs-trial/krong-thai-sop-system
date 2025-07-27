@@ -21,7 +21,8 @@
     "welcome": "Bienvenue",
     "language": "Langue",
     "english": "Anglais",
-    "french": "Français"
+    "french": "Français",
+    "clear": "Effacer"
   },
   "auth": {
     "title": "Restaurant Krong Thai",
