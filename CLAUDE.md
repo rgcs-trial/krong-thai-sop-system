@@ -104,7 +104,7 @@ supabase/         # 8 database migrations, schema
 
 ## Database Schema (Supabase)
 
-**Tables**: `auth_users` (PIN auth), `sop_categories` (16 categories), `sop_documents` (bilingual EN/TH SOPs), `training_modules`, `training_progress`, `training_assessments`, `training_certificates`, `form_submissions`, `audit_logs`, `performance_metrics`, `realtime_subscriptions`
+**Tables**: `restaurants` (location management), `auth_users` (PIN auth), `sop_categories` (16 categories), `sop_documents` (bilingual EN/TH SOPs), `training_modules`, `training_progress`, `training_assessments`, `training_certificates`, `form_submissions`, `audit_logs`, `performance_metrics`, `realtime_subscriptions`
 
 ## Development Workflow
 
