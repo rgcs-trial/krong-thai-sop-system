@@ -283,7 +283,7 @@ export interface DatabaseError {
 // Language support
 export interface BilingualContent {
   en: string;
-  th: string;
+  fr: string;
 }
 
 // File upload types
