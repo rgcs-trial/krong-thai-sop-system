@@ -275,20 +275,52 @@ export function LanguageToggle({
   );
 }
 
-// Quick toggle between just two languages for space-constrained areas
-export function QuickLanguageToggle({ className = '' }: { className?: string }) {
+// Quick toggle between languages for space-constrained areas
+export function QuickLanguageToggle({ 
+  className = '',
+  preferredLanguages = ['en', 'th'] 
+}: { 
+  className?: string;
+  preferredLanguages?: Locale[];
+}) {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
+  const { setLanguage } = useSettingsStore();
 
-  const otherLocale = locale === 'en' ? 'fr' : 'en';
+  // Get the next language in the rotation
+  const getNextLocale = () => {
+    const currentIndex = preferredLanguages.indexOf(locale);
+    const nextIndex = (currentIndex + 1) % preferredLanguages.length;
+    return preferredLanguages[nextIndex];
+  };
 
-  const handleToggle = () => {
-    startTransition(() => {
-      const newPathname = pathname.replace(`/${locale}`, `/${otherLocale}`);
-      router.push(newPathname);
-      router.refresh();
+  const nextLocale = getNextLocale();
+
+  const handleToggle = async () => {
+    startTransition(async () => {
+      try {
+        // Update language preference in settings store
+        await setLanguage(nextLocale as 'en' | 'fr' | 'th');
+        
+        // Store language preference in session storage for immediate persistence
+        sessionStorage.setItem('preferred-language', nextLocale);
+        
+        // Replace the current locale in the pathname
+        const segments = pathname.split('/');
+        if (locales.includes(segments[1] as Locale)) {
+          segments[1] = nextLocale;
+        } else {
+          segments.splice(1, 0, nextLocale);
+        }
+        const newPathname = segments.join('/');
+        
+        router.push(newPathname);
+        router.refresh();
+      } catch (error) {
+        console.error('Failed to change language:', error);
+      }
     });
   };
 
@@ -307,14 +339,20 @@ export function QuickLanguageToggle({ className = '' }: { className?: string }) 
         transition-colors
         ${className}
       `}
-      aria-label={`Switch to ${localeNames[otherLocale]}`}
+      aria-label={`Switch to ${localeNames[nextLocale]}`}
     >
-      <span className="text-sm" role="img" aria-label={localeNames[otherLocale]}>
-        {localeFlags[otherLocale]}
-      </span>
-      <span className={`text-sm font-medium ${otherLocale === 'fr' ? 'font-ui' : 'font-ui'}`}>
-        {otherLocale.toUpperCase()}
-      </span>
+      {isPending ? (
+        <Loader2 size={14} className="animate-spin" />
+      ) : (
+        <>
+          <span className="text-sm" role="img" aria-label={localeNames[nextLocale]}>
+            {localeFlags[nextLocale]}
+          </span>
+          <span className={`text-sm font-medium ${nextLocale === 'th' ? 'font-thai' : 'font-ui'}`}>
+            {nextLocale.toUpperCase()}
+          </span>
+        </>
+      )}
     </Button>
   );
 }
