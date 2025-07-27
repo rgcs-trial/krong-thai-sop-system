@@ -9,6 +9,8 @@ import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { RestaurantForm } from './restaurant-form';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface Restaurant {
   id: string;
