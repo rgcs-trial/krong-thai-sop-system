@@ -336,9 +336,31 @@ const defaultUserPreferences: UserPreferences = {
   favoriteCategories: [],
   pinnedDocuments: [],
   recentlyViewed: [],
+  
+  // Language-specific preferences
+  languagePreferences: {
+    primaryLanguage: 'en',
+    secondaryLanguage: 'th',
+    showTranslations: true,
+    autoTranslate: false,
+    translationQuality: 'balanced',
+    preferredLanguageForContent: 'auto',
+    fallbackLanguage: 'en',
+  },
+  
+  // Content management preferences
+  contentEditing: {
+    defaultEditMode: 'side-by-side',
+    showTranslationHints: true,
+    validateTranslations: true,
+    requireBothLanguages: false,
+    autoSaveInterval: 30, // 30 seconds
+  },
+  
   searchHistory: [],
   searchFilters: {},
   saveSearchHistory: true,
+  searchLanguages: ['en', 'th'],
   preferredLearningPath: null,
   studyReminders: {
     enabled: false,
