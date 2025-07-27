@@ -12,9 +12,9 @@ export type AuditAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'LOGIN' | 'LOGOUT' | 
 export interface Restaurant {
   id: string;
   name: string;
-  name_th?: string;
+  name_fr?: string;
   address?: string;
-  address_th?: string;
+  address_fr?: string;
   phone?: string;
   email?: string;
   timezone: string;
