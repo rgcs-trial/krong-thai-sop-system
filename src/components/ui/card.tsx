@@ -73,7 +73,16 @@ const CardContent = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+  <div 
+    ref={ref} 
+    className={cn(
+      "p-6 pt-0",
+      // Tablet-optimized content spacing
+      "p-6 pt-2 font-body text-tablet-base leading-relaxed",
+      className
+    )} 
+    {...props} 
+  />
 ))
 CardContent.displayName = "CardContent"
 
