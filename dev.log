@@ -4167,3 +4167,251 @@ Error: Route "/api/restaurants" used `cookies().get('sb-blimbcomhmhlubqngben-aut
 [AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
  POST /api/auth/login 200 in 73ms
 [AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 57ms
+ GET /en/login?redirect=%2F 200 in 31ms
+ GET /en/login?redirect=%2F 200 in 32ms
+ GET /api/auth/location-session/check 200 in 315ms
+ GET /en/login?redirect=%2F 200 in 26ms
+ GET /api/auth/location-session/check 200 in 85ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 61ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 129ms
+ GET /api/auth/location-session/check 200 in 110ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'manager@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: manager@krongthai.com
+ POST /api/auth/login 200 in 62ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 230ms
+ GET /api/auth/location-session/check 200 in 79ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'invalid@email.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: invalid@email.com
+ POST /api/auth/login 200 in 66ms
+[AUTH-DEBUG] Database query result: {
+  hasUser: false,
+  error: 'JSON object requested, multiple (or no) rows returned',
+  errorCode: 'PGRST116'
+}
+[AUTH-ERROR] 2025-07-27T13:51:01.588Z: {
+  "timestamp": "2025-07-27T13:51:01.588Z",
+  "context": "DATABASE_QUERY",
+  "error": {
+    "code": "PGRST116",
+    "details": "The result contains 0 rows",
+    "hint": null,
+    "message": "JSON object requested, multiple (or no) rows returned"
+  },
+  "metadata": {
+    "operation": "auth_users_lookup",
+    "email": "invalid@email.com",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+    "ip": "::ffff:127.0.0.1"
+  }
+}
+ GET /en/login?redirect=%2F 200 in 25ms
+ GET /api/auth/location-session/check 200 in 92ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'test@test.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: test@test.com
+ POST /api/auth/login 200 in 67ms
+[AUTH-DEBUG] Database query result: {
+  hasUser: false,
+  error: 'JSON object requested, multiple (or no) rows returned',
+  errorCode: 'PGRST116'
+}
+[AUTH-ERROR] 2025-07-27T13:51:02.858Z: {
+  "timestamp": "2025-07-27T13:51:02.858Z",
+  "context": "DATABASE_QUERY",
+  "error": {
+    "code": "PGRST116",
+    "details": "The result contains 0 rows",
+    "hint": null,
+    "message": "JSON object requested, multiple (or no) rows returned"
+  },
+  "metadata": {
+    "operation": "auth_users_lookup",
+    "email": "test@test.com",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+    "ip": "::ffff:127.0.0.1"
+  }
+}
+ GET /en/login?redirect=%2F 200 in 26ms
+ GET /api/auth/location-session/check 200 in 101ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 63ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 128ms
+ GET /api/auth/location-session/check 200 in 88ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 355ms
+ GET /en/login?redirect=%2F 200 in 28ms
+ GET /api/auth/location-session/check 200 in 75ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 341ms
+ GET /api/restaurants?active=true 200 in 84ms
+ GET /api/restaurants?active=true 200 in 62ms
+ ✓ Compiled in 146ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 30ms
+ GET /api/auth/location-session/check 200 in 199ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 351ms
+ GET /api/restaurants?active=true 200 in 71ms
+ GET /api/restaurants?active=true 200 in 87ms
+ ✓ Compiled in 117ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 26ms
+ GET /api/auth/location-session/check 200 in 150ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 347ms
+ GET /api/restaurants?active=true 200 in 104ms
+ GET /api/restaurants?active=true 200 in 89ms
+ ✓ Compiled in 79ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 25ms
+ GET /api/auth/location-session/check 200 in 193ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 358ms
+ GET /api/restaurants?active=true 200 in 85ms
+ GET /api/restaurants?active=true 200 in 91ms
+ ✓ Compiled in 107ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 25ms
+ GET /api/auth/location-session/check 200 in 166ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 362ms
+ GET /api/restaurants?active=true 200 in 84ms
+ GET /api/restaurants?active=true 200 in 76ms
+ ✓ Compiled in 90ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 25ms
+ GET /api/auth/location-session/check 200 in 137ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 360ms
+ GET /api/restaurants?active=true 200 in 71ms
+ GET /api/restaurants?active=true 200 in 68ms
+ ✓ Compiled in 80ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 25ms
+ GET /api/auth/location-session/check 200 in 200ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 378ms
+ GET /api/restaurants?active=true 200 in 105ms
+ GET /api/restaurants?active=true 200 in 107ms
+ ✓ Compiled in 76ms (366 modules)
+ ✓ Compiled in 71ms (366 modules)
