@@ -95,7 +95,7 @@ export default function AdminSettingsPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Users size={20} />
-                {t('admin.settings.userManagement')}
+                User Management
               </CardTitle>
             </CardHeader>
             <CardContent>
