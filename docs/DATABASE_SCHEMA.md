@@ -1,6 +1,6 @@
-# Database Schema Documentation - Restaurant Krong Thai SOP System
+# Database Schema Documentation - Restaurant Krong French SOP System
 
-This document provides a comprehensive overview of the PostgreSQL database schema for the Restaurant Krong Thai Standard Operating Procedures (SOP) management system, deployed on Supabase.
+This document provides a comprehensive overview of the PostgreSQL database schema for the Restaurant Krong French Standard Operating Procedures (SOP) management system, deployed on Supabase.
 
 ## ✅ ENTERPRISE SCHEMA STATUS - Phase 2 Complete
 
@@ -12,11 +12,11 @@ This document provides a comprehensive overview of the PostgreSQL database schem
 
 ## Overview
 
-The database supports a comprehensive bilingual (English/Thai) restaurant SOP system with role-based access control, training modules, progress tracking, and comprehensive audit logging. The system is designed for multi-tenant restaurant operations with full security and scalability.
+The database supports a comprehensive bilingual (English/French) restaurant SOP system with role-based access control, training modules, progress tracking, and comprehensive audit logging. The system is designed for multi-tenant restaurant operations with full security and scalability.
 
 ### Key Features
 
-- **Bilingual Support**: Complete English and Thai content storage
+- **Bilingual Support**: Complete English and French content storage
 - **Multi-tenant Architecture**: Restaurant isolation with Row Level Security
 - **PIN Authentication**: bcrypt-hashed 4-digit PIN system for restaurant staff
 - **16 SOP Categories**: Complete coverage of restaurant operations
@@ -31,7 +31,7 @@ The database supports a comprehensive bilingual (English/Thai) restaurant SOP sy
 #### ✅ Completed Components
 1. **Core Schema**: All 12 main tables implemented with relationships
 2. **Migration System**: 4 progressive migrations for incremental builds
-3. **Bilingual Structure**: Thai and English content fields throughout
+3. **Bilingual Structure**: French and English content fields throughout
 4. **Security Layer**: Row Level Security policies for multi-tenant isolation
 5. **Performance Optimization**: Strategic indexing and full-text search
 6. **Training Infrastructure**: Complete training and assessment system
@@ -73,7 +73,7 @@ The database schema is built using an 8-migration enterprise approach:
 
 ### Migration 005: Performance Optimizations
 - **Features**: Advanced indexing for <100ms search queries, <50ms SOP queries
-- **Indexes**: 25+ performance indexes including GIN indexes for Thai full-text search
+- **Indexes**: 25+ performance indexes including GIN indexes for French full-text search
 - **Functions**: Optimized search functions with ranking and filtering
 - **Monitoring**: Query performance tracking and automated optimization
 - **Target**: 100+ concurrent tablet support with enterprise-grade performance
@@ -107,9 +107,9 @@ The database schema is built using an 8-migration enterprise approach:
 CREATE TABLE restaurants (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
-    name_th VARCHAR(255),                    -- Thai restaurant name
+    name_fr VARCHAR(255),                    -- French restaurant name
     address TEXT,
-    address_th TEXT,                         -- Thai address
+    address_fr TEXT,                         -- French address
     phone VARCHAR(20),
     email VARCHAR(255),
     timezone VARCHAR(50) DEFAULT 'Asia/Bangkok',
@@ -128,10 +128,10 @@ CREATE TABLE auth_users (
     pin_hash VARCHAR(255),                   -- bcrypt hashed 4-digit PIN
     role user_role NOT NULL DEFAULT 'staff', -- admin, manager, staff
     full_name VARCHAR(255) NOT NULL,
-    full_name_th VARCHAR(255),               -- Thai name
+    full_name_fr VARCHAR(255),               -- French name
     phone VARCHAR(20),
     position VARCHAR(100),
-    position_th VARCHAR(100),                -- Thai position
+    position_fr VARCHAR(100),                -- French position
     restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
     is_active BOOLEAN DEFAULT true,
     last_login_at TIMESTAMPTZ,
@@ -176,9 +176,9 @@ CREATE TABLE sop_categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     code VARCHAR(20) UNIQUE NOT NULL,        -- 'FOOD_SAFETY', 'CLEANING', etc.
     name VARCHAR(255) NOT NULL,
-    name_th VARCHAR(255) NOT NULL,           -- Thai category name
+    name_fr VARCHAR(255) NOT NULL,           -- French category name
     description TEXT,
-    description_th TEXT,                     -- Thai description
+    description_fr TEXT,                     -- French description
     icon VARCHAR(50),                        -- Icon identifier (shield-check, spray-can, etc.)
     color VARCHAR(7),                        -- Hex color code for UI theming
     sort_order INTEGER NOT NULL DEFAULT 0,  -- Display order
@@ -200,14 +200,14 @@ CREATE TABLE sop_documents (
     category_id UUID NOT NULL,
     restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
     title VARCHAR(500) NOT NULL,
-    title_th VARCHAR(500) NOT NULL,         -- Thai title
+    title_fr VARCHAR(500) NOT NULL,         -- French title
     content TEXT NOT NULL,
-    content_th TEXT NOT NULL,               -- Thai content
+    content_fr TEXT NOT NULL,               -- French content
     steps JSONB,                            -- Structured step-by-step procedures
-    steps_th JSONB,                         -- Thai structured steps
+    steps_fr JSONB,                         -- French structured steps
     attachments JSONB DEFAULT '[]',         -- File attachment references
     tags VARCHAR(255)[],                    -- Searchable tags (English)
-    tags_th VARCHAR(255)[],                 -- Thai searchable tags
+    tags_fr VARCHAR(255)[],                 -- French searchable tags
     version INTEGER DEFAULT 1,
     status sop_status DEFAULT 'draft',      -- draft, review, approved, archived
     priority sop_priority DEFAULT 'medium', -- low, medium, high, critical
@@ -233,13 +233,13 @@ CREATE INDEX idx_sop_documents_category ON sop_documents(category_id);
 CREATE INDEX idx_sop_documents_restaurant ON sop_documents(restaurant_id);
 CREATE INDEX idx_sop_documents_status ON sop_documents(status);
 CREATE INDEX idx_sop_documents_tags ON sop_documents USING GIN(tags);
-CREATE INDEX idx_sop_documents_tags_th ON sop_documents USING GIN(tags_th);
+CREATE INDEX idx_sop_documents_tags_fr ON sop_documents USING GIN(tags_fr);
 
 -- Full-text search indexes for bilingual content
 CREATE INDEX idx_sop_documents_search_en ON sop_documents 
     USING GIN(to_tsvector('english', title || ' ' || content));
-CREATE INDEX idx_sop_documents_search_th ON sop_documents 
-    USING GIN(to_tsvector('simple', title_th || ' ' || content_th));
+CREATE INDEX idx_sop_documents_search_fr ON sop_documents 
+    USING GIN(to_tsvector('simple', title_fr || ' ' || content_fr));
 ```
 
 ### 3. Training System
@@ -251,9 +251,9 @@ CREATE TABLE training_modules (
     restaurant_id UUID NOT NULL,
     sop_document_id UUID NOT NULL,          -- Links training to specific SOP
     title VARCHAR(500) NOT NULL,
-    title_th VARCHAR(500) NOT NULL,         -- Thai title
+    title_fr VARCHAR(500) NOT NULL,         -- French title
     description TEXT,
-    description_th TEXT,                    -- Thai description
+    description_fr TEXT,                    -- French description
     duration_minutes INTEGER DEFAULT 30,    -- Expected completion time
     passing_score INTEGER DEFAULT 80,       -- Minimum score to pass (0-100)
     max_attempts INTEGER DEFAULT 3,         -- Maximum assessment attempts
@@ -278,9 +278,9 @@ CREATE TABLE training_sections (
     module_id UUID NOT NULL,
     section_number INTEGER NOT NULL,
     title VARCHAR(500) NOT NULL,
-    title_th VARCHAR(500) NOT NULL,         -- Thai title
+    title_fr VARCHAR(500) NOT NULL,         -- French title
     content TEXT NOT NULL,
-    content_th TEXT NOT NULL,               -- Thai content
+    content_fr TEXT NOT NULL,               -- French content
     media_urls JSONB DEFAULT '[]',          -- Images, videos, documents
     estimated_minutes INTEGER DEFAULT 5,    -- Time for this section
     is_required BOOLEAN DEFAULT true,       -- Must complete to progress
@@ -376,7 +376,7 @@ CREATE TABLE user_bookmarks (
     sop_id UUID NOT NULL,
     restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
     notes TEXT,                             -- User notes for bookmark
-    notes_th TEXT,                          -- Thai notes
+    notes_fr TEXT,                          -- French notes
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
@@ -545,7 +545,7 @@ RETURNS TABLE(
     role user_role,
     restaurant_id UUID,
     full_name VARCHAR(255),
-    full_name_th VARCHAR(255)
+    full_name_fr VARCHAR(255)
 ) AS $$
 BEGIN
     RETURN QUERY
@@ -555,7 +555,7 @@ BEGIN
         u.role,
         u.restaurant_id,
         u.full_name,
-        u.full_name_th
+        u.full_name_fr
     FROM auth_users u
     WHERE u.email = user_email 
     AND u.is_active = true
@@ -642,12 +642,12 @@ The database includes comprehensive sample data for development and testing:
 
 #### Restaurant Configuration
 ```sql
--- Krong Thai Restaurant with Thai localization
-INSERT INTO restaurants (id, name, name_th, address, address_th, phone, email, settings) VALUES
+-- Krong French Restaurant with French localization
+INSERT INTO restaurants (id, name, name_fr, address, address_fr, phone, email, settings) VALUES
 ('550e8400-e29b-41d4-a716-446655440000', 
- 'Krong Thai Restaurant', 
+ 'Krong French Restaurant', 
  'ร้านกรองไทย', 
- '123 Main Street, Bangkok 10110, Thailand', 
+ '123 Main Street, Bangkok 10110, Frenchland', 
  '123 ถนนใหญ่ กรุงเทพฯ 10110', 
  '+66-2-123-4567', 
  'info@krongthai.com',
@@ -656,8 +656,8 @@ INSERT INTO restaurants (id, name, name_th, address, address_th, phone, email, s
 
 #### Complete 16 SOP Categories
 ```sql
--- All 16 standard restaurant operation categories with Thai translations
-INSERT INTO sop_categories (code, name, name_th, description, description_th, icon, color, sort_order) VALUES
+-- All 16 standard restaurant operation categories with French translations
+INSERT INTO sop_categories (code, name, name_fr, description, description_fr, icon, color, sort_order) VALUES
 ('FOOD_SAFETY', 'Food Safety & Hygiene', 'ความปลอดภัยและสุขอนามัยอาหาร', 'Food handling, storage, and safety procedures', 'ขั้นตอนการจัดการ เก็บรักษา และความปลอดภัยของอาหาร', 'shield-check', '#e74c3c', 1),
 ('CLEANING', 'Cleaning & Sanitation', 'การทำความสะอาดและสุขาภิบาล', 'Cleaning schedules, sanitization procedures', 'ตารางการทำความสะอาด ขั้นตอนการฆ่าเชื้อ', 'spray-can', '#3498db', 2),
 ('CUSTOMER_SERVICE', 'Customer Service', 'การบริการลูกค้า', 'Guest interaction, complaint handling, service standards', 'การปฏิสัมพันธ์กับแขก การจัดการข้อร้องเรียน มาตรฐานการบริการ', 'users', '#2ecc71', 3),
@@ -670,7 +670,7 @@ INSERT INTO sop_categories (code, name, name_th, description, description_th, ic
 #### Test User Accounts with Working PINs
 ```sql
 -- Admin user with PIN 1234
-INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, position, position_th, restaurant_id) VALUES
+INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_fr, position, position_fr, restaurant_id) VALUES
 ('660e8400-e29b-41d4-a716-446655440000', 
  'admin@krongthai.com', 
  crypt('1234', gen_salt('bf')), 
@@ -682,7 +682,7 @@ INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, posi
  '550e8400-e29b-41d4-a716-446655440000');
 
 -- Manager user with PIN 5678
-INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, position, position_th, restaurant_id) VALUES
+INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_fr, position, position_fr, restaurant_id) VALUES
 ('770e8400-e29b-41d4-a716-446655440000', 
  'manager@krongthai.com', 
  crypt('5678', gen_salt('bf')), 
@@ -694,7 +694,7 @@ INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, posi
  '550e8400-e29b-41d4-a716-446655440000');
 
 -- Staff user with PIN 9999
-INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, position, position_th, restaurant_id) VALUES
+INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_fr, position, position_fr, restaurant_id) VALUES
 ('880e8400-e29b-41d4-a716-446655440000', 
  'staff@krongthai.com', 
  crypt('9999', gen_salt('bf')), 
@@ -712,7 +712,7 @@ INSERT INTO auth_users (id, email, pin_hash, role, full_name, full_name_th, posi
 
 ### ✅ Enterprise Performance Optimization
 - **Advanced Indexing**: 25+ performance indexes achieving <100ms search queries
-- **Search Optimization**: GIN indexes with Thai language support for <100ms response
+- **Search Optimization**: GIN indexes with French language support for <100ms response
 - **SOP Queries**: Composite indexes achieving <50ms document retrieval
 - **Category Navigation**: Optimized indexes for <30ms category browsing
 - **Training Queries**: Performance functions achieving <75ms progress tracking
@@ -781,4 +781,4 @@ END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 ```
 
-This comprehensive schema supports the full functionality of the Krong Thai Restaurant SOP system with proper bilingual support, security, and scalability for multi-tenant restaurant operations.
+This comprehensive schema supports the full functionality of the Krong French Restaurant SOP system with proper bilingual support, security, and scalability for multi-tenant restaurant operations.
