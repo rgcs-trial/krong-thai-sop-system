@@ -38,3 +38,569 @@
  GET /api/restaurants?active=true 200 in 102ms
  ✓ Compiled in 120ms (366 modules)
  ✓ Compiled in 101ms (366 modules)
+ ✓ Compiled in 120ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 231ms
+ GET /api/auth/location-session/check 200 in 190ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 14ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 409ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:33.593Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /api/auth/location-session/check 200 in 408ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:33.701Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 87ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 32ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:34.323Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:35.210Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /th/login 200 in 67ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 36ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:35.331Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:35.341Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:35.764Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 28ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:38.241Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:39.044Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 32ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:39.610Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 26ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:40.069Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:40.872Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 27ms
+ GET /en/login?redirect=%2Fen%2Fanalytics 200 in 38ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:41.447Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 27ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:41.874Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login 200 in 26ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:42.300Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:42.718Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 25ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:43.199Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:44.010Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 26ms
+ ✓ Compiled in 79ms (366 modules)
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:44.607Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 82ms (366 modules)
+ GET /en/login?redirect=%2Fen%2Fanalytics 200 in 52ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 14ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 26ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:45.082Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 23ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:45.984Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:46.786Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fnonexistent-page 200 in 27ms
+ GET /en/login?redirect=%2Finvalid%2Froute 200 in 26ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:47.351Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:47.756Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 24ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:48.212Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 79ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 14ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:48.516Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 85ms (366 modules)
+ ✓ Compiled in 89ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 87ms
+ GET /en/login?redirect=%2F 200 in 70ms
+ ✓ Compiled in 85ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 14ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:48.787Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:49.029Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 26ms
+ GET /th/login?redirect=%2Fth%2Fdashboard 200 in 25ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:49.587Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 30ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:50.016Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:50.430Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 23ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:50.907Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 74ms (366 modules)
+ ✓ Compiled in 80ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 147ms
+ ✓ Compiled in 107ms (366 modules)
+ ✓ Compiled in 94ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 91ms
+ GET /en/login?redirect=%2F 200 in 14ms
+ GET /en/login?redirect=%2F 200 in 14ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:51.360Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:51.715Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 24ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:52.277Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:31:52.298Z",
+  "type": "rate_limit_exceeded",
+  "source": "middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 100,
+    "maxRequests": 100,
+    "windowMs": 900000,
+    "path": "/"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 90ms (366 modules)
+ ✓ Compiled in 404ms (1139 modules)
