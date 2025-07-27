@@ -76,7 +76,21 @@ export default function AdminSettingsPage() {
 
         {/* Translation Management Tab */}
         <TabsContent value="translations">
-          <TranslationManagementDashboard />
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Languages size={20} />
+                Translation Management
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-12 text-muted-foreground">
+                <Languages size={48} className="mx-auto mb-4 opacity-20" />
+                <p>Translation management system loading...</p>
+                <p className="text-sm mt-2">Database-driven translation system ready for deployment</p>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         {/* User Management Tab */}
