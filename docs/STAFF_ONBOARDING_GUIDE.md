@@ -321,8 +321,10 @@
 ### **Skill Demonstration:**
 - [ ] Tablet operation proficiency
 - [ ] SOP navigation skills
-- [ ] Search function usage
+- [ ] Search function usage (online/offline)
 - [ ] Bookmark management
+- [ ] Language switching (EN/FR)
+- [ ] PIN security understanding
 - [ ] Logout procedure completion
 
 ### **Knowledge Assessment:**
