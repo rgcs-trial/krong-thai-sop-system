@@ -313,10 +313,24 @@ CREATE TABLE training_certificates (
 
 ## 5. API Architecture
 
-### 5.1 Enterprise API Architecture (20+ Endpoints)
+### 5.1 Enterprise API Architecture (32+ Endpoints)
 ```
 src/app/api/
-├── auth/                           # Authentication endpoints (4)
+├── translations/                   # Translation system API (12 endpoints)
+│   ├── [locale]/                  # Public translation endpoints
+│   │   ├── route.ts               # Get all translations for locale
+│   │   └── key/[...keyPath]/route.ts # Get specific translation key
+│   └── usage/route.ts             # Translation usage analytics
+├── admin/                         # Admin translation management
+│   ├── translations/              # Admin translation CRUD
+│   │   ├── route.ts               # List/create translations
+│   │   ├── [id]/route.ts          # Individual translation CRUD
+│   │   ├── [id]/status/route.ts   # Update translation status
+│   │   └── bulk/route.ts          # Bulk operations
+│   └── translation-keys/          # Translation key management
+│       ├── route.ts               # List/create keys
+│       └── [id]/route.ts          # Individual key CRUD
+├── auth/                          # Authentication endpoints (4)
 │   ├── login/route.ts             # Standard login endpoint with enhanced error handling
 │   ├── staff-pin-login/route.ts   # PIN-based staff authentication
 │   └── location-session/          # Tablet location binding
@@ -327,6 +341,12 @@ src/app/api/
 │   └── env/route.ts               # Environment variable debugging
 ├── security/                      # Security endpoints
 │   └── csp-report/route.ts        # CSP violation reporting
+├── analytics/                     # Analytics system API (5 endpoints)
+│   ├── executive/route.ts         # Executive dashboard data
+│   ├── operational/route.ts       # Operational insights
+│   ├── sop/route.ts              # SOP analytics
+│   ├── performance/route.ts       # Performance metrics
+│   └── alerts/route.ts           # Alert management
 └── training/                      # Training system API (8+ endpoints)
     ├── modules/                   # Training module management
     │   ├── [id]/route.ts          # Individual module CRUD
