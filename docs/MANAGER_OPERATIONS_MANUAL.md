@@ -32,12 +32,14 @@
 ┌─────────────────────────────────────────┐
 │ Daily System Health Summary             │
 ├─────────────────────────────────────────┤
-│ Active Users: 12/15 expected            │
+│ Active PIN Sessions: 12/15 expected     │
 │ System Uptime: 99.98%                   │
 │ Avg Response Time: 1.2s                 │
-│ Failed Logins: 0                        │
-│ Storage Used: 67%                       │
+│ Failed PIN Attempts: 0                  │
+│ Storage Used: 67% (736MB optimized)     │
 │ Last Backup: 02:30 AM ✓                 │
+│ Tablet Sync Status: All connected       │
+│ EN/FR Content: Synchronized             │
 └─────────────────────────────────────────┘
 ```
 
