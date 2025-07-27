@@ -41,7 +41,7 @@ interface SearchResult {
   updated_at: string;
   category?: {
     name_en: string;
-    name_th: string;
+    name_fr: string;
     color: string;
   };
   // Search-specific fields
