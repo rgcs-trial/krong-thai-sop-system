@@ -87,6 +87,7 @@ export function RestaurantForm({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [currentTab, setCurrentTab] = useState('basic');
+  const [submitError, setSubmitError] = useState<any>(null);
 
   // Initialize operational hours if not provided
   useEffect(() => {
