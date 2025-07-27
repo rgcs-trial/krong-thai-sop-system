@@ -90,7 +90,16 @@ const CardFooter = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex items-center p-6 pt-0", className)} {...props} />
+  <div 
+    ref={ref} 
+    className={cn(
+      "flex items-center p-6 pt-0",
+      // Tablet-optimized footer with better touch targets
+      "flex items-center gap-4 p-6 pt-4 min-h-[60px]",
+      className
+    )} 
+    {...props} 
+  />
 ))
 CardFooter.displayName = "CardFooter"
 
