@@ -1,6 +1,6 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useTransition, useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { locales, localeNames, localeFlags, type Locale } from '@/lib/i18n';
@@ -10,8 +10,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { Globe, Languages, Check } from 'lucide-react';
+import { Globe, Languages, Check, Loader2 } from 'lucide-react';
+import { useSettingsStore } from '@/lib/stores/settings-store';
 
 interface LanguageToggleProps {
   variant?: 'default' | 'compact' | 'icon-only';
