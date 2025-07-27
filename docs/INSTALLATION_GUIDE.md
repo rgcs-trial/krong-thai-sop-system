@@ -269,7 +269,7 @@ CREATE TABLE auth_users (
     staff_id VARCHAR(10) UNIQUE NOT NULL,
     name VARCHAR(100) NOT NULL,
     role TEXT NOT NULL CHECK (role IN ('admin', 'manager', 'staff')),
-    language_preference VARCHAR(2) DEFAULT 'th',
+    language_preference VARCHAR(2) DEFAULT 'fr',
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
