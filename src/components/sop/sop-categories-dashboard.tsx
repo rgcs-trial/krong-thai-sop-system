@@ -282,7 +282,9 @@ const MOCK_CATEGORIES: EnhancedSOPCategory[] = [
     sort_order: 16,
     is_active: true,
     sop_count: 5,
-    last_updated: '2024-01-16'
+    last_updated: '2024-01-16',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-16T00:00:00Z'
   }
 ];
 
