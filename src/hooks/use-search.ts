@@ -246,7 +246,7 @@ export function useSearch(locale: string = 'en') {
     // Apply sorting
     switch (sortOption.field) {
       case 'title':
-        searchQuery = searchQuery.order(locale === 'th' ? 'title_th' : 'title_en', { ascending: sortOption.direction === 'asc' });
+        searchQuery = searchQuery.order(locale === 'fr' ? 'title_fr' : 'title_en', { ascending: sortOption.direction === 'asc' });
         break;
       case 'updated_at':
         searchQuery = searchQuery.order('updated_at', { ascending: sortOption.direction === 'asc' });
