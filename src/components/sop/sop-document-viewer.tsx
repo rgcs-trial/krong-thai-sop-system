@@ -267,7 +267,7 @@ export function SOPDocumentViewer({
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-red mx-auto mb-4"></div>
-          <p className={cn("text-gray-600", locale === 'th' && "font-thai")}>
+          <p className={cn("text-gray-600", locale === 'fr' && "font-ui")}>
             {t('sop.loading')}
           </p>
         </div>
@@ -281,10 +281,10 @@ export function SOPDocumentViewer({
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className={cn("text-xl font-semibold text-gray-900 mb-2", locale === 'th' && "font-thai")}>
+          <h2 className={cn("text-xl font-semibold text-gray-900 mb-2", locale === 'fr' && "font-ui")}>
             {t('common.error')}
           </h2>
-          <p className={cn("text-gray-600 mb-4", locale === 'th' && "font-thai")}>
+          <p className={cn("text-gray-600 mb-4", locale === 'fr' && "font-ui")}>
             {error?.message || t('sop.documentNotFound')}
           </p>
           <Button onClick={onBack} variant="outline">
@@ -315,16 +315,16 @@ export function SOPDocumentViewer({
             <div className="flex-1 min-w-0">
               <h1 className={cn(
                 "text-xl md:text-2xl font-bold text-brand-black truncate",
-                locale === 'th' && "font-thai"
+                locale === 'fr' && "font-ui"
               )}>
                 {title}
               </h1>
               {category && (
                 <p className={cn(
                   "text-sm text-gray-600",
-                  locale === 'th' && "font-thai"
+                  locale === 'fr' && "font-ui"
                 )}>
-                  {locale === 'th' ? category.name_th : category.name}
+                  {locale === 'fr' ? category.name_fr : category.name}
                 </p>
               )}
             </div>
@@ -367,7 +367,7 @@ export function SOPDocumentViewer({
               )}
             >
               <Heart className={cn("w-4 h-4", isFavorite && "fill-current")} />
-              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+              <span className={cn("hidden sm:inline", locale === 'fr' && "font-ui")}>
                 {isFavorite ? t('sop.removeFromFavorites') : t('sop.addToFavorites')}
               </span>
             </Button>
@@ -379,7 +379,7 @@ export function SOPDocumentViewer({
               className="flex items-center gap-2 min-w-[44px] min-h-[44px]"
             >
               <Download className="w-4 h-4" />
-              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+              <span className={cn("hidden sm:inline", locale === 'fr' && "font-ui")}>
                 {t('sop.downloadPdf')}
               </span>
             </Button>
@@ -391,7 +391,7 @@ export function SOPDocumentViewer({
               className="flex items-center gap-2 min-w-[44px] min-h-[44px]"
             >
               <Print className="w-4 h-4" />
-              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+              <span className={cn("hidden sm:inline", locale === 'fr' && "font-ui")}>
                 {t('sop.printSop')}
               </span>
             </Button>
@@ -403,7 +403,7 @@ export function SOPDocumentViewer({
               className="flex items-center gap-2 min-w-[44px] min-h-[44px]"
             >
               <Share2 className="w-4 h-4" />
-              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+              <span className={cn("hidden sm:inline", locale === 'fr' && "font-ui")}>
                 {t('sop.shareSop')}
               </span>
             </Button>
@@ -472,14 +472,14 @@ export function SOPDocumentViewer({
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4 text-gray-500" />
                 <span className="font-medium">{t('sop.createdBy')}:</span>
-                <span className={cn(locale === 'th' && "font-thai")}>{creatorName}</span>
+                <span className={cn(locale === 'fr' && "font-ui")}>{creatorName}</span>
               </div>
               
               {approverName && (
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500" />
                   <span className="font-medium">{t('sop.approvedBy')}:</span>
-                  <span className={cn(locale === 'th' && "font-thai")}>{approverName}</span>
+                  <span className={cn(locale === 'fr' && "font-ui")}>{approverName}</span>
                 </div>
               )}
             </div>
@@ -493,7 +493,7 @@ export function SOPDocumentViewer({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, index) => (
-                    <Badge key={index} variant="outline" className={cn("text-xs", locale === 'th' && "font-thai")}>
+                    <Badge key={index} variant="outline" className={cn("text-xs", locale === 'fr' && "font-ui")}>
                       {tag}
                     </Badge>
                   ))}
@@ -511,7 +511,7 @@ export function SOPDocumentViewer({
           <CardContent>
             <p className={cn(
               "text-gray-700 leading-relaxed",
-              locale === 'th' && "font-thai"
+              locale === 'fr' && "font-ui"
             )}>
               {content}
             </p>
@@ -537,14 +537,14 @@ export function SOPDocumentViewer({
                   <div className="flex-1 min-w-0">
                     <h4 className={cn(
                       "font-semibold text-brand-black mb-2 text-base",
-                      locale === 'th' && "font-thai"
+                      locale === 'fr' && "font-ui"
                     )}>
                       {step.action}
                     </h4>
                     {step.note && (
                       <p className={cn(
                         "text-gray-700 leading-relaxed mb-3",
-                        locale === 'th' && "font-thai"
+                        locale === 'fr' && "font-ui"
                       )}>
                         {step.note}
                       </p>
@@ -553,7 +553,7 @@ export function SOPDocumentViewer({
                     {step.duration && (
                       <div className="flex items-center gap-2 mb-2">
                         <Clock className="w-4 h-4 text-blue-600" />
-                        <span className={cn("text-sm text-blue-700 font-medium", locale === 'th' && "font-thai")}>
+                        <span className={cn("text-sm text-blue-700 font-medium", locale === 'fr' && "font-ui")}>
                           {t('sop.duration')}: {step.duration}
                         </span>
                       </div>
@@ -564,7 +564,7 @@ export function SOPDocumentViewer({
                         <span className="text-sm font-medium text-gray-600 mb-1 block">{t('sop.tools')}:</span>
                         <div className="flex flex-wrap gap-1">
                           {step.tools.map((tool, toolIndex) => (
-                            <Badge key={toolIndex} variant="secondary" className={cn("text-xs", locale === 'th' && "font-thai")}>
+                            <Badge key={toolIndex} variant="secondary" className={cn("text-xs", locale === 'fr' && "font-ui")}>
                               {tool}
                             </Badge>
                           ))}
@@ -580,13 +580,13 @@ export function SOPDocumentViewer({
                           <div>
                             <p className={cn(
                               "text-red-800 text-sm font-medium mb-1",
-                              locale === 'th' && "font-thai"
+                              locale === 'fr' && "font-ui"
                             )}>
                               {t('common.warning')}
                             </p>
                             <p className={cn(
                               "text-red-700 text-sm",
-                              locale === 'th' && "font-thai"
+                              locale === 'fr' && "font-ui"
                             )}>
                               {step.warning}
                             </p>

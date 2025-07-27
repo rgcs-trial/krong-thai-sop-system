@@ -413,8 +413,8 @@ export function useSearch(locale: string = 'en') {
       // Get document title suggestions
       const { data: documents } = await supabase
         .from('sop_documents')
-        .select('id, title_en, title_th, category_id')
-        .or(`title_en.ilike.%${searchQuery}%,title_th.ilike.%${searchQuery}%`)
+        .select('id, title_en, title_fr, category_id')
+        .or(`title_en.ilike.%${searchQuery}%,title_fr.ilike.%${searchQuery}%`)
         .eq('is_published', true)
         .limit(3);
 
