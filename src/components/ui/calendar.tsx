@@ -52,42 +52,6 @@ function Calendar({
         day_hidden: "invisible",
         ...classNames,
       }}
-      components={{
-        IconLeft: ({ ...props }) => (
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 15 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            {...props}
-          >
-            <path
-              d="m8.842 3.135.058.069a.5.5 0 0 1-.058.697L6.435 6.5H12a.5.5 0 0 1 0 1H6.435l2.407 2.599a.5.5 0 1 1-.73.675l-3.25-3.5a.5.5 0 0 1 0-.675l3.25-3.5a.5.5 0 0 1 .73 0z"
-              fill="currentColor"
-              fillRule="evenodd"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        ),
-        IconRight: ({ ...props }) => (
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 15 15"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            {...props}
-          >
-            <path
-              d="m6.158 3.135a.5.5 0 0 1 .639-.058l.069.058 3.25 3.5a.5.5 0 0 1 .058.639l-.058.069-3.25 3.5a.5.5 0 1 1-.73-.675L8.565 7.5H3a.5.5 0 0 1 0-1h5.565L6.158 3.901a.5.5 0 0 1 0-.766z"
-              fill="currentColor"
-              fillRule="evenodd"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        ),
-      }}
       {...props}
     />
   )
