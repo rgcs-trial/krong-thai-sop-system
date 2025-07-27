@@ -10,13 +10,14 @@ import { getTranslations } from 'next-intl/server';
 import { SOPAnalyticsDashboard } from '@/components/analytics/sop-analytics-dashboard';
 
 interface SOPAnalyticsPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: SOPAnalyticsPageProps): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
   
   return {
     title: t('sop_analytics'),
@@ -25,9 +26,11 @@ export async function generateMetadata({ params }: SOPAnalyticsPageProps): Promi
 }
 
 export default async function SOPAnalyticsPage({ params }: SOPAnalyticsPageProps) {
+  const resolvedParams = await params;
+  
   // Validate locale
   const validLocales = ['en', 'fr', 'th'];
-  if (!validLocales.includes(params.locale)) {
+  if (!validLocales.includes(resolvedParams.locale)) {
     notFound();
   }
 
