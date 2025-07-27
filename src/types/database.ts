@@ -30,10 +30,10 @@ export interface AuthUser {
   pin_hash?: string;
   role: UserRole;
   full_name: string;
-  full_name_th?: string;
+  full_name_fr?: string;
   phone?: string;
   position?: string;
-  position_th?: string;
+  position_fr?: string;
   restaurant_id: string;
   is_active: boolean;
   last_login_at?: string;
