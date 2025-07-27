@@ -3,7 +3,10 @@
 Cypress.Commands.add('login', (email, pin) => {
   cy.visit('/')
   cy.get('input[type="email"]').type(email)
-  cy.get('input[type="password"]').type(pin)
+  // Type PIN in individual inputs
+  for (let i = 0; i < 4; i++) {
+    cy.get('input[inputmode="numeric"]').eq(i).type(pin[i])
+  }
   cy.get('button[type="submit"]').click()
 })
 
