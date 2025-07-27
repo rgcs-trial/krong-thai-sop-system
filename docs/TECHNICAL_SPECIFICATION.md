@@ -12,13 +12,13 @@
 
 ## 1. Executive Summary
 
-The Restaurant Krong Thai SOP Management System is an enterprise-grade tablet-optimized web application providing secure, bilingual (English/Thai) access to Standard Operating Procedures for restaurant staff. The system features PIN-based authentication, comprehensive SOP management across 16 categories, interactive training modules with certification, advanced analytics dashboards, real-time collaboration, and voice search capabilities with offline functionality.
+The Restaurant Krong Thai SOP Management System is an enterprise-grade tablet-optimized web application providing secure, bilingual (English/French) access to Standard Operating Procedures for restaurant staff. The system features PIN-based authentication, comprehensive SOP management across 16 categories, interactive training modules with certification, advanced analytics dashboards, real-time collaboration, and voice search capabilities with offline functionality.
 
 **CURRENT STATUS**: Phase 2 development is complete, delivering a world-class restaurant management system with enterprise-grade capabilities across all domains. The system supports 100+ concurrent tablets with real-time updates, comprehensive analytics, and professional training certification management.
 
 ### Key Objectives
 - Provide secure, tablet-optimized access to restaurant SOPs with real-time collaboration
-- Enable bilingual operations (English/Thai) with professional translation management
+- Enable bilingual operations (English/French) with professional translation management
 - Support PIN-based authentication with device fingerprinting and session management
 - Deliver interactive training modules with certification tracking and analytics
 - Facilitate comprehensive content management with voice search and AI-powered recommendations
@@ -37,7 +37,7 @@ The Restaurant Krong Thai SOP Management System is an enterprise-grade tablet-op
 - ✅ **Real-time Features**: WebSocket integration for collaborative editing and live updates
 - ✅ **Performance Monitoring**: Automated alerting, query optimization, and capacity tracking
 - ✅ **Bilingual Management**: Professional translation workflow with content synchronization
-- ✅ **Voice Search**: Web Speech API integration with Thai language support
+- ✅ **Voice Search**: Web Speech API integration with French language support
 - ✅ **PWA Capabilities**: Offline functionality with service worker and local indexing
 - ✅ **Concurrent Support**: 100+ tablet connections with <200ms real-time propagation
 
@@ -524,7 +524,7 @@ interface AuthStore {
 #### Enterprise Feature Delivery
 - ✅ **Advanced Analytics**: Executive and operational dashboards with Recharts
 - ✅ **Training Certification**: Complete interactive training system with digital certificates
-- ✅ **Voice Search**: Web Speech API integration with Thai language support
+- ✅ **Voice Search**: Web Speech API integration with French language support
 - ✅ **Real-time Collaboration**: WebSocket subscriptions for live document editing
 - ✅ **Professional Translation**: Bilingual content management with synchronization
 - ✅ **Performance Monitoring**: Automated alerting and capacity tracking
