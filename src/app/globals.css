@@ -1,7 +1,29 @@
+/* Optimized font loading for restaurant tablet deployment */
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond+SC:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Font performance optimizations */
+html {
+  font-display: swap; /* Improve font loading performance */
+}
+
+/* Preload critical fonts for faster rendering */
+@supports (font-display: swap) {
+  @font-face {
+    font-family: 'Inter-fallback';
+    src: local('Arial'), local('Helvetica'), local('sans-serif');
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Noto-Thai-fallback';
+    src: local('Tahoma'), local('Arial Unicode MS'), local('sans-serif');
+    font-display: swap;
+    unicode-range: U+0E00-0E7F; /* Thai Unicode range */
+  }
+}
 @import "tailwindcss";
 
 :root {
