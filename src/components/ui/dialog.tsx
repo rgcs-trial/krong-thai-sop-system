@@ -83,6 +83,8 @@ const DialogFooter = ({
   <div
     className={cn(
       "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-4 gap-4 pt-4",
+      // Tablet-optimized footer with better button spacing
+      "gap-6 pt-6 flex-col sm:flex-row",
       className
     )}
     {...props}
