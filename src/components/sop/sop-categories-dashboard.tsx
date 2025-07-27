@@ -27,6 +27,25 @@ interface SOPCategoriesDashboardProps {
   onCategorySelect: (category: SOPCategory) => void;
   className?: string;
 }
+
+// Mock data for fallback when API is unavailable
+const MOCK_CATEGORIES: EnhancedSOPCategory[] = [
+  {
+    id: '1',
+    code: 'FOOD_SAFETY',
+    name: 'Food Safety',
+    name_th: 'ความปลอดภัยอาหาร',
+    description: 'Food safety and hygiene procedures',
+    description_th: 'ขั้นตอนความปลอดภัยและสุขอนามัยอาหาร',
+    icon: 'shield',
+    color: '#E31B23',
+    sort_order: 1,
+    is_active: true,
+    sop_count: 12,
+    last_updated: '2024-01-25',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-25T00:00:00Z'
+  },
   {
     id: '2',
     code: 'KITCHEN_OPERATIONS',
