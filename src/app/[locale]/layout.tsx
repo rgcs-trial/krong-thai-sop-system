@@ -62,34 +62,30 @@ export default async function LocaleLayout({
   ].join(' ');
 
   return (
-    <html lang={locale} dir={direction} className={fontClasses}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-        <title>Krong Thai SOP</title>
-        <meta name="theme-color" content="#E31B23" />
-      </head>
-      <body 
-        className={`
-          antialiased 
-          ${locale === 'th' ? 'font-thai' : 'font-ui'}
-          bg-background 
-          text-foreground
-          touch-manipulation
-          select-none
-          overflow-x-hidden
-        `}
-        style={{
-          WebkitTapHighlightColor: 'transparent',
-          WebkitTouchCallout: 'none',
-          WebkitUserSelect: 'none',
-          userSelect: 'none',
-        }}
-      >
-        {children}
-        <PWAInstallPrompt />
-        <Toaster />
-      </body>
-    </html>
+    <div 
+      className={`
+        ${fontClasses}
+        antialiased 
+        ${locale === 'th' ? 'font-thai' : 'font-ui'}
+        bg-background 
+        text-foreground
+        touch-manipulation
+        select-none
+        overflow-x-hidden
+        min-h-screen
+      `}
+      dir={direction}
+      style={{
+        WebkitTapHighlightColor: 'transparent',
+        WebkitTouchCallout: 'none',
+        WebkitUserSelect: 'none',
+        userSelect: 'none',
+      }}
+    >
+      {children}
+      <PWAInstallPrompt />
+      <Toaster />
+    </div>
   );
 }
 
