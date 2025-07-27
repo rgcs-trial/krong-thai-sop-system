@@ -147,7 +147,7 @@ export default function DashboardPage({ params }: DashboardPageProps) {
               {t('welcome')}
             </h2>
             <p className="text-gray-600">
-              {new Date().toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
+              {new Date().toLocaleDateString(locale === 'th' ? 'th-TH' : 'en-US', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
