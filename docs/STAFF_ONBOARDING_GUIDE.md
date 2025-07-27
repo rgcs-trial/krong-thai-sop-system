@@ -34,6 +34,8 @@
 - Cannot be birthday, phone number, or obvious sequence
 - Must be changed within 30 days of first login
 - Staff must memorize PIN (no writing down)
+- Device binding enabled for enhanced security
+- Session timeout after 8 hours of inactivity
 
 ### **Step 2: First Login Walkthrough** (10 minutes)
 
