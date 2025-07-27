@@ -70,17 +70,23 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
     "@tanstack/query-devtools": "^5.81.2",
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
     "@types/bcryptjs": "^3.0.0",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/web-push": "^3.6.4",
+    "@vitejs/plugin-react": "^4.7.0",
+    "@vitest/ui": "^3.2.4",
     "cypress": "^14.5.3",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
+    "jsdom": "^26.1.0",
     "sharp": "^0.34.3",
     "supabase": "^2.31.8",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }
