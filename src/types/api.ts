@@ -289,7 +289,7 @@ export interface AuditLogParams {
   limit?: number;
 }
 
-export interface AuditLogResponse extends AuditLog {
+export interface AuditLogResponse extends Omit<AuditLog, 'user'> {
   user?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_th' | 'email' | 'role'>;
 }
 
