@@ -103,7 +103,9 @@
     "recent": "ล่าสุด",
     "totalSops": "{count} SOP",
     "lastUpdated": "อัปเดตล่าสุด: {date}",
-    "noResults": "ไม่พบหมวดหมู่ที่ตรงกับการค้นหา"
+    "noResults": "ไม่พบหมวดหมู่ที่ตรงกับการค้นหา",
+    "addedToFavorites": "เพิ่มในรายการโปรดแล้ว",
+    "removedFromFavorites": "ลบออกจากรายการโปรดแล้ว"
   },
   "navigation": {
     "home": "หน้าแรก",
