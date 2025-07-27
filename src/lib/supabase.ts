@@ -146,7 +146,7 @@ export const dbHelpers = {
           email,
           role,
           full_name,
-          full_name_th,
+          full_name_fr,
           position,
           position_th,
           restaurant_id,
