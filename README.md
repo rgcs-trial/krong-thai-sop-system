@@ -100,10 +100,11 @@ pnpm db:migrate            # Run database migrations (8 total)
 src/
 ├── app/                   # Next.js App Router
 │   ├── [locale]/         # Internationalized routes (EN/FR)
-│   ├── api/              # 20+ API endpoints
+│   ├── api/              # 32+ API endpoints including translation management
 │   ├── analytics/        # Analytics dashboards
 │   └── training/         # Training system pages
-├── components/            # 60+ React components
+├── components/            # 67+ React components
+│   ├── admin/            # Translation management interface (7 components)
 │   ├── analytics/        # Executive, SOP, training analytics + client wrappers (4 dashboards)
 │   ├── sop/              # SOP management, search, bilingual content (15 components)
 │   ├── training/         # Training modules, assessments, certificates + analytics (5 components)
@@ -112,13 +113,13 @@ src/
 ├── lib/                   # Utilities and configurations
 │   ├── stores/           # Zustand state stores
 │   ├── security/         # Security utilities
-│   └── i18n/             # Bilingual content management, offline storage, performance monitoring
-└── types/                # TypeScript definitions
-src/__tests__/            # Unit test files
+│   └── translation/      # Database-driven translation system, caching, real-time updates
+└── types/                # TypeScript definitions including translation types
+src/__tests__/            # Unit test files with 90%+ coverage
 cypress/                  # E2E test suite
 docs/                     # Project documentation
-messages/                 # Internationalization files (EN/FR)
-supabase/                 # 8 database migrations and config
+messages/                 # Legacy JSON files (migrated to database)
+supabase/                 # 17 database migrations including translation system
 ```
 
 ## Brand Guidelines
