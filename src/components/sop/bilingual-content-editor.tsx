@@ -386,7 +386,7 @@ export function BilingualContentEditor({
           value={title[lang] || ''}
           onChange={(e) => handleTitleChange(lang, e.target.value)}
           placeholder={placeholder?.title?.[lang] || `Enter title in ${localeNames[lang]}...`}
-          className={`${lang === 'th' ? 'font-thai' : 'font-ui'}`}
+          className={`${lang === 'fr' ? 'font-ui' : 'font-ui'}`}
           readOnly={readOnly}
         />
         <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -460,7 +460,7 @@ export function BilingualContentEditor({
             min-h-[300px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm 
             placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 
             focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 resize-vertical
-            ${lang === 'th' ? 'font-thai' : 'font-ui'}
+            ${lang === 'fr' ? 'font-ui' : 'font-ui'}
           `}
           readOnly={readOnly}
           maxLength={maxLength}
@@ -741,7 +741,7 @@ export const BilingualTitleEditor = ({
 }) => {
   return (
     <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 ${className}`}>
-      {(['en', 'th'] as Locale[]).map(lang => (
+      {(['en', 'fr'] as Locale[]).map(lang => (
         <div key={lang} className="space-y-2">
           <Label className="flex items-center gap-2">
             <span role="img">{localeFlags[lang]}</span>
@@ -751,7 +751,7 @@ export const BilingualTitleEditor = ({
             value={title[lang] || ''}
             onChange={(e) => onTitleChange({ ...title, [lang]: e.target.value })}
             placeholder={`Enter title in ${localeNames[lang]}...`}
-            className={lang === 'th' ? 'font-thai' : 'font-ui'}
+            className={lang === 'fr' ? 'font-ui' : 'font-ui'}
             readOnly={readOnly}
           />
         </div>
@@ -784,9 +784,9 @@ export const QuickBilingualInput = ({
             🇺🇸 English
             {required && !value.en?.trim() && <span className="text-destructive">*</span>}
           </TabsTrigger>
-          <TabsTrigger value="th" className="flex items-center gap-2">
-            🇹🇭 ไทย
-            {required && !value.th?.trim() && <span className="text-destructive">*</span>}
+          <TabsTrigger value="fr" className="flex items-center gap-2">
+            🇫🇷 Français
+            {required && !value.fr?.trim() && <span className="text-destructive">*</span>}
           </TabsTrigger>
         </TabsList>
         
@@ -799,12 +799,12 @@ export const QuickBilingualInput = ({
           />
         </TabsContent>
         
-        <TabsContent value="th" className="mt-2">
+        <TabsContent value="fr" className="mt-2">
           <Input
-            value={value.th || ''}
-            onChange={(e) => onChange({ ...value, th: e.target.value })}
-            placeholder={placeholder?.th || 'ป้อนเป็นภาษาไทย...'}
-            className="font-thai"
+            value={value.fr || ''}
+            onChange={(e) => onChange({ ...value, fr: e.target.value })}
+            placeholder={placeholder?.fr || 'Entrez en français...'}
+            className="font-ui"
           />
         </TabsContent>
       </Tabs>
