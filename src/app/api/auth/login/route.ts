@@ -175,8 +175,14 @@ export async function POST(request: NextRequest) {
         ip: request.headers.get('x-forwarded-for') || 'unknown'
       });
       
+      const errorInfo = getAuthErrorMessage('WRONG_PIN', 'en');
       return NextResponse.json(
-        { success: false, error: 'Invalid credentials' },
+        { 
+          success: false, 
+          error: errorInfo.userMessage,
+          errorCode: errorInfo.code,
+          severity: errorInfo.severity
+        },
         { status: 401 }
       );
     }
