@@ -19,7 +19,7 @@ const CreateRestaurantSchema = z.object({
   phone: z.string().optional(),
   email: z.string().email('Invalid email format').optional(),
   timezone: z.string().min(1, 'Timezone is required'),
-  operational_hours: z.record(z.object({
+  operational_hours: z.record(z.string(), z.object({
     open: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
     close: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
     closed: z.boolean().optional()
