@@ -179,10 +179,12 @@ pnpm db:generate-types
 **Functional Database Setup**
 ```bash
 # Database is fully operational with:
-# - Complete schema with 8 migrations
+# - Complete schema with 17 migrations
+# - 7-table translation system with RLS policies
 # - Sample restaurant and user data
-# - 16 SOP categories with bilingual EN/TH content
+# - 16 SOP categories with bilingual EN/FR content
 # - Training modules with assessment data
+# - Translation management with workflow approval
 # - Real-time subscriptions and performance monitoring
 # - Working PIN authentication with session management
 ```
