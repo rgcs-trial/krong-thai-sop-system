@@ -79,15 +79,27 @@ export async function POST(request: NextRequest) {
 
     // Validate input
     if (!email || !pin) {
+      const errorInfo = getAuthErrorMessage('MISSING_CREDENTIALS', 'en');
       return NextResponse.json(
-        { success: false, error: 'Email and PIN are required' },
+        { 
+          success: false, 
+          error: errorInfo.userMessage,
+          errorCode: errorInfo.code,
+          severity: errorInfo.severity
+        },
         { status: 400 }
       );
     }
 
     if (pin.length !== 4 || !/^\d{4}$/.test(pin)) {
+      const errorInfo = getAuthErrorMessage('INVALID_PIN_FORMAT', 'en');
       return NextResponse.json(
-        { success: false, error: 'PIN must be exactly 4 digits' },
+        { 
+          success: false, 
+          error: errorInfo.userMessage,
+          errorCode: errorInfo.code,
+          severity: errorInfo.severity
+        },
         { status: 400 }
       );
     }
