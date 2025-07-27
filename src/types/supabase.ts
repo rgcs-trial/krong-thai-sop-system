@@ -328,6 +328,233 @@ export type Database = {
           updated_at?: string
         }
       }
+      system_alerts: {
+        Row: {
+          id: string
+          restaurant_id: string
+          alert_type: string
+          severity: string
+          title: string
+          message: string
+          source: string
+          metadata: Json | null
+          is_resolved: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          alert_type: string
+          severity: string
+          title: string
+          message: string
+          source: string
+          metadata?: Json | null
+          is_resolved?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          alert_type?: string
+          severity?: string
+          title?: string
+          message?: string
+          source?: string
+          metadata?: Json | null
+          is_resolved?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      user_sessions: {
+        Row: {
+          id: string
+          restaurant_id: string
+          user_id: string
+          session_token: string
+          expires_at: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          user_id: string
+          session_token: string
+          expires_at: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          user_id?: string
+          session_token?: string
+          expires_at?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      user_bookmarks: {
+        Row: {
+          id: string
+          restaurant_id: string
+          user_id: string
+          sop_id: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          user_id: string
+          sop_id: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          user_id?: string
+          sop_id?: string
+          created_at?: string
+        }
+      }
+      user_progress: {
+        Row: {
+          id: string
+          restaurant_id: string
+          user_id: string
+          sop_id: string
+          progress_percentage: number
+          time_spent: number
+          last_accessed: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          user_id: string
+          sop_id: string
+          progress_percentage: number
+          time_spent: number
+          last_accessed: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          user_id?: string
+          sop_id?: string
+          progress_percentage?: number
+          time_spent?: number
+          last_accessed?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      user_progress_summary: {
+        Row: {
+          id: string
+          restaurant_id: string
+          user_id: string
+          total_sops: number
+          completed_sops: number
+          total_time_spent: number
+          average_score: number
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          user_id: string
+          total_sops: number
+          completed_sops: number
+          total_time_spent: number
+          average_score: number
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          user_id?: string
+          total_sops?: number
+          completed_sops?: number
+          total_time_spent?: number
+          average_score?: number
+          updated_at?: string
+        }
+      }
+      uploaded_files: {
+        Row: {
+          id: string
+          restaurant_id: string
+          filename: string
+          file_path: string
+          file_size: number
+          content_type: string
+          uploaded_by: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          filename: string
+          file_path: string
+          file_size: number
+          content_type: string
+          uploaded_by: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          filename?: string
+          file_path?: string
+          file_size?: number
+          content_type?: string
+          uploaded_by?: string
+          created_at?: string
+        }
+      }
+      form_templates: {
+        Row: {
+          id: string
+          restaurant_id: string
+          name: string
+          description: string
+          form_schema: Json
+          is_active: boolean
+          created_by: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          name: string
+          description: string
+          form_schema: Json
+          is_active?: boolean
+          created_by: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          name?: string
+          description?: string
+          form_schema?: Json
+          is_active?: boolean
+          created_by?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
       training_modules: {
         Row: {
           id: string
