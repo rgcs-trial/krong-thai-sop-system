@@ -791,7 +791,7 @@ export const useUIStore = create<UIStore>()(
           state.notifications.notifications.forEach((notification: any) => {
             if (!notification.read) {
               unreadCount++;
-              unreadByType[notification.type]++;
+              (unreadByType as any)[notification.type]++;
             }
           });
           
