@@ -64,7 +64,7 @@ interface SearchHistory {
 interface SavedSearch {
   id: string;
   name: string;
-  name_th: string;
+  name_fr: string;
   query: string;
   filters: SearchFilters;
   sort: SortOption;
