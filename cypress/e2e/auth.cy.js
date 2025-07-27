@@ -81,7 +81,10 @@ describe('Restaurant Selection', () => {
   it('should show restaurant selection after login', () => {
     cy.visit('/')
     cy.get('input[type="email"]').type(Cypress.env('ADMIN_EMAIL'))
-    cy.get('input[type="password"]').type(Cypress.env('ADMIN_PIN'))
+    const pin = Cypress.env('ADMIN_PIN')
+    for (let i = 0; i < 4; i++) {
+      cy.get('input[inputmode="numeric"]').eq(i).type(pin[i])
+    }
     cy.get('button[type="submit"]').click()
     
     // Should show restaurant selection
@@ -91,7 +94,10 @@ describe('Restaurant Selection', () => {
   it('should show add location button for admin users', () => {
     cy.visit('/')
     cy.get('input[type="email"]').type(Cypress.env('ADMIN_EMAIL'))
-    cy.get('input[type="password"]').type(Cypress.env('ADMIN_PIN'))
+    const pin = Cypress.env('ADMIN_PIN')
+    for (let i = 0; i < 4; i++) {
+      cy.get('input[inputmode="numeric"]').eq(i).type(pin[i])
+    }
     cy.get('button[type="submit"]').click()
     
     // Admin should see add location option
