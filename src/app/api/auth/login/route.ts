@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
       });
       
       const errorCode = mapErrorToCode(error);
-      const errorInfo = getAuthErrorMessage(errorCode, 'en');
+      const errorInfo = getAuthErrorMessage(errorCode, locale);
       
       return NextResponse.json(
         { 
