@@ -9,7 +9,7 @@ import { z } from 'zod';
 export const UUIDSchema = z.string().uuid('Invalid UUID format');
 
 export const LocaleSchema = z.enum(['en', 'fr'], {
-  errorMap: () => ({ message: 'Locale must be either "en" or "fr"' })
+  message: 'Locale must be either "en" or "fr"'
 });
 
 export const DateStringSchema = z.string().refine(
