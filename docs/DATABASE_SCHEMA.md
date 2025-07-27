@@ -42,44 +42,98 @@ The database supports a comprehensive bilingual (English/Thai) restaurant SOP sy
 - **Functions**: Custom database functions for business logic
 - **Triggers**: Automated timestamp updates and analytics
 
+## Database Migration Architecture
+
+The database schema is built using a 4-migration progressive approach:
+
+### Migration 001: Core Foundation
+- **Tables**: restaurants, auth_users, sop_categories, sop_documents, form_templates, form_submissions, audit_logs
+- **Features**: Basic multi-tenant structure, PIN authentication, SOP management, audit logging
+- **Enums**: user_role, sop_status, sop_priority, submission_status, audit_action
+
+### Migration 002: Device Management
+- **Tables**: user_devices
+- **Features**: Device fingerprinting, device binding, trusted device management
+- **Security**: Enhanced authentication with device tracking
+
+### Migration 003: Training System
+- **Tables**: training_modules, training_sections, training_questions, user_training_progress, user_section_progress, training_assessments, training_question_responses, training_certificates, training_reminders, training_analytics
+- **Features**: Complete training infrastructure with assessments and certification
+- **Enums**: training_status, assessment_status, certificate_status
+
+### Migration 004: Session & Progress Management
+- **Tables**: location_sessions, user_bookmarks, user_progress, user_progress_summary, uploaded_files
+- **Features**: Location-bound sessions, progress tracking, file management
+- **Enhancement**: Extended user_sessions table for location binding
+
 ## Database Tables
 
-### 1. Authentication & Users
+### 1. Core Authentication & Multi-tenancy
 
-#### `auth_users`
-Core user authentication and profile management.
+#### `restaurants` - Multi-tenant Support
+```sql
+CREATE TABLE restaurants (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    name_th VARCHAR(255),                    -- Thai restaurant name
+    address TEXT,
+    address_th TEXT,                         -- Thai address
+    phone VARCHAR(20),
+    email VARCHAR(255),
+    timezone VARCHAR(50) DEFAULT 'Asia/Bangkok',
+    settings JSONB DEFAULT '{}',             -- Restaurant configuration
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
 
+#### `auth_users` - Staff Authentication
 ```sql
 CREATE TABLE auth_users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email VARCHAR(255) UNIQUE NOT NULL,
-    pin_hash VARCHAR(255), -- Hashed 4-digit PIN
-    role user_role NOT NULL DEFAULT 'staff',
+    pin_hash VARCHAR(255),                   -- bcrypt hashed 4-digit PIN
+    role user_role NOT NULL DEFAULT 'staff', -- admin, manager, staff
     full_name VARCHAR(255) NOT NULL,
-    full_name_th VARCHAR(255), -- Thai name
+    full_name_th VARCHAR(255),               -- Thai name
     phone VARCHAR(20),
     position VARCHAR(100),
-    position_th VARCHAR(100), -- Thai position
-    restaurant_id UUID NOT NULL,
+    position_th VARCHAR(100),                -- Thai position
+    restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
     is_active BOOLEAN DEFAULT true,
     last_login_at TIMESTAMPTZ,
     pin_changed_at TIMESTAMPTZ,
+    pin_attempts INTEGER DEFAULT 0,          -- Rate limiting
+    locked_until TIMESTAMPTZ,               -- Progressive lockout
+    device_fingerprint TEXT,                -- Device binding
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     
-    CONSTRAINT fk_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id)
+    CONSTRAINT fk_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
 );
-
--- Indexes
-CREATE INDEX idx_auth_users_email ON auth_users(email);
-CREATE INDEX idx_auth_users_restaurant ON auth_users(restaurant_id);
-CREATE INDEX idx_auth_users_role ON auth_users(role);
-CREATE INDEX idx_auth_users_active ON auth_users(is_active);
 ```
 
-#### `user_roles` (ENUM)
+#### `user_devices` - Device Management
 ```sql
-CREATE TYPE user_role AS ENUM ('admin', 'manager', 'staff');
+CREATE TABLE user_devices (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    fingerprint_hash VARCHAR(255) NOT NULL, -- SHA-256 device fingerprint
+    name VARCHAR(255) NOT NULL,             -- "Kitchen Tablet #1"
+    type device_type NOT NULL DEFAULT 'tablet', -- tablet, desktop, mobile
+    location VARCHAR(255),                   -- Physical location
+    user_agent TEXT,
+    ip_address INET,
+    is_active BOOLEAN DEFAULT true,
+    is_trusted BOOLEAN DEFAULT false,        -- Admin-approved device
+    registered_at TIMESTAMPTZ DEFAULT NOW(),
+    last_used_at TIMESTAMPTZ DEFAULT NOW(),
+    trusted_at TIMESTAMPTZ,
+    metadata JSONB DEFAULT '{}',             -- Device capabilities, screen size, etc.
+    
+    CONSTRAINT fk_user_devices_user FOREIGN KEY (user_id) REFERENCES auth_users(id) ON DELETE CASCADE
+);
 ```
 
 ### 2. Restaurant Management
