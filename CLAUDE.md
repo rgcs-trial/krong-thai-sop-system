@@ -96,21 +96,22 @@ pnpm install               # Install dependencies using pnpm
 
 ```
 src/app/          # Next.js App Router, layouts, pages, API routes
-src/components/   # 60+ React components across 6 domains:
+src/components/   # 67+ React components across 7 domains:
+├── admin/        # Translation management interface (7 components)
 ├── analytics/    # Executive, SOP, Training analytics dashboards + client wrappers
 ├── sop/          # SOP management, search, bilingual content
 ├── training/     # Training modules, assessments, certificates + analytics
 ├── auth/         # PIN authentication, restaurant flow
 ├── voice/        # Voice search, natural language processing
 └── ui/           # shadcn/ui components, tablet-optimized + form fields
-src/lib/          # Utilities, Supabase client, security, i18n, offline storage
-src/hooks/        # Custom React hooks
-src/types/        # TypeScript definitions
-src/__tests__/    # Unit test files
+src/lib/          # Utilities, Supabase client, security, i18n, translation cache
+src/hooks/        # Custom React hooks including translation admin hooks
+src/types/        # TypeScript definitions including translation types
+src/__tests__/    # Unit test files with 90%+ coverage
 cypress/          # E2E test suite
 docs/             # Project documentation
-messages/         # Internationalization files (EN/FR)
-supabase/         # 8 database migrations, schema
+messages/         # Legacy JSON files (migrated to database)
+supabase/         # 17 database migrations including translation system
 ```
 
 ## Database Schema (Supabase)
