@@ -77,7 +77,7 @@
 **Staff Requirements:**
 - Basic tablet operation knowledge
 - Understanding of restaurant workflows
-- Familiarity with bilingual interfaces (EN/TH)
+- Familiarity with bilingual interfaces (EN/FR)
 
 ---
 
