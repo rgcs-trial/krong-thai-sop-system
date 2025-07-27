@@ -864,7 +864,7 @@ export const useUIStore = create<UIStore>()(
 
       hideAlert: (id: string) => {
         set((state) => {
-          const index = state.notifications.alerts.findIndex(a => a.id === id);
+          const index = state.notifications.alerts.findIndex((a: any) => a.id === id);
           if (index >= 0) {
             state.notifications.alerts.splice(index, 1);
           }
