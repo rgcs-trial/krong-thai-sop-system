@@ -492,7 +492,7 @@ export interface TrainingReminder {
   title: string;
   title_fr: string;
   message: string;
-  message_th: string;
+  message_fr: string;
   scheduled_for: string;
   sent_at?: string;
   is_read: boolean;
