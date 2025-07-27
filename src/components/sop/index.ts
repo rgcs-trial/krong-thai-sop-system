@@ -28,6 +28,11 @@ export {
   BilingualTitleEditor, 
   QuickBilingualInput 
 } from './bilingual-content-editor';
+export { 
+  BilingualContentRenderer, 
+  BilingualContentSummary 
+} from './bilingual-content-renderer';
+export { default as TranslationManagementDashboard } from './translation-management-dashboard';
 
 // Types and interfaces
 export type { SOPCategory } from './sop-categories-dashboard';
