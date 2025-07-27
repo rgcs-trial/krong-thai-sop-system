@@ -4736,3 +4736,365 @@ Error: Route "/api/restaurants" used `cookies().get('sb-blimbcomhmhlubqngben-aut
  ✓ Compiled in 126ms (366 modules)
  ✓ Compiled in 75ms (366 modules)
  ✓ Compiled in 82ms (366 modules)
+ ✓ Compiled in 78ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 36ms
+ GET /api/auth/location-session/check 200 in 239ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 13ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 390ms
+ GET /api/auth/login 405 in 5ms
+ GET /api/auth/location-session/check 200 in 106ms
+ GET /api/restaurants 200 in 146ms
+ GET /api/auth/location-session/check 200 in 93ms
+ GET /api/auth/location-session/check 200 in 103ms
+ GET /en/login?redirect=%2F 200 in 28ms
+ GET /api/auth/location-session/check 200 in 92ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 12ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 381ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 29ms
+ GET /api/auth/location-session/check 200 in 47ms
+ GET /api/auth/location-session/check 200 in 65ms
+ GET /en/login?redirect=%2F 200 in 41ms
+ GET /api/auth/location-session/check 200 in 100ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 362ms
+ GET /th/login 200 in 302ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 32ms
+ GET /api/restaurants?active=true 200 in 23ms
+ GET /api/auth/location-session/check 200 in 5ms
+ GET /en/login?redirect=%2F 200 in 30ms
+ GET /api/auth/location-session/check 200 in 116ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 350ms
+ GET /th/login 200 in 305ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 36ms
+ GET /api/auth/location-session/check 200 in 13ms
+ GET /api/restaurants?active=true 200 in 55ms
+ ○ Compiling /[locale]/analytics ...
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+ GET /api/auth/location-session/check 200 in 3153ms
+Error: Route "/[locale]/analytics" used `params.locale`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at AnalyticsPage (src/app/[locale]/analytics/page.tsx:43:51)
+  41 |
+  42 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+> 43 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |                                                   ^
+  44 |   
+  45 |   // Validate locale
+  46 |   const validLocales = ['en', 'fr', 'th'];
+ ⨯ Error: No locale was returned from `getRequestConfig`.
+
+See https://next-intl.dev/docs/usage/configuration#i18n-request
+    at async AnalyticsPage (src/app/[locale]/analytics/page.tsx:43:12)
+  41 |
+  42 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+> 43 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |            ^
+  44 |   
+  45 |   // Validate locale
+  46 |   const validLocales = ['en', 'fr', 'th']; {
+  digest: '4145244861'
+}
+Error: Route "/[locale]/analytics" used `params.locale`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[locale]/analytics/page.tsx:34:51)
+  32 |
+  33 | export async function generateMetadata({ params }: AnalyticsPageProps): Promise<Metadata> {
+> 34 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |                                                   ^
+  35 |   
+  36 |   return {
+  37 |     title: t('analytics_dashboard'),
+Error: Route "/[locale]/analytics" used `params.locale`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[locale]/analytics/page.tsx:34:51)
+  32 |
+  33 | export async function generateMetadata({ params }: AnalyticsPageProps): Promise<Metadata> {
+> 34 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |                                                   ^
+  35 |   
+  36 |   return {
+  37 |     title: t('analytics_dashboard'),
+ GET /en/analytics 500 in 3788ms
+ GET /en/login?redirect=%2F 200 in 513ms
+ GET /api/auth/location-session/check 200 in 153ms
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+ GET /en/login?redirect=%2F 200 in 17ms
+ GET /api/auth/location-session/check 200 in 67ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 12ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 382ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 30ms
+ GET /api/auth/location-session/check 200 in 47ms
+Error: Route "/[locale]/analytics" used `params.locale`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at AnalyticsPage (src/app/[locale]/analytics/page.tsx:43:51)
+  41 |
+  42 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+> 43 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |                                                   ^
+  44 |   
+  45 |   // Validate locale
+  46 |   const validLocales = ['en', 'fr', 'th'];
+ ⨯ Error: No locale was returned from `getRequestConfig`.
+
+See https://next-intl.dev/docs/usage/configuration#i18n-request
+    at async AnalyticsPage (src/app/[locale]/analytics/page.tsx:43:12)
+  41 |
+  42 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+> 43 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |            ^
+  44 |   
+  45 |   // Validate locale
+  46 |   const validLocales = ['en', 'fr', 'th']; {
+  digest: '4145244861'
+}
+Error: Route "/[locale]/analytics" used `params.locale`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[locale]/analytics/page.tsx:34:51)
+  32 |
+  33 | export async function generateMetadata({ params }: AnalyticsPageProps): Promise<Metadata> {
+> 34 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |                                                   ^
+  35 |   
+  36 |   return {
+  37 |     title: t('analytics_dashboard'),
+Error: Route "/[locale]/analytics" used `params.locale`. `params` should be awaited before using its properties. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at Module.generateMetadata (src/app/[locale]/analytics/page.tsx:34:51)
+  32 |
+  33 | export async function generateMetadata({ params }: AnalyticsPageProps): Promise<Metadata> {
+> 34 |   const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+     |                                                   ^
+  35 |   
+  36 |   return {
+  37 |     title: t('analytics_dashboard'),
+ GET /en/analytics 500 in 56ms
+ GET /api/auth/location-session/check 200 in 70ms
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+ GET /en/login?redirect=%2F 200 in 36ms
+ GET /api/auth/location-session/check 200 in 73ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 12ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 384ms
+ GET /en/login?redirect=%2Fen%2Fnonexistent-page 200 in 28ms
+ GET /api/auth/location-session/check 200 in 45ms
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+ GET /api/auth/location-session/check 200 in 94ms
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+ GET /en/invalid/route 404 in 699ms
+ GET /en/login?redirect=%2F 200 in 111ms
+ GET /api/auth/location-session/check 200 in 145ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 12ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 372ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 47ms
+ GET /api/auth/location-session/check 200 in 37ms
+ GET /api/restaurants?active=true 200 in 36ms
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+ GET /api/auth/location-session/check 200 in 1914ms
+ GET /th/dashboard 200 in 2341ms
+ GET /en/dashboard 200 in 27ms
+ GET /en/login?redirect=%2F 200 in 68ms
+ GET /api/auth/location-session/check 200 in 74ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 10ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 364ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 28ms
+ GET /api/auth/location-session/check 200 in 11ms
+ GET /en/login?redirect=%2F 200 in 29ms
+ GET /api/auth/location-session/check 200 in 67ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 10ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 369ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 23ms
+ GET /api/auth/location-session/check 200 in 38ms
+ GET /api/auth/location-session/check 200 in 5ms
+ GET /en/login?redirect=%2F 200 in 24ms
+ GET /api/auth/location-session/check 200 in 68ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /th/login 200 in 11ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 372ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 23ms
+ GET /api/auth/location-session/check 200 in 39ms
+ GET /en/dashboard 200 in 27ms
+ GET /api/auth/location-session/check 200 in 12ms
+ GET /en/dashboard 200 in 23ms
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
+
+./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
