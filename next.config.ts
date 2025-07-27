@@ -62,11 +62,13 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
-  // PWA-friendly settings for tablet usage
+  // Enhanced security headers for restaurant tablet environment
   headers: async () => [
     {
+      // Security headers for all routes
       source: '/(.*)',
       headers: [
+        // Basic security headers
         {
           key: 'X-Content-Type-Options',
           value: 'nosniff',
@@ -80,17 +82,137 @@ const nextConfig: NextConfig = {
           value: '1; mode=block',
         },
         {
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin',
+        },
+        // Cross-origin isolation for enhanced security
+        {
+          key: 'Cross-Origin-Embedder-Policy',
+          value: 'credentialless',
+        },
+        {
+          key: 'Cross-Origin-Opener-Policy',
+          value: 'same-origin',
+        },
+        {
+          key: 'Cross-Origin-Resource-Policy',
+          value: 'same-origin',
+        },
+        // Permissions Policy for tablet security
+        {
+          key: 'Permissions-Policy',
+          value: 'camera=self, microphone=(), geolocation=(), accelerometer=(), gyroscope=(), magnetometer=(), payment=(), usb=(), bluetooth=(), display-capture=(), fullscreen=self, web-share=self',
+        },
+        // Additional security headers
+        {
+          key: 'X-Permitted-Cross-Domain-Policies',
+          value: 'none',
+        },
+        // Restaurant-specific headers
+        {
+          key: 'X-Restaurant-Security',
+          value: 'tablet-optimized',
+        },
+        // Cache control for static assets
+        {
           key: 'Cache-Control',
           value: 'public, max-age=31536000, immutable',
         },
       ],
     },
     {
+      // Sensitive routes with stricter security
+      source: '/api/auth/(.*)',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+        {
+          key: 'Pragma',
+          value: 'no-cache',
+        },
+        {
+          key: 'Expires',
+          value: '0',
+        },
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff',
+        },
+      ],
+    },
+    {
+      // Dashboard and SOP routes with session-based caching
+      source: '/(en|th)/(dashboard|sop)/(.*)',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'private, no-cache, no-store, must-revalidate',
+        },
+        {
+          key: 'Pragma',
+          value: 'no-cache',
+        },
+        {
+          key: 'X-Restaurant-Content',
+          value: 'authenticated',
+        },
+      ],
+    },
+    {
+      // Service Worker with proper caching
       source: '/sw.js',
       headers: [
         {
           key: 'Cache-Control',
           value: 'public, max-age=0, must-revalidate',
+        },
+        {
+          key: 'Service-Worker-Allowed',
+          value: '/',
+        },
+      ],
+    },
+    {
+      // PWA Manifest
+      source: '/manifest.json',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=86400',
+        },
+        {
+          key: 'Content-Type',
+          value: 'application/manifest+json',
+        },
+      ],
+    },
+    {
+      // Static assets with long-term caching
+      source: '/icons/(.*)',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+    {
+      // API routes with security headers
+      source: '/api/(.*)',
+      headers: [
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff',
+        },
+        {
+          key: 'X-Frame-Options',
+          value: 'DENY',
+        },
+        {
+          key: 'Content-Security-Policy',
+          value: "default-src 'none'; frame-ancestors 'none';",
         },
       ],
     },
