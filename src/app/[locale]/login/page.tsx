@@ -185,7 +185,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
           return;
         }
         
-        setError(data.error || (locale === 'en' ? 'Authentication failed' : 'การยืนยันตัวตนล้มเหลว'));
+        setError(data.error || (locale === 'en' ? 'Authentication failed' : 'Échec de l\'authentification'));
       }
     } catch (error) {
       console.error('Login error:', error);
