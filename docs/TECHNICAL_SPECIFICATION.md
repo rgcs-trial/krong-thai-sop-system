@@ -365,9 +365,6 @@ src/app/api/
         ├── dashboard/route.ts     # Analytics dashboard data
         ├── modules/[id]/route.ts  # Module-specific analytics
         └── users/[userId]/route.ts # User-specific analytics
-│   ├── performance/route.ts       # Performance metrics
-│   ├── alerts/route.ts            # System alerts
-│   └── sop/route.ts               # SOP analytics
 ```
 
 ### 5.2 Authentication Strategy
