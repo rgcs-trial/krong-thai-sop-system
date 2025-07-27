@@ -10,13 +10,14 @@ import { getTranslations } from 'next-intl/server';
 import { RealtimeMonitoringDashboard } from '@/components/analytics/realtime-monitoring-dashboard';
 
 interface MonitoringAnalyticsPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: MonitoringAnalyticsPageProps): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
   
   return {
     title: t('realtime_monitoring'),
@@ -25,9 +26,11 @@ export async function generateMetadata({ params }: MonitoringAnalyticsPageProps)
 }
 
 export default async function MonitoringAnalyticsPage({ params }: MonitoringAnalyticsPageProps) {
+  const resolvedParams = await params;
+  
   // Validate locale
   const validLocales = ['en', 'fr', 'th'];
-  if (!validLocales.includes(params.locale)) {
+  if (!validLocales.includes(resolvedParams.locale)) {
     notFound();
   }
 
