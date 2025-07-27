@@ -116,7 +116,7 @@ self.addEventListener('install', (event) => {
           'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
           'https://fonts.googleapis.com/css2?family=EB+Garamond+SC:wght@400;700&display=swap',
           'https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600&display=swap',
-          'https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap',
+          'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
         ];
         
         return Promise.allSettled(
