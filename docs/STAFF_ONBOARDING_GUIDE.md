@@ -175,6 +175,8 @@
 3. **Seasonal Training**: Time-sensitive procedures
 4. **Refresher Training**: Periodic skill updates
 5. **Advanced Training**: Leadership development
+6. **Bilingual Training**: EN/FR language proficiency
+7. **Tablet Operations**: Device-specific training
 
 #### **Completion Requirements:**
 - Watch all video content (cannot skip)
