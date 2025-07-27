@@ -106,27 +106,28 @@ Each section contains bilingual content (EN + FR), optionally toggleable.
 
 ---
 
-## ⚙️ Supabase Schema Recommendations
+## 🏗️ System Architecture
 
-1. **pins**
+### Database Structure (19 Tables)
+**Core Tables:** restaurants, auth_users, sop_categories, sop_documents, training_modules, training_progress, training_assessments, training_certificates, form_submissions, audit_logs, performance_metrics, realtime_subscriptions
 
-   * `pin_code: string`
-   * `role: enum('admin', 'staff')`
-   * `expires_at: timestamp`
+**Translation System (7 Tables):** translation_keys, translations, translation_history, translation_projects, translation_project_assignments, translation_cache, translation_analytics
 
-2. **form\_submissions**
+### Component Architecture (67+ Components)
+- **Admin Components (7):** Translation management interface with workflow approval
+- **Analytics Components:** Executive, operational, SOP, and training dashboards with client wrappers
+- **SOP Components (15):** Bilingual content management and search functionality
+- **Training Components:** Interactive modules, assessments, and certificates
+- **Auth Components:** PIN-based authentication and restaurant flow
+- **UI Components (25+):** Tablet-optimized shadcn/ui components
 
-   * `form_type: string`
-   * `data: jsonb`
-   * `submitted_by: string`
-   * `submitted_at: timestamp`
-
-3. **audit\_logs**
-
-   * `event: string`
-   * `user: string`
-   * `details: jsonb`
-   * `timestamp: timestamp`
+### API Layer (32+ Endpoints)
+- **Translation Management (12):** Public and admin translation endpoints
+- **Analytics (5):** Executive, operational, SOP, and training analytics
+- **Training (8):** Modules, assessments, certificates, and progress tracking
+- **Auth (3):** PIN login and session management
+- **Restaurant Management (2):** Location setup and configuration
+- **Security (2):** CSP reporting and rate limiting
 
 ---
 
