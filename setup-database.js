@@ -52,11 +52,21 @@ async function runSQL(sql, description) {
   console.log(`📝 ${description}...`);
   
   try {
-    const { error } = await supabase.rpc('exec_sql', { query: sql });
+    // Split SQL into individual statements and execute them
+    const statements = sql
+      .split(';')
+      .map(s => s.trim())
+      .filter(s => s.length > 0 && !s.startsWith('--'));
     
-    if (error) {
-      console.error(`❌ Failed to ${description.toLowerCase()}:`, error.message);
-      return false;
+    for (const statement of statements) {
+      if (statement.trim()) {
+        const { error } = await supabase.rpc('sql', { query: statement });
+        if (error && !error.message.includes('already exists')) {
+          console.error(`❌ SQL Error:`, error.message);
+          console.error(`   Statement:`, statement.substring(0, 100) + '...');
+          return false;
+        }
+      }
     }
     
     console.log(`✅ ${description} completed successfully`);
