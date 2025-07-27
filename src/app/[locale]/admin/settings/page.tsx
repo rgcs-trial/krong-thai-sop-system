@@ -66,7 +66,7 @@ export default function AdminSettingsPage() {
           </TabsTrigger>
           <TabsTrigger value="appearance" className="flex flex-col items-center gap-1 text-xs">
             <Palette size={16} />
-            {t('admin.settings.appearance')}
+            Appearance
           </TabsTrigger>
         </TabsList>
 
