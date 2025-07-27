@@ -17,7 +17,7 @@ interface RestaurantError {
 
 interface RestaurantErrorDisplayProps {
   error: RestaurantError | string;
-  locale: 'en' | 'th';
+  locale: 'en' | 'fr';
   onRetry?: () => void;
   onDismiss?: () => void;
   className?: string;
@@ -179,7 +179,7 @@ export function RestaurantErrorDisplay({
 // Success message component for restaurant operations
 interface RestaurantSuccessDisplayProps {
   message: string;
-  locale: 'en' | 'th';
+  locale: 'en' | 'fr';
   onDismiss?: () => void;
   className?: string;
 }
@@ -217,7 +217,7 @@ export function RestaurantSuccessDisplay({
 }
 
 // Hook for managing restaurant operation states
-export function useRestaurantOperations(locale: 'en' | 'th') {
+export function useRestaurantOperations(locale: 'en' | 'fr') {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<RestaurantError | null>(null);
   const [success, setSuccess] = React.useState<string>('');
