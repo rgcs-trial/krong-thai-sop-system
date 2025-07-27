@@ -166,7 +166,7 @@ const pwaConfig = withPWA({
           maxEntries: 10,
           maxAgeSeconds: 60 * 60 * 24 * 365, // 365 days
         },
-        cacheKeyWillBeUsed: async ({ request }) => `${request.url}`,
+        cacheKeyWillBeUsed: async ({ request }: { request: Request }) => `${request.url}`,
       },
     },
     {
