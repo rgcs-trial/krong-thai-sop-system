@@ -526,19 +526,17 @@ export function ExecutiveDashboard({ className }: ExecutiveDashboardProps) {
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
-                  <RechartsPieChart>
-                    <RechartsPieChart
-                      data={performanceDistribution}
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={80}
-                      fill="#8884d8"
-                      dataKey="value"
-                    >
-                      {performanceDistribution.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </RechartsPieChart>
+                  <RechartsPieChart
+                    data={performanceDistribution}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {performanceDistribution.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
                     <Tooltip 
                       formatter={(value: any) => [`${value}%`, t('analytics.staff_percentage')]}
                     />

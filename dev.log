@@ -5153,3 +5153,8 @@ Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize_
 
 Import trace for requested module:
 ./src/components/analytics/executive-dashboard.tsx
+ ⚠ ./src/components/analytics/executive-dashboard.tsx
+Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize__?names=Activity,Award,Bell,ChevronDown,ChevronUp,Clock,DollarSign,FileText,PieChart,RefreshCw,Settings,Shield,Star,TrendingRight,TrendingUp,Users,Zap!=!lucide-react' (imported as 'TrendingRight').
+
+Import trace for requested module:
+./src/components/analytics/executive-dashboard.tsx
