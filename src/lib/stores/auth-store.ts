@@ -281,7 +281,7 @@ export const useAuthStore = create<AuthStore>()(
             touchSupport: 'ontouchstart' in window,
             canvasFingerprint: await generateCanvasFingerprint(),
             connectionType: (navigator as any).connection?.effectiveType,
-          });
+          }); */
 
           const fingerprintHash = 'development-hash'; // Security.Device.generateFingerprintHash(fingerprint);
           
