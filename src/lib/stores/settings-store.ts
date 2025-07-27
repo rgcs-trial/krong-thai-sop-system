@@ -509,7 +509,7 @@ export const useSettingsStore = create<SettingsStore>()(
 
       removeFromFavorites: (categoryId: string) => {
         set((state) => {
-          state.user.favoriteCategories = state.user.favoriteCategories.filter(id => id !== categoryId);
+          state.user.favoriteCategories = state.user.favoriteCategories.filter((id: string) => id !== categoryId);
           state.hasUnsavedChanges = true;
         });
       },
