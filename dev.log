@@ -3900,3 +3900,4 @@ Error: Route "/api/restaurants" used `cookies().get('sb-blimbcomhmhlubqngben-aut
   487 |       `\`cookies()\` should be awaited before using its value. ` +
   488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
  GET /api/restaurants?active=true 200 in 148ms
+ ✓ Compiled in 239ms (1072 modules)
