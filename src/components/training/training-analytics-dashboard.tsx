@@ -649,7 +649,232 @@ export function TrainingAnalyticsDashboard({ className }: TrainingAnalyticsDashb
           </Card>
         </TabsContent>
 
-        {/* Trends & Insights */}
+        {/* ROI Analysis Tab */}
+        <TabsContent value="roi" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* ROI Summary */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <DollarSign className="h-5 w-5 mr-2 text-green-500" />
+                  {t('training.roi_summary')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="text-center p-6 bg-green-50 rounded-lg">
+                  <div className="text-4xl font-bold text-green-600 mb-2">
+                    {roiMetrics.roiPercentage}%
+                  </div>
+                  <p className="text-green-700">{t('training.total_roi')}</p>
+                  <p className="text-sm text-green-600 mt-2">
+                    ฿{roiMetrics.totalBenefit.toLocaleString()} {t('training.total_benefit')}
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">{t('training.training_cost')}</span>
+                    <span className="text-red-600">-฿{roiMetrics.trainingCost.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">{t('training.time_saved_value')}</span>
+                    <span className="text-green-600">+฿{roiMetrics.timeSaved.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">{t('training.error_reduction_value')}</span>
+                    <span className="text-green-600">+฿{roiMetrics.errorReduction.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">{t('training.compliance_value')}</span>
+                    <span className="text-green-600">+฿{roiMetrics.complianceImprovement.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">{t('training.satisfaction_value')}</span>
+                    <span className="text-green-600">+฿{roiMetrics.customerSatisfactionGain.toLocaleString()}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Cost vs Benefit Trend */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Calculator className="h-5 w-5 mr-2 text-blue-500" />
+                  {t('training.cost_benefit_trend')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <ComposedChart data={trainingTrends}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="date" />
+                    <YAxis yAxisId="left" orientation="left" />
+                    <YAxis yAxisId="right" orientation="right" />
+                    <Tooltip 
+                      formatter={(value: any, name: any) => [
+                        name === 'cost' ? `฿${value.toLocaleString()}` : value,
+                        name === 'cost' ? t('training.weekly_cost') :
+                        name === 'completions' ? t('training.completions') :
+                        name === 'satisfaction' ? t('training.satisfaction') : name
+                      ]}
+                    />
+                    <Legend />
+                    <Bar 
+                      yAxisId="left"
+                      dataKey="cost" 
+                      fill="#E31B23" 
+                      name={t('training.training_cost')}
+                    />
+                    <Line 
+                      yAxisId="left"
+                      type="monotone" 
+                      dataKey="completions" 
+                      stroke="#008B8B" 
+                      strokeWidth={3}
+                      name={t('training.completions')}
+                    />
+                    <Line 
+                      yAxisId="right"
+                      type="monotone" 
+                      dataKey="satisfaction" 
+                      stroke="#D4AF37" 
+                      strokeWidth={3}
+                      name={t('training.satisfaction')}
+                    />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        {/* Competency Gaps Tab */}
+        <TabsContent value="competency" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Competency Gap Analysis */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Brain className="h-5 w-5 mr-2 text-purple-500" />
+                  {t('training.competency_gap_analysis')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {competencyGaps.map((gap) => (
+                    <div key={gap.category} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-medium">{gap.category}</span>
+                        <div className="flex items-center space-x-2">
+                          <Badge 
+                            variant={
+                              gap.priority === 'high' ? 'destructive' :
+                              gap.priority === 'medium' ? 'secondary' : 'default'
+                            }
+                          >
+                            {gap.priority}
+                          </Badge>
+                          <span className={cn(
+                            'text-sm font-medium',
+                            gap.gap > 0 ? 'text-red-600' : 'text-green-600'
+                          )}>
+                            {gap.gap > 0 ? `+${gap.gap}` : gap.gap}%
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex-1 bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-blue-500 h-2 rounded-full"
+                            style={{ width: `${gap.currentLevel}%` }}
+                          />
+                        </div>
+                        <span className="text-xs text-gray-500 w-12">
+                          {gap.currentLevel}%
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {t('training.target')}: {gap.requiredLevel}% | {t('training.current')}: {gap.currentLevel}%
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Learning Efficiency Radar */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Activity className="h-5 w-5 mr-2 text-orange-500" />
+                  {t('training.learning_efficiency')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <RadarChart data={learningEfficiencyData}>
+                    <PolarGrid />
+                    <PolarAngleAxis dataKey="subject" />
+                    <PolarRadiusAxis angle={90} domain={[0, 100]} />
+                    <Radar
+                      name={t('training.current_performance')}
+                      dataKey="A"
+                      stroke="#E31B23"
+                      fill="#E31B23"
+                      fillOpacity={0.3}
+                    />
+                    <Radar
+                      name={t('training.target_performance')}
+                      dataKey="B"
+                      stroke="#008B8B"
+                      fill="#008B8B"
+                      fillOpacity={0.3}
+                    />
+                    <Legend />
+                    <Tooltip />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Training Recommendations */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <FileBarChart className="h-5 w-5 mr-2 text-indigo-500" />
+                {t('training.improvement_recommendations')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {competencyGaps
+                  .filter(gap => gap.gap > 5)
+                  .sort((a, b) => b.gap - a.gap)
+                  .slice(0, 3)
+                  .map((gap) => (
+                  <div key={gap.category} className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                    <h4 className="font-semibold text-orange-800 mb-2">
+                      {gap.category} {t('training.improvement')}
+                    </h4>
+                    <p className="text-sm text-orange-700 mb-3">
+                      {t('training.gap_description', { 
+                        category: gap.category,
+                        gap: gap.gap 
+                      })}
+                    </p>
+                    <Button size="sm" variant="outline" className="w-full">
+                      {t('training.create_action_plan')}
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Enhanced Trends & Insights */}
         <TabsContent value="trends" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
