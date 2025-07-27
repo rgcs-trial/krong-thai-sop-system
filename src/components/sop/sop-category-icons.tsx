@@ -175,4 +175,86 @@ export function getCategoryColor(categoryCode: string): string {
   return colorMap[categoryCode] || '#95A5A6';
 }
 
+// SOP Category data structure
+export interface SOPCategory {
+  id: string;
+  code: string;
+  name: string;
+  name_th: string;
+  description: string;
+  description_th: string;
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  order: number;
+  icon: string;
+  color: string;
+}
+
+// Sample SOP categories data
+export const SOP_CATEGORIES: SOPCategory[] = [
+  {
+    id: '1',
+    code: 'FOOD_SAFETY',
+    name: 'Food Safety',
+    name_th: 'ความปลอดภัยอาหาร',
+    description: 'Food handling, storage, and safety protocols',
+    description_th: 'การจัดการ การเก็บรักษา และความปลอดภัยอาหาร',
+    priority: 'critical',
+    order: 1,
+    icon: 'Shield',
+    color: '#E31B23'
+  },
+  {
+    id: '2',
+    code: 'KITCHEN_OPERATIONS',
+    name: 'Kitchen Operations',
+    name_th: 'การดำเนินงานครัว',
+    description: 'Kitchen workflow and cooking procedures',
+    description_th: 'ขั้นตอนการทำงานในครัวและการปรุงอาหาร',
+    priority: 'high',
+    order: 2,
+    icon: 'ChefHat',
+    color: '#D4AF37'
+  },
+  {
+    id: '3',
+    code: 'SERVICE_STANDARDS',
+    name: 'Service Standards',
+    name_th: 'มาตรฐานการบริการ',
+    description: 'Customer service protocols and standards',
+    description_th: 'มาตรฐานและขั้นตอนการบริการลูกค้า',
+    priority: 'high',
+    order: 3,
+    icon: 'Users',
+    color: '#008B8B'
+  },
+  {
+    id: '4',
+    code: 'CUSTOMER_SERVICE',
+    name: 'Customer Service',
+    name_th: 'การบริการลูกค้า',
+    description: 'Customer interaction and satisfaction',
+    description_th: 'การมีปฏิสัมพันธ์และความพึงพอใจของลูกค้า',
+    priority: 'high',
+    order: 4,
+    icon: 'Smile',
+    color: '#2ECC71'
+  }
+];
+
+// Utility function to get priority color
+export function getPriorityColor(priority: 'critical' | 'high' | 'medium' | 'low'): string {
+  const colorMap = {
+    critical: '#E31B23',
+    high: '#FF9800',
+    medium: '#FFC107',
+    low: '#4CAF50'
+  };
+  return colorMap[priority];
+}
+
+// Utility function to get categories by priority
+export function getCategoriesByPriority(priority: 'critical' | 'high' | 'medium' | 'low'): SOPCategory[] {
+  return SOP_CATEGORIES.filter(category => category.priority === priority);
+}
+
 export default SOPCategoryIcon;
