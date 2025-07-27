@@ -68,14 +68,14 @@ export interface SOPDocument {
   category_id: string;
   restaurant_id: string;
   title: string;
-  title_th: string;
+  title_fr: string;
   content: string;
-  content_th: string;
+  content_fr: string;
   steps?: SOPStep[];
-  steps_th?: SOPStep[];
+  steps_fr?: SOPStep[];
   attachments: string[];
   tags?: string[];
-  tags_th?: string[];
+  tags_fr?: string[];
   version: number;
   status: SOPStatus;
   priority: SOPPriority;
