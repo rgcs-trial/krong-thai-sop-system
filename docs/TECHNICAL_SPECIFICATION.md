@@ -205,7 +205,7 @@ The database uses an 8-migration approach for enterprise-grade capabilities:
 CREATE TABLE restaurants (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
-    name_th VARCHAR(255),           -- Thai restaurant name
+    name_fr VARCHAR(255),           -- Thai restaurant name
     settings JSONB DEFAULT '{}',    -- Configuration
     timezone VARCHAR(50) DEFAULT 'Asia/Bangkok'
 );
@@ -217,7 +217,7 @@ CREATE TABLE auth_users (
     pin_hash VARCHAR(255),          -- bcrypt hashed 4-digit PIN
     role user_role NOT NULL,        -- admin, manager, staff
     full_name VARCHAR(255) NOT NULL,
-    full_name_th VARCHAR(255),      -- Thai name
+    full_name_fr VARCHAR(255),      -- Thai name
     restaurant_id UUID NOT NULL,   -- Multi-tenant isolation
     device_fingerprint TEXT,       -- Device binding
     pin_attempts INTEGER DEFAULT 0 -- Rate limiting
@@ -231,7 +231,7 @@ CREATE TABLE sop_categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     code VARCHAR(20) UNIQUE NOT NULL,    -- FOOD_SAFETY, CLEANING, etc.
     name VARCHAR(255) NOT NULL,
-    name_th VARCHAR(255) NOT NULL,       -- Thai category name
+    name_fr VARCHAR(255) NOT NULL,       -- Thai category name
     icon VARCHAR(50),                    -- UI icon identifier
     color VARCHAR(7),                    -- Hex color for theming
     sort_order INTEGER DEFAULT 0
@@ -243,14 +243,14 @@ CREATE TABLE sop_documents (
     category_id UUID NOT NULL,
     restaurant_id UUID NOT NULL,        -- Multi-tenant isolation
     title VARCHAR(500) NOT NULL,
-    title_th VARCHAR(500) NOT NULL,     -- Thai title
+    title_fr VARCHAR(500) NOT NULL,     -- Thai title
     content TEXT NOT NULL,
-    content_th TEXT NOT NULL,           -- Thai content
+    content_fr TEXT NOT NULL,           -- Thai content
     steps JSONB,                        -- Structured procedures
-    steps_th JSONB,                     -- Thai procedures
+    steps_fr JSONB,                     -- Thai procedures
     attachments JSONB DEFAULT '[]',     -- File references
     tags VARCHAR(255)[],                -- Search tags
-    tags_th VARCHAR(255)[],             -- Thai tags
+    tags_fr VARCHAR(255)[],             -- Thai tags
     status sop_status DEFAULT 'draft',  -- draft, review, approved, archived
     priority sop_priority DEFAULT 'medium' -- low, medium, high, critical
 );
@@ -264,7 +264,7 @@ CREATE TABLE training_modules (
     restaurant_id UUID NOT NULL,
     sop_document_id UUID NOT NULL,      -- Link to SOP
     title VARCHAR(500) NOT NULL,
-    title_th VARCHAR(500) NOT NULL,     -- Thai title
+    title_fr VARCHAR(500) NOT NULL,     -- Thai title
     duration_minutes INTEGER DEFAULT 30,
     passing_score INTEGER DEFAULT 80,   -- Percentage required to pass
     max_attempts INTEGER DEFAULT 3,
@@ -400,9 +400,9 @@ interface RestaurantListResponse {
 // POST /api/restaurants - Create new restaurant location
 interface CreateRestaurantRequest {
   name: string;
-  name_th?: string;
+  name_fr?: string;
   address?: string;
-  address_th?: string;
+  address_fr?: string;
   phone?: string;
   email?: string;
   timezone?: string;
@@ -592,8 +592,8 @@ const LazyTrainingModule = lazy(() => import('./training-session'));
 ### 7.2 Database Performance
 ```sql
 -- Strategic indexing for performance
-CREATE INDEX idx_sop_documents_search_th ON sop_documents 
-  USING GIN(to_tsvector('thai', title_th || ' ' || content_th));
+CREATE INDEX idx_sop_documents_search_fr ON sop_documents 
+  USING GIN(to_tsvector('thai', title_fr || ' ' || content_fr));
 
 CREATE INDEX idx_sop_documents_status_restaurant ON sop_documents
   (status, restaurant_id);
