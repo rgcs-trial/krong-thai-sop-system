@@ -199,8 +199,8 @@ export function useTabletOptimization() {
   // Get font size adjustments for tablet reading
   const getFontSizeClasses = (element: 'body' | 'heading' | 'ui' | 'small' = 'body') => {
     const sizes = {
-      body: isFrenchLocale ? 'text-base leading-relaxed' : 'text-base',
-      heading: isFrenchLocale ? 'text-2xl leading-tight' : 'text-2xl',
+      body: 'text-base',
+      heading: 'text-2xl',
       ui: 'text-sm',
       small: 'text-xs',
     };
