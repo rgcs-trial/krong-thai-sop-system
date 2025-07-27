@@ -416,7 +416,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
                   {authMode === 'manager'
                     ? (locale === 'en' 
                         ? 'Managers must enter email + PIN to set up location' 
-                        : 'ผู้จัดการต้องกรอกอีเมล + PIN เพื่อตั้งค่าสถานที่')
+                        : 'Les gestionnaires doivent saisir email + code PIN pour configurer le lieu')
                     : (locale === 'en' 
                         ? 'Staff only need to enter their 4-digit PIN' 
                         : 'พนักงานต้องกรอกรหัส PIN 4 หลักเท่านั้น')
