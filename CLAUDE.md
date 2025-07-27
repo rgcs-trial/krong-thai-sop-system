@@ -6,8 +6,8 @@ Tablet-optimized internal SOP management website with bilingual (EN/FR) content,
 
 **Status**: Foundation Complete - Production Ready (Health Score: 8/10)  
 **Version**: 0.1.3  
-**Stack**: Next.js 15.4.4, React 19.1.0, TypeScript 5.8.3, Tailwind CSS 4.1  
-**Project Size**: 736MB, optimized for tablet deployment
+**Stack**: Next.js 15.4.4, React 19.1.0, TypeScript 5, Tailwind CSS 4  
+**Project Size**: 956MB, optimized for tablet deployment
 
 ## Development Commands
 
@@ -38,8 +38,8 @@ pnpm install               # Install dependencies using pnpm
 
 ## Architecture
 
-**Frontend**: Next.js 15.4.4 App Router, React 19.1.0, TypeScript 5.8.3  
-**Styling**: Tailwind CSS 4.1, shadcn/ui components  
+**Frontend**: Next.js 15.4.4 App Router, React 19.1.0, TypeScript 5  
+**Styling**: Tailwind CSS 4, shadcn/ui components  
 **Database**: Supabase PostgreSQL with RLS  
 **Auth**: Custom PIN-based system (4-digit PINs, 8-hour sessions)  
 **State**: Zustand + TanStack Query  
@@ -59,7 +59,7 @@ pnpm install               # Install dependencies using pnpm
 - ✅ Build system fully functional with Next.js 15.4.4 compatibility
 - ✅ Complete Supabase database with schema, sample data, and working authentication
 - ✅ Enterprise-grade security implementation with PIN authentication
-- ✅ Project size optimized (1.2GB → 736MB) for tablet deployment
+- ✅ Project size optimized (1.2GB → 956MB) for tablet deployment
 - ✅ shadcn/ui component library installed and tablet-optimized
 - ✅ TypeScript compilation clean for all core functionality
 
