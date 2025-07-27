@@ -53,11 +53,11 @@ const CACHE_EXPIRATION = {
 const ESSENTIAL_PAGES = [
   '/',
   '/en',
-  '/th',
+  '/fr',
   '/en/dashboard',
-  '/th/dashboard',
+  '/fr/dashboard',
   '/en/login',
-  '/th/login',
+  '/fr/login',
   '/offline',
 ];
 

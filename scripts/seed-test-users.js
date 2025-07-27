@@ -29,36 +29,36 @@ const testUsers = [
     pin: '1234',
     role: 'admin',
     full_name: 'Admin User',
-    full_name_th: 'ผู้ดูแลระบบ',
+    full_name_fr: 'Utilisateur Admin',
     position: 'System Administrator',
-    position_th: 'ผู้ดูแลระบบ'
+    position_fr: 'Administrateur Système'
   },
   {
     email: 'manager@krongthai.com',
     pin: '2345',
     role: 'manager',
     full_name: 'Manager User',
-    full_name_th: 'ผู้จัดการ',
+    full_name_fr: 'Utilisateur Manager',
     position: 'Restaurant Manager',
-    position_th: 'ผู้จัดการร้านอาหาร'
+    position_fr: 'Directeur de Restaurant'
   },
   {
     email: 'chef@krongthai.com',
     pin: '2468',
     role: 'staff',
     full_name: 'Chef User',
-    full_name_th: 'เชฟ',
+    full_name_fr: 'Utilisateur Chef',
     position: 'Head Chef',
-    position_th: 'หัวหน้าเชฟ'
+    position_fr: 'Chef Principal'
   },
   {
     email: 'server@krongthai.com',
     pin: '3456',
     role: 'staff',
     full_name: 'Server User',
-    full_name_th: 'พนักงานเสิร์ฟ',
+    full_name_fr: 'Utilisateur Serveur',
     position: 'Server',
-    position_th: 'พนักงานเสิร์ฟ'
+    position_fr: 'Serveur'
   }
 ];
 
@@ -91,9 +91,9 @@ async function createTestUsers() {
           pin_hash: pinHash,
           role: user.role,
           full_name: user.full_name,
-          full_name_th: user.full_name_th,
+          full_name_fr: user.full_name_fr,
           position: user.position,
-          position_th: user.position_th,
+          position_fr: user.position_fr,
           restaurant_id: restaurantId,
           is_active: true
         }, {

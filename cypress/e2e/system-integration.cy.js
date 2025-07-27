@@ -129,16 +129,16 @@ describe('System Integration', () => {
     cy.visit('/en/dashboard')
     cy.get('body').should('be.visible')
     
-    // Test Thai
-    cy.visit('/th/dashboard')
+    // Test French
+    cy.visit('/fr/dashboard')
     cy.get('body').should('be.visible')
     
     // Test language switching
     cy.visit('/en/dashboard')
     cy.get('body').then(($body) => {
-      if ($body.text().includes('TH') || $body.text().includes('ไทย')) {
-        cy.contains(/TH|ไทย/).click({ force: true })
-        cy.url().should('include', '/th/')
+      if ($body.text().includes('FR') || $body.text().includes('Français')) {
+        cy.contains(/FR|Français/).click({ force: true })
+        cy.url().should('include', '/fr/')
       }
     })
   })

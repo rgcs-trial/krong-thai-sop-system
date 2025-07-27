@@ -37,7 +37,7 @@ export interface PaginatedApiResponse<T = any> extends ApiResponse<T[]> {
 export interface ApiError {
   code: string;
   message: string;
-  messageTh?: string;
+  messageFr?: string;
   details?: Record<string, any>;
   field?: string;
   severity: 'low' | 'medium' | 'high' | 'critical';
@@ -47,9 +47,9 @@ export interface ApiError {
 export interface CreateCategoryRequest {
   code: string;
   name: string;
-  nameTh: string;
+  nameFr: string;
   description?: string;
-  descriptionTh?: string;
+  descriptionFr?: string;
   icon?: string;
   color?: string;
   sortOrder?: number;
@@ -70,14 +70,14 @@ export interface CategoryListParams {
 export interface CreateSOPRequest {
   categoryId: string;
   title: string;
-  titleTh: string;
+  titleFr: string;
   content: string;
-  contentTh: string;
+  contentFr: string;
   steps?: SOPStepRequest[];
-  stepsTh?: SOPStepRequest[];
+  stepsFr?: SOPStepRequest[];
   attachments?: string[];
   tags?: string[];
-  tagsTh?: string[];
+  tagsFr?: string[];
   priority?: SOPPriority;
   effectiveDate?: string;
   reviewDate?: string;
@@ -138,22 +138,22 @@ export interface SearchRequest {
 export interface SearchResult {
   id: string;
   title: string;
-  titleTh: string;
+  titleFr: string;
   content: string;
-  contentTh: string;
+  contentFr: string;
   categoryId: string;
   categoryName: string;
-  categoryNameTh: string;
+  categoryNameFr: string;
   status: SOPStatus;
   priority: SOPPriority;
   tags: string[];
-  tagsTh: string[];
+  tagsFr: string[];
   matchScore: number;
   highlights: {
     title?: string;
-    titleTh?: string;
+    titleFr?: string;
     content?: string;
-    contentTh?: string;
+    contentFr?: string;
   };
   createdAt: string;
   updatedAt: string;
@@ -171,13 +171,13 @@ export interface SearchResponse {
 export interface CreateBookmarkRequest {
   sopId: string;
   notes?: string;
-  notesTh?: string;
+  notesFr?: string;
 }
 
 export interface UpdateBookmarkRequest {
   id: string;
   notes?: string;
-  notesTh?: string;
+  notesFr?: string;
 }
 
 export interface BookmarkResponse {
@@ -185,11 +185,11 @@ export interface BookmarkResponse {
   sopId: string;
   userId: string;
   notes?: string;
-  notesTh?: string;
+  notesFr?: string;
   createdAt: string;
   updatedAt: string;
-  sop: Pick<SOPDocument, 'id' | 'title' | 'title_th' | 'category_id' | 'status' | 'priority'>;
-  category: Pick<SOPCategory, 'id' | 'name' | 'name_th' | 'icon' | 'color'>;
+  sop: Pick<SOPDocument, 'id' | 'title' | 'title_fr' | 'category_id' | 'status' | 'priority'>;
+  category: Pick<SOPCategory, 'id' | 'name' | 'name_fr' | 'icon' | 'color'>;
 }
 
 export interface BookmarkListParams {
@@ -219,7 +219,7 @@ export interface UserProgressResponse {
 export interface CategoryProgress {
   categoryId: string;
   categoryName: string;
-  categoryNameTh: string;
+  categoryNameFr: string;
   totalSOPs: number;
   viewedSOPs: number;
   completedSOPs: number;
@@ -230,7 +230,7 @@ export interface ProgressActivity {
   id: string;
   sopId: string;
   sopTitle: string;
-  sopTitleTh: string;
+  sopTitleFr: string;
   action: 'viewed' | 'completed' | 'bookmarked' | 'downloaded';
   timestamp: string;
   duration?: number; // seconds spent on SOP
@@ -324,7 +324,7 @@ export interface RateLimitInfo {
 export interface ValidationError {
   field: string;
   message: string;
-  messageTh?: string;
+  messageFr?: string;
   code: string;
   value?: any;
 }

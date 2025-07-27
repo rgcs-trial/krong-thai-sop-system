@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond+SC:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* French language uses Inter font family - no additional font imports needed */
 
 /* Font performance optimizations */
 html {
@@ -18,10 +18,9 @@ html {
   }
   
   @font-face {
-    font-family: 'Noto-Thai-fallback';
-    src: local('Tahoma'), local('Arial Unicode MS'), local('sans-serif');
+    font-family: 'French-fallback';
+    src: local('Arial'), local('Helvetica'), local('sans-serif');
     font-display: swap;
-    unicode-range: U+0E00-0E7F; /* Thai Unicode range */
   }
 }
 @import "tailwindcss";
@@ -104,8 +103,8 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.font-thai {
-  font-family: "Noto Sans Thai", sans-serif;
+.font-french {
+  font-family: "Inter", sans-serif;
 }
 
 /* Tablet-optimized base styles */
@@ -123,29 +122,29 @@ button, input, select, textarea {
   min-height: 44px;
 }
 
-/* Thai text styling and language-specific classes */
-.text-thai, .font-thai {
-  font-family: "Noto Sans Thai", sans-serif;
-  line-height: 1.6; /* Better line spacing for Thai characters */
-  word-wrap: break-word; /* Handle long Thai words */
+/* French text styling and language-specific classes */
+.text-french, .font-french {
+  font-family: "Inter", sans-serif;
+  line-height: 1.5; /* Optimized line spacing for French text */
+  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 /* Language-specific document root classes for enhanced font rendering */
-html.lang-thai {
-  --primary-font: "Noto Sans Thai", sans-serif;
+html.lang-french {
+  --primary-font: "Inter", sans-serif;
 }
 
-html.lang-thai .font-ui {
-  font-family: "Noto Sans Thai", "Inter", sans-serif;
+html.lang-french .font-ui {
+  font-family: "Inter", sans-serif;
 }
 
-html.lang-thai .font-body {
-  font-family: "Noto Sans Thai", "Source Serif Pro", serif;
+html.lang-french .font-body {
+  font-family: "Inter", "Source Serif Pro", serif;
 }
 
-html.lang-thai .font-heading {
-  font-family: "Noto Sans Thai", "EB Garamond SC", serif;
+html.lang-french .font-heading {
+  font-family: "Inter", "EB Garamond SC", serif;
 }
 
 /* French language optimizations */
@@ -179,27 +178,27 @@ html.lang-french .font-ui {
   opacity: 0.7;
 }
 
-/* Thai-specific input and textarea styling */
-input.font-thai,
-textarea.font-thai {
-  font-family: "Noto Sans Thai", sans-serif;
+/* French-specific input and textarea styling */
+input.font-french,
+textarea.font-french {
+  font-family: "Inter", sans-serif;
   line-height: 1.5;
 }
 
 /* Font optimization for different text lengths */
-.thai-short {
+.french-short {
   font-weight: 400;
 }
 
-.thai-medium {
-  font-weight: 300;
-  letter-spacing: 0.01em;
+.french-medium {
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-.thai-long {
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  line-height: 1.7;
+.french-long {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
 }
 
 /* Restaurant brand utility classes */

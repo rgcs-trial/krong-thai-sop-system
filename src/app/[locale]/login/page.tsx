@@ -290,7 +290,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center p-4">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('/images/thai-pattern.svg')] opacity-5" />
+      <div className="absolute inset-0 bg-[url('/images/restaurant-pattern.svg')] opacity-5" />
       
       <div className="w-full max-w-md relative z-10">
         {/* Language Toggle */}

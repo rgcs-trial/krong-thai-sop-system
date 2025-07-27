@@ -29,7 +29,7 @@ export default async function OperationalAnalyticsPage({ params }: OperationalAn
   const resolvedParams = await params;
   
   // Validate locale
-  const validLocales = ['en', 'fr', 'th'];
+  const validLocales = ['en', 'fr'];
   if (!validLocales.includes(resolvedParams.locale)) {
     notFound();
   }
