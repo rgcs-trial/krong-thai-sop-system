@@ -725,7 +725,7 @@ export const useUIStore = create<UIStore>()(
 
       removeNotification: (id: string) => {
         set((state) => {
-          const index = state.notifications.notifications.findIndex(n => n.id === id);
+          const index = state.notifications.notifications.findIndex((n: any) => n.id === id);
           if (index >= 0) {
             const notification = state.notifications.notifications[index];
             
