@@ -104,9 +104,11 @@ Next Review Date: [Date]
 **Real-Time Monitoring Alerts:**
 - Staff member hasn't logged in for 3+ days
 - Assessment score below department average
-- Multiple failed login attempts from same user
+- Multiple failed PIN attempts from same user (security lockout)
 - Unusual access patterns or security concerns
 - Training deadline approaching (7-day warning)
+- Tablet device disconnected or offline
+- Language preference conflicts (EN/FR synchronization issues)
 
 ---
 
