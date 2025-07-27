@@ -7,11 +7,11 @@ export interface AuthError {
   code: string;
   message: {
     en: string;
-    th: string;
+    fr: string;
   };
   userMessage: {
     en: string;
-    th: string;
+    fr: string;
   };
   severity: 'low' | 'medium' | 'high' | 'critical';
 }
@@ -22,11 +22,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_001',
     message: {
       en: 'Email and PIN are required',
-      th: 'จำเป็นต้องใส่อีเมลและรหัส PIN'
+      fr: 'Email et PIN sont requis'
     },
     userMessage: {
       en: 'Please enter both your email and 4-digit PIN',
-      th: 'กรุณาใส่อีเมลและรหัส PIN 4 หลักของคุณ'
+      fr: 'Veuillez saisir votre email et votre code PIN à 4 chiffres'
     },
     severity: 'low'
   },
@@ -35,11 +35,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_002',
     message: {
       en: 'PIN must be exactly 4 digits',
-      th: 'รหัส PIN ต้องเป็นตัวเลข 4 หลักเท่านั้น'
+      fr: 'Le PIN doit être exactement 4 chiffres'
     },
     userMessage: {
       en: 'PIN must be exactly 4 digits (0-9)',
-      th: 'รหัส PIN ต้องเป็นตัวเลข 4 หลักเท่านั้น (0-9)'
+      fr: 'Le PIN doit être exactement 4 chiffres (0-9)'
     },
     severity: 'low'
   },
@@ -48,11 +48,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_003',
     message: {
       en: 'Invalid email format',
-      th: 'รูปแบบอีเมลไม่ถูกต้อง'
+      fr: 'Format d\'email invalide'
     },
     userMessage: {
       en: 'Please enter a valid email address',
-      th: 'กรุณาใส่อีเมลที่ถูกต้อง'
+      fr: 'Veuillez saisir une adresse email valide'
     },
     severity: 'low'
   },
@@ -62,11 +62,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_101',
     message: {
       en: 'Invalid email or PIN',
-      th: 'อีเมลหรือรหัส PIN ไม่ถูกต้อง'
+      fr: 'Email ou PIN invalide'
     },
     userMessage: {
       en: 'The email or PIN you entered is incorrect. Please try again.',
-      th: 'อีเมลหรือรหัส PIN ที่ใส่ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง'
+      fr: 'L\'email ou le PIN que vous avez saisi est incorrect. Veuillez réessayer.'
     },
     severity: 'medium'
   },
@@ -220,7 +220,7 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
 /**
  * Get user-friendly error message for a given error code and locale
  */
-export function getAuthErrorMessage(errorCode: string, locale: 'en' | 'th' = 'en'): {
+export function getAuthErrorMessage(errorCode: string, locale: 'en' | 'fr' = 'en'): {
   code: string;
   message: string;
   userMessage: string;
