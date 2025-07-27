@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
 
     // Validate input
     if (!email || !pin) {
-      const errorInfo = getAuthErrorMessage('MISSING_CREDENTIALS', 'en');
+      const errorInfo = getAuthErrorMessage('MISSING_CREDENTIALS', locale);
       return NextResponse.json(
         { 
           success: false, 
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (pin.length !== 4 || !/^\d{4}$/.test(pin)) {
-      const errorInfo = getAuthErrorMessage('INVALID_PIN_FORMAT', 'en');
+      const errorInfo = getAuthErrorMessage('INVALID_PIN_FORMAT', locale);
       return NextResponse.json(
         { 
           success: false, 
