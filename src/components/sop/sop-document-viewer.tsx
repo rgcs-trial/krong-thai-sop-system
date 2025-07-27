@@ -609,7 +609,7 @@ export function SOPDocumentViewer({
                   </div>
                 </div>
               </div>
-            )))}
+            ))}
             </CardContent>
           </Card>
         )}
