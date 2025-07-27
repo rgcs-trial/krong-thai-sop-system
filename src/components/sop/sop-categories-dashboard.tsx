@@ -596,7 +596,7 @@ export default function SOPCategoriesDashboard({
         <Card className="p-4 bg-white">
           <div className="text-center">
             <div className="text-2xl font-bold text-brand-red">
-              {mockCategories.length}
+              {categories.length}
             </div>
             <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
               {t('navigation.categories')}
@@ -607,7 +607,7 @@ export default function SOPCategoriesDashboard({
         <Card className="p-4 bg-white">
           <div className="text-center">
             <div className="text-2xl font-bold text-brand-red">
-              {mockCategories.reduce((sum, cat) => sum + cat.sop_count, 0)}
+              {categories.reduce((sum, cat) => sum + (cat.sop_count || 0), 0)}
             </div>
             <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
               {t('dashboard.totalSops')}
@@ -618,7 +618,7 @@ export default function SOPCategoriesDashboard({
         <Card className="p-4 bg-white">
           <div className="text-center">
             <div className="text-2xl font-bold text-brand-red">
-              {mockCategories.filter(cat => cat.is_active).length}
+              {categories.filter(cat => cat.is_active).length}
             </div>
             <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
               {t('dashboard.activeCategories')}
