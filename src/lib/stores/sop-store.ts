@@ -131,7 +131,7 @@ export const useSOPStore = create<SOPState>()(
       setDocuments: (categoryId: string, documents: SOPDocument[]) =>
         set((state) => {
           // Update documents for specific category
-          state.documents = state.documents.filter(doc => doc.category_id !== categoryId);
+          state.documents = state.documents.filter((doc: any) => doc.category_id !== categoryId);
           state.documents.push(...documents);
           state.documentsLastFetched[categoryId] = Date.now();
           state.documentsLoadingByCategory[categoryId] = false;
