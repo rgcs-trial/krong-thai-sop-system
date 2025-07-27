@@ -219,7 +219,7 @@ export const PinAuthSchema = z.object({
     .min(10, 'Device fingerprint required')
     .max(500, 'Device fingerprint too long'),
   userAgent: z.string().max(1000).optional(),
-  ipAddress: z.string().ip().optional(),
+  ipAddress: z.string().ip('Invalid IP address format').optional(),
 });
 
 export const ChangePinSchema = z.object({
