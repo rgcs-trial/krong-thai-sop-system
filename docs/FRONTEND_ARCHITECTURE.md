@@ -172,53 +172,102 @@ src/
 └── middleware.ts                          # Next.js middleware for auth & i18n
 ```
 
-## shadcn/ui Integration Strategy
+## ✅ State Management Architecture
 
-### Component Library Architecture
-
-The shadcn/ui integration follows a layered approach:
-
-1. **Base Layer**: Core shadcn/ui components
-2. **Composite Layer**: Restaurant-specific compositions
-3. **Application Layer**: Page-level implementations
-
-### Installation & Configuration
-
-```bash
-# Initialize shadcn/ui
-npx shadcn@latest init
-
-# Install core components
-npx shadcn@latest add button
-npx shadcn@latest add card
-npx shadcn@latest add form
-npx shadcn@latest add dialog
-npx shadcn@latest add table
-```
-
-### Component Customization Strategy
+### Zustand Store Implementation (6 Domain Stores)
 
 ```typescript
-// components/ui/button.tsx - Extended button variants
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        // Restaurant-specific variants
-        sop: "bg-thai-red text-white hover:bg-thai-red/90 min-h-[60px] min-w-[120px]",
-        category: "bg-golden-saffron text-black hover:bg-golden-saffron/90 min-h-[80px] min-w-[100px]"
-      },
-      size: {
-        default: "h-9 px-4 py-2",
-        // Touch-optimized sizes
-        touch: "h-14 rounded-lg px-6 text-base",
-        touchLarge: "h-16 rounded-lg px-8 text-lg"
-      }
-    }
-  }
-)
+// Complete state management with domain separation
+src/lib/stores/
+├── auth-store.ts      # Authentication & session management
+├── sop-store.ts       # SOP document management
+├── training-store.ts  # Training system state
+├── ui-store.ts        # UI preferences & settings
+├── settings-store.ts  # User configuration
+└── global-store.ts    # Application-wide state
+```
+
+#### Authentication Store (Production-Ready)
+```typescript
+// auth-store.ts - Complete authentication state management
+interface AuthStore {
+  // User State
+  user: SessionUser | null;
+  userProfile: AuthUser | null;
+  sessionToken: string | null;
+  isAuthenticated: boolean;
+  
+  // Security State
+  deviceFingerprint: string | null;
+  sessionExpiresAt: Date | null;
+  lastActivity: Date | null;
+  
+  // Actions
+  login: (email: string, pin: string) => Promise<boolean>;
+  logout: () => Promise<void>;
+  refreshSession: () => Promise<boolean>;
+  generateDeviceFingerprint: () => Promise<string>;
+  updateLastActivity: () => void;
+}
+
+// Key features:
+// - Persistent state with localStorage
+// - Automatic session refresh (5-minute intervals)
+// - Device fingerprinting for security
+// - Rate limiting awareness
+// - Cookie-based session management
+```
+
+#### SOP Store (Ready for Implementation)
+```typescript
+// sop-store.ts - SOP management state
+interface SOPStore {
+  // Data State
+  sops: SOPDocument[];
+  categories: SOPCategory[];
+  selectedSOP: SOPDocument | null;
+  selectedCategory: string | null;
+  
+  // UI State
+  isLoading: boolean;
+  searchTerm: string;
+  filters: SOPFilters;
+  
+  // Actions
+  fetchSOPs: () => Promise<void>;
+  searchSOPs: (query: string) => Promise<SOPDocument[]>;
+  selectSOP: (sopId: string) => void;
+  bookmarkSOP: (sopId: string) => Promise<void>;
+  updateProgress: (sopId: string, action: string) => Promise<void>;
+}
+```
+
+### TanStack Query Integration
+
+```typescript
+// Comprehensive caching and synchronization
+import { QueryClient } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,        // 5 minutes
+      cacheTime: 10 * 60 * 1000,       // 10 minutes
+      retry: 3,
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      retry: 1,
+    },
+  },
+});
+
+// Key features:
+// - Offline query support with IDB persistence
+// - Background synchronization
+// - Optimistic updates for user actions
+// - Error boundary integration
+// - Request deduplication
 ```
 
 ## State Management with Zustand
