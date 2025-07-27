@@ -268,7 +268,6 @@ export function TranslationPreviewPanel({
                 <SelectContent>
                   <SelectItem value="en">English</SelectItem>
                   <SelectItem value="fr">Français</SelectItem>
-                  <SelectItem value="th">ไทย</SelectItem>
                 </SelectContent>
               </Select>
             </div>
