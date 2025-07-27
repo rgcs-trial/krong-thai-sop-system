@@ -75,7 +75,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { email, pin, deviceFingerprint } = body;
     
-    console.log('[AUTH-DEBUG] Login attempt:', { email, pinLength: pin?.length });
+    // Determine locale from Accept-Language header or default to 'en'
+    const acceptLanguage = request.headers.get('accept-language') || '';
+    const locale = acceptLanguage.includes('th') ? 'th' : 'en';
+    
+    console.log('[AUTH-DEBUG] Login attempt:', { email, pinLength: pin?.length, locale });
 
     // Validate input
     if (!email || !pin) {
