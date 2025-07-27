@@ -450,5 +450,28 @@
     "customer_service": "Customer Service",
     "cleaning": "Cleaning",
     "emergency": "Emergency"
+  },
+  "admin": {
+    "settings": {
+      "title": "Admin Settings",
+      "subtitle": "Manage system settings and configuration",
+      "adminOnly": "Admin Only",
+      "translations": "Translations",
+      "users": "Users",
+      "database": "Database",
+      "security": "Security",
+      "notifications": "Notifications",
+      "appearance": "Appearance",
+      "userManagement": "User Management",
+      "userManagementPlaceholder": "User management features coming soon",
+      "databaseManagement": "Database Management",
+      "databaseManagementPlaceholder": "Database management features coming soon",
+      "securitySettings": "Security Settings",
+      "securitySettingsPlaceholder": "Security settings coming soon",
+      "notificationSettings": "Notification Settings",
+      "notificationSettingsPlaceholder": "Notification settings coming soon",
+      "appearanceSettings": "Appearance Settings",
+      "appearanceSettingsPlaceholder": "Appearance settings coming soon"
+    }
   }
 }
