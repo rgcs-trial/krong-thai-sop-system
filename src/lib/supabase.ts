@@ -288,6 +288,11 @@ export type SopDocument = Database['public']['Tables']['sop_documents']['Row'];
 export type FormTemplate = Database['public']['Tables']['form_templates']['Row'];
 export type FormSubmission = Database['public']['Tables']['form_submissions']['Row'];
 export type AuditLog = Database['public']['Tables']['audit_logs']['Row'];
+export type UserSession = Database['public']['Tables']['user_sessions']['Row'];
+export type UserBookmark = Database['public']['Tables']['user_bookmarks']['Row'];
+export type UserProgress = Database['public']['Tables']['user_progress']['Row'];
+export type UserProgressSummary = Database['public']['Tables']['user_progress_summary']['Row'];
+export type UploadedFile = Database['public']['Tables']['uploaded_files']['Row'];
 
 /**
  * Database insert types
@@ -299,6 +304,11 @@ export type SopDocumentInsert = Database['public']['Tables']['sop_documents']['I
 export type FormTemplateInsert = Database['public']['Tables']['form_templates']['Insert'];
 export type FormSubmissionInsert = Database['public']['Tables']['form_submissions']['Insert'];
 export type AuditLogInsert = Database['public']['Tables']['audit_logs']['Insert'];
+export type UserSessionInsert = Database['public']['Tables']['user_sessions']['Insert'];
+export type UserBookmarkInsert = Database['public']['Tables']['user_bookmarks']['Insert'];
+export type UserProgressInsert = Database['public']['Tables']['user_progress']['Insert'];
+export type UserProgressSummaryInsert = Database['public']['Tables']['user_progress_summary']['Insert'];
+export type UploadedFileInsert = Database['public']['Tables']['uploaded_files']['Insert'];
 
 /**
  * Database update types
@@ -310,3 +320,8 @@ export type SopDocumentUpdate = Database['public']['Tables']['sop_documents']['U
 export type FormTemplateUpdate = Database['public']['Tables']['form_templates']['Update'];
 export type FormSubmissionUpdate = Database['public']['Tables']['form_submissions']['Update'];
 export type AuditLogUpdate = Database['public']['Tables']['audit_logs']['Update'];
+export type UserSessionUpdate = Database['public']['Tables']['user_sessions']['Update'];
+export type UserBookmarkUpdate = Database['public']['Tables']['user_bookmarks']['Update'];
+export type UserProgressUpdate = Database['public']['Tables']['user_progress']['Update'];
+export type UserProgressSummaryUpdate = Database['public']['Tables']['user_progress_summary']['Update'];
+export type UploadedFileUpdate = Database['public']['Tables']['uploaded_files']['Update'];
