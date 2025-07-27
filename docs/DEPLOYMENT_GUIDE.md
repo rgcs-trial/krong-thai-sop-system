@@ -54,8 +54,8 @@
 - SSL/TLS encryption support
 
 **Development Environment:**
-- Node.js 18.0 or higher
-- pnpm package manager (recommended)
+- Node.js 20.0 or higher
+- pnpm@9.0.0 package manager (required - specified in package.json)
 - Git version control
 - Text editor/IDE (VS Code recommended)
 
