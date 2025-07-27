@@ -84,67 +84,179 @@ The Restaurant Krong Thai SOP Management System is a tablet-optimized web applic
 │   Tablet Client │────│   Next.js App   │────│   Supabase DB   │
 │                 │    │                 │    │                 │
 │ • React 19.1.0  │    │ • App Router    │    │ • PostgreSQL    │
-│ • Tailwind 4.1  │    │ • API Routes    │    │ • Auth          │
-│ • PWA Support   │    │ • Middleware    │    │ • Storage       │
-│ • Offline Cache │    │ • i18n Support  │    │ • Realtime      │
+│ • Tailwind 4.1  │    │ • [locale] i18n │    │ • RLS Security  │
+│ • PWA + Offline │    │ • API Routes    │    │ • Training Sys  │
+│ • Touch UI      │    │ • Middleware    │    │ • Audit Logs    │
+│ • Zustand State │    │ • TanStack Q    │    │ • 4 Migrations  │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
 ### 3.2 Application Layers
-- **Presentation Layer**: shadcn/ui components with tablet optimization
-- **Business Logic**: Next.js API routes and server actions
-- **Data Layer**: Supabase with Row Level Security
-- **Security Layer**: PIN-based authentication and audit logging
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    PRESENTATION LAYER                       │
+│  • shadcn/ui Components (15+)    • Tablet-optimized Touch  │
+│  • Bilingual UI (EN/TH)          • PWA with Offline Cache  │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    STATE MANAGEMENT                         │
+│  • Zustand Stores (6 domains)    • TanStack Query Cache    │
+│  • Auth Store                    • SOP Store               │
+│  • Training Store               • UI Store                 │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    BUSINESS LOGIC                           │
+│  • Next.js API Routes (4 auth)   • Server Actions          │
+│  • Location Sessions             • Staff PIN Login         │
+│  • Restaurant Management         • Security Middleware     │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    DATA LAYER                               │
+│  • Supabase PostgreSQL           • Row Level Security      │
+│  • 12 Core Tables                • Full-text Search        │
+│  • Bilingual Content             • JSONB for Flexibility   │
+└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    SECURITY LAYER                           │
+│  • PIN-based Authentication      • Device Fingerprinting   │
+│  • CSRF Protection              • Rate Limiting            │
+│  • Session Management           • Comprehensive Auditing   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 3.3 Component Architecture
+```
+src/components/
+├── ui/                 # shadcn/ui base components (15+)
+│   ├── button.tsx      # Touch-optimized button variants
+│   ├── card.tsx        # Content cards for SOPs
+│   ├── dialog.tsx      # Modal dialogs
+│   └── [12 more]       # Form controls, navigation, etc.
+├── auth/               # Authentication components (3)
+│   ├── location-selector.tsx      # Tablet location binding
+│   ├── restaurant-auth-flow.tsx   # Multi-step auth flow
+│   └── staff-pin-login.tsx        # PIN entry interface
+├── sop/                # SOP management components (9)
+│   ├── sop-categories-dashboard.tsx
+│   ├── sop-document-viewer.tsx
+│   ├── sop-navigation-main.tsx
+│   └── [6 more]        # Search, breadcrumbs, status, etc.
+└── training/           # Training system components (3)
+    ├── training-analytics-dashboard.tsx
+    ├── training-assessment.tsx
+    └── training-session.tsx
+```
 
 ---
 
 ## 4. Database Design
 
-### 4.1 Core Tables
+### 4.1 Migration Architecture
+The database uses a 4-migration approach for incremental schema building:
+
 ```sql
--- Users table for staff members
-CREATE TABLE users (
+-- Migration 001: Core schema (restaurants, users, SOPs, forms, audit)
+-- Migration 002: Device management and security
+-- Migration 003: Training system (modules, assessments, certificates)
+-- Migration 004: Session management and progress tracking
+```
+
+### 4.2 Core Tables Overview
+
+#### Authentication & Multi-tenancy
+```sql
+-- Restaurants (multi-tenant support)
+CREATE TABLE restaurants (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    pin_hash TEXT NOT NULL UNIQUE,
-    staff_id VARCHAR(10) UNIQUE NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    language_preference VARCHAR(2) DEFAULT 'en',
-    is_active BOOLEAN DEFAULT true,
-    last_login TIMESTAMP,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
+    name VARCHAR(255) NOT NULL,
+    name_th VARCHAR(255),           -- Thai restaurant name
+    settings JSONB DEFAULT '{}',    -- Configuration
+    timezone VARCHAR(50) DEFAULT 'Asia/Bangkok'
 );
 
--- SOP Categories
+-- Staff authentication with PIN system
+CREATE TABLE auth_users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    pin_hash VARCHAR(255),          -- bcrypt hashed 4-digit PIN
+    role user_role NOT NULL,        -- admin, manager, staff
+    full_name VARCHAR(255) NOT NULL,
+    full_name_th VARCHAR(255),      -- Thai name
+    restaurant_id UUID NOT NULL,   -- Multi-tenant isolation
+    device_fingerprint TEXT,       -- Device binding
+    pin_attempts INTEGER DEFAULT 0 -- Rate limiting
+);
+```
+
+#### SOP Management System
+```sql
+-- 16 standard restaurant categories
 CREATE TABLE sop_categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name_en VARCHAR(100) NOT NULL,
-    name_th VARCHAR(100) NOT NULL,
-    description_en TEXT,
-    description_th TEXT,
-    icon VARCHAR(50),
-    sort_order INTEGER,
-    is_active BOOLEAN DEFAULT true,
-    created_at TIMESTAMP DEFAULT NOW()
+    code VARCHAR(20) UNIQUE NOT NULL,    -- FOOD_SAFETY, CLEANING, etc.
+    name VARCHAR(255) NOT NULL,
+    name_th VARCHAR(255) NOT NULL,       -- Thai category name
+    icon VARCHAR(50),                    -- UI icon identifier
+    color VARCHAR(7),                    -- Hex color for theming
+    sort_order INTEGER DEFAULT 0
 );
 
--- SOPs (Standard Operating Procedures)
-CREATE TABLE sops (
+-- Bilingual SOP documents with structured content
+CREATE TABLE sop_documents (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    category_id UUID REFERENCES sop_categories(id),
-    title_en VARCHAR(200) NOT NULL,
-    title_th VARCHAR(200) NOT NULL,
-    content_en TEXT NOT NULL,
-    content_th TEXT NOT NULL,
-    version VARCHAR(10) DEFAULT '1.0',
-    is_critical BOOLEAN DEFAULT false,
-    is_published BOOLEAN DEFAULT false,
-    media_urls TEXT[],
-    created_by UUID REFERENCES users(id),
-    updated_by UUID REFERENCES users(id),
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
+    category_id UUID NOT NULL,
+    restaurant_id UUID NOT NULL,        -- Multi-tenant isolation
+    title VARCHAR(500) NOT NULL,
+    title_th VARCHAR(500) NOT NULL,     -- Thai title
+    content TEXT NOT NULL,
+    content_th TEXT NOT NULL,           -- Thai content
+    steps JSONB,                        -- Structured procedures
+    steps_th JSONB,                     -- Thai procedures
+    attachments JSONB DEFAULT '[]',     -- File references
+    tags VARCHAR(255)[],                -- Search tags
+    tags_th VARCHAR(255)[],             -- Thai tags
+    status sop_status DEFAULT 'draft',  -- draft, review, approved, archived
+    priority sop_priority DEFAULT 'medium' -- low, medium, high, critical
+);
+```
+
+#### Training System
+```sql
+-- Interactive training modules
+CREATE TABLE training_modules (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    restaurant_id UUID NOT NULL,
+    sop_document_id UUID NOT NULL,      -- Link to SOP
+    title VARCHAR(500) NOT NULL,
+    title_th VARCHAR(500) NOT NULL,     -- Thai title
+    duration_minutes INTEGER DEFAULT 30,
+    passing_score INTEGER DEFAULT 80,   -- Percentage required to pass
+    max_attempts INTEGER DEFAULT 3,
+    validity_days INTEGER DEFAULT 365,  -- Certificate validity
+    is_mandatory BOOLEAN DEFAULT false
+);
+
+-- Training progress tracking
+CREATE TABLE user_training_progress (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    module_id UUID NOT NULL,
+    status training_status DEFAULT 'not_started', -- not_started, in_progress, completed, failed
+    progress_percentage INTEGER DEFAULT 0,
+    attempt_number INTEGER DEFAULT 1,
+    time_spent_minutes INTEGER DEFAULT 0
+);
+
+-- Digital certificates
+CREATE TABLE training_certificates (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    module_id UUID NOT NULL,
+    certificate_number VARCHAR(50) UNIQUE NOT NULL, -- KT-FS-001-2024-001
+    status certificate_status DEFAULT 'active',     -- active, expired, revoked
+    issued_at TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ,
+    certificate_data JSONB NOT NULL -- PDF metadata, template info
 );
 ```
 
