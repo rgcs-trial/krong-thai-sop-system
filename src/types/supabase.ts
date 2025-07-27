@@ -1,6 +1,6 @@
 // Restaurant Krong Thai SOP Management System
 // Supabase Generated Types
-// This file will be auto-generated when you run: pnpm db:generate-types
+// This file represents the database schema from all migrations
 
 export type Json =
   | string
@@ -270,6 +270,18 @@ export interface Database {
             columns: ["created_by"]
             referencedRelation: "auth_users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_sop_updated_by"
+            columns: ["updated_by"]
+            referencedRelation: "auth_users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_sop_approved_by"
+            columns: ["approved_by"]
+            referencedRelation: "auth_users"
+            referencedColumns: ["id"]
           }
         ]
       }
@@ -416,6 +428,12 @@ export interface Database {
             columns: ["submitted_by"]
             referencedRelation: "auth_users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_submission_reviewer"
+            columns: ["reviewed_by"]
+            referencedRelation: "auth_users"
+            referencedColumns: ["id"]
           }
         ]
       }
@@ -489,6 +507,10 @@ export interface Database {
           expires_at: string
           is_active: boolean
           last_accessed_at: string | null
+          session_type: string
+          location_bound_restaurant_id: string | null
+          ip_address: unknown | null
+          user_agent: string | null
           created_at: string
           updated_at: string
         }
@@ -500,6 +522,10 @@ export interface Database {
           expires_at: string
           is_active?: boolean
           last_accessed_at?: string | null
+          session_type?: string
+          location_bound_restaurant_id?: string | null
+          ip_address?: unknown | null
+          user_agent?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -511,6 +537,10 @@ export interface Database {
           expires_at?: string
           is_active?: boolean
           last_accessed_at?: string | null
+          session_type?: string
+          location_bound_restaurant_id?: string | null
+          ip_address?: unknown | null
+          user_agent?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -518,6 +548,76 @@ export interface Database {
           {
             foreignKeyName: "fk_session_user"
             columns: ["user_id"]
+            referencedRelation: "auth_users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_user_session_location_restaurant"
+            columns: ["location_bound_restaurant_id"]
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      location_sessions: {
+        Row: {
+          id: string
+          restaurant_id: string
+          tablet_device_id: string
+          session_token: string
+          name: string
+          location: string | null
+          ip_address: unknown | null
+          user_agent: string | null
+          is_active: boolean
+          expires_at: string
+          last_staff_login_at: string | null
+          last_staff_user_id: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          restaurant_id: string
+          tablet_device_id: string
+          session_token: string
+          name: string
+          location?: string | null
+          ip_address?: unknown | null
+          user_agent?: string | null
+          is_active?: boolean
+          expires_at: string
+          last_staff_login_at?: string | null
+          last_staff_user_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          restaurant_id?: string
+          tablet_device_id?: string
+          session_token?: string
+          name?: string
+          location?: string | null
+          ip_address?: unknown | null
+          user_agent?: string | null
+          is_active?: boolean
+          expires_at?: string
+          last_staff_login_at?: string | null
+          last_staff_user_id?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_location_session_restaurant"
+            columns: ["restaurant_id"]
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_location_session_last_user"
+            columns: ["last_staff_user_id"]
             referencedRelation: "auth_users"
             referencedColumns: ["id"]
           }
@@ -770,6 +870,64 @@ export interface Database {
           }
         ]
       }
+      user_devices: {
+        Row: {
+          id: string
+          user_id: string
+          fingerprint_hash: string
+          name: string
+          type: Database["public"]["Enums"]["device_type"]
+          location: string | null
+          user_agent: string | null
+          ip_address: unknown | null
+          is_active: boolean
+          is_trusted: boolean
+          registered_at: string
+          last_used_at: string
+          trusted_at: string | null
+          metadata: Json
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          fingerprint_hash: string
+          name: string
+          type?: Database["public"]["Enums"]["device_type"]
+          location?: string | null
+          user_agent?: string | null
+          ip_address?: unknown | null
+          is_active?: boolean
+          is_trusted?: boolean
+          registered_at?: string
+          last_used_at?: string
+          trusted_at?: string | null
+          metadata?: Json
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          fingerprint_hash?: string
+          name?: string
+          type?: Database["public"]["Enums"]["device_type"]
+          location?: string | null
+          user_agent?: string | null
+          ip_address?: unknown | null
+          is_active?: boolean
+          is_trusted?: boolean
+          registered_at?: string
+          last_used_at?: string
+          trusted_at?: string | null
+          metadata?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_user_devices_user"
+            columns: ["user_id"]
+            referencedRelation: "auth_users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -802,6 +960,34 @@ export interface Database {
         }
         Returns: string
       }
+      create_location_session: {
+        Args: {
+          p_restaurant_id: string
+          p_device_id: string
+          p_location_name: string
+          p_ip_address: unknown | null
+          p_user_agent: string | null
+        }
+        Returns: string
+      }
+      cleanup_expired_location_sessions: {
+        Args: {}
+        Returns: number
+      }
+      get_user_progress_stats: {
+        Args: {
+          p_user_id: string
+          p_restaurant_id: string
+        }
+        Returns: {
+          total_sops: number
+          viewed_sops: number
+          completed_sops: number
+          downloaded_sops: number
+          bookmarked_sops: number
+          progress_percentage: number
+        }[]
+      }
     }
     Enums: {
       user_role: "admin" | "manager" | "staff"
@@ -809,6 +995,10 @@ export interface Database {
       sop_priority: "low" | "medium" | "high" | "critical"
       submission_status: "submitted" | "reviewed" | "approved" | "rejected"
       audit_action: "CREATE" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "VIEW" | "DOWNLOAD" | "UPLOAD" | "APPROVE" | "REJECT"
+      device_type: "tablet" | "desktop" | "mobile"
+      training_status: "not_started" | "in_progress" | "completed" | "failed" | "expired"
+      assessment_status: "pending" | "passed" | "failed" | "retake_required"
+      certificate_status: "active" | "expired" | "revoked"
     }
     CompositeTypes: {
       [_ in never]: never
