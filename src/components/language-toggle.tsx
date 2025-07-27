@@ -135,12 +135,14 @@ export function LanguageToggle({
               <span className="text-lg" role="img" aria-label={localeNames[loc]}>
                 {localeFlags[loc]}
               </span>
-              <span className={`flex-1 ${loc === 'fr' ? 'font-ui' : 'font-ui'}`}>
+              <span className={`flex-1 ${loc === 'th' ? 'font-thai' : 'font-ui'}`}>
                 {localeNames[loc]}
               </span>
-              {loc === locale && (
+              {isPending ? (
+                <Loader2 size={16} className="animate-spin text-muted-foreground" />
+              ) : loc === locale ? (
                 <Check size={16} className="text-primary" />
-              )}
+              ) : null}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
@@ -197,12 +199,14 @@ export function LanguageToggle({
               <span className="text-lg" role="img" aria-label={localeNames[loc]}>
                 {localeFlags[loc]}
               </span>
-              <span className={`flex-1 ${loc === 'fr' ? 'font-ui' : 'font-ui'}`}>
+              <span className={`flex-1 ${loc === 'th' ? 'font-thai' : 'font-ui'}`}>
                 {localeNames[loc]}
               </span>
-              {loc === locale && (
+              {isPending ? (
+                <Loader2 size={16} className="animate-spin text-muted-foreground" />
+              ) : loc === locale ? (
                 <Check size={16} className="text-primary" />
-              )}
+              ) : null}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
