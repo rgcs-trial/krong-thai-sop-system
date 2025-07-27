@@ -306,9 +306,9 @@ export function useSearch(locale: string = 'en') {
   const calculateRelevanceScore = (item: any, query: string, locale: string): number => {
     let score = 0;
     const queryLower = query.toLowerCase();
-    const title = (locale === 'th' ? item.title_th : item.title_en).toLowerCase();
-    const content = (locale === 'th' ? item.content_th : item.content_en).toLowerCase();
-    const tags = locale === 'th' ? (item.tags_th || []) : (item.tags || []);
+    const title = (locale === 'fr' ? item.title_fr : item.title_en).toLowerCase();
+    const content = (locale === 'fr' ? item.content_fr : item.content_en).toLowerCase();
+    const tags = locale === 'fr' ? (item.tags_fr || []) : (item.tags || []);
 
     // Title matches (highest priority)
     if (title.includes(queryLower)) {
