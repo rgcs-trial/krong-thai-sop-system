@@ -12,9 +12,9 @@ export type AuditAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'LOGIN' | 'LOGOUT' | 
 export interface Restaurant {
   id: string;
   name: string;
-  name_fr?: string;
+  name_th?: string;
   address?: string;
-  address_fr?: string;
+  address_th?: string;
   phone?: string;
   email?: string;
   timezone: string;
@@ -30,7 +30,7 @@ export interface AuthUser {
   pin_hash?: string;
   role: UserRole;
   full_name: string;
-  full_name_fr?: string;
+  full_name_th?: string;
   phone?: string;
   position?: string;
   position_th?: string;
@@ -52,7 +52,7 @@ export interface SOPCategory {
   id: string;
   code: string;
   name: string;
-  name_fr: string;
+  name_th: string;
   description?: string;
   description_th?: string;
   icon?: string;
@@ -68,9 +68,9 @@ export interface SOPDocument {
   category_id: string;
   restaurant_id: string;
   title: string;
-  title_fr: string;
+  title_th: string;
   content: string;
-  content_fr: string;
+  content_th: string;
   steps?: SOPStep[];
   steps_th?: SOPStep[];
   attachments: string[];
@@ -111,7 +111,7 @@ export interface FormTemplate {
   id: string;
   restaurant_id: string;
   name: string;
-  name_fr: string;
+  name_th: string;
   description?: string;
   description_th?: string;
   category?: string;
