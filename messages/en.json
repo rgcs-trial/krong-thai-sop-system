@@ -24,7 +24,8 @@
     "thai": "Thai",
     "retry": "Retry",
     "saving": "Saving...",
-    "confirmDelete": "Confirm Delete"
+    "confirmDelete": "Confirm Delete",
+    "clear": "Clear"
   },
   "auth": {
     "title": "Restaurant Krong Thai",
