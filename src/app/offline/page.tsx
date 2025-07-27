@@ -74,6 +74,22 @@ export default function OfflinePage({ params, searchParams }: OfflinePageProps) 
   const [lastOnline, setLastOnline] = useState<Date | null>(null);
   const [retryCount, setRetryCount] = useState(0);
   const [cachedSops, setCachedSops] = useState<string[]>([]);
+  const [locale, setLocale] = useState('en');
+
+  useEffect(() => {
+    // Extract locale from params
+    const getLocale = async () => {
+      if (params) {
+        try {
+          const resolvedParams = await params;
+          setLocale(resolvedParams.locale || 'en');
+        } catch {
+          setLocale('en');
+        }
+      }
+    };
+    getLocale();
+  }, [params]);
 
   useEffect(() => {
     // Check online status
