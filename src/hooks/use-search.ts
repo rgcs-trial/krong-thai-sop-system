@@ -194,7 +194,7 @@ export function useSearch(locale: string = 'en') {
         updated_at,
         sop_categories (
           name_en,
-          name_th,
+          name_fr,
           color
         )
       `)
