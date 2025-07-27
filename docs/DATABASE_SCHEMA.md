@@ -12,19 +12,22 @@ This document provides a comprehensive overview of the PostgreSQL database schem
 
 ## Overview
 
-The database supports a comprehensive bilingual (English/French) restaurant SOP system with role-based access control, training modules, progress tracking, and comprehensive audit logging. The system is designed for multi-tenant restaurant operations with full security and scalability.
+The database supports a comprehensive bilingual (English/French) restaurant SOP system with database-driven translation management, role-based access control, training modules, progress tracking, and comprehensive audit logging. The system features a complete translation workflow with admin interface and intelligent caching.
 
 ### Key Features
 
-- **Bilingual Support**: Complete English and French content storage
+- **Database-Driven Translation System**: 7 tables with complete workflow management and caching
+- **Translation Admin Interface**: Workflow approval, version control, and project management
+- **Bilingual Support**: Complete English and French content with database-driven translations
 - **Multi-tenant Architecture**: Restaurant isolation with Row Level Security
 - **PIN Authentication**: bcrypt-hashed 4-digit PIN system for restaurant staff
 - **16 SOP Categories**: Complete coverage of restaurant operations
 - **Training System**: Interactive modules with assessments and certificates
 - **Progress Tracking**: Detailed user progress and bookmark management
 - **Session Management**: Location-bound tablet sessions with device binding
-- **Audit Logging**: Comprehensive audit trail for all operations
-- **File Management**: Attachment storage and management system
+- **Audit Logging**: Comprehensive audit trail for all operations including translation history
+- **Real-time Updates**: WebSocket integration for live translation updates
+- **Intelligent Caching**: Automatic cache invalidation and performance optimization
 
 ### Schema Implementation Status
 
