@@ -272,3 +272,4 @@
 }
  GET /en/login?redirect=%2F 500 in 2418ms
  ✓ Compiled in 101ms (513 modules)
+[?25h
