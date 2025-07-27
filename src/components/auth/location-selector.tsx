@@ -224,12 +224,25 @@ export function LocationSelector({
 
         {restaurants.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-gray-500">
+            <p className="text-gray-500 mb-4">
               {locale === 'en' ? 'No restaurants available' : 'ไม่มีร้านอาหารที่ใช้งานได้'}
             </p>
-            <Button onClick={onCancel} variant="outline" className="mt-4">
-              {locale === 'en' ? 'Back to Login' : 'กลับไปหน้าเข้าสู่ระบบ'}
-            </Button>
+            <div className="flex gap-2 justify-center">
+              {userRole === 'admin' && (
+                <Button 
+                  onClick={() => setShowAddForm(true)} 
+                  className="bg-red-600 hover:bg-red-700"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  {locale === 'en' ? 'Add Restaurant' : 'เพิ่มร้านอาหาร'}
+                </Button>
+              )}
+              <Button onClick={onCancel} variant="outline">
+                {locale === 'en' ? 'Back to Login' : 'กลับไปหน้าเข้าสู่ระบบ'}
+              </Button>
+            </div>
           </div>
         ) : (
           <>
