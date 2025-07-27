@@ -526,9 +526,11 @@ export function TrainingAnalyticsDashboard({ className }: TrainingAnalyticsDashb
 
       {/* Detailed Analytics */}
       <Tabs defaultValue="modules" className="space-y-6">
-        <TabsList>
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="modules">{t('training.module_performance')}</TabsTrigger>
           <TabsTrigger value="users">{t('training.user_performance')}</TabsTrigger>
+          <TabsTrigger value="roi">{t('training.roi_analysis')}</TabsTrigger>
+          <TabsTrigger value="competency">{t('training.competency_gaps')}</TabsTrigger>
           <TabsTrigger value="trends">{t('training.trends_insights')}</TabsTrigger>
         </TabsList>
 
