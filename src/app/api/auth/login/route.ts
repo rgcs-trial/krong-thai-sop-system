@@ -93,14 +93,22 @@ export async function POST(request: NextRequest) {
 
     // Create Supabase client and authenticate
     const supabase = createSupabaseClient(request);
+    console.log('[AUTH-DEBUG] Supabase client created successfully');
 
     // Use Supabase for authentication
+    console.log('[AUTH-DEBUG] Querying auth_users for:', email.toLowerCase());
     const { data: user, error } = await supabase
       .from('auth_users')
       .select('*')
       .eq('email', email.toLowerCase())
       .eq('is_active', true)
       .single();
+    
+    console.log('[AUTH-DEBUG] Database query result:', { 
+      hasUser: !!user, 
+      error: error?.message,
+      errorCode: error?.code 
+    });
 
     if (error) {
       logError('DATABASE_QUERY', error, {
