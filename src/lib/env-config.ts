@@ -123,7 +123,9 @@ export class EnvConfig {
   private isProduction: boolean;
 
   private constructor() {
-    this.isProduction = process.env.NODE_ENV === 'production';
+    // Only enforce production validation for actual production deployment
+    // Not during development builds
+    this.isProduction = process.env.NODE_ENV === 'production' && process.env.BUILD_ENV !== 'development';
     this.validateAndParseEnvironment();
   }
 
