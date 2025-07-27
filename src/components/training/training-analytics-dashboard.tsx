@@ -26,8 +26,37 @@ import {
   XCircle,
   Star,
   Trophy,
-  Zap
+  Zap,
+  DollarSign,
+  Calculator,
+  TrendingRight,
+  Activity,
+  Brain,
+  FileBarChart
 } from 'lucide-react';
+
+import {
+  LineChart,
+  Line,
+  AreaChart,
+  Area,
+  BarChart,
+  Bar,
+  PieChart as RechartsPieChart,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  ComposedChart,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar
+} from 'recharts';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
