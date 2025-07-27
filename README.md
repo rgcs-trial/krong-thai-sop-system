@@ -49,8 +49,8 @@ Use these credentials to test the PIN authentication system:
 ## Key Features
 
 ✅ **Phase 2 Complete - Full Feature Set**
-- **55+ React Components**: Complete SOP management, analytics, and training systems
-- **16 API Endpoints**: Full CRUD operations with real-time capabilities
+- **55+ React Components**: Complete SOP management, analytics, training, and restaurant management systems
+- **17 API Endpoints**: Full CRUD operations with real-time capabilities and restaurant management
 - **8 Database Migrations**: Advanced schema with performance optimizations
 - **Bilingual EN/TH Support**: Professional content management with proper Thai typography
 - **Training System**: Interactive modules, assessments, and certificates
