@@ -111,12 +111,12 @@ export interface FormTemplate {
   id: string;
   restaurant_id: string;
   name: string;
-  name_th: string;
+  name_fr: string;
   description?: string;
-  description_th?: string;
+  description_fr?: string;
   category?: string;
   schema: FormSchema;
-  schema_th?: FormSchema;
+  schema_fr?: FormSchema;
   validation_rules: Record<string, any>;
   settings: Record<string, any>;
   is_active: boolean;
