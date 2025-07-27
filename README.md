@@ -97,7 +97,7 @@ pnpm db:migrate            # Run database migrations (8 total)
 src/
 ├── app/                   # Next.js App Router
 │   ├── [locale]/         # Internationalized routes (EN/TH)
-│   ├── api/              # 16 API endpoints
+│   ├── api/              # 17 API endpoints
 │   ├── analytics/        # Analytics dashboards
 │   └── training/         # Training system pages
 ├── components/            # 55+ React components
