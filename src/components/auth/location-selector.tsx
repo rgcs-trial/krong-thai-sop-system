@@ -95,6 +95,76 @@ export function LocationSelector({
     }
   };
 
+  const handleAddRestaurant = async (formData: any) => {
+    try {
+      setIsSubmitting(true);
+      setSubmitError('');
+
+      const response = await fetch('/api/restaurants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to create restaurant');
+      }
+
+      // Refresh restaurants list
+      await loadRestaurants();
+      
+      // Close form and select the new restaurant
+      setShowAddForm(false);
+      if (result.restaurant) {
+        setSelectedRestaurant(result.restaurant);
+      }
+
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setSubmitError(locale === 'en' 
+        ? `Failed to create restaurant: ${errorMessage}`
+        : `ไม่สามารถสร้างร้านอาหารได้: ${errorMessage}`
+      );
+      console.error('Error creating restaurant:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCancelAdd = () => {
+    setShowAddForm(false);
+    setSubmitError('');
+  };
+
+  // Show add restaurant form
+  if (showAddForm) {
+    return (
+      <>
+        {submitError && (
+          <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
+            <Alert variant="destructive">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+              <AlertDescription>{submitError}</AlertDescription>
+            </Alert>
+          </div>
+        )}
+        <RestaurantForm
+          mode="create"
+          onSubmit={handleAddRestaurant}
+          onCancel={handleCancelAdd}
+          locale={locale}
+          isSubmitting={isSubmitting}
+        />
+      </>
+    );
+  }
+
   if (loadingRestaurants) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center p-4">
