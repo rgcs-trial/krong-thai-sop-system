@@ -248,8 +248,8 @@
 **Symptoms**: Wrong language display
 **Solution**:
 1. Locate language toggle (top right corner)
-2. Tap to switch between EN/TH
-3. System remembers preference
+2. Tap to switch between EN/FR
+3. System remembers preference automatically
 4. Refresh page if content doesn't update
 5. Contact trainer if option not visible
 
