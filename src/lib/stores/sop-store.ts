@@ -144,7 +144,7 @@ export const useSOPStore = create<SOPState>()(
           // Add to recently viewed if selecting a document
           if (documentId) {
             const existingIndex = state.recentlyViewedDocuments.findIndex(
-              item => item.id === documentId
+              (item: any) => item.id === documentId
             );
             
             if (existingIndex > -1) {
