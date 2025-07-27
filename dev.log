@@ -23,3 +23,982 @@
   "userAgent": "curl/8.7.1",
   "ip": "::1"
 }
+ ○ Compiling /[locale]/login ...
+ ✓ Compiled /[locale]/login in 1877ms (874 modules)
+ GET /en/login?redirect=%2F 200 in 2601ms
+ ✓ Compiled /_not-found in 367ms (879 modules)
+ GET /images/thai-pattern.svg 404 in 513ms
+ GET /en/login?redirect=%2F 200 in 100ms
+ GET /images/thai-pattern.svg 404 in 20ms
+ GET /en/login?redirect=%2F 200 in 31ms
+ GET /images/thai-pattern.svg 404 in 20ms
+ ✓ Compiled /api/auth/location-session/check in 322ms (991 modules)
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+ GET /api/auth/location-session/check 200 in 817ms
+ ✓ Compiled in 114ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 179ms
+ GET /images/thai-pattern.svg 404 in 29ms
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+ GET /api/auth/location-session/check 200 in 204ms
+ ✓ Compiled /api/auth/login in 290ms (995 modules)
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-ERROR] 2025-07-27T13:38:19.512Z: {
+  "timestamp": "2025-07-27T13:38:19.512Z",
+  "context": "UNEXPECTED_ERROR",
+  "error": {
+    "name": "SyntaxError",
+    "message": "Unexpected end of JSON input",
+    "stack": "SyntaxError: Unexpected end of JSON input\n    at JSON.parse (<anonymous>)\n    at parseJSONFromBytes (node:internal/deps/undici/undici:6223:19)\n    at successSteps (node:internal/deps/undici/undici:6204:27)\n    at consumeBody (node:internal/deps/undici/undici:6210:9)\n    at NextRequest.json (node:internal/deps/undici/undici:6152:18)\n    at POST (webpack-internal:///(rsc)/./src/app/api/auth/login/route.ts:72:36)\n    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:59:14)\n    at AppRouteRouteModule.do (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:5:38861)\n    at /Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:5:48879\n    at /Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/server/lib/trace/tracer.js:169:36\n    at NoopContextManager.with (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)\n    at ContextAPI.with (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)\n    at NoopTracer.startActiveSpan (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18093)\n    at ProxyTracer.startActiveSpan (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:18854)\n    at /Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/server/lib/trace/tracer.js:151:103\n    at NoopContextManager.with (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:7062)\n    at ContextAPI.with (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/@opentelemetry/api/index.js:1:518)\n    at NextTracerImpl.trace (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/server/lib/trace/tracer.js:151:28)\n    at /Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:5:48724\n    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)\n    at /Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:5:46103\n    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)\n    at /Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:5:46060\n    at AsyncLocalStorage.run (node:internal/async_local_storage/async_context_frame:63:14)\n    at AppRouteRouteModule.handle (/Users/rgcs-admin/workspace/krong-thai-sop-system/node_modules/.pnpm/next@15.4.4_@babel+core@7.28.0_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/next/dist/compiled/next-server/app-route.runtime.dev.js:5:46014)"
+  },
+  "metadata": {
+    "operation": "login",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+    "ip": "::ffff:127.0.0.1"
+  }
+}
+ GET /en/login?redirect=%2F 200 in 478ms
+ GET /images/thai-pattern.svg 404 in 25ms
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.0')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.1')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.2')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.3')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+Error: Route "/api/auth/location-session/check" used `cookies().get('sb-blimbcomhmhlubqngben-auth-token.4')`. `cookies()` should be awaited before using its value. Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis
+    at createCookiesAccessError (../../../src/server/request/cookies.ts:485:9)
+    at syncIODev (../../../src/server/request/cookies.ts:473:2)
+    at Promise.get (../../../src/server/request/cookies.ts:300:8)
+    at Object.get (src/app/api/auth/location-session/check/route.ts:21:31)
+  483 | ) {
+  484 |   const prefix = route ? `Route "${route}" ` : 'This route '
+> 485 |   return new Error(
+      |         ^
+  486 |     `${prefix}used ${expression}. ` +
+  487 |       `\`cookies()\` should be awaited before using its value. ` +
+  488 |       `Learn more: https://nextjs.org/docs/messages/sync-dynamic-apis`
+ GET /api/auth/location-session/check 200 in 126ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:20.956Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 30ms
+ GET /images/thai-pattern.svg 404 in 22ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:21.553Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:22.316Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 97ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 33ms
+ GET /images/thai-pattern.svg 404 in 22ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:33.218Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:34.274Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 94ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 32ms
+ GET /images/thai-pattern.svg 404 in 22ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:46.176Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:46.949Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ GET /en/login?redirect=%2F 200 in 29ms
+ GET /images/thai-pattern.svg 404 in 19ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:47.505Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:48.294Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 79ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 35ms
+ GET /images/thai-pattern.svg 404 in 23ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:38:59.914Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:00.731Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 88ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 31ms
+ GET /images/thai-pattern.svg 404 in 21ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:11.581Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:12.379Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 85ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 36ms
+ GET /images/thai-pattern.svg 404 in 23ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:23.263Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:24.054Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 88ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 30ms
+ GET /images/thai-pattern.svg 404 in 19ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:34.897Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:35.706Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 79ms (370 modules)
+ GET /en/login?redirect=%2F 200 in 29ms
+ GET /images/thai-pattern.svg 404 in 21ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:46.588Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:39:47.385Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
