@@ -47,4 +47,99 @@ const Textarea = React.forwardRef<
 })
 Textarea.displayName = "Textarea"
 
-export { Input, Textarea }
+// Specialized PIN Input component for restaurant authentication
+interface PinInputProps extends Omit<InputProps, 'type' | 'maxLength' | 'pattern'> {
+  pinLength?: number
+  onPinComplete?: (pin: string) => void
+}
+
+const PinInput = React.forwardRef<HTMLInputElement, PinInputProps>(
+  ({ className, pinLength = 4, onPinComplete, ...props }, ref) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value.replace(/\D/g, '').slice(0, pinLength)
+      e.target.value = value
+      
+      if (value.length === pinLength && onPinComplete) {
+        onPinComplete(value)
+      }
+      
+      props.onChange?.(e)
+    }
+
+    return (
+      <input
+        ref={ref}
+        type="tel"
+        inputMode="numeric"
+        pattern="[0-9]*"
+        maxLength={pinLength}
+        className={cn(
+          "flex h-16 w-full rounded-md border-2 border-input bg-transparent px-4 py-3 font-ui shadow-sm transition-all duration-200 placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-krong-red focus-visible:ring-offset-2 focus-visible:border-krong-red disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation",
+          // PIN-specific styling
+          "text-center text-3xl font-bold tracking-[0.5em] min-h-[64px]",
+          "hover:border-krong-red/50 focus:shadow-lg focus:border-krong-red",
+          // Restaurant environment optimizations
+          "bg-krong-white/90 backdrop-blur-sm",
+          className
+        )}
+        onChange={handleChange}
+        {...props}
+      />
+    )
+  }
+)
+PinInput.displayName = "PinInput"
+
+// Search Input variant optimized for tablet
+interface SearchInputProps extends InputProps {
+  onSearchChange?: (value: string) => void
+  debounceMs?: number
+}
+
+const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
+  ({ className, onSearchChange, debounceMs = 300, ...props }, ref) => {
+    const [searchTerm, setSearchTerm] = React.useState("")
+    const timeoutRef = React.useRef<NodeJS.Timeout>()
+
+    React.useEffect(() => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+      
+      timeoutRef.current = setTimeout(() => {
+        onSearchChange?.(searchTerm)
+      }, debounceMs)
+
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+        }
+      }
+    }, [searchTerm, debounceMs, onSearchChange])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(e.target.value)
+      props.onChange?.(e)
+    }
+
+    return (
+      <input
+        ref={ref}
+        type="search"
+        className={cn(
+          "flex h-12 w-full rounded-md border-2 border-input bg-transparent px-4 py-3 text-tablet-base font-ui shadow-sm transition-all duration-200 placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-krong-red focus-visible:ring-offset-2 focus-visible:border-krong-red disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation",
+          "min-h-[48px] leading-relaxed",
+          "hover:border-krong-red/50 focus:shadow-md",
+          // Search specific styling
+          "pl-10", // Space for search icon
+          className
+        )}
+        onChange={handleChange}
+        {...props}
+      />
+    )
+  }
+)
+SearchInput.displayName = "SearchInput"
+
+export { Input, Textarea, PinInput, SearchInput }
