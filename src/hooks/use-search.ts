@@ -532,7 +532,7 @@ export function useSearch(locale: string = 'en') {
     const savedSearch: SavedSearch = {
       id: Date.now().toString(),
       name,
-      name_th,
+      name_fr,
       query: searchQuery,
       filters,
       sort,
