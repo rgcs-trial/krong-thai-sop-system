@@ -15,7 +15,7 @@ export type Database = {
           restaurant_id: string
           role: string
           full_name: string
-          full_name_th: string
+          full_name_fr: string
           email: string
           created_at: string
           updated_at: string
@@ -25,7 +25,7 @@ export type Database = {
           restaurant_id: string
           role: string
           full_name: string
-          full_name_th: string
+          full_name_fr: string
           email: string
           created_at?: string
           updated_at?: string
@@ -35,7 +35,7 @@ export type Database = {
           restaurant_id?: string
           role?: string
           full_name?: string
-          full_name_th?: string
+          full_name_fr?: string
           email?: string
           created_at?: string
           updated_at?: string
@@ -45,7 +45,7 @@ export type Database = {
         Row: {
           id: string
           name: string
-          name_th: string
+          name_fr: string
           location: string
           contact_email: string
           contact_phone: string
@@ -56,7 +56,7 @@ export type Database = {
         Insert: {
           id?: string
           name: string
-          name_th: string
+          name_fr: string
           location: string
           contact_email: string
           contact_phone: string
@@ -67,7 +67,7 @@ export type Database = {
         Update: {
           id?: string
           name?: string
-          name_th?: string
+          name_fr?: string
           location?: string
           contact_email?: string
           contact_phone?: string
@@ -81,9 +81,9 @@ export type Database = {
           id: string
           restaurant_id: string
           name: string
-          name_th: string
+          name_fr: string
           description: string | null
-          description_th: string | null
+          description_fr: string | null
           icon: string | null
           color: string | null
           sort_order: number
@@ -95,9 +95,9 @@ export type Database = {
           id?: string
           restaurant_id: string
           name: string
-          name_th: string
+          name_fr: string
           description?: string | null
-          description_th?: string | null
+          description_fr?: string | null
           icon?: string | null
           color?: string | null
           sort_order: number
@@ -109,9 +109,9 @@ export type Database = {
           id?: string
           restaurant_id?: string
           name?: string
-          name_th?: string
+          name_fr?: string
           description?: string | null
-          description_th?: string | null
+          description_fr?: string | null
           icon?: string | null
           color?: string | null
           sort_order?: number
@@ -126,9 +126,9 @@ export type Database = {
           restaurant_id: string
           category_id: string
           title: string
-          title_th: string
+          title_fr: string
           content: string
-          content_th: string
+          content_fr: string
           version: string
           status: string
           tags: string[]
@@ -147,9 +147,9 @@ export type Database = {
           restaurant_id: string
           category_id: string
           title: string
-          title_th: string
+          title_fr: string
           content: string
-          content_th: string
+          content_fr: string
           version: string
           status: string
           tags: string[]
@@ -168,9 +168,9 @@ export type Database = {
           restaurant_id?: string
           category_id?: string
           title?: string
-          title_th?: string
+          title_fr?: string
           content?: string
-          content_th?: string
+          content_fr?: string
           version?: string
           status?: string
           tags?: string[]
@@ -560,7 +560,7 @@ export type Database = {
           id: string
           restaurant_id: string
           title: string
-          title_th: string
+          title_fr: string
           is_active: boolean
           created_at: string
           updated_at: string
@@ -569,7 +569,7 @@ export type Database = {
           id?: string
           restaurant_id: string
           title: string
-          title_th: string
+          title_fr: string
           is_active?: boolean
           created_at?: string
           updated_at?: string
@@ -578,7 +578,7 @@ export type Database = {
           id?: string
           restaurant_id?: string
           title?: string
-          title_th?: string
+          title_fr?: string
           is_active?: boolean
           created_at?: string
           updated_at?: string
