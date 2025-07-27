@@ -1,6 +1,9 @@
 'use client';
 
 import React from 'react';
+
+// Force dynamic rendering for admin pages that require database access
+export const dynamic = 'force-dynamic';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
