@@ -22,7 +22,9 @@
     "language": "Language",
     "english": "English",
     "thai": "Thai",
-    "retry": "Retry"
+    "retry": "Retry",
+    "saving": "Saving...",
+    "confirmDelete": "Confirm Delete"
   },
   "auth": {
     "title": "Restaurant Krong Thai",
