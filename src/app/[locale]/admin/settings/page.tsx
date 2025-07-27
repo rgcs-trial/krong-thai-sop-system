@@ -58,7 +58,7 @@ export default function AdminSettingsPage() {
           </TabsTrigger>
           <TabsTrigger value="security" className="flex flex-col items-center gap-1 text-xs">
             <Shield size={16} />
-            {t('admin.settings.security')}
+            Security
           </TabsTrigger>
           <TabsTrigger value="notifications" className="flex flex-col items-center gap-1 text-xs">
             <Bell size={16} />
