@@ -479,8 +479,8 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
                 disabled={isSubmitting}
               >
                 {authMode === 'manager'
-                  ? (locale === 'en' ? 'Switch to Staff Login' : 'เปลี่ยนเป็นการเข้าสู่ระบบพนักงาน')
-                  : (locale === 'en' ? 'Switch to Manager Mode' : 'เปลี่ยนเป็นโหมดผู้จัดการ')
+                  ? (locale === 'en' ? 'Switch to Staff Login' : 'Passer à la Connexion Personnel')
+                  : (locale === 'en' ? 'Switch to Manager Mode' : 'Passer au Mode Gestionnaire')
                 }
               </button>
             </div>
