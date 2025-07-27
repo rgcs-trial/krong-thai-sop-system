@@ -34,7 +34,7 @@ const categoryIconMap: Record<string, LucideIcon> = {
   CUSTOMER_SERVICE: Smile,
   CASH_HANDLING: CreditCard,
   INVENTORY: Package,
-  CLEANING: Spray,
+  CLEANING: Droplets,
   EQUIPMENT: Settings,
   EMERGENCY_PROCEDURES: AlertTriangle,
   STAFF_TRAINING: GraduationCap,
