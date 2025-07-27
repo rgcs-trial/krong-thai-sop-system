@@ -196,10 +196,12 @@ export function TrainingAssessment({
     }
   }, [questionStates]);
 
-  // Handle answer selection
+  // Handle answer selection with instant feedback
   const handleAnswerChange = (questionId: string, answer: string) => {
     const state = questionStates[questionId];
-    if (state) {
+    const question = assessmentQuestions.find(q => q.id === questionId);
+    
+    if (state && question) {
       updateQuestionTimeSpent(questionId);
       
       setQuestionStates(prev => ({
@@ -213,6 +215,33 @@ export function TrainingAssessment({
 
       // Submit answer to store
       submitAnswer(questionId, answer, state.timeSpent + 1);
+      
+      // Mark question as answered
+      setAnsweredQuestions(prev => new Set([...prev, questionId]));
+
+      // Show instant feedback if enabled
+      if (instantFeedbackEnabled && !answeredQuestions.has(questionId)) {
+        let isCorrect = false;
+        
+        if (question.question_type === 'multiple_choice') {
+          isCorrect = answer === question.correct_answer;
+        } else if (question.question_type === 'true_false') {
+          isCorrect = answer.toLowerCase() === question.correct_answer.toLowerCase();
+        } else if (question.question_type === 'short_answer') {
+          const userAnswer = answer.toLowerCase().trim();
+          const correctAnswer = question.correct_answer.toLowerCase().trim();
+          isCorrect = userAnswer === correctAnswer || userAnswer.includes(correctAnswer);
+        }
+
+        setFeedbackQuestion(question);
+        setFeedbackCorrect(isCorrect);
+        setShowQuestionFeedback(true);
+
+        // Auto-hide feedback after 3 seconds
+        setTimeout(() => {
+          setShowQuestionFeedback(false);
+        }, 3000);
+      }
     }
   };
 
