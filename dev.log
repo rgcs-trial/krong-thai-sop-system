@@ -15,3 +15,26 @@
  ○ Compiling /[locale]/login ...
  ✓ Compiled /[locale]/login in 3s (946 modules)
  GET /en/login 200 in 3674ms
+ ✓ Compiled in 170ms (365 modules)
+ GET /en/login?redirect=%2F 200 in 37ms
+ ○ Compiling /api/auth/location-session/check ...
+ ✓ Compiled /api/auth/location-session/check in 502ms (986 modules)
+ ✓ Compiled /api/auth/login in 140ms (990 modules)
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /api/auth/location-session/check 200 in 1027ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 687ms
+ ✓ Compiled /api/restaurants in 245ms (1058 modules)
+ GET /api/restaurants?active=true 200 in 447ms
+ GET /api/restaurants?active=true 200 in 102ms
+ ✓ Compiled in 120ms (366 modules)
+ ✓ Compiled in 101ms (366 modules)
