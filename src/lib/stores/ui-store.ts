@@ -753,7 +753,7 @@ export const useUIStore = create<UIStore>()(
 
       markAllNotificationsRead: () => {
         set((state) => {
-          state.notifications.notifications.forEach(notification => {
+          state.notifications.notifications.forEach((notification: any) => {
             notification.read = true;
           });
           
