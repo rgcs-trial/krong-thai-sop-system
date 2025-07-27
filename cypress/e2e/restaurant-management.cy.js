@@ -52,7 +52,7 @@ describe('Restaurant Management', () => {
   })
 
   it('should handle bilingual content properly', () => {
-    cy.contains('add location', { matchCase: false }).click()
+    cy.contains('Add Location', { matchCase: false }).click()
     
     // Check for Thai language support
     cy.get('label').contains('ชื่อร้าน').should('be.visible')
@@ -60,7 +60,7 @@ describe('Restaurant Management', () => {
   })
 
   it('should validate email format', () => {
-    cy.contains('add location', { matchCase: false }).click()
+    cy.contains('Add Location', { matchCase: false }).click()
     
     cy.get('input[name="name"]').type('Test Restaurant')
     cy.get('input[name="email"]').type('invalid-email')
@@ -70,7 +70,7 @@ describe('Restaurant Management', () => {
   })
 
   it('should validate phone number format', () => {
-    cy.contains('add location', { matchCase: false }).click()
+    cy.contains('Add Location', { matchCase: false }).click()
     
     cy.get('input[name="name"]').type('Test Restaurant')
     cy.get('input[name="phone"]').type('invalid-phone')
