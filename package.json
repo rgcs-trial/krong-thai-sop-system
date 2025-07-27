@@ -74,6 +74,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/web-push": "^3.6.4",
+    "cypress": "^14.5.3",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
     "sharp": "^0.34.3",
