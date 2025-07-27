@@ -52,9 +52,9 @@ pnpm install               # Install dependencies using pnpm
 **Database**: Supabase PostgreSQL with RLS, Real-time subscriptions  
 **Auth**: Custom PIN-based system (4-digit PINs, 8-hour sessions) with comprehensive error handling  
 **State**: Zustand + TanStack Query + WebSocket integration  
-**i18n**: Complete bilingual EN/TH support with proper Thai fonts  
-**Voice**: Advanced voice search with natural language processing  
-**Features**: Training system, Analytics dashboard, Performance monitoring, Certificate management
+**i18n**: Database-driven bilingual EN/FR system with admin management interface  
+**Translation**: 7 database tables, 12 API endpoints, workflow approval system  
+**Features**: Translation admin interface, Training system, Analytics dashboard, Performance monitoring
 
 ## Implementation Status
 
