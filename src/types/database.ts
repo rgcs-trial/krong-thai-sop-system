@@ -370,7 +370,7 @@ export interface TrainingQuestion {
   options_fr?: string[];
   correct_answer: string;
   explanation?: string;
-  explanation_th?: string;
+  explanation_fr?: string;
   points: number;
   difficulty: DifficultyLevel;
   sort_order: number;
@@ -559,7 +559,7 @@ export interface CreateTrainingQuestionRequest {
   options_fr?: string[];
   correct_answer: string;
   explanation?: string;
-  explanation_th?: string;
+  explanation_fr?: string;
   points?: number;
   difficulty?: DifficultyLevel;
   sort_order?: number;
