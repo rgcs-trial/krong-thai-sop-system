@@ -6,7 +6,7 @@ import { useLocale } from 'next-intl';
 import { getAuthErrorMessage } from '@/lib/auth-errors';
 
 export function useAuthErrors() {
-  const locale = useLocale() as 'en' | 'th';
+  const locale = useLocale() as 'en' | 'fr';
 
   const getErrorMessage = (errorCode: string) => {
     return getAuthErrorMessage(errorCode, locale);
