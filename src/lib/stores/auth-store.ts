@@ -269,7 +269,8 @@ export const useAuthStore = create<AuthStore>()(
       // Device actions
       generateDeviceFingerprint: async (): Promise<string> => {
         try {
-          const fingerprint = Security.Device.createFingerprint({
+          // Security disabled during development
+          const fingerprint = 'development-fingerprint'; /*Security.Device.createFingerprint({
             screenWidth: screen.width,
             screenHeight: screen.height,
             colorDepth: screen.colorDepth,
@@ -282,7 +283,7 @@ export const useAuthStore = create<AuthStore>()(
             connectionType: (navigator as any).connection?.effectiveType,
           });
 
-          const fingerprintHash = Security.Device.generateFingerprintHash(fingerprint);
+          const fingerprintHash = 'development-hash'; // Security.Device.generateFingerprintHash(fingerprint);
           
           set({ deviceFingerprint: fingerprintHash });
           
@@ -303,7 +304,8 @@ export const useAuthStore = create<AuthStore>()(
         if (!deviceId) return false;
 
         try {
-          return await Security.Device.trustDevice(deviceId);
+          // Security disabled during development
+          return true; // await Security.Device.trustDevice(deviceId);
         } catch (error) {
           console.error('Error trusting device:', error);
           return false;
@@ -315,7 +317,8 @@ export const useAuthStore = create<AuthStore>()(
         if (!user) return [];
 
         try {
-          return await Security.Device.getUserDevices(user.id);
+          // Security disabled during development
+          return []; // await Security.Device.getUserDevices(user.id);
         } catch (error) {
           console.error('Error getting device list:', error);
           return [];
