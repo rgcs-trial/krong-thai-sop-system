@@ -19,56 +19,72 @@ import {
   BookOpen,
   AlertTriangle,
   CheckCircle,
-  Lightbulb
+  Lightbulb,
+  FileText,
+  Eye,
+  Bookmark,
+  History
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
-import { SOPCategory } from './sop-categories-dashboard';
+import { useSOPDocument } from '@/lib/hooks/use-sop-queries';
+import { useFavorites } from '@/hooks/use-favorites';
+import { SOPCategory } from '@/types/database';
+import { useAuthStore } from '@/lib/stores/auth-store';
+import { toast } from '@/hooks/use-toast';
 
 // SOP Document data structure based on database schema
+export interface SOPDocumentStep {
+  step: number;
+  action: string;
+  note?: string;
+  duration?: string;
+  warning?: string;
+  tools?: string[];
+  image?: string;
+}
+
 export interface SOPDocument {
   id: string;
   category_id: string;
+  restaurant_id: string;
   title: string;
   title_th: string;
   content: string;
   content_th: string;
-  steps: Array<{
-    id: number;
-    title: string;
-    description: string;
-    warning?: string;
-    tip?: string;
-  }>;
-  steps_th: Array<{
-    id: number;
-    title: string;
-    description: string;
-    warning?: string;
-    tip?: string;
-  }>;
-  attachments: Array<{
-    id: string;
-    name: string;
-    url: string;
-    type: string;
-    size: number;
-  }>;
-  tags: string[];
-  tags_th: string[];
+  steps?: SOPDocumentStep[];
+  steps_th?: SOPDocumentStep[];
+  attachments: string[];
+  tags?: string[];
+  tags_th?: string[];
   version: number;
   status: 'draft' | 'review' | 'approved' | 'archived';
   priority: 'low' | 'medium' | 'high' | 'critical';
-  effective_date: string;
-  review_date: string;
+  effective_date?: string;
+  review_date?: string;
   created_by: string;
+  updated_by?: string;
   approved_by?: string;
   approved_at?: string;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
+  
+  // Relations
+  category?: SOPCategory;
+  creator?: {
+    id: string;
+    full_name: string;
+    full_name_th?: string;
+  };
+  approver?: {
+    id: string;
+    full_name: string;
+    full_name_th?: string;
+  };
 }
 
 // Mock SOP document data
@@ -155,33 +171,63 @@ const mockSOPDocument: SOPDocument = {
 
 interface SOPDocumentViewerProps {
   locale: string;
-  document?: SOPDocument;
-  category?: SOPCategory;
+  documentId: string;
+  categoryId?: string;
   onBack: () => void;
   onNavigate?: (direction: 'prev' | 'next') => void;
   canNavigate?: {
     prev: boolean;
     next: boolean;
   };
+  className?: string;
 }
 
 export function SOPDocumentViewer({
   locale,
-  document = mockSOPDocument,
-  category,
+  documentId,
+  categoryId,
   onBack,
   onNavigate,
-  canNavigate = { prev: false, next: false }
+  canNavigate = { prev: false, next: false },
+  className
 }: SOPDocumentViewerProps) {
   const t = useTranslations();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const user = useAuthStore(state => state.user);
   const [activeStep, setActiveStep] = useState<number | null>(null);
+  
+  // Fetch document data from Supabase
+  const {
+    data: document,
+    isLoading,
+    error,
+    refetch
+  } = useSOPDocument(documentId, {
+    includeRelated: true,
+    markAsViewed: true
+  });
+  
+  // Favorites management
+  const { 
+    isFavorite, 
+    toggleFavorite, 
+    isLoading: favoritesLoading 
+  } = useFavorites('document', documentId);
 
   // Get localized content
-  const title = locale === 'th' ? document.title_th : document.title;
-  const content = locale === 'th' ? document.content_th : document.content;
-  const steps = locale === 'th' ? document.steps_th : document.steps;
-  const tags = locale === 'th' ? document.tags_th : document.tags;
+  const title = document ? (locale === 'th' ? document.title_th : document.title) : '';
+  const content = document ? (locale === 'th' ? document.content_th : document.content) : '';
+  const steps = document ? (locale === 'th' ? document.steps_th : document.steps) : [];
+  const tags = document ? (locale === 'th' ? document.tags_th : document.tags) : [];
+  const category = document?.category;
+  
+  // Get creator and approver names
+  const creatorName = document?.creator ? 
+    (locale === 'th' ? document.creator.full_name_th || document.creator.full_name : document.creator.full_name) : 
+    document?.created_by || '';
+    
+  const approverName = document?.approver ? 
+    (locale === 'th' ? document.approver.full_name_th || document.approver.full_name : document.approver.full_name) : 
+    document?.approved_by || '';
 
   // Format file size
   const formatFileSize = (bytes: number) => {
@@ -214,13 +260,125 @@ export function SOPDocumentViewer({
     }
   };
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-    // In real app, update localStorage or API
+  const handleToggleFavorite = async () => {
+    try {
+      await toggleFavorite();
+      toast({
+        title: isFavorite ? t('sop.removeFromFavorites') : t('sop.addToFavorites'),
+        description: isFavorite ? 
+          t('sop.removedFromFavorites') : 
+          t('sop.addedToFavorites'),
+      });
+    } catch (error) {
+      toast({
+        title: t('common.error'),
+        description: t('errors.general'),
+        variant: 'destructive'
+      });
+    }
   };
+  
+  const handleDownloadPdf = async () => {
+    if (!document) return;
+    
+    try {
+      const response = await fetch(`/api/sop/documents/${documentId}/pdf?language=${locale}`);
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${title}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        toast({
+          title: t('common.success'),
+          description: t('sop.pdfDownloaded')
+        });
+      }
+    } catch (error) {
+      toast({
+        title: t('common.error'),
+        description: t('errors.downloadFailed'),
+        variant: 'destructive'
+      });
+    }
+  };
+  
+  const handlePrint = () => {
+    if (typeof window !== 'undefined') {
+      window.print();
+    }
+  };
+  
+  const handleShare = async () => {
+    if (!document) return;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: content.substring(0, 200) + '...',
+          url: window.location.href
+        });
+      } catch (error) {
+        // Fallback to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: t('common.success'),
+          description: t('sop.linkCopied')
+        });
+      }
+    } else {
+      // Fallback to clipboard
+      await navigator.clipboard.writeText(window.location.href);
+      toast({
+        title: t('common.success'),
+        description: t('sop.linkCopied')
+      });
+    }
+  };
+  
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-red mx-auto mb-4"></div>
+          <p className={cn("text-gray-600", locale === 'th' && "font-thai")}>
+            {t('sop.loading')}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
+  // Error state
+  if (error || !document) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+          <h2 className={cn("text-xl font-semibold text-gray-900 mb-2", locale === 'th' && "font-thai")}>
+            {t('common.error')}
+          </h2>
+          <p className={cn("text-gray-600 mb-4", locale === 'th' && "font-thai")}>
+            {error?.message || t('sop.documentNotFound')}
+          </p>
+          <Button onClick={onBack} variant="outline">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t('sop.backToCategories')}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={cn("min-h-screen bg-gray-50", className)}>
       {/* Header */}
       <div className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="p-4 md:p-6">
@@ -282,29 +440,53 @@ export function SOPDocumentViewer({
             <Button 
               variant="outline" 
               size="sm"
-              onClick={toggleFavorite}
+              onClick={handleToggleFavorite}
+              disabled={favoritesLoading}
               className={cn(
-                "flex items-center gap-2",
+                "flex items-center gap-2 min-w-[44px] min-h-[44px]",
                 isFavorite && "bg-red-50 border-red-200 text-red-700"
               )}
             >
               <Heart className={cn("w-4 h-4", isFavorite && "fill-current")} />
-              {isFavorite ? t('sop.removeFromFavorites') : t('sop.addToFavorites')}
+              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+                {isFavorite ? t('sop.removeFromFavorites') : t('sop.addToFavorites')}
+              </span>
             </Button>
             
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={handleDownloadPdf}
+              className="flex items-center gap-2 min-w-[44px] min-h-[44px]"
+            >
               <Download className="w-4 h-4" />
-              {t('sop.downloadPdf')}
+              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+                {t('sop.downloadPdf')}
+              </span>
             </Button>
             
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={handlePrint}
+              className="flex items-center gap-2 min-w-[44px] min-h-[44px]"
+            >
               <Print className="w-4 h-4" />
-              {t('sop.printSop')}
+              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+                {t('sop.printSop')}
+              </span>
             </Button>
             
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={handleShare}
+              className="flex items-center gap-2 min-w-[44px] min-h-[44px]"
+            >
               <Share2 className="w-4 h-4" />
-              {t('sop.shareSop')}
+              <span className={cn("hidden sm:inline", locale === 'th' && "font-thai")}>
+                {t('sop.shareSop')}
+              </span>
             </Button>
           </div>
         </div>
@@ -371,20 +553,20 @@ export function SOPDocumentViewer({
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4 text-gray-500" />
                 <span className="font-medium">{t('sop.createdBy')}:</span>
-                <span>{document.created_by}</span>
+                <span className={cn(locale === 'th' && "font-thai")}>{creatorName}</span>
               </div>
               
-              {document.approved_by && (
+              {approverName && (
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-green-500" />
                   <span className="font-medium">{t('sop.approvedBy')}:</span>
-                  <span>{document.approved_by}</span>
+                  <span className={cn(locale === 'th' && "font-thai")}>{approverName}</span>
                 </div>
               )}
             </div>
 
             {/* Tags */}
-            {tags.length > 0 && (
+            {tags && tags.length > 0 && (
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Tag className="w-4 h-4 text-gray-500" />
@@ -392,7 +574,7 @@ export function SOPDocumentViewer({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
+                    <Badge key={index} variant="outline" className={cn("text-xs", locale === 'th' && "font-thai")}>
                       {tag}
                     </Badge>
                   ))}
@@ -418,36 +600,58 @@ export function SOPDocumentViewer({
         </Card>
 
         {/* Steps */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-brand-red" />
-              {t('sop.steps')}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {steps.map((step, index) => (
-              <div key={step.id} className="border rounded-lg p-4 bg-gray-50">
-                <div 
-                  className="flex items-start gap-3 cursor-pointer"
-                  onClick={() => setActiveStep(activeStep === step.id ? null : step.id)}
-                >
-                  <div className="w-8 h-8 bg-brand-red text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1">
-                    {index + 1}
+        {steps && steps.length > 0 && (
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CheckCircle className="w-5 h-5 text-brand-red" />
+                {t('sop.steps')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {steps.map((step, index) => (
+              <div key={step.step || index} className="border rounded-lg p-4 bg-gray-50">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-brand-red text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1 min-w-[40px]">
+                    {step.step || index + 1}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h4 className={cn(
-                      "font-semibold text-brand-black mb-2",
+                      "font-semibold text-brand-black mb-2 text-base",
                       locale === 'th' && "font-thai"
                     )}>
-                      {step.title}
+                      {step.action}
                     </h4>
-                    <p className={cn(
-                      "text-gray-700 leading-relaxed mb-3",
-                      locale === 'th' && "font-thai"
-                    )}>
-                      {step.description}
-                    </p>
+                    {step.note && (
+                      <p className={cn(
+                        "text-gray-700 leading-relaxed mb-3",
+                        locale === 'th' && "font-thai"
+                      )}>
+                        {step.note}
+                      </p>
+                    )}
+                    
+                    {step.duration && (
+                      <div className="flex items-center gap-2 mb-2">
+                        <Clock className="w-4 h-4 text-blue-600" />
+                        <span className={cn("text-sm text-blue-700 font-medium", locale === 'th' && "font-thai")}>
+                          {t('sop.duration')}: {step.duration}
+                        </span>
+                      </div>
+                    )}
+                    
+                    {step.tools && step.tools.length > 0 && (
+                      <div className="mb-3">
+                        <span className="text-sm font-medium text-gray-600 mb-1 block">{t('sop.tools')}:</span>
+                        <div className="flex flex-wrap gap-1">
+                          {step.tools.map((tool, toolIndex) => (
+                            <Badge key={toolIndex} variant="secondary" className={cn("text-xs", locale === 'th' && "font-thai")}>
+                              {tool}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     
                     {/* Warning */}
                     {step.warning && (
@@ -472,37 +676,27 @@ export function SOPDocumentViewer({
                       </div>
                     )}
                     
-                    {/* Tip */}
-                    {step.tip && (
-                      <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
-                        <div className="flex items-start gap-2">
-                          <Lightbulb className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
-                          <div>
-                            <p className={cn(
-                              "text-blue-800 text-sm font-medium mb-1",
-                              locale === 'th' && "font-thai"
-                            )}>
-                              {t('sop.tips')}
-                            </p>
-                            <p className={cn(
-                              "text-blue-700 text-sm",
-                              locale === 'th' && "font-thai"
-                            )}>
-                              {step.tip}
-                            </p>
-                          </div>
-                        </div>
+                    {/* Image attachment */}
+                    {step.image && (
+                      <div className="mt-3">
+                        <img 
+                          src={step.image} 
+                          alt={step.action}
+                          className="max-w-full h-auto rounded-lg border"
+                          loading="lazy"
+                        />
                       </div>
                     )}
                   </div>
                 </div>
               </div>
-            ))}
-          </CardContent>
-        </Card>
+            )))}
+            </CardContent>
+          </Card>
+        )}
 
         {/* Attachments */}
-        {document.attachments.length > 0 && (
+        {document.attachments && document.attachments.length > 0 && (
           <Card className="mb-6">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
