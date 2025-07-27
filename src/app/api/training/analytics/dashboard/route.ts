@@ -231,7 +231,7 @@ export async function GET(request: NextRequest) {
       console.error('Database query error:', dbError);
       return NextResponse.json({ 
         error: 'Failed to fetch analytics data',
-        details: dbError.message 
+        details: dbError instanceof Error ? dbError.message : 'Unknown database error'
       }, { status: 500 });
     }
 
