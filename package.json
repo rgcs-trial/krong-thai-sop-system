@@ -33,9 +33,9 @@
     "@radix-ui/react-toast": "^1.2.14",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.52.1",
+    "@tanstack/query-sync-storage-persister": "^5.83.0",
     "@tanstack/react-query": "^5.83.0",
     "@tanstack/react-query-persist-client": "^5.83.0",
-    "@tanstack/query-sync-storage-persister": "^5.83.0",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -55,6 +55,7 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
     "@tanstack/query-devtools": "^5.81.2",
     "@types/bcryptjs": "^3.0.0",
     "@types/node": "^24",
