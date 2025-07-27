@@ -144,7 +144,7 @@
      pin_hash TEXT NOT NULL,
      role user_role NOT NULL DEFAULT 'staff',
      name_en TEXT NOT NULL,
-     name_th TEXT NOT NULL,
+     name_fr TEXT NOT NULL,
      department TEXT NOT NULL,
      is_active BOOLEAN DEFAULT true,
      device_id TEXT,
@@ -159,9 +159,9 @@
    CREATE TABLE sop_categories (
      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
      name_en TEXT NOT NULL,
-     name_th TEXT NOT NULL,
+     name_fr TEXT NOT NULL,
      description_en TEXT,
-     description_th TEXT,
+     description_fr TEXT,
      icon TEXT,
      sort_order INTEGER,
      is_active BOOLEAN DEFAULT true,
@@ -173,9 +173,9 @@
      id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
      category_id UUID REFERENCES sop_categories(id) ON DELETE CASCADE,
      title_en TEXT NOT NULL,
-     title_th TEXT NOT NULL,
+     title_fr TEXT NOT NULL,
      content_en TEXT NOT NULL,
-     content_th TEXT NOT NULL,
+     content_fr TEXT NOT NULL,
      version TEXT NOT NULL DEFAULT '1.0',
      status sop_status DEFAULT 'draft',
      author_id UUID REFERENCES auth_users(id),
@@ -718,7 +718,7 @@ CONTENT_SYNC_INTERVAL=300  # 5 minutes
 
 ```sql
 -- Insert default admin user
-INSERT INTO auth_users (pin_hash, role, name_en, name_th, department)
+INSERT INTO auth_users (pin_hash, role, name_en, name_fr, department)
 VALUES (
   -- PIN: 1234 (change immediately after setup)
   '$2b$10$rWgfX.XxXxXxXxXxXxXxXeXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx',
@@ -733,7 +733,7 @@ VALUES (
 
 ```sql
 -- Insert default SOP categories
-INSERT INTO sop_categories (name_en, name_th, description_en, description_th, icon, sort_order) VALUES
+INSERT INTO sop_categories (name_en, name_fr, description_en, description_fr, icon, sort_order) VALUES
 ('Food Safety', 'ความปลอดภัยอาหาร', 'Food handling and safety procedures', 'ขั้นตอนการจัดการและความปลอดภัยของอาหาร', 'shield', 1),
 ('Kitchen Operations', 'การดำเนินงานครัว', 'Kitchen workflow and procedures', 'ขั้นตอนการทำงานและการดำเนินงานในครัว', 'chef-hat', 2),
 ('Service Standards', 'มาตรฐานการบริการ', 'Customer service procedures', 'ขั้นตอนการบริการลูกค้า', 'users', 3),
@@ -759,9 +759,9 @@ INSERT INTO sop_categories (name_en, name_th, description_en, description_th, ic
 INSERT INTO sop_documents (
   category_id,
   title_en,
-  title_th,
+  title_fr,
   content_en,
-  content_th,
+  content_fr,
   status,
   effective_date,
   review_date
