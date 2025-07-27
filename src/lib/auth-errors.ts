@@ -168,11 +168,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'SYS_302',
     message: {
       en: 'Authentication service unavailable',
-      th: 'บริการยืนยันตัวตนไม่พร้อมใช้งาน'
+      fr: 'Service d\'authentification indisponible'
     },
     userMessage: {
       en: 'Login service is temporarily down. Please try again later.',
-      th: 'บริการเข้าสู่ระบบขัดข้อง กรุณาลองใหม่ภายหลัง'
+      fr: 'Le service de connexion est temporairement hors service. Veuillez réessayer plus tard.'
     },
     severity: 'critical'
   },
@@ -181,11 +181,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'SYS_303',
     message: {
       en: 'System configuration error',
-      th: 'เกิดข้อผิดพลาดในการตั้งค่าระบบ'
+      fr: 'Erreur de configuration système'
     },
     userMessage: {
       en: 'System configuration issue. Please contact technical support.',
-      th: 'เกิดปัญหาการตั้งค่าระบบ กรุณาติดต่อฝ่ายเทคนิค'
+      fr: 'Problème de configuration système. Veuillez contacter le support technique.'
     },
     severity: 'critical'
   },
@@ -194,11 +194,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'SYS_304',
     message: {
       en: 'Network connection error',
-      th: 'เกิดข้อผิดพลาดในการเชื่อมต่อเครือข่าย'
+      fr: 'Erreur de connexion réseau'
     },
     userMessage: {
       en: 'Network connection problem. Please check your internet connection.',
-      th: 'เกิดปัญหาการเชื่อมต่อเครือข่าย กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต'
+      fr: 'Problème de connexion réseau. Veuillez vérifier votre connexion internet.'
     },
     severity: 'medium'
   },
@@ -207,11 +207,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'SYS_999',
     message: {
       en: 'Unknown error occurred',
-      th: 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ'
+      fr: 'Erreur inconnue s\'est produite'
     },
     userMessage: {
       en: 'An unexpected error occurred. Please try again or contact support.',
-      th: 'เกิดข้อผิดพลาดที่ไม่คาดคิด กรุณาลองใหม่หรือติดต่อฝ่ายสนับสนุน'
+      fr: 'Une erreur inattendue s\'est produite. Veuillez réessayer ou contacter le support.'
     },
     severity: 'high'
   }
