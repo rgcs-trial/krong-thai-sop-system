@@ -179,7 +179,7 @@ export async function POST(request: NextRequest) {
         ip: request.headers.get('x-forwarded-for') || 'unknown'
       });
       
-      const errorInfo = getAuthErrorMessage('WRONG_PIN', 'en');
+      const errorInfo = getAuthErrorMessage('WRONG_PIN', locale);
       return NextResponse.json(
         { 
           success: false, 
