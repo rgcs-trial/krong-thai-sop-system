@@ -18,7 +18,6 @@ import {
   Globe
 } from 'lucide-react';
 import { useI18n } from '@/hooks/use-i18n';
-import { TranslationManagementDashboard } from '@/components/admin';
 
 /**
  * Admin Settings Page
