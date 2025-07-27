@@ -209,6 +209,8 @@ Next Review Date: [Date]
 ├─────────────────────────────────────────┤
 │ Overall Restaurant:   94% compliant     │
 │ Target Minimum:       95% compliant     │
+│ PIN Access Status:    All active        │
+│ Bilingual Ready:      EN/FR synchronized│
 │ Status: ATTENTION NEEDED ⚠️             │
 └─────────────────────────────────────────┘
 ```
