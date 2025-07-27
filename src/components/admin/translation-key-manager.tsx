@@ -468,7 +468,6 @@ export function TranslationKeyManager({
                   <SelectItem value="all">{t('admin.translation.allLocales')}</SelectItem>
                   <SelectItem value="en">English</SelectItem>
                   <SelectItem value="fr">Français</SelectItem>
-                  <SelectItem value="th">ไทย</SelectItem>
                 </SelectContent>
               </Select>
             </div>
