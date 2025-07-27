@@ -207,3 +207,35 @@
   "ip": "::ffff:127.0.0.1"
 }
  ✓ Compiled in 101ms (366 modules)
+ GET /en/login?redirect=%2F 200 in 37ms
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:23:32.697Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/location-session/check"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:23:33.527Z",
+  "type": "rate_limit_exceeded",
+  "source": "auth_middleware",
+  "details": {
+    "ip": "::ffff:127.0.0.1",
+    "count": 5,
+    "maxAttempts": 5,
+    "windowMs": 900000,
+    "path": "/api/auth/login"
+  },
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/138.0.0.0 Safari/537.36",
+  "ip": "::ffff:127.0.0.1"
+}
+ ✓ Compiled in 115ms (366 modules)
+ ✓ Compiled in 82ms (366 modules)
+ ✓ Compiled in 75ms (366 modules)

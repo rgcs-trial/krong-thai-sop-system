@@ -4,21 +4,11 @@
 describe('Analytics Dashboard', () => {
   beforeEach(() => {
     // Login as admin to access analytics features
-    cy.visit('/')
-    cy.get('input[type="email"]').type(Cypress.env('ADMIN_EMAIL'))
-    const pin = Cypress.env('ADMIN_PIN')
-    for (let i = 0; i < 4; i++) {
-      cy.get('input[inputmode="numeric"]').eq(i).type(pin[i])
-    }
-    cy.get('button[type="submit"]').click()
-    
-    // Navigate to analytics
-    cy.get('body').then(($body) => {
-      if ($body.text().includes('restaurant')) {
-        // If restaurant selection appears, click the first available restaurant
-        cy.get('[role="button"], button').contains('Select', { matchCase: false }).first().click({ force: true })
-      }
-    })
+    cy.loginAsAdmin()
+    // Handle restaurant selection if needed
+    cy.handleRestaurantSelection()
+    // Wait for any redirects or loading
+    cy.waitForPageLoad()
   })
 
   it('should access analytics dashboard', () => {
