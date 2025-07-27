@@ -485,6 +485,41 @@ export function TrainingAssessment({
             </ul>
           </div>
 
+          {/* Assessment Settings */}
+          <div className="space-y-4">
+            <h4 className="font-semibold">{t('training.assessment_settings')}</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  id="instant-feedback"
+                  checked={instantFeedbackEnabled}
+                  onChange={(e) => setInstantFeedbackEnabled(e.target.checked)}
+                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <label htmlFor="instant-feedback" className="text-sm">
+                  {t('training.enable_instant_feedback')}
+                </label>
+              </div>
+              
+              <div className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  id="adaptive-difficulty"
+                  checked={adaptiveDifficulty}
+                  onChange={(e) => setAdaptiveDifficulty(e.target.checked)}
+                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                <label htmlFor="adaptive-difficulty" className="text-sm">
+                  {t('training.adaptive_difficulty')}
+                </label>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {t('training.assessment_settings_desc')}
+            </p>
+          </div>
+
           <div className="flex space-x-4 justify-center">
             <Button variant="outline" onClick={onCancel}>
               {t('common.cancel')}
