@@ -136,29 +136,78 @@ CREATE TABLE user_devices (
 );
 ```
 
-### 2. Restaurant Management
+### 2. SOP Management System
 
-#### `restaurants`
-Restaurant/tenant information.
-
+#### `sop_categories` - 16 Standard Restaurant Categories
 ```sql
-CREATE TABLE restaurants (
+CREATE TABLE sop_categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    code VARCHAR(20) UNIQUE NOT NULL,        -- 'FOOD_SAFETY', 'CLEANING', etc.
     name VARCHAR(255) NOT NULL,
-    name_th VARCHAR(255), -- Thai name
-    address TEXT,
-    address_th TEXT, -- Thai address
-    phone VARCHAR(20),
-    email VARCHAR(255),
-    timezone VARCHAR(50) DEFAULT 'Asia/Bangkok',
-    settings JSONB DEFAULT '{}',
+    name_th VARCHAR(255) NOT NULL,           -- Thai category name
+    description TEXT,
+    description_th TEXT,                     -- Thai description
+    icon VARCHAR(50),                        -- Icon identifier (shield-check, spray-can, etc.)
+    color VARCHAR(7),                        -- Hex color code for UI theming
+    sort_order INTEGER NOT NULL DEFAULT 0,  -- Display order
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Indexes
-CREATE INDEX idx_restaurants_active ON restaurants(is_active);
+-- Standard 16 categories include:
+-- FOOD_SAFETY, CLEANING, CUSTOMER_SERVICE, KITCHEN_OPS, INVENTORY, CASH_HANDLING,
+-- STAFF_TRAINING, SAFETY_SECURITY, MAINTENANCE, QUALITY_CONTROL, OPENING_CLOSING,
+-- DELIVERY_TAKEOUT, WASTE_MANAGEMENT, COMPLIANCE, MARKETING_PROMO, EMERGENCY
+```
+
+#### `sop_documents` - Bilingual SOP Content
+```sql
+CREATE TABLE sop_documents (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    category_id UUID NOT NULL,
+    restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
+    title VARCHAR(500) NOT NULL,
+    title_th VARCHAR(500) NOT NULL,         -- Thai title
+    content TEXT NOT NULL,
+    content_th TEXT NOT NULL,               -- Thai content
+    steps JSONB,                            -- Structured step-by-step procedures
+    steps_th JSONB,                         -- Thai structured steps
+    attachments JSONB DEFAULT '[]',         -- File attachment references
+    tags VARCHAR(255)[],                    -- Searchable tags (English)
+    tags_th VARCHAR(255)[],                 -- Thai searchable tags
+    version INTEGER DEFAULT 1,
+    status sop_status DEFAULT 'draft',      -- draft, review, approved, archived
+    priority sop_priority DEFAULT 'medium', -- low, medium, high, critical
+    effective_date DATE,
+    review_date DATE,
+    created_by UUID NOT NULL,
+    updated_by UUID,
+    approved_by UUID,
+    approved_at TIMESTAMPTZ,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_sop_category FOREIGN KEY (category_id) REFERENCES sop_categories(id) ON DELETE CASCADE,
+    CONSTRAINT fk_sop_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
+    CONSTRAINT fk_sop_created_by FOREIGN KEY (created_by) REFERENCES auth_users(id),
+    CONSTRAINT fk_sop_updated_by FOREIGN KEY (updated_by) REFERENCES auth_users(id),
+    CONSTRAINT fk_sop_approved_by FOREIGN KEY (approved_by) REFERENCES auth_users(id)
+);
+
+-- Performance indexes for SOP search and filtering
+CREATE INDEX idx_sop_documents_category ON sop_documents(category_id);
+CREATE INDEX idx_sop_documents_restaurant ON sop_documents(restaurant_id);
+CREATE INDEX idx_sop_documents_status ON sop_documents(status);
+CREATE INDEX idx_sop_documents_tags ON sop_documents USING GIN(tags);
+CREATE INDEX idx_sop_documents_tags_th ON sop_documents USING GIN(tags_th);
+
+-- Full-text search indexes for bilingual content
+CREATE INDEX idx_sop_documents_search_en ON sop_documents 
+    USING GIN(to_tsvector('english', title || ' ' || content));
+CREATE INDEX idx_sop_documents_search_th ON sop_documents 
+    USING GIN(to_tsvector('simple', title_th || ' ' || content_th));
 ```
 
 ### 3. SOP Categories
