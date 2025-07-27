@@ -1,6 +1,35 @@
 import type { Metadata, Viewport } from "next";
 import { locales } from "@/lib/i18n";
+import { Inter, EB_Garamond, Source_Serif_4, Noto_Sans_Thai } from 'next/font/google';
 import "./globals.css";
+
+// Font configurations following brand guidelines
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const ebGaramond = EB_Garamond({
+  subsets: ['latin'],
+  variable: '--font-eb-garamond',
+  display: 'swap',
+});
+
+const sourceSerif4 = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-source-serif-4',
+  display: 'swap',
+});
+
+const notoSans = Noto_Sans_Thai({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-noto-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Restaurant Krong Thai - SOP Management System",
