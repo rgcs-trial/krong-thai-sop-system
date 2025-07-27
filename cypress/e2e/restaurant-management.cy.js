@@ -26,7 +26,7 @@ describe('Restaurant Management', () => {
   })
 
   it('should validate required fields in restaurant form', () => {
-    cy.contains('add location', { matchCase: false }).click()
+    cy.contains('Add Location', { matchCase: false }).click()
     
     // Try to submit empty form
     cy.get('button[type="submit"]').click()
@@ -34,7 +34,7 @@ describe('Restaurant Management', () => {
   })
 
   it('should create a new restaurant location', () => {
-    cy.contains('add location', { matchCase: false }).click()
+    cy.contains('Add Location', { matchCase: false }).click()
     
     // Fill out the form
     cy.get('input[name="name"]').type('Test Restaurant Location')
