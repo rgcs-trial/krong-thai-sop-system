@@ -81,12 +81,13 @@ export default async function middleware(request: NextRequest) {
     );
 
     if (isProtectedApi) {
-      try {
-        return await securityMiddleware(request);
-      } catch (error) {
-        console.error('Security middleware error for API:', error);
-        return NextResponse.json({ error: 'Authentication failed' }, { status: 401 });
-      }
+      // Security middleware disabled during development
+      // try {
+      //   return await securityMiddleware(request);
+      // } catch (error) {
+      //   console.error('Security middleware error for API:', error);
+      //   return NextResponse.json({ error: 'Authentication failed' }, { status: 401 });
+      // }
     }
 
     return NextResponse.next();
