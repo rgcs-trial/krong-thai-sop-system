@@ -69,7 +69,7 @@ const CRITICAL_SOPS = [
   }
 ];
 
-export default function OfflinePage({ locale = 'en' }: OfflinePage) {
+export default function OfflinePage({ params, searchParams }: OfflinePageProps) {
   const [isOnline, setIsOnline] = useState(false);
   const [lastOnline, setLastOnline] = useState<Date | null>(null);
   const [retryCount, setRetryCount] = useState(0);
