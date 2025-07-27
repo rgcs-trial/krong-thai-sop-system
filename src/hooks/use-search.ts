@@ -75,7 +75,7 @@ interface SavedSearch {
 interface SearchSuggestion {
   type: 'query' | 'tag' | 'category' | 'document';
   text: string;
-  text_th?: string;
+  text_fr?: string;
   id?: string;
   category?: string;
 }
