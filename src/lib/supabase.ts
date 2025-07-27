@@ -237,10 +237,10 @@ export const dbHelpers = {
   /**
    * Search SOP documents
    */
-  async searchSopDocuments(query: string, restaurantId: string, locale: 'en' | 'fr' = 'en') {
+  async searchSopDocuments(query: string, restaurantId: string, locale: 'en' | 'th' = 'en') {
     try {
-      const searchColumn = locale === 'fr' ? 'title_fr' : 'title';
-      const contentColumn = locale === 'fr' ? 'content_fr' : 'content';
+      const searchColumn = locale === 'th' ? 'title_th' : 'title';
+      const contentColumn = locale === 'th' ? 'content_th' : 'content';
 
       const { data, error } = await supabase
         .from('sop_documents')
