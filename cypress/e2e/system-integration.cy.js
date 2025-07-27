@@ -13,11 +13,7 @@ describe('System Integration', () => {
     cy.get('button[type="submit"]').click()
     
     // Handle restaurant selection
-    cy.get('body').then(($body) => {
-      if ($body.text().includes('restaurant')) {
-        cy.get('[role="button"], button').contains('Select', { matchCase: false }).first().click({ force: true })
-      }
-    })
+    cy.handleRestaurantSelection()
   })
 
   it('should test API endpoints availability', () => {
