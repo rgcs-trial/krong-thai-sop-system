@@ -196,18 +196,18 @@ class SearchCacheManager {
 
       // Index title words
       this.indexText(doc.title_en, doc.id, index.titleIndex);
-      this.indexText(doc.title_th, doc.id, index.titleIndex);
+      this.indexText(doc.title_fr, doc.id, index.titleIndex);
 
       // Index content words (first 500 chars to avoid too much data)
       this.indexText(doc.content_en.substring(0, 500), doc.id, index.contentIndex);
-      this.indexText(doc.content_th.substring(0, 500), doc.id, index.contentIndex);
+      this.indexText(doc.content_fr.substring(0, 500), doc.id, index.contentIndex);
 
       // Index tags
       if (doc.tags) {
         doc.tags.forEach(tag => this.indexTerm(tag, doc.id, index.tagIndex));
       }
-      if (doc.tags_th) {
-        doc.tags_th.forEach(tag => this.indexTerm(tag, doc.id, index.tagIndex));
+      if (doc.tags_fr) {
+        doc.tags_fr.forEach(tag => this.indexTerm(tag, doc.id, index.tagIndex));
       }
 
       // Index category

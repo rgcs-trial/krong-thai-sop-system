@@ -155,7 +155,7 @@ export const dbHelpers = {
           restaurants (
             id,
             name,
-            name_th
+            name_fr
           )
         `)
         .eq('id', userId)
@@ -208,7 +208,7 @@ export const dbHelpers = {
           sop_categories (
             id,
             name,
-            name_th,
+            name_fr,
             code
           ),
           created_by_user:auth_users!created_by (
@@ -249,7 +249,7 @@ export const dbHelpers = {
           sop_categories (
             id,
             name,
-            name_th,
+            name_fr,
             code
           )
         `)
