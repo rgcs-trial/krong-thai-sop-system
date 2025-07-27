@@ -1,0 +1,10 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="thaiPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="#f8f8f8"/>
+      <circle cx="10" cy="10" r="2" fill="#e31b23" opacity="0.1"/>
+      <path d="M5,5 L15,5 M5,15 L15,15" stroke="#e31b23" stroke-width="0.5" opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="100" height="100" fill="url(#thaiPattern)"/>
+</svg>
