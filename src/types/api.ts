@@ -118,9 +118,9 @@ export interface SOPListParams {
 
 export interface SOPResponse extends Omit<SOPDocument, 'creator' | 'updater' | 'approver'> {
   category: SOPCategory;
-  creator: Pick<AuthUser, 'id' | 'full_name' | 'full_name_th' | 'position' | 'position_th'>;
-  updater?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_th' | 'position' | 'position_th'>;
-  approver?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_th' | 'position' | 'position_th'>;
+  creator: Pick<AuthUser, 'id' | 'full_name' | 'full_name_fr' | 'position' | 'position_fr'>;
+  updater?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_fr' | 'position' | 'position_fr'>;
+  approver?: Pick<AuthUser, 'id' | 'full_name' | 'full_name_fr' | 'position' | 'position_fr'>;
 }
 
 // Search API types
