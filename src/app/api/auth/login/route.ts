@@ -229,8 +229,16 @@ export async function POST(request: NextRequest) {
       ip: request.headers.get('x-forwarded-for') || 'unknown'
     });
     
+    const errorCode = mapErrorToCode(error);
+    const errorInfo = getAuthErrorMessage(errorCode, 'en');
+    
     return NextResponse.json(
-      { success: false, error: 'Service temporarily unavailable', code: 'SERVICE_DOWN' },
+      { 
+        success: false, 
+        error: errorInfo.userMessage,
+        errorCode: errorInfo.code,
+        severity: errorInfo.severity
+      },
       { status: 503 }
     );
   }
