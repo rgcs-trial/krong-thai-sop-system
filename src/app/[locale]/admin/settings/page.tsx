@@ -17,14 +17,11 @@ import {
   Palette,
   Globe
 } from 'lucide-react';
-import { useI18n } from '@/hooks/use-i18n';
-
 /**
  * Admin Settings Page
  * Central hub for all administrative settings including translation management
  */
 export default function AdminSettingsPage() {
-  const { t } = useI18n();
 
   return (
     <div className="container mx-auto py-6 space-y-6">
