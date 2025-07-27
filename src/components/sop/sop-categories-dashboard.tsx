@@ -122,7 +122,9 @@ const MOCK_CATEGORIES: EnhancedSOPCategory[] = [
     sort_order: 6,
     is_active: true,
     sop_count: 14,
-    last_updated: '2024-01-19'
+    last_updated: '2024-01-19',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-19T00:00:00Z'
   },
   {
     id: '7',
@@ -136,7 +138,9 @@ const MOCK_CATEGORIES: EnhancedSOPCategory[] = [
     sort_order: 7,
     is_active: true,
     sop_count: 16,
-    last_updated: '2024-01-21'
+    last_updated: '2024-01-21',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-21T00:00:00Z'
   },
   {
     id: '8',
@@ -150,7 +154,9 @@ const MOCK_CATEGORIES: EnhancedSOPCategory[] = [
     sort_order: 8,
     is_active: true,
     sop_count: 11,
-    last_updated: '2024-01-17'
+    last_updated: '2024-01-17',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-17T00:00:00Z'
   },
   {
     id: '9',
@@ -164,7 +170,9 @@ const MOCK_CATEGORIES: EnhancedSOPCategory[] = [
     sort_order: 9,
     is_active: true,
     sop_count: 7,
-    last_updated: '2024-01-14'
+    last_updated: '2024-01-14',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-14T00:00:00Z'
   },
   {
     id: '10',
@@ -178,7 +186,9 @@ const MOCK_CATEGORIES: EnhancedSOPCategory[] = [
     sort_order: 10,
     is_active: true,
     sop_count: 9,
-    last_updated: '2024-01-23'
+    last_updated: '2024-01-23',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-23T00:00:00Z'
   },
   {
     id: '11',
