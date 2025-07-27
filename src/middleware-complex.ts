@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { locales, defaultLocale } from './lib/i18n';
-import { createSecurityMiddleware } from '@/lib/security';
+// import { createSecurityMiddleware } from '@/lib/security'; // Disabled during development
 
 // Create i18n middleware
 const intlMiddleware = createIntlMiddleware({
