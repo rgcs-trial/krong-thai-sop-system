@@ -157,11 +157,12 @@ export default async function middleware(request: NextRequest) {
         headers: request.headers,
       });
 
-      const securityResponse = await securityMiddleware(modifiedRequest);
+      // Security middleware disabled during development
+      // const securityResponse = await securityMiddleware(modifiedRequest);
       
       // If security middleware returns a redirect
-      if (securityResponse.status === 302 || securityResponse.status === 307) {
-        const location = securityResponse.headers.get('location');
+      // if (securityResponse.status === 302 || securityResponse.status === 307) {
+      //   const location = securityResponse.headers.get('location');
         if (location) {
           const redirectUrl = new URL(location, request.url);
           // Add locale prefix to the redirect if it's not an API route
