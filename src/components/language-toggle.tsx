@@ -251,6 +251,17 @@ export function LanguageToggle({
         <div className="px-3 py-2 text-sm font-medium text-muted-foreground border-b border-border mb-2">
           {t('language')}
         </div>
+        {!isMounted && (
+          <div className="px-3 py-2 text-xs text-muted-foreground">
+            Loading languages...
+          </div>
+        )}
+        {isMounted && isPending && (
+          <div className="px-3 py-2 text-xs text-muted-foreground flex items-center gap-2">
+            <Loader2 size={12} className="animate-spin" />
+            Switching language...
+          </div>
+        )}
         {locales.map((loc) => (
           <DropdownMenuItem
             key={loc}
