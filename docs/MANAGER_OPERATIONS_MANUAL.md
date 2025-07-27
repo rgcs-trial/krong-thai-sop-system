@@ -12,11 +12,13 @@
 - [ ] Confirm backup systems are operational
 
 **Key Metrics to Monitor:**
-- Current active users
+- Current active users (PIN-based sessions)
 - System response time (target: <2 seconds)
 - Error rate (target: <0.1%)
-- Storage usage percentage
+- Storage usage percentage (optimized to 736MB)
 - Network connectivity status
+- PIN authentication success rate
+- Tablet device connectivity
 
 #### **2. User Activity Analysis** (5 minutes)
 - [ ] Review staff login activity from previous day
