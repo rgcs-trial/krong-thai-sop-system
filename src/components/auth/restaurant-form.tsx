@@ -162,6 +162,7 @@ export function RestaurantForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
 
     if (!validateForm()) {
       return;
@@ -169,8 +170,9 @@ export function RestaurantForm({
 
     try {
       await onSubmit(formData);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Form submission error:', error);
+      setSubmitError(error);
     }
   };
 
