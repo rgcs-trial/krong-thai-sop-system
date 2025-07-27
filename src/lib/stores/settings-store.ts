@@ -559,7 +559,7 @@ export const useSettingsStore = create<SettingsStore>()(
           if (!trimmedQuery) return;
 
           // Remove if already exists
-          state.user.searchHistory = state.user.searchHistory.filter(q => q !== trimmedQuery);
+          state.user.searchHistory = state.user.searchHistory.filter((q: string) => q !== trimmedQuery);
           // Add to beginning
           state.user.searchHistory.unshift(trimmedQuery);
           // Keep only last 20 searches
