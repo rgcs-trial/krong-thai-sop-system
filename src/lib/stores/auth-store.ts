@@ -5,9 +5,19 @@
 
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { Security } from '@/lib/security';
+// Security modules disabled during development
+// import { Security } from '@/lib/security';
 import { dbHelpers } from '@/lib/supabase';
-import type { SessionUser } from '@/lib/security';
+// import type { SessionUser } from '@/lib/security';
+
+// Temporary type definitions for disabled security module
+interface SessionUser {
+  id: string;
+  email: string;
+  role: 'admin' | 'manager' | 'staff';
+  full_name: string;
+  restaurant_id: string;
+}
 import type { AuthUser } from '@/lib/supabase';
 
 // Types
