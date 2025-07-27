@@ -300,16 +300,18 @@ CREATE TABLE training_certificates (
 
 ## 5. API Architecture
 
-### 5.1 Enterprise API Architecture (16+ Endpoints)
+### 5.1 Enterprise API Architecture (17+ Endpoints)
 ```
 src/app/api/
 ├── auth/                           # Authentication endpoints (4)
-│   ├── login/route.ts             # Standard login endpoint
+│   ├── login/route.ts             # Standard login endpoint with enhanced error handling
 │   ├── staff-pin-login/route.ts   # PIN-based staff authentication
 │   └── location-session/          # Tablet location binding
 │       ├── create/route.ts        # Create location session
 │       └── check/route.ts         # Validate location session
-├── restaurants/route.ts           # Restaurant management
+├── restaurants/route.ts           # Restaurant location management (CRUD)
+├── debug/                         # Development utilities
+│   └── env/route.ts               # Environment variable debugging
 ├── security/                      # Security endpoints
 │   └── csp-report/route.ts        # CSP violation reporting
 └── training/                      # Training system API (8+ endpoints)
