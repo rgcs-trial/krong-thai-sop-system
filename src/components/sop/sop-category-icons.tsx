@@ -9,7 +9,7 @@ import {
   Smile,
   CreditCard,
   Package,
-  Spray,
+  Droplets,
   Settings,
   AlertTriangle,
   GraduationCap,
