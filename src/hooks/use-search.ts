@@ -28,11 +28,11 @@ interface SearchResult {
   id: string;
   category_id: string;
   title_en: string;
-  title_th: string;
+  title_fr: string;
   content_en: string;
-  content_th: string;
+  content_fr: string;
   tags?: string[];
-  tags_th?: string[];
+  tags_fr?: string[];
   version: string;
   is_critical: boolean;
   is_published: boolean;
