@@ -187,7 +187,7 @@ export async function GET(request: NextRequest) {
 
       const topModules = modulePerformance?.map(module => {
         const progressArray = module.progress || [];
-        const completedCount = progressArray.filter(p => p.status === 'completed').length;
+        const completedCount = progressArray.filter((p: any) => p.status === 'completed').length;
         const totalCount = progressArray.length;
         const completionRate = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
