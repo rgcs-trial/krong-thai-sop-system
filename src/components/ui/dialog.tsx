@@ -67,6 +67,8 @@ const DialogHeader = ({
   <div
     className={cn(
       "flex flex-col space-y-2 text-center sm:text-left pb-4",
+      // Tablet-optimized header spacing
+      "pb-6 space-y-3",
       className
     )}
     {...props}
