@@ -27,7 +27,7 @@ interface LocationSelectorProps {
   userRestaurantId?: string;
   onLocationSelected: (restaurant: Restaurant) => void;
   onCancel: () => void;
-  locale: 'en' | 'th';
+  locale: 'en' | 'fr';
   isLoading?: boolean;
 }
 
