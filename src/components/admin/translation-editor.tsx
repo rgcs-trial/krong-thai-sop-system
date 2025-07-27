@@ -611,10 +611,6 @@ export function TranslationEditor({
                       <Globe size={14} />
                       Français
                     </TabsTrigger>
-                    <TabsTrigger value="th" className="flex items-center gap-2">
-                      <Globe size={14} />
-                      ไทย
-                    </TabsTrigger>
                   </TabsList>
 
                   {(['en', 'fr', 'th'] as Locale[]).map((locale) => (
