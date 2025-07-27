@@ -1000,7 +1000,7 @@ pnpm add @formatjs/intl-localematcher
 pnpm add @formatjs/intl-numberformat
 
 # Create i18n structure
-mkdir -p public/locales/{en,th}
+mkdir -p public/locales/{en,fr}
 mkdir -p src/hooks/i18n
 ```
 
