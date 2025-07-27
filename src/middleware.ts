@@ -245,10 +245,16 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(authResult.redirect, request.url));
   }
 
-  // 6. Apply internationalization
+  // 6. Handle legacy /th/ redirects to /fr/
+  if (pathname.startsWith('/th/')) {
+    const newPath = pathname.replace('/th/', '/fr/');
+    return NextResponse.redirect(new URL(newPath, request.url));
+  }
+
+  // 7. Apply internationalization
   const intlResponse = intlMiddleware(request);
   
-  // 7. Apply security headers
+  // 8. Apply security headers
   const response = intlResponse || NextResponse.next();
   
   if (securityConfig.enableSecurityHeaders) {

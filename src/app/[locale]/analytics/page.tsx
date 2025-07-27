@@ -6,21 +6,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import dynamic from 'next/dynamic';
+import { ExecutiveClientWrapper } from '@/components/analytics/executive-client-wrapper';
 
-const ExecutiveDashboard = dynamic(
-  () => import('@/components/analytics/executive-dashboard').then(mod => ({ default: mod.ExecutiveDashboard })),
-  {
-    loading: () => (
-      <div className="flex items-center justify-center min-h-[200px]">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-          <p className="mt-2 text-sm text-muted-foreground">Loading insights...</p>
-        </div>
-      </div>
-    )
-  }
-);
+export const dynamic = 'force-dynamic';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -255,7 +243,7 @@ export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ExecutiveDashboard />
+            <ExecutiveClientWrapper />
           </CardContent>
         </Card>
       </div>

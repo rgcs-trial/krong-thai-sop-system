@@ -8,9 +8,15 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import type { Database } from '@/types/supabase';
 
+interface RouteParams {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: RouteParams
 ) {
   try {
     const cookieStore = await cookies();
@@ -41,7 +47,8 @@ export async function GET(
       return NextResponse.json({ error: 'Insufficient permissions' }, { status: 403 });
     }
 
-    const moduleId = params.id;
+    const resolvedParams = await params;
+    const moduleId = resolvedParams.id;
     if (!moduleId) {
       return NextResponse.json({ error: 'Module ID is required' }, { status: 400 });
     }

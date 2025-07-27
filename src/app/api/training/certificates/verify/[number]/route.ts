@@ -9,15 +9,19 @@ import { cookies } from 'next/headers';
 import type { Database } from '@/types/supabase';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     number: string;
-  };
+  }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
-    const supabase = createRouteHandlerClient<Database>({ cookies });
-    const certificateNumber = params.number;
+    const cookieStore = await cookies();
+    const supabase = createRouteHandlerClient<Database>({ 
+      cookies: () => cookieStore 
+    });
+    const resolvedParams = await params;
+    const certificateNumber = resolvedParams.number;
     
     if (!certificateNumber) {
       return NextResponse.json({ error: 'Certificate number is required' }, { status: 400 });

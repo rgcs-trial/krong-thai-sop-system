@@ -5,25 +5,65 @@
 
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 
+// Database schema type definitions
+type SOPDocument = {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  language: 'en' | 'fr';
+  lastUpdated: string;
+  isCritical: boolean;
+  mediaFiles?: Array<{
+    id: string;
+    url: string;
+    type: string;
+    blob?: Blob;
+  }>;
+};
+
+type ProgressUpdate = {
+  id: string;
+  userId: string;
+  sopId: string;
+  action: 'view' | 'complete' | 'bookmark' | 'unbookmark';
+  timestamp: string;
+  synced: boolean;
+  metadata?: Record<string, any>;
+};
+
+type SOPCategory = {
+  id: string;
+  name: string;
+  description: string;
+  language: 'en' | 'fr';
+  sopIds: string[];
+  lastUpdated: string;
+};
+
+type UserBookmark = {
+  id: string;
+  userId: string;
+  sopId: string;
+  createdAt: string;
+  synced: boolean;
+};
+
+type MediaCacheEntry = {
+  id: string;
+  url: string;
+  blob: Blob;
+  mimeType: string;
+  size: number;
+  cachedAt: string;
+  expiresAt: string;
+};
+
 // Database schema interfaces
-interface SOPOfflineDB extends DBSchema {
+export interface SOPOfflineDB extends DBSchema {
   sopDocuments: {
     key: string;
-    value: {
-      id: string;
-      title: string;
-      content: string;
-      category: string;
-      language: 'en' | 'fr';
-      lastUpdated: string;
-      isCritical: boolean;
-      mediaFiles?: Array<{
-        id: string;
-        url: string;
-        type: string;
-        blob?: Blob;
-      }>;
-    };
+    value: SOPDocument;
     indexes: { 
       'by-category': string;
       'by-language': string;
@@ -33,15 +73,7 @@ interface SOPOfflineDB extends DBSchema {
   
   progressUpdates: {
     key: string;
-    value: {
-      id: string;
-      userId: string;
-      sopId: string;
-      action: 'view' | 'complete' | 'bookmark' | 'unbookmark';
-      timestamp: string;
-      synced: boolean;
-      metadata?: Record<string, any>;
-    };
+    value: ProgressUpdate;
     indexes: {
       'by-user': string;
       'by-synced': boolean;
@@ -51,14 +83,7 @@ interface SOPOfflineDB extends DBSchema {
   
   sopCategories: {
     key: string;
-    value: {
-      id: string;
-      name: string;
-      description: string;
-      language: 'en' | 'fr';
-      sopIds: string[];
-      lastUpdated: string;
-    };
+    value: SOPCategory;
     indexes: {
       'by-language': string;
     };
@@ -66,13 +91,7 @@ interface SOPOfflineDB extends DBSchema {
   
   userBookmarks: {
     key: string;
-    value: {
-      id: string;
-      userId: string;
-      sopId: string;
-      createdAt: string;
-      synced: boolean;
-    };
+    value: UserBookmark;
     indexes: {
       'by-user': string;
       'by-synced': boolean;
@@ -81,15 +100,7 @@ interface SOPOfflineDB extends DBSchema {
   
   mediaCache: {
     key: string;
-    value: {
-      id: string;
-      url: string;
-      blob: Blob;
-      mimeType: string;
-      size: number;
-      cachedAt: string;
-      expiresAt: string;
-    };
+    value: MediaCacheEntry;
     indexes: {
       'by-expires': string;
     };
@@ -569,7 +580,11 @@ export async function waitForOnline(): Promise<void> {
 export function requestBackgroundSync(tag: string): void {
   if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
     navigator.serviceWorker.ready.then((registration) => {
-      return registration.sync.register(tag);
+      // Type assertion for sync property that may not be in all browsers
+      const syncManager = (registration as any).sync;
+      if (syncManager && syncManager.register) {
+        return syncManager.register(tag);
+      }
     }).catch((error) => {
       console.error('[OfflineStorage] Background sync registration failed:', error);
     });

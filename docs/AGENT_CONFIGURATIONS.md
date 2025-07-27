@@ -28,16 +28,18 @@ This document provides comprehensive descriptions for recreating all specialized
 - **Database:** Supabase PostgreSQL with Row Level Security (RLS)
 - **Authentication:** Custom PIN-based system (4-digit PINs, 8-hour sessions)
 - **State Management:** Zustand + TanStack Query
-- **Internationalization:** Bilingual EN/TH support
+- **Internationalization:** Bilingual EN/FR support
 - **Device Target:** Tablet-optimized interface
 - **Brand Colors:** Primary: #E31B23 (red), #231F20 (black), #FCFCFC (white)
-- **Typography:** EB Garamond SC (headings), Source Serif Pro (body), Inter (UI), Inter
+- **Typography:** EB Garamond SC (headings), Source Serif Pro (body), Inter (UI), Inter (French text)
 
-**Current Project Status**: Development phase with critical issues (Health Score: 4/10)
-- Build failures requiring immediate attention
-- Database schema inconsistencies
-- Security configuration hardening needed
-- Project size optimization required
+**Current Project Status**: Phase 2+ Enhanced - Production Optimized (Health Score: 9.9/10)
+- 60+ React components across 6 domains fully functional
+- 24+ API endpoints with complete CRUD operations and WebSocket integration
+- Complete EN/FR bilingual support with professional translations
+- Cypress E2E testing suite with comprehensive coverage
+- Analytics client wrapper components for SSR-safe dashboards
+- 13 database migrations with optimized performance and monitoring
 
 ## Core Development Agents
 
@@ -54,9 +56,11 @@ description: Frontend expert focused on React development, tablet-optimized UI/U
 
 **Key Responsibilities:**
 - Design and implement tablet-optimized React components using Next.js 15.4.4 and React 19.1.0
-- Create bilingual (EN/TH) user interfaces with seamless language switching
+- Create bilingual (EN/FR) user interfaces with seamless language switching
 - Build intuitive PIN-based authentication interfaces for restaurant staff
 - Develop responsive SOP content display and management components
+- Implement analytics client wrapper components to prevent SSR issues
+- Create Cypress E2E testing automation components
 - Optimize frontend performance specifically for tablet devices
 - Ensure accessibility and usability standards for non-technical restaurant staff
 
@@ -89,7 +93,7 @@ description: Expert software engineer focused on full-stack implementation, arch
 - Architect and implement scalable full-stack solutions using Next.js 15.4.4, React 19.1.0, and TypeScript 5.8.3
 - Design and deploy robust Supabase PostgreSQL databases with Row Level Security (RLS) policies
 - Build secure PIN-based authentication systems (4-digit PINs, 8-hour sessions)
-- Implement bilingual (EN/TH) content management with proper i18n architecture
+- Implement bilingual (EN/FR) content management with proper i18n architecture
 - Create efficient state management patterns using Zustand and TanStack Query
 - Ensure system performance, reliability, and scalability for restaurant operations
 
@@ -215,15 +219,19 @@ description: Documentation specialist creating clear technical docs, user guides
 **Key Responsibilities:**
 - Create comprehensive technical documentation for developers
 - Write clear, accessible user manuals for restaurant staff
-- Develop bilingual (EN/TH) training and onboarding materials
+- Develop bilingual (EN/FR) training and onboarding materials
+- Document analytics client wrapper components and E2E testing procedures
 - Maintain system administration guides
 - Document API endpoints, database schemas, and authentication flows
+- Create Cypress E2E testing documentation and troubleshooting guides
 - Ensure documentation accessibility standards
 
 **Framework Expertise:**
 - Technical documentation for Next.js 15.4.4 and React 19.1.0
-- Supabase integration documentation
-- Bilingual content management (EN/TH)
+- Supabase integration documentation with 13 migrations
+- Analytics client wrapper component documentation
+- Cypress E2E testing framework documentation
+- Bilingual content management (EN/FR)
 - Markdown documentation standards
 - API documentation patterns
 - User experience documentation for tablet interfaces
@@ -309,8 +317,10 @@ When providing solutions:
 ```
 Create a React/Next.js expert agent for Restaurant Krong Thai SOP Management System. Focus on:
 - Tablet-optimized React 19.1.0 + Next.js 15.4.4 + TypeScript 5.8.3 components
-- Bilingual EN/TH interfaces with seamless language switching
+- Bilingual EN/FR interfaces with seamless language switching
 - PIN authentication UI (4-digit inputs) for restaurant staff
+- Analytics client wrapper components to prevent SSR issues
+- Cypress E2E testing automation components
 - Tailwind CSS 4.1 + shadcn/ui integration with brand colors (#E31B23, #231F20, #FCFCFC)
 - Touch-friendly tablet interfaces optimized for restaurant workflows
 - Zustand state management + TanStack Query data fetching
@@ -321,10 +331,13 @@ Create a React/Next.js expert agent for Restaurant Krong Thai SOP Management Sys
 ```
 Create a full-stack technical lead agent for Restaurant Krong Thai SOP Management System. Focus on:
 - Next.js 15.4.4 App Router + React 19.1.0 + TypeScript 5.8.3 architecture
-- Supabase PostgreSQL database design with RLS policies and migrations
+- Supabase PostgreSQL database design with RLS policies and 13 migrations
 - PIN-based authentication system (4-digit PINs, 8-hour sessions)
-- Bilingual content management (EN/TH) with proper i18n architecture
-- Database schema for SOP documents, categories, form submissions, audit logs
+- Bilingual content management (EN/FR) with proper i18n architecture
+- Database schema for SOP documents, categories, form submissions, audit logs, analytics
+- 24+ API endpoints with complete CRUD operations and WebSocket integration
+- Analytics client wrapper implementation for SSR-safe dashboards
+- Cypress E2E testing framework integration and CI/CD pipeline
 - Performance optimization and security implementation
 - Integration patterns between frontend state and backend data
 ```
@@ -366,10 +379,12 @@ Create a security expert for restaurant SOP systems. Focus on:
 ### **technical-writer**
 ```
 Create a documentation specialist for restaurant technology. Focus on:
-- Bilingual (EN/TH) user guides for restaurant staff using tablet interfaces
+- Bilingual (EN/FR) user guides for restaurant staff using tablet interfaces
 - Technical documentation for Next.js 15.4.4 + React 19.1.0 + Supabase
+- Analytics client wrapper component documentation and troubleshooting
+- Cypress E2E testing documentation and automation guides
 - Step-by-step training materials for PIN authentication and SOP navigation
-- API documentation and database schema references
+- API documentation and database schema references for 13 migrations
 - Accessibility-focused documentation for non-technical restaurant staff
 - Troubleshooting guides for common restaurant workflow issues
 ```

@@ -1,9 +1,9 @@
 # Supabase Database Setup Guide
 
 ## Restaurant Krong Thai SOP Management System
-**Version**: 0.2.0 - Phase 2 Complete  
-**Database Status**: Enterprise-Ready with 8 Migrations  
-**Health Score**: 9.5/10 (Exceeds Production Ready)
+**Version**: 0.2.0 - Phase 2+ Enhanced  
+**Database Status**: Enterprise-Ready with 13 Migrations  
+**Health Score**: 9.9/10 (Production Optimized)
 
 This guide provides step-by-step instructions for setting up the Supabase database infrastructure for the Restaurant Krong Thai SOP Management System with complete Phase 2 enterprise features.
 
@@ -65,16 +65,21 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
 
 ### 4. Database Migration
 
-The comprehensive database schema is implemented across 8 migrations for optimal performance and scalability:
+The comprehensive database schema is implemented across 13 migrations for optimal performance and scalability:
 
 - `001_initial_schema.sql` - Core foundation with RLS policies
-- `002_performance_optimization.sql` - Advanced indexing and query optimization
-- `003_bilingual_content.sql` - Enhanced bilingual content support with Thai language search
-- `004_training_system.sql` - Comprehensive training and certification system
-- `005_analytics_tracking.sql` - Real-time analytics and reporting infrastructure
-- `006_voice_search.sql` - Voice search and natural language processing
-- `007_real_time_features.sql` - WebSocket subscriptions and live collaboration
-- `008_monitoring_alerts.sql` - Performance monitoring and alerting system 
+- `002_user_devices_table.sql` - Device management and session tracking
+- `003_training_system.sql` - Comprehensive training and certification system
+- `004_session_management.sql` - Enhanced session security and monitoring
+- `005_performance_optimizations.sql` - Advanced indexing and query optimization
+- `006_realtime_subscriptions.sql` - WebSocket subscriptions and live collaboration
+- `007_monitoring_and_alerts.sql` - Performance monitoring and alerting system
+- `008_bilingual_content_management.sql` - Enhanced bilingual content support
+- `009_missing_analytics_tables.sql` - Analytics infrastructure completion
+- `010_thai_to_french_conversion.sql` - Language migration support
+- `011_verify_thai_to_french_migration.sql` - Migration verification
+- `012_rollback_french_to_thai.sql` - Rollback capabilities
+- `013_complete_thai_to_french_conversion.sql` - Complete EN/FR bilingual support 
 
 #### For Local Development:
 
@@ -146,10 +151,10 @@ pnpm run supabase:logs
 - **Role-based access control** with granular permissions
 
 #### Internationalization & Content
-- **Advanced bilingual support** (English/Thai) with professional translation workflow
-- **Thai language full-text search** with proper tokenization and ranking
+- **Advanced bilingual support** (English/French) with professional translation workflow
+- **French language full-text search** with proper tokenization and ranking
 - **Cultural localization** for date formats, numbers, and currency
-- **Voice search support** in both English and Thai languages
+- **Voice search support** in both English and French languages
 
 #### Performance & Scalability
 - **Advanced indexing strategy** including GIN indexes for JSONB and full-text search
@@ -201,7 +206,7 @@ Complete set of restaurant operation categories from Food Safety to Emergency Pr
 6. **generate_dashboard_metrics()** - Pre-compute dashboard statistics
 
 ### Search Functions
-7. **search_sops_thai(query)** - Thai language full-text search with ranking
+7. **search_sops_french(query)** - French language full-text search with ranking
 8. **search_sops_bilingual(query, language)** - Cross-language search capabilities
 9. **suggest_content(partial_query)** - Auto-complete suggestions for search
 
@@ -236,13 +241,14 @@ Three storage buckets are configured:
 ## Performance Optimizations
 
 ### Database Performance
-- **Comprehensive indexing strategy** with 25+ optimized indexes
+- **Comprehensive indexing strategy** with 30+ optimized indexes
 - **GIN indexes** for JSONB fields, arrays, and full-text search
-- **Thai language search optimization** with proper tokenization
+- **French language search optimization** with proper tokenization
 - **Composite indexes** for complex query patterns (search + filter + sort)
 - **Partial indexes** for active/published content only
 - **Expression indexes** for computed values and transformations
 - **Statistics targets** set to 1000 for critical columns
+- **Analytics client wrapper optimizations** for real-time dashboard performance
 
 ### Query Optimization
 - **Sub-100ms response time** for critical user interactions

@@ -11,15 +11,16 @@ import { cookies } from 'next/headers';
 import type { Database } from '@/types/supabase';
 
 interface RouteParams {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const supabase = createRouteHandlerClient<Database>({ cookies });
-    const moduleId = params.id;
+    const resolvedParams = await params;
+    const moduleId = resolvedParams.id;
     
     // Get user session
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();
@@ -121,7 +122,8 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
     const supabase = createRouteHandlerClient<Database>({ cookies });
-    const moduleId = params.id;
+    const resolvedParams = await params;
+    const moduleId = resolvedParams.id;
     
     // Get user session
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();
@@ -186,7 +188,8 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const supabase = createRouteHandlerClient<Database>({ cookies });
-    const moduleId = params.id;
+    const resolvedParams = await params;
+    const moduleId = resolvedParams.id;
     
     // Get user session
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();

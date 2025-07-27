@@ -28,21 +28,21 @@ export default getRequestConfig(async ({ locale }) => {
       formats: {
         dateTime: {
           short: {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
+            day: 'numeric' as const,
+            month: 'short' as const,
+            year: 'numeric' as const
           },
           medium: {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit'
+            day: 'numeric' as const,
+            month: 'long' as const,
+            year: 'numeric' as const,
+            hour: 'numeric' as const,
+            minute: '2-digit' as const
           }
         },
         number: {
           currency: {
-            style: 'currency',
+            style: 'currency' as const,
             currency: 'THB'
           }
         }
@@ -53,21 +53,21 @@ export default getRequestConfig(async ({ locale }) => {
       formats: {
         dateTime: {
           short: {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
+            day: 'numeric' as const,
+            month: 'short' as const,
+            year: 'numeric' as const
           },
           medium: {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit'
+            day: 'numeric' as const,
+            month: 'long' as const,
+            year: 'numeric' as const,
+            hour: 'numeric' as const,
+            minute: '2-digit' as const
           }
         },
         number: {
           currency: {
-            style: 'currency',
+            style: 'currency' as const,
             currency: 'THB'
           }
         }

@@ -8,9 +8,15 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import type { Database } from '@/types/supabase';
 
+interface RouteParams {
+  params: Promise<{
+    userId: string;
+  }>;
+}
+
 export async function GET(
   request: NextRequest,
-  { params }: { params: { userId: string } }
+  { params }: RouteParams
 ) {
   try {
     const cookieStore = await cookies();
@@ -36,7 +42,8 @@ export async function GET(
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    const targetUserId = params.userId;
+    const resolvedParams = await params;
+    const targetUserId = resolvedParams.userId;
     if (!targetUserId) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
     }

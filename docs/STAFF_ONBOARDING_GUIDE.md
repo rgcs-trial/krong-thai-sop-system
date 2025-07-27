@@ -7,7 +7,7 @@
 **Account Creation Checklist:**
 - [ ] Create staff profile in system with correct role assignment
 - [ ] Generate unique 4-digit PIN (avoid: 0000, 1111, 1234, 0123)
-- [ ] Set language preference (English/Thai)
+- [ ] Set language preference (English/French)
 - [ ] Assign appropriate SOP category access based on position
 - [ ] Configure tablet device binding for security
 - [ ] Assign mandatory training modules and certification requirements
@@ -25,7 +25,7 @@
 1. Open staff management dashboard
 2. Click "Add New Staff Member"
 3. Enter staff details:
-   - Full name (English and Thai)
+   - Full name (English and French)
    - Position/Role
    - Department assignment
    - Contact information
@@ -58,7 +58,9 @@
    - Personal progress display with real-time analytics
    - Interactive training modules with certification tracking
    - Favorite SOPs section with voice search capability
-   - Language toggle functionality (EN/TH)
+   - Language toggle functionality (EN/FR)
+   - Enhanced analytics dashboard navigation with client wrappers
+   - E2E testing quality assurance procedures
    - Certificate status and renewal reminders
    - Performance metrics and achievement badges
    - Voice search activation and usage statistics
@@ -80,7 +82,7 @@
    - Voice-activated search with natural language processing
    - Advanced keyword search with filters and suggestions
    - Category filtering with visual indicators
-   - Bilingual search capabilities (EN/TH)
+   - Bilingual search capabilities (EN/FR)
    - Recent searches history with quick access
    - Offline search capabilities with intelligent caching
    - Real-time search results with sub-100ms response time
@@ -177,7 +179,7 @@
 - **Advanced Performance Analytics**: Individual improvement metrics with predictive insights
 - **Smart Scheduled Reminders**: AI-powered notifications based on learning patterns
 - **Voice-Guided Training**: Audio instructions and voice interaction capabilities
-- **Bilingual Learning Paths**: Content available in both EN/TH with seamless switching
+- **Bilingual Learning Paths**: Content available in both EN/FR with seamless switching
 - **Offline Training Capability**: Download modules for offline study and completion
 
 #### **Comprehensive Training Types:**
@@ -186,7 +188,8 @@
 3. **Seasonal Training**: Time-sensitive procedures with automatic updates
 4. **Refresher Training**: Periodic skill updates with smart scheduling
 5. **Advanced Training**: Leadership development with mentorship features
-6. **Bilingual Training**: EN/TH language proficiency with cultural context
+6. **Bilingual Training**: EN/FR language proficiency with cultural context
+7. **E2E Testing Training**: Quality assurance and testing procedures
 7. **Tablet Operations**: Device-specific training with hands-on simulations
 8. **Voice Technology Training**: Voice search and interaction capabilities
 9. **Analytics Training**: Understanding personal performance metrics
@@ -199,7 +202,8 @@
 - Manager verification of practical skills with digital attestation
 - Automatic digital certificate generation with blockchain verification
 - Voice interaction competency demonstration
-- Bilingual content understanding verification (EN/TH)
+- Bilingual content understanding verification (EN/FR)
+- E2E testing procedure completion and quality assurance verification
 - Real-time performance tracking and improvement documentation
 
 ---
@@ -267,7 +271,7 @@
 **Symptoms**: Wrong language display
 **Solution**:
 1. Locate language toggle (top right corner)
-2. Tap to switch between EN/TH
+2. Tap to switch between EN/FR
 3. System remembers preference automatically
 4. Content switches in real-time without refresh
 5. Voice search language automatically adjusts
@@ -278,7 +282,7 @@
 **Solution**:
 1. Try voice search by saying "Find [procedure name]"
 2. Use different search keywords or try bilingual terms
-3. Check spelling and language setting (EN/TH)
+3. Check spelling and language setting (EN/FR)
 4. Use advanced filters by category, date, or difficulty
 5. Browse by category with visual navigation
 6. Check if content is available offline
@@ -333,7 +337,7 @@
 ### **Enhanced System Access Verification:**
 - [ ] Staff can login independently with PIN and device binding
 - [ ] Appropriate category access confirmed with role-based permissions
-- [ ] Language preference set correctly (EN/TH) with real-time switching
+- [ ] Language preference set correctly (EN/FR) with real-time switching
 - [ ] Interactive training assignments visible with progress tracking
 - [ ] Emergency procedures accessible offline
 - [ ] Voice search functionality operational
@@ -347,7 +351,7 @@
 - [ ] Advanced SOP navigation skills with voice commands
 - [ ] Search function usage (voice, text, filters, online/offline)
 - [ ] Bookmark management and favorites organization
-- [ ] Seamless language switching (EN/TH) during tasks
+- [ ] Seamless language switching (EN/FR) during tasks
 - [ ] Voice search activation and natural language queries
 - [ ] PIN security understanding and device binding awareness
 - [ ] Offline mode operation and content synchronization
@@ -377,7 +381,7 @@
 #### **Voice Search Mastery** (New Phase 2 Feature)
 - [ ] Activate voice search with "Hey Krong Thai" or tap microphone
 - [ ] Use natural language: "Show me food safety procedures"
-- [ ] Practice voice commands in both EN/TH languages
+- [ ] Practice voice commands in both EN/FR languages
 - [ ] Understand voice search accuracy feedback and corrections
 - [ ] Learn offline voice capability limitations and workarounds
 
@@ -390,7 +394,7 @@
 
 #### **Advanced Bilingual Operations**
 - [ ] Master seamless language switching during workflows
-- [ ] Understand cultural context differences in EN/TH content
+- [ ] Understand cultural context differences in EN/FR content
 - [ ] Practice voice search in both languages
 - [ ] Use bilingual search capabilities effectively
 - [ ] Understand translation quality feedback system
@@ -404,11 +408,11 @@
 
 ---
 
-**Document Version**: 2.0 (Updated for Phase 2 Completion)  
+**Document Version**: 2.1 (Updated for Phase 2+ Enhanced)  
 **Last Updated**: July 27, 2025  
 **Next Review**: Quarterly  
 **Approved By**: Training Manager
 
-*This guide has been comprehensively updated to reflect the successful completion of Phase 2, including interactive training systems, voice search capabilities, real-time analytics, advanced bilingual support, and professional certificate management.*
+*This guide has been comprehensively updated to reflect the successful completion of Phase 2+ Enhanced, including interactive training systems with analytics client wrappers, voice search capabilities, real-time analytics with client-side optimization, advanced bilingual EN/FR support, E2E testing procedures, and professional certificate management.*
 
 *This guide ensures comprehensive staff onboarding for effective use of the Krong Thai SOP Management System.*

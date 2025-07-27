@@ -4,20 +4,20 @@
 
 ### Search Queries (Target: <100ms)
 
-#### Optimized Thai Search
+#### Optimized French Search
 ```sql
 -- Before: Basic search with poor performance
 SELECT * FROM sop_documents 
-WHERE title_th ILIKE '%อาหาร%' OR content_th ILIKE '%อาหาร%';
+WHERE title_fr ILIKE '%nourriture%' OR content_fr ILIKE '%nourriture%';
 
 -- After: Optimized with GIN index and ranking
 SELECT * FROM search_sop_documents(
     '550e8400-e29b-41d4-a716-446655440000',  -- restaurant_id
-    'อาหาร',                                   -- search_term
-    'th',                                      -- language
-    NULL,                                      -- category_id (optional)
-    20,                                        -- limit
-    0                                          -- offset
+    'nourriture',                             -- search_term
+    'fr',                                     -- language
+    NULL,                                     -- category_id (optional)
+    20,                                       -- limit
+    0                                         -- offset
 );
 ```
 
@@ -191,7 +191,7 @@ SELECT * FROM get_alert_summary(24);
 SELECT log_query_performance(
     'sop_search',                    -- query_type
     45.2,                           -- execution_time_ms
-    'Thai search for food safety',   -- query_text
+    'French search for food safety', -- query_text
     '550e8400-e29b-41d4-a716-446655440000', -- restaurant_id
     '880e8400-e29b-41d4-a716-446655440000'  -- user_id
 );
@@ -254,6 +254,8 @@ SELECT run_monitoring_cycle();
 5. **Monitor query plans** using EXPLAIN ANALYZE
 6. **Use functions** for complex, frequently-used queries
 7. **Subscribe selectively** to real-time channels to minimize overhead
+8. **Use analytics client wrappers** for optimized dashboard performance (Phase 2+ Enhanced)
+9. **Implement E2E testing** with Cypress to validate query performance
 
 ### Common Pitfalls to Avoid
 

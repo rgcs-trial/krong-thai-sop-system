@@ -15,13 +15,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
+import { 
+  FormField, 
+  FormLabel, 
+  FormInput, 
+  FormSelect, 
+  FormGrid, 
+  FormSection 
+} from '@/components/ui/form-field';
 import { RestaurantErrorDisplay } from './restaurant-errors';
 
 interface RestaurantFormData {
   name: string;
-  name_th: string;
-  address?: string;
-  address_th?: string;
+  name_fr: string;
+  street_address?: string;
+  street_address_fr?: string;
+  city?: string;
+  city_fr?: string;
+  state_province?: string;
+  state_province_fr?: string;
+  postal_code?: string;
+  country?: string;
   phone?: string;
   email?: string;
   timezone: string;
@@ -44,23 +58,29 @@ interface RestaurantFormProps {
 }
 
 const timezones = [
-  'Asia/Bangkok',
-  'Asia/Singapore',
-  'Asia/Kuala_Lumpur',
-  'Asia/Jakarta',
-  'Asia/Manila',
-  'Asia/Ho_Chi_Minh',
+  'America/New_York',
+  'America/Chicago',
+  'America/Denver', 
+  'America/Los_Angeles',
+  'America/Toronto',
+  'America/Vancouver',
   'UTC'
 ];
 
+const countries = [
+  { code: 'US', name: 'United States', name_fr: 'États-Unis' },
+  { code: 'CA', name: 'Canada', name_fr: 'Canada' },
+  { code: 'MX', name: 'Mexico', name_fr: 'Mexique' }
+];
+
 const daysOfWeek = [
-  { key: 'monday', en: 'Monday', th: 'จันทร์' },
-  { key: 'tuesday', en: 'Tuesday', th: 'อังคาร' },
-  { key: 'wednesday', en: 'Wednesday', th: 'พุธ' },
-  { key: 'thursday', en: 'Thursday', th: 'พฤหัสบดี' },
-  { key: 'friday', en: 'Friday', th: 'ศุกร์' },
-  { key: 'saturday', en: 'Saturday', th: 'เสาร์' },
-  { key: 'sunday', en: 'Sunday', th: 'อาทิตย์' }
+  { key: 'monday', en: 'Monday', fr: 'Lundi' },
+  { key: 'tuesday', en: 'Tuesday', fr: 'Mardi' },
+  { key: 'wednesday', en: 'Wednesday', fr: 'Mercredi' },
+  { key: 'thursday', en: 'Thursday', fr: 'Jeudi' },
+  { key: 'friday', en: 'Friday', fr: 'Vendredi' },
+  { key: 'saturday', en: 'Saturday', fr: 'Samedi' },
+  { key: 'sunday', en: 'Sunday', fr: 'Dimanche' }
 ];
 
 export function RestaurantForm({
@@ -73,12 +93,18 @@ export function RestaurantForm({
 }: RestaurantFormProps) {
   const [formData, setFormData] = useState<RestaurantFormData>({
     name: '',
-    name_th: '',
-    address: '',
-    address_th: '',
+    name_fr: '',
+    street_address: '',
+    street_address_fr: '',
+    city: '',
+    city_fr: '',
+    state_province: '',
+    state_province_fr: '',
+    postal_code: '',
+    country: 'US',
     phone: '',
     email: '',
-    timezone: 'Asia/Bangkok',
+    timezone: 'America/New_York',
     capacity: 50,
     operational_hours: {},
     settings: {},
@@ -113,30 +139,30 @@ export function RestaurantForm({
 
     // Required fields validation
     if (!formData.name.trim()) {
-      newErrors.name = locale === 'en' ? 'Restaurant name is required' : 'ชื่อร้านอาหารต้องระบุ';
+      newErrors.name = locale === 'en' ? 'Restaurant name is required' : 'Le nom du restaurant est requis';
     }
 
-    if (!formData.name_th.trim()) {
-      newErrors.name_th = locale === 'en' ? 'Thai restaurant name is required' : 'ชื่อร้านอาหารภาษาไทยต้องระบุ';
+    if (!formData.name_fr.trim()) {
+      newErrors.name_fr = locale === 'en' ? 'French restaurant name is required' : 'Le nom du restaurant en français est requis';
     }
 
     if (!formData.timezone) {
-      newErrors.timezone = locale === 'en' ? 'Timezone is required' : 'เขตเวลาต้องระบุ';
+      newErrors.timezone = locale === 'en' ? 'Timezone is required' : 'Le fuseau horaire est requis';
     }
 
     // Email validation
     if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = locale === 'en' ? 'Invalid email format' : 'รูปแบบอีเมลไม่ถูกต้อง';
+      newErrors.email = locale === 'en' ? 'Invalid email format' : 'Format d\'email invalide';
     }
 
     // Phone validation (basic)
     if (formData.phone && !/^\+?[\d\s-()]+$/.test(formData.phone)) {
-      newErrors.phone = locale === 'en' ? 'Invalid phone format' : 'รูปแบบเบอร์โทรไม่ถูกต้อง';
+      newErrors.phone = locale === 'en' ? 'Invalid phone format' : 'Format de téléphone invalide';
     }
 
     // Capacity validation
     if (formData.capacity && formData.capacity < 1) {
-      newErrors.capacity = locale === 'en' ? 'Capacity must be at least 1' : 'จำนวนที่นั่งต้องมากกว่า 0';
+      newErrors.capacity = locale === 'en' ? 'Capacity must be at least 1' : 'La capacité doit être d\'au moins 1';
     }
 
     // Operational hours validation
@@ -146,11 +172,11 @@ export function RestaurantForm({
           if (!hours.open || !hours.close) {
             newErrors[`${day}_hours`] = locale === 'en' 
               ? 'Open and close times are required' 
-              : 'เวลาเปิดและปิดต้องระบุ';
+              : 'Les heures d\'ouverture et de fermeture sont requises';
           } else if (hours.open >= hours.close) {
             newErrors[`${day}_hours`] = locale === 'en' 
               ? 'Close time must be after open time' 
-              : 'เวลาปิดต้องหลังเวลาเปิด';
+              : 'L\'heure de fermeture doit être après l\'heure d\'ouverture';
           }
         }
       });
@@ -229,14 +255,14 @@ export function RestaurantForm({
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             {mode === 'create' 
-              ? (locale === 'en' ? 'Add New Restaurant Location' : 'เพิ่มสถานที่ร้านอาหารใหม่')
-              : (locale === 'en' ? 'Edit Restaurant Location' : 'แก้ไขสถานที่ร้านอาหาร')
+              ? (locale === 'en' ? 'Add New Restaurant Location' : 'Ajouter un nouveau restaurant')
+              : (locale === 'en' ? 'Edit Restaurant Location' : 'Modifier le restaurant')
             }
           </h1>
           <p className="text-gray-600">
             {locale === 'en' 
               ? 'Enter restaurant details and operational settings' 
-              : 'กรอกรายละเอียดร้านอาหารและการตั้งค่าการดำเนินงาน'
+              : 'Entrez les détails du restaurant et les paramètres opérationnels'
             }
           </p>
         </div>
@@ -255,175 +281,201 @@ export function RestaurantForm({
           <Tabs value={currentTab} onValueChange={setCurrentTab}>
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="basic">
-                {locale === 'en' ? 'Basic Info' : 'ข้อมูลพื้นฐาน'}
+                {locale === 'en' ? 'Basic Info' : 'Informations de base'}
               </TabsTrigger>
               <TabsTrigger value="hours">
-                {locale === 'en' ? 'Operating Hours' : 'เวลาทำการ'}
+                {locale === 'en' ? 'Operating Hours' : 'Heures d\'ouverture'}
               </TabsTrigger>
               <TabsTrigger value="settings">
-                {locale === 'en' ? 'Settings' : 'การตั้งค่า'}
+                {locale === 'en' ? 'Settings' : 'Paramètres'}
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="basic" className="space-y-6">
               {/* Restaurant Names */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="name">
-                    {locale === 'en' ? 'Restaurant Name (English)' : 'ชื่อร้าน (อังกฤษ)'}
-                    <span className="text-red-500 ml-1">*</span>
-                  </Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                    placeholder={locale === 'en' ? 'Enter restaurant name' : 'ระบุชื่อร้านอาหาร'}
-                    className={errors.name ? 'border-red-500' : ''}
-                  />
-                  {errors.name && (
-                    <p className="text-sm text-red-500">{errors.name}</p>
-                  )}
-                </div>
+              <FormGrid columns={2}>
+                <FormInput
+                  id="name"
+                  label={locale === 'en' ? 'Restaurant Name (English)' : 'Nom du restaurant (Anglais)'}
+                  value={formData.name}
+                  onChange={(e) => handleInputChange('name', e.target.value)}
+                  placeholder={locale === 'en' ? 'Enter restaurant name' : 'Entrez le nom du restaurant'}
+                  error={errors.name}
+                  required
+                />
 
-                <div className="space-y-2">
-                  <Label htmlFor="name_th">
-                    {locale === 'en' ? 'Restaurant Name (Thai)' : 'ชื่อร้าน (ไทย)'}
-                    <span className="text-red-500 ml-1">*</span>
-                  </Label>
-                  <Input
-                    id="name_th"
-                    type="text"
-                    value={formData.name_th}
-                    onChange={(e) => handleInputChange('name_th', e.target.value)}
-                    placeholder={locale === 'en' ? 'ระบุชื่อร้านภาษาไทย' : 'ระบุชื่อร้านภาษาไทย'}
-                    className={`${errors.name_th ? 'border-red-500' : ''} font-thai`}
-                  />
-                  {errors.name_th && (
-                    <p className="text-sm text-red-500">{errors.name_th}</p>
-                  )}
-                </div>
-              </div>
+                <FormInput
+                  id="name_fr"
+                  label={locale === 'en' ? 'Restaurant Name (French)' : 'Nom du restaurant (Français)'}
+                  value={formData.name_fr}
+                  onChange={(e) => handleInputChange('name_fr', e.target.value)}
+                  placeholder={locale === 'en' ? 'Entrez le nom en français' : 'Entrez le nom en français'}
+                  error={errors.name_fr}
+                  required
+                />
+              </FormGrid>
 
-              {/* Addresses */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="address">
-                    {locale === 'en' ? 'Address (English)' : 'ที่อยู่ (อังกฤษ)'}
-                  </Label>
-                  <Input
-                    id="address"
-                    type="text"
-                    value={formData.address}
-                    onChange={(e) => handleInputChange('address', e.target.value)}
-                    placeholder={locale === 'en' ? 'Enter address' : 'ระบุที่อยู่'}
+              {/* Address Information */}
+              <FormSection 
+                title={locale === 'en' ? 'Address Information' : 'Informations d\'adresse'}
+                description={locale === 'en' ? 'Enter the restaurant\'s physical location details' : 'Entrez les détails de l\'emplacement physique du restaurant'}
+              >
+                {/* Street Address */}
+                <FormGrid columns={2}>
+                  <FormInput
+                    id="street_address"
+                    label={locale === 'en' ? 'Street Address (English)' : 'Adresse civique (Anglais)'}
+                    value={formData.street_address}
+                    onChange={(e) => handleInputChange('street_address', e.target.value)}
+                    placeholder={locale === 'en' ? '123 Main Street' : '123 Rue Principale'}
+                    error={errors.street_address}
                   />
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="address_th">
-                    {locale === 'en' ? 'Address (Thai)' : 'ที่อยู่ (ไทย)'}
-                  </Label>
-                  <Input
-                    id="address_th"
-                    type="text"
-                    value={formData.address_th}
-                    onChange={(e) => handleInputChange('address_th', e.target.value)}
-                    placeholder={locale === 'en' ? 'ระบุที่อยู่ภาษาไทย' : 'ระบุที่อยู่ภาษาไทย'}
-                    className="font-thai"
+                  <FormInput
+                    id="street_address_fr"
+                    label={locale === 'en' ? 'Street Address (French)' : 'Adresse civique (Français)'}
+                    value={formData.street_address_fr}
+                    onChange={(e) => handleInputChange('street_address_fr', e.target.value)}
+                    placeholder={locale === 'en' ? '123 Rue Principale' : '123 Rue Principale'}
+                    error={errors.street_address_fr}
                   />
-                </div>
-              </div>
+                </FormGrid>
+
+                {/* City */}
+                <FormGrid columns={2}>
+                  <FormInput
+                    id="city"
+                    label={locale === 'en' ? 'City (English)' : 'Ville (Anglais)'}
+                    value={formData.city}
+                    onChange={(e) => handleInputChange('city', e.target.value)}
+                    placeholder={locale === 'en' ? 'New York' : 'New York'}
+                    error={errors.city}
+                  />
+
+                  <FormInput
+                    id="city_fr"
+                    label={locale === 'en' ? 'City (French)' : 'Ville (Français)'}
+                    value={formData.city_fr}
+                    onChange={(e) => handleInputChange('city_fr', e.target.value)}
+                    placeholder={locale === 'en' ? 'Montréal' : 'Montréal'}
+                    error={errors.city_fr}
+                  />
+                </FormGrid>
+
+                {/* State/Province and Postal Code */}
+                <FormGrid columns={3}>
+                  <FormInput
+                    id="state_province"
+                    label={locale === 'en' ? 'State/Province (English)' : 'État/Province (Anglais)'}
+                    value={formData.state_province}
+                    onChange={(e) => handleInputChange('state_province', e.target.value)}
+                    placeholder={locale === 'en' ? 'NY / Ontario' : 'NY / Ontario'}
+                    error={errors.state_province}
+                  />
+
+                  <FormInput
+                    id="state_province_fr"
+                    label={locale === 'en' ? 'State/Province (French)' : 'État/Province (Français)'}
+                    value={formData.state_province_fr}
+                    onChange={(e) => handleInputChange('state_province_fr', e.target.value)}
+                    placeholder={locale === 'en' ? 'NY / Ontario' : 'NY / Ontario'}
+                    error={errors.state_province_fr}
+                  />
+
+                  <FormInput
+                    id="postal_code"
+                    label={locale === 'en' ? 'ZIP/Postal Code' : 'Code postal'}
+                    value={formData.postal_code}
+                    onChange={(e) => handleInputChange('postal_code', e.target.value)}
+                    placeholder={locale === 'en' ? '10001 / H3A 1A1' : '10001 / H3A 1A1'}
+                    error={errors.postal_code}
+                  />
+                </FormGrid>
+
+                {/* Country */}
+                <FormSelect
+                  id="country"
+                  label={locale === 'en' ? 'Country' : 'Pays'}
+                  value={formData.country}
+                  onValueChange={(value) => handleInputChange('country', value)}
+                  options={countries.map(country => ({
+                    value: country.code,
+                    label: locale === 'en' ? country.name : country.name_fr
+                  }))}
+                  placeholder={locale === 'en' ? 'Select country' : 'Sélectionnez le pays'}
+                  error={errors.country}
+                  required
+                />
+              </FormSection>
 
               {/* Contact Information */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">
-                    {locale === 'en' ? 'Phone Number' : 'เบอร์โทรศัพท์'}
-                  </Label>
-                  <Input
+              <FormSection 
+                title={locale === 'en' ? 'Contact Information' : 'Informations de contact'}
+                description={locale === 'en' ? 'Primary contact details for the restaurant' : 'Coordonnées principales du restaurant'}
+              >
+                <FormGrid columns={2}>
+                  <FormInput
                     id="phone"
                     type="tel"
+                    label={locale === 'en' ? 'Phone Number' : 'Numéro de téléphone'}
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder={locale === 'en' ? '+66 XX XXX XXXX' : '+66 XX XXX XXXX'}
-                    className={errors.phone ? 'border-red-500' : ''}
+                    placeholder={locale === 'en' ? '+1 (555) 123-4567' : '+1 (555) 123-4567'}
+                    error={errors.phone}
+                    helpText={locale === 'en' ? 'Include country and area code' : 'Inclure le code pays et régional'}
                   />
-                  {errors.phone && (
-                    <p className="text-sm text-red-500">{errors.phone}</p>
-                  )}
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">
-                    {locale === 'en' ? 'Email Address' : 'อีเมล'}
-                  </Label>
-                  <Input
+                  <FormInput
                     id="email"
                     type="email"
+                    label={locale === 'en' ? 'Email Address' : 'Adresse e-mail'}
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     placeholder={locale === 'en' ? 'restaurant@example.com' : 'restaurant@example.com'}
-                    className={errors.email ? 'border-red-500' : ''}
+                    error={errors.email}
+                    helpText={locale === 'en' ? 'Primary contact email for the restaurant' : 'E-mail de contact principal du restaurant'}
                   />
-                  {errors.email && (
-                    <p className="text-sm text-red-500">{errors.email}</p>
-                  )}
-                </div>
-              </div>
+                </FormGrid>
+              </FormSection>
 
               {/* Timezone */}
-              <div className="space-y-2">
-                <Label htmlFor="timezone">
-                  {locale === 'en' ? 'Timezone' : 'เขตเวลา'}
-                  <span className="text-red-500 ml-1">*</span>
-                </Label>
-                <Select 
-                  value={formData.timezone} 
-                  onValueChange={(value) => handleInputChange('timezone', value)}
-                >
-                  <SelectTrigger className={errors.timezone ? 'border-red-500' : ''}>
-                    <SelectValue placeholder={locale === 'en' ? 'Select timezone' : 'เลือกเขตเวลา'} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {timezones.map((tz) => (
-                      <SelectItem key={tz} value={tz}>
-                        {tz}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {errors.timezone && (
-                  <p className="text-sm text-red-500">{errors.timezone}</p>
-                )}
-              </div>
+              <FormSelect
+                id="timezone"
+                label={locale === 'en' ? 'Timezone' : 'Fuseau horaire'}
+                value={formData.timezone}
+                onValueChange={(value) => handleInputChange('timezone', value)}
+                options={timezones.map(tz => ({
+                  value: tz,
+                  label: tz
+                }))}
+                placeholder={locale === 'en' ? 'Select timezone' : 'Sélectionnez le fuseau horaire'}
+                error={errors.timezone}
+                required
+                helpText={locale === 'en' ? 'Choose the timezone for restaurant operations' : 'Choisissez le fuseau horaire pour les opérations du restaurant'}
+              />
             </TabsContent>
 
             <TabsContent value="hours" className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">
-                  {locale === 'en' ? 'Operating Hours' : 'เวลาทำการ'}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {locale === 'en' 
-                    ? 'Set the operating hours for each day of the week' 
-                    : 'กำหนดเวลาทำการสำหรับแต่ละวันในสัปดาห์'
-                  }
-                </p>
-
+              <FormSection 
+                title={locale === 'en' ? 'Operating Hours' : 'Heures d\'ouverture'}
+                description={locale === 'en' 
+                  ? 'Set the operating hours for each day of the week' 
+                  : 'Définissez les heures d\'ouverture pour chaque jour de la semaine'
+                }
+              >
                 {daysOfWeek.map((day) => {
                   const dayHours = formData.operational_hours?.[day.key] || { open: '09:00', close: '22:00', closed: false };
                   
                   return (
-                    <div key={day.key} className="p-4 border rounded-lg">
+                    <div key={day.key} className="p-4 border border-gray-200 rounded-lg bg-gray-50/50 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-medium">
-                          {locale === 'en' ? day.en : day.th}
+                        <h4 className="font-medium text-gray-900">
+                          {locale === 'en' ? day.en : day.fr}
                         </h4>
                         <div className="flex items-center space-x-2">
-                          <Label htmlFor={`${day.key}_closed`} className="text-sm">
-                            {locale === 'en' ? 'Closed' : 'ปิด'}
-                          </Label>
+                          <FormLabel htmlFor={`${day.key}_closed`} className="text-sm font-normal">
+                            {locale === 'en' ? 'Closed' : 'Fermé'}
+                          </FormLabel>
                           <Switch
                             id={`${day.key}_closed`}
                             checked={dayHours.closed || false}
@@ -433,66 +485,56 @@ export function RestaurantForm({
                       </div>
 
                       {!dayHours.closed && (
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-2">
-                            <Label htmlFor={`${day.key}_open`} className="text-sm">
-                              {locale === 'en' ? 'Open Time' : 'เวลาเปิด'}
-                            </Label>
+                        <FormGrid columns={2}>
+                          <FormField error={errors[`${day.key}_hours`]}>
+                            <FormLabel htmlFor={`${day.key}_open`}>
+                              {locale === 'en' ? 'Open Time' : 'Heure d\'ouverture'}
+                            </FormLabel>
                             <Input
                               id={`${day.key}_open`}
                               type="time"
                               value={dayHours.open || '09:00'}
                               onChange={(e) => handleOperationalHoursChange(day.key, 'open', e.target.value)}
-                              className={errors[`${day.key}_hours`] ? 'border-red-500' : ''}
+                              className={errors[`${day.key}_hours`] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                              aria-invalid={errors[`${day.key}_hours`] ? 'true' : 'false'}
                             />
-                          </div>
-                          <div className="space-y-2">
-                            <Label htmlFor={`${day.key}_close`} className="text-sm">
-                              {locale === 'en' ? 'Close Time' : 'เวลาปิด'}
-                            </Label>
+                          </FormField>
+                          <FormField error={errors[`${day.key}_hours`]}>
+                            <FormLabel htmlFor={`${day.key}_close`}>
+                              {locale === 'en' ? 'Close Time' : 'Heure de fermeture'}
+                            </FormLabel>
                             <Input
                               id={`${day.key}_close`}
                               type="time"
                               value={dayHours.close || '22:00'}
                               onChange={(e) => handleOperationalHoursChange(day.key, 'close', e.target.value)}
-                              className={errors[`${day.key}_hours`] ? 'border-red-500' : ''}
+                              className={errors[`${day.key}_hours`] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                              aria-invalid={errors[`${day.key}_hours`] ? 'true' : 'false'}
                             />
-                          </div>
-                        </div>
-                      )}
-
-                      {errors[`${day.key}_hours`] && (
-                        <p className="text-sm text-red-500 mt-2">{errors[`${day.key}_hours`]}</p>
+                          </FormField>
+                        </FormGrid>
                       )}
                     </div>
                   );
                 })}
-              </div>
+              </FormSection>
             </TabsContent>
 
             <TabsContent value="settings" className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold">
-                  {locale === 'en' ? 'Restaurant Settings' : 'การตั้งค่าร้านอาหาร'}
-                </h3>
-
-                <div className="space-y-2">
-                  <Label htmlFor="capacity">
-                    {locale === 'en' ? 'Seating Capacity' : 'จำนวนที่นั่ง'}
-                  </Label>
-                  <Input
-                    id="capacity"
-                    type="number"
-                    min="1"
-                    value={formData.capacity || ''}
-                    onChange={(e) => handleInputChange('capacity', parseInt(e.target.value) || 0)}
-                    placeholder={locale === 'en' ? 'Number of seats' : 'จำนวนที่นั่ง'}
-                    className={errors.capacity ? 'border-red-500' : ''}
-                  />
-                  {errors.capacity && (
-                    <p className="text-sm text-red-500">{errors.capacity}</p>
-                  )}
-                </div>
+              <FormSection 
+                title={locale === 'en' ? 'Restaurant Settings' : 'Paramètres du restaurant'}
+                description={locale === 'en' ? 'Configure basic restaurant operational settings' : 'Configurez les paramètres opérationnels de base du restaurant'}
+              >
+                <FormInput
+                  id="capacity"
+                  type="number"
+                  label={locale === 'en' ? 'Seating Capacity' : 'Capacité d\'accueil'}
+                  value={formData.capacity?.toString() || ''}
+                  onChange={(e) => handleInputChange('capacity', parseInt(e.target.value) || 0)}
+                  placeholder={locale === 'en' ? 'Number of seats' : 'Nombre de places'}
+                  error={errors.capacity}
+                  helpText={locale === 'en' ? 'Total number of customers that can be seated' : 'Nombre total de clients pouvant être assis'}
+                />
 
                 <Alert>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -501,11 +543,11 @@ export function RestaurantForm({
                   <AlertDescription>
                     {locale === 'en' 
                       ? 'Additional settings can be configured after creating the restaurant location.'
-                      : 'การตั้งค่าเพิ่มเติมสามารถกำหนดได้หลังจากสร้างสถานที่ร้านอาหารแล้ว'
+                      : 'Des paramètres supplémentaires peuvent être configurés après la création du restaurant'
                     }
                   </AlertDescription>
                 </Alert>
-              </div>
+              </FormSection>
             </TabsContent>
           </Tabs>
 
@@ -518,7 +560,7 @@ export function RestaurantForm({
               variant="outline" 
               disabled={isSubmitting}
             >
-              {locale === 'en' ? 'Cancel' : 'ยกเลิก'}
+              {locale === 'en' ? 'Cancel' : 'Annuler'}
             </Button>
             <Button 
               type="submit" 
@@ -528,7 +570,7 @@ export function RestaurantForm({
               {isSubmitting ? (
                 <>
                   <div className="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full" />
-                  {locale === 'en' ? 'Saving...' : 'กำลังบันทึก...'}
+                  {locale === 'en' ? 'Saving...' : 'Enregistrement...'}
                 </>
               ) : (
                 <>
@@ -536,8 +578,8 @@ export function RestaurantForm({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   {mode === 'create' 
-                    ? (locale === 'en' ? 'Create Restaurant' : 'สร้างร้านอาหาร')
-                    : (locale === 'en' ? 'Update Restaurant' : 'อัปเดตร้านอาหาร')
+                    ? (locale === 'en' ? 'Create Restaurant' : 'Créer le restaurant')
+                    : (locale === 'en' ? 'Update Restaurant' : 'Mettre à jour le restaurant')
                   }
                 </>
               )}

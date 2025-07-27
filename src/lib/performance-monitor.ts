@@ -3,7 +3,7 @@
  * Tracks Web Vitals, custom metrics, and tablet-specific performance indicators
  */
 
-import { getCLS, getFID, getFCP, getLCP, getTTFB, Metric } from 'web-vitals';
+import { onCLS, onFID, onFCP, onLCP, onTTFB, type Metric } from 'web-vitals';
 
 // Performance metrics interface
 interface PerformanceMetrics {
@@ -108,31 +108,31 @@ class PerformanceMonitor {
 
   private initializeWebVitals(): void {
     // Largest Contentful Paint
-    getLCP((metric: Metric) => {
+    onLCP((metric: Metric) => {
       this.metrics.lcp = metric.value;
       this.evaluateMetric('lcp', metric.value);
     });
 
     // First Input Delay
-    getFID((metric: Metric) => {
+    onFID((metric: Metric) => {
       this.metrics.fid = metric.value;
       this.evaluateMetric('fid', metric.value);
     });
 
     // Cumulative Layout Shift
-    getCLS((metric: Metric) => {
+    onCLS((metric: Metric) => {
       this.metrics.cls = metric.value;
       this.evaluateMetric('cls', metric.value);
     });
 
     // First Contentful Paint
-    getFCP((metric: Metric) => {
+    onFCP((metric: Metric) => {
       this.metrics.fcp = metric.value;
       this.evaluateMetric('fcp', metric.value);
     });
 
     // Time to First Byte
-    getTTFB((metric: Metric) => {
+    onTTFB((metric: Metric) => {
       this.metrics.ttfb = metric.value;
       this.evaluateMetric('ttfb', metric.value);
     });
@@ -213,7 +213,7 @@ class PerformanceMonitor {
       requestTime,
       responseTime,
       domParseTime,
-      totalLoadTime: entry.loadEventEnd - entry.navigationStart,
+      totalLoadTime: entry.loadEventEnd - entry.startTime,
     });
   }
 

@@ -6,23 +6,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import dynamic from 'next/dynamic';
+import { ExecutiveClientWrapper } from '@/components/analytics/executive-client-wrapper';
 
-const ExecutiveDashboard = dynamic(
-  () => import('@/components/analytics/executive-dashboard').then(mod => ({ default: mod.ExecutiveDashboard })),
-  {
-    loading: () => (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-            <p className="mt-2 text-muted-foreground">Loading executive dashboard...</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-);
+export const dynamic = 'force-dynamic';
 
 interface ExecutiveAnalyticsPageProps {
   params: Promise<{
@@ -51,7 +37,7 @@ export default async function ExecutiveAnalyticsPage({ params }: ExecutiveAnalyt
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <ExecutiveDashboard />
+      <ExecutiveClientWrapper />
     </div>
   );
 }

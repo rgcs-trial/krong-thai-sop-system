@@ -1,10 +1,10 @@
 # Krong Thai UI Component Library
 
-**Version**: 0.2.0 - Phase 2 Complete  
-**Components**: 55+ Across 6 Domains  
-**Status**: Enterprise Production Ready with Restaurant Management & Error Handling
+**Version**: 0.2.0 - Phase 2+ Enhanced  
+**Components**: 60+ Across 6 Domains  
+**Status**: Production Optimized with Analytics Client Wrappers & E2E Testing
 
-A comprehensive design system for Krong Thai restaurant management platform, built on shadcn/ui with Thai cultural elements, bilingual EN/TH support, and enterprise-grade features including analytics, training, and voice search capabilities.
+A comprehensive design system for Krong Thai restaurant management platform, built on shadcn/ui with French cultural elements, bilingual EN/FR support, and enterprise-grade features including analytics client wrappers, training system, Cypress E2E testing, and voice search capabilities.
 
 ## Brand Foundation
 
@@ -55,7 +55,7 @@ A comprehensive design system for Krong Thai restaurant management platform, bui
 ```css
 --font-serif: 'EB Garamond', serif; /* Headlines, elegant text */
 --font-sans: 'Inter', sans-serif; /* Body text, UI elements */
---font-thai: 'Inter', sans-serif; /* Thai text */
+--font-french: 'Inter', sans-serif; /* French text */
 ```
 
 #### Font Scale
@@ -96,8 +96,8 @@ A comprehensive design system for Krong Thai restaurant management platform, bui
 
 ### Language Direction Classes
 ```css
-.text-thai {
-  font-family: var(--font-thai);
+.text-french {
+  font-family: var(--font-french);
   line-height: var(--leading-relaxed);
 }
 
@@ -129,7 +129,7 @@ A comprehensive design system for Krong Thai restaurant management platform, bui
   variant="default" 
   className="bg-krong-red hover:bg-krong-red-600 text-white font-medium min-h-[44px] px-6"
 >
-  บันทึก / Save
+  Enregistrer / Save
 </Button>
 ```
 
@@ -139,7 +139,7 @@ A comprehensive design system for Krong Thai restaurant management platform, bui
   variant="secondary" 
   className="bg-golden-saffron hover:bg-golden-saffron-600 text-black font-medium min-h-[44px] px-6"
 >
-  ดูรายละเอียด / View Details
+  Voir les détails / View Details
 </Button>
 ```
 
@@ -480,17 +480,76 @@ const NumberInput = ({ value, onChange, min = 0, max = 99 }) => {
 
 ### 5. Analytics Components
 - **Executive Dashboard**: High-level analytics with charts and KPIs
+- **Executive Client Wrapper**: Client-side wrapper preventing SSR issues
 - **Real-time Monitoring**: Live system status and performance metrics
+- **Real-time Monitoring Client Wrapper**: SSR-safe real-time dashboard wrapper
+- **Operational Insights**: Business analytics and reporting dashboard
+- **Operational Insights Client Wrapper**: Client-side operational analytics wrapper
+- **SOP Analytics**: SOP usage and effectiveness metrics
+- **SOP Analytics Client Wrapper**: Client-side SOP metrics wrapper
+- **Training Analytics**: Staff training progress and completion analytics
+- **Training Analytics Client Wrapper**: Client-side training dashboard wrapper
 - **Report Generators**: Export capabilities with multiple formats
 - **Data Visualizations**: Recharts integration with restaurant themes
 
 ### 6. UI Foundation Components
-- **Form Controls**: Enhanced shadcn/ui components with Thai support
+- **Form Controls**: Enhanced shadcn/ui components with French support
+- **Form Field Component**: Reusable form field with bilingual labels and validation
 - **Navigation**: Tablet-optimized navigation patterns
 - **Layout Components**: Responsive grid and container systems
 - **Feedback Components**: Toasts, alerts, and status indicators
+- **Service Status Error**: Specialized error handling for service connectivity issues
 
-## Recent Additions (v0.2.0)
+## Recent Additions (v0.2.0+)
+
+### Analytics Client Wrapper Components
+```tsx
+// Executive Dashboard Client Wrapper
+<ExecutiveClientWrapper 
+  className="min-h-[600px]"
+  loadingText="Loading executive dashboard..."
+/>
+
+// Real-time Monitoring Client Wrapper
+<RealtimeMonitoringClientWrapper 
+  className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+  refreshInterval={5000}
+/>
+
+// SOP Analytics Client Wrapper
+<SOPAnalyticsClientWrapper 
+  filters={{ category: 'all', dateRange: '30d' }}
+  exportEnabled={true}
+/>
+
+// Training Analytics Client Wrapper
+<TrainingAnalyticsClientWrapper 
+  userId={user.id}
+  showCertificates={true}
+/>
+```
+
+### Form Field Component
+```tsx
+<FormField
+  name="restaurantName"
+  label={{ en: "Restaurant Name", fr: "Nom du restaurant" }}
+  placeholder={{ en: "Enter name", fr: "Entrez le nom" }}
+  required={true}
+  validation={{ minLength: 2, maxLength: 100 }}
+  locale="fr"
+/>
+```
+
+### Cypress E2E Testing Components
+```tsx
+// Test automation components for E2E testing
+<TestAutomation
+  testId="restaurant-form-bilingual"
+  scenario="bilingual-form-submission"
+  mockData={mockRestaurantData}
+/>
+```
 
 ### Enhanced Error Handling System
 ```tsx
