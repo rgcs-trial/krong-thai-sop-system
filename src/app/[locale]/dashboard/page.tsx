@@ -37,11 +37,12 @@ interface DashboardPageProps {
 
 export default function DashboardPage({ params }: DashboardPageProps) {
   const [locale, setLocale] = useState('en');
+  const [isClient, setIsClient] = useState(false);
   const t = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const tAuth = useTranslations('auth');
   
-  // Auth store
+  // Auth store - only access after client hydration
   const { 
     user, 
     userProfile, 
@@ -55,23 +56,42 @@ export default function DashboardPage({ params }: DashboardPageProps) {
     updateLastActivity 
   } = useSession();
 
-  // Resolve params and update activity on component mount
+  // Resolve params and set client ready state
   useEffect(() => {
     const resolveParams = async () => {
       const { locale: paramLocale } = await params;
       setLocale(paramLocale);
+      setIsClient(true);
     };
     
     resolveParams();
-    updateLastActivity();
-  }, [params, updateLastActivity]);
+  }, [params]);
+
+  // Update activity only on client side
+  useEffect(() => {
+    if (isClient) {
+      updateLastActivity();
+    }
+  }, [isClient, updateLastActivity]);
 
   // Handle logout
   const handleLogout = async () => {
     await logout();
   };
 
-  // Show loading state if not authenticated
+  // Show loading state during SSR or while resolving params
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-red-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show authentication loading state if not authenticated
   if (!isAuthenticated || !user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 flex items-center justify-center">
