@@ -13,20 +13,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { 
-  Shield, 
-  Users, 
-  BookOpen, 
-  Clock, 
-  Settings, 
-  LogOut,
-  CheckCircle,
-  AlertTriangle,
-  TrendingUp,
-  MapPin,
-  Smartphone,
-  Calendar
-} from 'lucide-react';
+// Optimize icon imports for tree shaking
+import { Shield } from 'lucide-react';
 
 interface DashboardPageProps {
   params: Promise<{
