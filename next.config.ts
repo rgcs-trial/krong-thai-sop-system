@@ -1,5 +1,44 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
+
+// Type declarations for next-pwa
+declare module 'next-pwa' {
+  interface PWAConfig {
+    dest: string;
+    register: boolean;
+    skipWaiting: boolean;
+    disable?: boolean;
+    scope?: string;
+    sw?: string;
+    reloadOnOnline?: boolean;
+    cacheStartUrl?: boolean;
+    dynamicStartUrl?: boolean;
+    workboxOptions?: {
+      disableDevLogs?: boolean;
+      cleanupOutdatedCaches?: boolean;
+      skipWaiting?: boolean;
+      clientsClaim?: boolean;
+      maximumFileSizeToCacheInBytes?: number;
+    };
+    runtimeCaching?: Array<{
+      urlPattern: RegExp | string | ((context: { request: Request; url: URL }) => boolean);
+      handler: string;
+      options?: {
+        cacheName: string;
+        expiration?: {
+          maxEntries: number;
+          maxAgeSeconds: number;
+        };
+        cacheKeyWillBeUsed?: (context: { request: Request }) => Promise<string>;
+        networkTimeoutSeconds?: number;
+      };
+    }>;
+  }
+  
+  function withPWA(config: PWAConfig): (nextConfig: NextConfig) => NextConfig;
+  export default withPWA;
+}
+
 import withPWA from 'next-pwa';
 
 const withNextIntl = createNextIntlPlugin('./src/lib/i18n.ts');
