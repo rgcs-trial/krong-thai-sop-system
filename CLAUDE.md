@@ -37,6 +37,10 @@ pnpm analytics             # Open analytics dashboard
 pnpm training              # Access training modules
 pnpm certificates          # View training certificates
 
+# Translation Management
+# Access translation admin interface via /admin/settings
+# Manage translations via database-driven system with workflow approval
+
 # Package management
 pnpm install               # Install dependencies using pnpm
 ```
