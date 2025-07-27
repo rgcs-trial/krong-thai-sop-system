@@ -235,7 +235,7 @@ export interface RestaurantSecuritySettings {
   locationValidation: boolean;
   allowedLocations?: string[];
   multiLanguageSecurity: boolean;
-  defaultLanguage: 'en' | 'th';
+  defaultLanguage: 'en' | 'fr';
   customSecurityRules?: SecurityValidationRule[];
 }
 
