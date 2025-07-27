@@ -8,17 +8,17 @@
 
 -- Sample Food Safety SOP
 INSERT INTO sop_documents (
-    id, category_id, restaurant_id, title, title_th, 
-    content, content_th, steps, steps_th,
-    tags, tags_th, status, priority, created_by
+    id, category_id, restaurant_id, title, title_fr, 
+    content, content_fr, steps, steps_fr,
+    tags, tags_fr, status, priority, created_by
 ) VALUES (
     '990e8400-e29b-41d4-a716-446655440000',
     (SELECT id FROM sop_categories WHERE code = 'FOOD_SAFETY'),
     '550e8400-e29b-41d4-a716-446655440000',
     'Hand Washing Procedure',
-    'ขั้นตอนการล้างมือ',
+    'Procédure de Lavage des Mains',
     'Proper hand washing is essential for food safety. This procedure must be followed by all kitchen and service staff before handling food, after using the restroom, and when switching between tasks.',
-    'การล้างมือที่ถูกต้องเป็นสิ่งสำคัญสำหรับความปลอดภัยของอาหาร ขั้นตอนนี้ต้องปฏิบัติโดยพนักงานครัวและบริการทุกคนก่อนจับอาหาร หลังใช้ห้องน้ำ และเมื่อเปลี่ยนงาน',
+    'Le lavage correct des mains est essentiel pour la sécurité alimentaire. Cette procédure doit être suivie par tout le personnel de cuisine et de service avant de manipuler les aliments, après être allé aux toilettes, et lors du changement de tâches.',
     '[
         {"step": 1, "action": "Remove jewelry and roll up sleeves", "duration": "5 seconds"},
         {"step": 2, "action": "Wet hands with warm water", "duration": "5 seconds"},
@@ -29,16 +29,16 @@ INSERT INTO sop_documents (
         {"step": 7, "action": "Use towel to turn off faucet", "duration": "2 seconds"}
     ]'::JSONB,
     '[
-        {"step": 1, "action": "ถอดเครื่องประดับและพับแขนเสื้อ", "duration": "5 วินาที"},
-        {"step": 2, "action": "เปียกมือด้วยน้ำอุ่น", "duration": "5 วินาที"},
-        {"step": 3, "action": "ใช้สบู่และถูให้เป็นฟอง 20 วินาที", "duration": "20 วินาที"},
-        {"step": 4, "action": "ถูระหว่างนิ้วและใต้เล็บ", "duration": "10 วินาที"},
-        {"step": 5, "action": "ล้างออกด้วยน้ำอุ่นให้สะอาด", "duration": "10 วินาที"},
-        {"step": 6, "action": "เช็ดด้วยกระดาษทิชชู่สะอาด", "duration": "5 วินาที"},
-        {"step": 7, "action": "ใช้ทิชชู่ปิดก๊อกน้ำ", "duration": "2 วินาที"}
+        {"step": 1, "action": "Retirer les bijoux et retrousser les manches", "duration": "5 secondes"},
+        {"step": 2, "action": "Mouiller les mains avec de l''eau tiède", "duration": "5 secondes"},
+        {"step": 3, "action": "Appliquer du savon et faire mousser pendant 20 secondes", "duration": "20 secondes"},
+        {"step": 4, "action": "Frotter entre les doigts et sous les ongles", "duration": "10 secondes"},
+        {"step": 5, "action": "Rincer abondamment à l''eau tiède", "duration": "10 secondes"},
+        {"step": 6, "action": "Sécher avec une serviette en papier propre", "duration": "5 secondes"},
+        {"step": 7, "action": "Utiliser la serviette pour fermer le robinet", "duration": "2 secondes"}
     ]'::JSONB,
     ARRAY['hygiene', 'food safety', 'handwashing', 'sanitization'],
-    ARRAY['สุขอนามัย', 'ความปลอดภัยอาหาร', 'ล้างมือ', 'ฆ่าเชื้อ'],
+    ARRAY['hygiène', 'sécurité alimentaire', 'lavage des mains', 'désinfection'],
     'approved',
     'high',
     '660e8400-e29b-41d4-a716-446655440000'
@@ -46,17 +46,17 @@ INSERT INTO sop_documents (
 
 -- Sample Customer Service SOP
 INSERT INTO sop_documents (
-    id, category_id, restaurant_id, title, title_th,
-    content, content_th, steps, steps_th,
-    tags, tags_th, status, priority, created_by
+    id, category_id, restaurant_id, title, title_fr,
+    content, content_fr, steps, steps_fr,
+    tags, tags_fr, status, priority, created_by
 ) VALUES (
     '991e8400-e29b-41d4-a716-446655440000',
     (SELECT id FROM sop_categories WHERE code = 'CUSTOMER_SERVICE'),
     '550e8400-e29b-41d4-a716-446655440000',
     'Greeting and Seating Guests',
-    'การทักทายและจัดที่นั่งแขก',
+    'Accueil et Installation des Clients',
     'First impressions matter. This procedure ensures all guests receive a warm, professional welcome that reflects our Thai hospitality values.',
-    'ความประทับใจแรกเป็นสิ่งสำคัญ ขั้นตอนนี้ทำให้แขกทุกคนได้รับการต้อนรับที่อบอุ่นและเป็นมืออาชีพที่สะท้อนค่านิยมการต้อนรับแบบไทย',
+    'Les premières impressions comptent. Cette procédure garantit que tous les clients reçoivent un accueil chaleureux et professionnel qui reflète nos valeurs d''hospitalité thaïlandaise.',
     '[
         {"step": 1, "action": "Greet within 30 seconds with smile and wai", "note": "Use traditional Thai greeting"},
         {"step": 2, "action": "Ask about reservation or party size", "note": "Be prepared with seating options"},
@@ -65,14 +65,14 @@ INSERT INTO sop_documents (
         {"step": 5, "action": "Offer water and ask about drinks", "note": "Suggest traditional Thai beverages"}
     ]'::JSONB,
     '[
-        {"step": 1, "action": "ทักทายภายใน 30 วินาทีด้วยรอยยิ้มและไหว้", "note": "ใช้การทักทายแบบไทยดั้งเดิม"},
-        {"step": 2, "action": "สอบถามเรื่องการจองหรือจำนวนคน", "note": "เตรียมตัวเลือกที่นั่ง"},
-        {"step": 3, "action": "นำไปยังโต๊ะที่เหมาะสม", "note": "พิจารณาความต้องการและการเข้าถึงของแขก"},
-        {"step": 4, "action": "เสนอเมนูและอธิบายเมนูพิเศษ", "note": "เน้นอาหารไทยยอดนิยม"},
-        {"step": 5, "action": "เสนอน้ำและสอบถามเรื่องเครื่องดื่ม", "note": "แนะนำเครื่องดื่มไทยดั้งเดิม"}
+        {"step": 1, "action": "Saluer dans les 30 secondes avec un sourire et un wai", "note": "Utiliser la salutation traditionnelle thaïlandaise"},
+        {"step": 2, "action": "Demander s''il y a une réservation ou la taille du groupe", "note": "Être prêt avec les options de places"},
+        {"step": 3, "action": "Accompagner à la table appropriée", "note": "Considérer les préférences des clients et l''accessibilité"},
+        {"step": 4, "action": "Présenter les menus et expliquer les spécialités", "note": "Mettre en avant les plats thaïlandais populaires"},
+        {"step": 5, "action": "Offrir de l''eau et demander pour les boissons", "note": "Suggérer des boissons traditionnelles thaïlandaises"}
     ]'::JSONB,
     ARRAY['customer service', 'greeting', 'hospitality', 'thai culture'],
-    ARRAY['บริการลูกค้า', 'การทักทาย', 'การต้อนรับ', 'วัฒนธรรมไทย'],
+    ARRAY['service client', 'accueil', 'hospitalité', 'culture thaïlandaise'],
     'approved',
     'medium',
     '770e8400-e29b-41d4-a716-446655440000'
