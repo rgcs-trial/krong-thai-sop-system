@@ -54,7 +54,7 @@ export default function AdminSettingsPage() {
           </TabsTrigger>
           <TabsTrigger value="database" className="flex flex-col items-center gap-1 text-xs">
             <Database size={16} />
-            {t('admin.settings.database')}
+            Database
           </TabsTrigger>
           <TabsTrigger value="security" className="flex flex-col items-center gap-1 text-xs">
             <Shield size={16} />
