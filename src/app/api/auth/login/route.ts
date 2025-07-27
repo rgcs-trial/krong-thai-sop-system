@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import bcrypt from 'bcryptjs';
+import { getAuthErrorMessage, mapErrorToCode } from '@/lib/auth-errors';
 
 // Logger utility
 function logError(context: string, error: any, metadata?: any) {
