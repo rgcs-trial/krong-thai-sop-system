@@ -46,7 +46,7 @@ export default function AdminSettingsPage() {
         <TabsList className="grid w-full grid-cols-6 h-14">
           <TabsTrigger value="translations" className="flex flex-col items-center gap-1 text-xs">
             <Languages size={16} />
-            {t('admin.settings.translations')}
+            Translations
           </TabsTrigger>
           <TabsTrigger value="users" className="flex flex-col items-center gap-1 text-xs">
             <Users size={16} />
