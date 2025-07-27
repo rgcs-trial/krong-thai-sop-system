@@ -115,11 +115,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_201',
     message: {
       en: 'Too many failed login attempts',
-      th: 'พยายามเข้าสู่ระบบผิดหลายครั้งเกินไป'
+      fr: 'Trop de tentatives de connexion échouées'
     },
     userMessage: {
       en: 'Too many failed attempts. Please wait 15 minutes before trying again.',
-      th: 'พยายามผิดหลายครั้งเกินไป กรุณารอ 15 นาทีก่อนลองใหม่'
+      fr: 'Trop de tentatives échouées. Veuillez attendre 15 minutes avant de réessayer.'
     },
     severity: 'high'
   },
@@ -128,11 +128,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_202',
     message: {
       en: 'Account temporarily locked',
-      th: 'บัญชีถูกล็อกชั่วคราว'
+      fr: 'Compte temporairement verrouillé'
     },
     userMessage: {
       en: 'Your account is temporarily locked for security reasons. Please contact your manager.',
-      th: 'บัญชีของคุณถูกล็อกชั่วคราวเพื่อความปลอดภัย กรุณาติดต่อผู้จัดการของคุณ'
+      fr: 'Votre compte est temporairement verrouillé pour des raisons de sécurité. Veuillez contacter votre manager.'
     },
     severity: 'high'
   },
@@ -141,11 +141,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_203',
     message: {
       en: 'Device not recognized',
-      th: 'ไม่รู้จักอุปกรณ์นี้'
+      fr: 'Appareil non reconnu'
     },
     userMessage: {
       en: 'This device is not authorized. Please contact your manager.',
-      th: 'อุปกรณ์นี้ไม่ได้รับอนุญาต กรุณาติดต่อผู้จัดการของคุณ'
+      fr: 'Cet appareil n\'est pas autorisé. Veuillez contacter votre manager.'
     },
     severity: 'high'
   },
@@ -155,11 +155,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'SYS_301',
     message: {
       en: 'Database connection error',
-      th: 'เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล'
+      fr: 'Erreur de connexion à la base de données'
     },
     userMessage: {
       en: 'System temporarily unavailable. Please try again in a few minutes.',
-      th: 'ระบบไม่พร้อมใช้งานชั่วคราว กรุณาลองใหม่ในอีกสักครู่'
+      fr: 'Système temporairement indisponible. Veuillez réessayer dans quelques minutes.'
     },
     severity: 'critical'
   },
