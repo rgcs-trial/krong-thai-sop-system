@@ -42,6 +42,7 @@
     "categories": "Categories",
     "documents": "Documents",
     "search": "Search SOPs",
+    "searchPlaceholder": "Search SOPs, procedures, or keywords...",
     "noResults": "No SOPs found",
     "loading": "Loading SOPs...",
     "emergency": "Emergency Procedures",
