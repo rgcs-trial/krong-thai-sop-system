@@ -36,6 +36,7 @@ interface DashboardPageProps {
 }
 
 export default function DashboardPage({ params }: DashboardPageProps) {
+  const [locale, setLocale] = useState('en');
   const t = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const tAuth = useTranslations('auth');
@@ -54,10 +55,16 @@ export default function DashboardPage({ params }: DashboardPageProps) {
     updateLastActivity 
   } = useSession();
 
-  // Update activity on component mount and interactions
+  // Resolve params and update activity on component mount
   useEffect(() => {
+    const resolveParams = async () => {
+      const { locale: paramLocale } = await params;
+      setLocale(paramLocale);
+    };
+    
+    resolveParams();
     updateLastActivity();
-  }, [updateLastActivity]);
+  }, [params, updateLastActivity]);
 
   // Handle logout
   const handleLogout = async () => {
