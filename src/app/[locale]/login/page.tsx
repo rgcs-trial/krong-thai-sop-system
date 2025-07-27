@@ -226,7 +226,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
       }
     } catch (error) {
       console.error('Error creating location session:', error);
-      setError(locale === 'en' ? 'Failed to set up location session. Please try again.' : 'ไม่สามารถตั้งค่าเซสชันสถานที่ได้ กรุณาลองใหม่');
+      setError(locale === 'en' ? 'Failed to set up location session. Please try again.' : 'Impossible de configurer la session de localisation. Veuillez réessayer.');
       setShowLocationSelector(false);
     }
   };
