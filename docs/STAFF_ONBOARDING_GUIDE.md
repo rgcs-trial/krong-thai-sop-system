@@ -7,9 +7,10 @@
 **Account Creation Checklist:**
 - [ ] Create staff profile in system with correct role assignment
 - [ ] Generate unique 4-digit PIN (avoid: 0000, 1111, 1234, 0123)
-- [ ] Set language preference (English/Thai)
+- [ ] Set language preference (English/French)
 - [ ] Assign appropriate SOP category access based on position
-- [ ] Prepare physical orientation materials and tablet
+- [ ] Configure tablet device binding for security
+- [ ] Prepare physical orientation materials and assigned tablet
 
 ---
 
