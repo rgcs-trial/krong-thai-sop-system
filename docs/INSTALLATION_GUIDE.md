@@ -33,8 +33,8 @@ Complete setup instructions for the Restaurant Krong Thai Standard Operating Pro
 
 ### Technology Stack Overview
 - **Frontend**: Next.js 15.4.4 with App Router
-- **UI Components**: shadcn/ui with Tailwind CSS 4.1 (60+ components)
-- **Database**: Supabase PostgreSQL with 20+ API endpoints
+- **UI Components**: shadcn/ui with Tailwind CSS 4.1 (67+ components including translation admin)
+- **Database**: Supabase PostgreSQL with 32+ API endpoints including translation management
 - **Authentication**: Custom PIN-based system with error handling
 - **Restaurant Management**: Complete CRUD system for location management
 - **Deployment**: Vercel
