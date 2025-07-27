@@ -613,7 +613,7 @@ export function TranslationEditor({
                     </TabsTrigger>
                   </TabsList>
 
-                  {(['en', 'fr', 'th'] as Locale[]).map((locale) => (
+                  {(['en', 'fr'] as Locale[]).map((locale) => (
                     <TabsContent key={locale} value={locale} className="space-y-4">
                       <div className="space-y-2">
                         <div className="flex items-center justify-between">
