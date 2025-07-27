@@ -756,6 +756,63 @@ export function TrainingAssessment({
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Instant Feedback Dialog */}
+      <Dialog open={showQuestionFeedback} onOpenChange={setShowQuestionFeedback}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-center">
+              <div className="mb-4">
+                {feedbackCorrect ? (
+                  <CheckCircle2 className="h-16 w-16 mx-auto text-green-500" />
+                ) : (
+                  <XCircle className="h-16 w-16 mx-auto text-red-500" />
+                )}
+              </div>
+              {feedbackCorrect ? t('training.correct_answer') : t('training.incorrect_answer')}
+            </DialogTitle>
+          </DialogHeader>
+          
+          {feedbackQuestion && (
+            <div className="text-center space-y-4">
+              {!feedbackCorrect && (
+                <div className="bg-red-50 border border-red-200 p-3 rounded-lg text-left">
+                  <h4 className="font-medium text-red-800 mb-1">
+                    {t('training.correct_answer_is')}:
+                  </h4>
+                  <p className="text-sm text-red-700">
+                    {feedbackQuestion.question_type === 'multiple_choice' && feedbackQuestion.options
+                      ? (locale === 'th' 
+                          ? feedbackQuestion.options_th?.[parseInt(feedbackQuestion.correct_answer)]
+                          : feedbackQuestion.options[parseInt(feedbackQuestion.correct_answer)])
+                      : feedbackQuestion.correct_answer}
+                  </p>
+                </div>
+              )}
+              
+              {(feedbackQuestion.explanation || feedbackQuestion.explanation_th) && (
+                <div className="bg-blue-50 border border-blue-200 p-3 rounded-lg text-left">
+                  <h4 className="font-medium text-blue-800 mb-1">
+                    {t('training.explanation')}:
+                  </h4>
+                  <p className="text-sm text-blue-700">
+                    {locale === 'th' ? feedbackQuestion.explanation_th : feedbackQuestion.explanation}
+                  </p>
+                </div>
+              )}
+
+              <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
+                <Star className="h-4 w-4" />
+                <span>+{feedbackQuestion.points} {t('training.points')}</span>
+              </div>
+              
+              <Button onClick={() => setShowQuestionFeedback(false)}>
+                {t('training.continue')}
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
