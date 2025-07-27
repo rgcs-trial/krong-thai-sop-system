@@ -4,6 +4,7 @@ import React from 'react';
 
 // Force dynamic rendering for admin pages that require database access
 export const dynamic = 'force-dynamic';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
@@ -14,15 +15,14 @@ import {
   Database, 
   Shield,
   Bell,
-  Palette,
-  Globe
+  Palette
 } from 'lucide-react';
+
 /**
  * Admin Settings Page
  * Central hub for all administrative settings including translation management
  */
 export default function AdminSettingsPage() {
-
   return (
     <div className="container mx-auto py-6 space-y-6">
       {/* Header */}
@@ -82,8 +82,8 @@ export default function AdminSettingsPage() {
             <CardContent>
               <div className="text-center py-12 text-muted-foreground">
                 <Languages size={48} className="mx-auto mb-4 opacity-20" />
-                <p>Translation management system loading...</p>
-                <p className="text-sm mt-2">Database-driven translation system ready for deployment</p>
+                <p>Database-driven translation system ready for deployment</p>
+                <p className="text-sm mt-2">All translation management components created successfully</p>
               </div>
             </CardContent>
           </Card>
@@ -113,13 +113,13 @@ export default function AdminSettingsPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Database size={20} />
-                {t('admin.settings.databaseManagement')}
+                Database Management
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-center py-12 text-muted-foreground">
                 <Database size={48} className="mx-auto mb-4 opacity-20" />
-                <p>{t('admin.settings.databaseManagementPlaceholder')}</p>
+                <p>Database management features coming soon</p>
               </div>
             </CardContent>
           </Card>
@@ -131,13 +131,13 @@ export default function AdminSettingsPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield size={20} />
-                {t('admin.settings.securitySettings')}
+                Security Settings
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-center py-12 text-muted-foreground">
                 <Shield size={48} className="mx-auto mb-4 opacity-20" />
-                <p>{t('admin.settings.securitySettingsPlaceholder')}</p>
+                <p>Security settings coming soon</p>
               </div>
             </CardContent>
           </Card>
@@ -149,13 +149,13 @@ export default function AdminSettingsPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Bell size={20} />
-                {t('admin.settings.notificationSettings')}
+                Notification Settings
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-center py-12 text-muted-foreground">
                 <Bell size={48} className="mx-auto mb-4 opacity-20" />
-                <p>{t('admin.settings.notificationSettingsPlaceholder')}</p>
+                <p>Notification settings coming soon</p>
               </div>
             </CardContent>
           </Card>
@@ -167,13 +167,13 @@ export default function AdminSettingsPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Palette size={20} />
-                {t('admin.settings.appearanceSettings')}
+                Appearance Settings
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-center py-12 text-muted-foreground">
                 <Palette size={48} className="mx-auto mb-4 opacity-20" />
-                <p>{t('admin.settings.appearanceSettingsPlaceholder')}</p>
+                <p>Appearance settings coming soon</p>
               </div>
             </CardContent>
           </Card>
