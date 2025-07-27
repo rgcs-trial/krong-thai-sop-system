@@ -5244,3 +5244,4 @@ Attempted import error: 'TrendingRight' is not exported from '__barrel_optimize_
 Import trace for requested module:
 ./src/components/analytics/executive-dashboard.tsx
  ✓ Compiled /[locale]/dashboard in 482ms (1353 modules)
+ ✓ Compiled in 238ms (1354 modules)

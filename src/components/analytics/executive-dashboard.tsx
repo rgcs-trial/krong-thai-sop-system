@@ -305,7 +305,7 @@ export function ExecutiveDashboard({ className }: ExecutiveDashboardProps) {
     } else if (trend === 'down') {
       return <ChevronDown className="h-4 w-4 text-red-500" />;
     }
-    return <TrendingRight className="h-4 w-4 text-gray-500" />;
+    return <ArrowRight className="h-4 w-4 text-gray-500" />;
   };
 
   // Format value based on type
