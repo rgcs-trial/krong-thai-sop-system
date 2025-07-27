@@ -11,7 +11,7 @@ import type { BilingualContent, ApiResponse } from '@/types/database';
 // Types
 export interface AppSettings {
   // Language and localization
-  language: 'en' | 'fr';
+  language: 'en' | 'th' | 'fr';
   dateFormat: 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD';
   timeFormat: '12h' | '24h';
   timezone: string;
