@@ -103,8 +103,8 @@ const ClientSafeEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   
   // Localization (CLIENT-SAFE)
-  NEXT_PUBLIC_DEFAULT_LOCALE: z.enum(['en', 'th']).default('en'),
-  NEXT_PUBLIC_SUPPORTED_LOCALES: z.string().default('en,th'),
+  NEXT_PUBLIC_DEFAULT_LOCALE: z.enum(['en', 'fr']).default('en'),
+  NEXT_PUBLIC_SUPPORTED_LOCALES: z.string().default('en,fr'),
   NEXT_PUBLIC_DEFAULT_TIMEZONE: z.string().default('Asia/Bangkok'),
   
   // Analytics (CLIENT-SAFE)
