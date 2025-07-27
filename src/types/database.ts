@@ -161,7 +161,7 @@ export interface FormSubmission {
   reviewed_by?: string;
   reviewed_at?: string;
   notes?: string;
-  notes_th?: string;
+  notes_fr?: string;
   created_at: string;
   updated_at: string;
   

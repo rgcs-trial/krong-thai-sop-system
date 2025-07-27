@@ -206,7 +206,7 @@ const config = {
         'tablet-lg': '1024px',  // iPad landscape
       },
       fontFamily: {
-        thai: ['Noto Sans Thai', 'Inter', 'system-ui', 'sans-serif'],
+        french: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
@@ -280,9 +280,9 @@ CREATE TABLE sop_categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     slug TEXT NOT NULL UNIQUE,
     name_en TEXT NOT NULL,
-    name_th TEXT NOT NULL,
+    name_fr TEXT NOT NULL,
     description_en TEXT,
-    description_th TEXT,
+    description_fr TEXT,
     icon TEXT,
     sort_order INTEGER DEFAULT 0,
     is_active BOOLEAN DEFAULT true,
@@ -294,9 +294,9 @@ CREATE TABLE sop_documents (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     category_id UUID REFERENCES sop_categories(id),
     title_en TEXT NOT NULL,
-    title_th TEXT NOT NULL,
+    title_fr TEXT NOT NULL,
     content_en TEXT NOT NULL,
-    content_th TEXT NOT NULL,
+    content_fr TEXT NOT NULL,
     version TEXT DEFAULT '1.0',
     status TEXT DEFAULT 'draft' CHECK (status IN ('draft', 'published', 'archived')),
     priority TEXT DEFAULT 'medium' CHECK (priority IN ('low', 'medium', 'high', 'critical')),
@@ -321,7 +321,7 @@ CREATE POLICY "Published SOPs are viewable by authenticated users" ON sop_docume
     FOR SELECT USING (status = 'published');
 
 -- Insert sample data
-INSERT INTO sop_categories (slug, name_en, name_th, description_en, description_th, icon, sort_order) VALUES
+INSERT INTO sop_categories (slug, name_en, name_fr, description_en, description_fr, icon, sort_order) VALUES
 ('food-safety', 'Food Safety & HACCP', 'ความปลอดภัยอาหารและ HACCP', 'Food safety procedures', 'ขั้นตอนความปลอดภัยอาหาร', 'shield-check', 1),
 ('kitchen-ops', 'Kitchen Operations', 'การดำเนินงานครัว', 'Kitchen procedures', 'ขั้นตอนการทำงานในครัว', 'chef-hat', 2),
 ('service', 'Customer Service', 'การบริการลูกค้า', 'Service standards', 'มาตรฐานการบริการ', 'users', 3);
@@ -495,7 +495,7 @@ Update `src/app/globals.css`:
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
+/* French language uses Inter font family - no additional imports needed */
 
 @layer base {
   :root {
@@ -523,7 +523,7 @@ Update `src/app/globals.css`:
   }
   
   .font-thai {
-    font-family: 'Noto Sans Thai', 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 }
 
@@ -640,7 +640,7 @@ pnpm dev
 ### 9.2 Verify Installation
 1. ✅ Application loads at `http://localhost:3000`
 2. ✅ Tailwind CSS styling works
-3. ✅ Thai fonts render correctly
+3. ✅ French fonts render correctly
 4. ✅ shadcn/ui components display properly
 5. ✅ Supabase connection established
 6. ✅ TypeScript compilation successful
@@ -740,10 +740,10 @@ pnpm db:generate-types # Regenerate TypeScript types
    npx shadcn-ui@latest add button --overwrite
    ```
 
-4. **Thai Font Issues**: Verify font loading
+4. **French Font Issues**: Verify font loading
    ```css
    /* Check if fonts are loaded in globals.css */
-   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
+   /* French language uses Inter font family - no additional imports needed */
    ```
 
 ### Emergency Recovery Commands
