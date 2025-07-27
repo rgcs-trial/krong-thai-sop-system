@@ -25,7 +25,8 @@ export {
   DialogTitle, 
   DialogDescription 
 } from "./dialog"
-export { Input, Textarea, PinInput, SearchInput } from "./input"
+export { Input, PinInput, SearchInput } from "./input"
+export { Textarea } from "./textarea"
 export { Label } from "./label"
 export { 
   Select, 
