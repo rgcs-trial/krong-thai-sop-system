@@ -270,66 +270,119 @@ const queryClient = new QueryClient({
 // - Request deduplication
 ```
 
-## State Management with Zustand
+## ✅ Tablet-Optimized UI Architecture
 
-### Store Architecture
+### Touch-First Design Implementation
 
-```typescript
-// stores/sopStore.ts
-interface SOPState {
-  sops: SOP[]
-  selectedSOP: SOP | null
-  categories: Category[]
-  isLoading: boolean
-  error: string | null
+```css
+/* globals.css - Production touch optimization */
+@layer base {
+  :root {
+    /* Touch target specifications */
+    --touch-target-min: 44px;          /* WCAG minimum */
+    --touch-target-comfortable: 48px;   /* Recommended */
+    --touch-target-large: 56px;        /* Navigation elements */
+    
+    /* Restaurant brand colors */
+    --thai-red: #E31B23;              /* Primary brand */
+    --saffron-gold: #D4AF37;          /* Accent */
+    --jade-green: #008B8B;            /* Success states */
+    --warm-beige: #D2B48C;            /* Backgrounds */
+  }
   
-  // Actions
-  fetchSOPs: () => Promise<void>
-  selectSOP: (sop: SOP | null) => void
-  updateSOP: (id: string, updates: Partial<SOP>) => Promise<void>
-  clearError: () => void
+  /* Touch interaction optimization */
+  button, [role="button"], .touch-action {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    min-height: var(--touch-target-comfortable);
+    min-width: var(--touch-target-comfortable);
+  }
+  
+  /* Form element optimization */
+  input, select, textarea {
+    min-height: var(--touch-target-comfortable);
+    padding: 12px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-radius: 8px;
+  }
+  
+  /* Navigation and critical actions */
+  .nav-item, .primary-action {
+    min-height: var(--touch-target-large);
+    padding: 16px 24px;
+  }
 }
 
-export const useSOPStore = create<SOPState>((set, get) => ({
-  sops: [],
-  selectedSOP: null,
-  categories: [],
-  isLoading: false,
-  error: null,
-
-  fetchSOPs: async () => {
-    set({ isLoading: true, error: null })
-    try {
-      const response = await fetch('/api/sops')
-      const sops = await response.json()
-      set({ sops, isLoading: false })
-    } catch (error) {
-      set({ error: error.message, isLoading: false })
-    }
-  },
-
-  selectSOP: (sop) => set({ selectedSOP: sop }),
+/* Tablet-specific responsive design */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 24px;
+  }
   
-  updateSOP: async (id, updates) => {
-    const { sops } = get()
-    try {
-      await fetch(`/api/sops/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(updates)
-      })
-      
-      set({
-        sops: sops.map(sop => 
-          sop.id === id ? { ...sop, ...updates } : sop
-        )
-      })
-    } catch (error) {
-      set({ error: error.message })
-    }
-  },
+  .tablet-card {
+    min-height: 120px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .tablet-card:active {
+    transform: scale(0.98);
+  }
+}
+```
 
-  clearError: () => set({ error: null })
-}))
+### Component Touch Optimization Examples
+
+```typescript
+// components/ui/button.tsx - Production button with touch variants
+const buttonVariants = cva(
+  "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-thai-red text-white hover:bg-thai-red/90",
+        secondary: "bg-saffron-gold text-black hover:bg-saffron-gold/90",
+        success: "bg-jade-green text-white hover:bg-jade-green/90",
+        outline: "border-2 border-thai-red text-thai-red hover:bg-thai-red hover:text-white"
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        // Touch-optimized sizes for tablets
+        touch: "h-12 rounded-lg px-6 text-base min-w-[120px]",
+        touchLarge: "h-16 rounded-lg px-8 text-lg min-w-[160px]",
+        icon: "h-12 w-12 rounded-lg"
+      }
+    }
+  }
+);
+
+// Touch feedback implementation
+export function TouchButton({ children, className, ...props }: ButtonProps) {
+  const [isPressed, setIsPressed] = useState(false);
+  
+  return (
+    <Button
+      className={cn(
+        "transition-all duration-150 active:scale-98",
+        isPressed && "scale-98 brightness-90",
+        className
+      )}
+      onTouchStart={() => setIsPressed(true)}
+      onTouchEnd={() => setIsPressed(false)}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+}
 ```
 
 ## Bilingual Content Handling
