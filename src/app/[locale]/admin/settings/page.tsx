@@ -62,7 +62,7 @@ export default function AdminSettingsPage() {
           </TabsTrigger>
           <TabsTrigger value="notifications" className="flex flex-col items-center gap-1 text-xs">
             <Bell size={16} />
-            {t('admin.settings.notifications')}
+            Notifications
           </TabsTrigger>
           <TabsTrigger value="appearance" className="flex flex-col items-center gap-1 text-xs">
             <Palette size={16} />
