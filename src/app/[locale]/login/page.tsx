@@ -419,7 +419,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
                         : 'Les gestionnaires doivent saisir email + code PIN pour configurer le lieu')
                     : (locale === 'en' 
                         ? 'Staff only need to enter their 4-digit PIN' 
-                        : 'พนักงานต้องกรอกรหัส PIN 4 หลักเท่านั้น')
+                        : 'Le personnel n\'a besoin que de saisir son code PIN à 4 chiffres')
                   }
                 </p>
               </div>
