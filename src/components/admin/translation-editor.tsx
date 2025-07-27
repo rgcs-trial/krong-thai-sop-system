@@ -646,7 +646,7 @@ export function TranslationEditor({
                           onChange={(e) => handleTranslationChange(locale, e.target.value)}
                           placeholder={t('admin.translation.enterTranslation', { locale })}
                           className={`w-full h-32 p-3 border rounded-md resize-none ${
-                            locale === 'th' ? 'font-thai' : locale === 'fr' ? 'font-french' : 'font-ui'
+                            locale === 'fr' ? 'font-french' : 'font-ui'
                           } ${readonly ? 'bg-muted' : ''}`}
                           readOnly={readonly}
                         />
@@ -705,7 +705,7 @@ export function TranslationEditor({
                               {t('admin.translation.preview')}:
                             </div>
                             <div className={`text-sm ${
-                              locale === 'th' ? 'font-thai' : locale === 'fr' ? 'font-french' : 'font-ui'
+                              locale === 'fr' ? 'font-french' : 'font-ui'
                             }`}>
                               {previewTranslation(locale, editorState.translations[locale]!.value)}
                             </div>
