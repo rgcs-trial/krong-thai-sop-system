@@ -172,7 +172,7 @@ export const useSOPStore = create<SOPState>()(
 
       updateDocument: (updatedDocument: SOPDocument) =>
         set((state) => {
-          const index = state.documents.findIndex(doc => doc.id === updatedDocument.id);
+          const index = state.documents.findIndex((doc: any) => doc.id === updatedDocument.id);
           if (index > -1) {
             state.documents[index] = updatedDocument;
           }
