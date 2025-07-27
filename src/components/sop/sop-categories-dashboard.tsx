@@ -2,46 +2,31 @@
 
 import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import { Search, Star, Clock, ChevronRight, Grid3X3, List, Filter } from 'lucide-react';
+import { Search, Star, Clock, ChevronRight, Grid3X3, List, Filter, AlertTriangle, Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
+import { useCategoriesWithCounts } from '@/lib/hooks/use-sop-queries';
+import { useFavorites } from '@/hooks/use-favorites';
+import { CategoryIconWithBackground, getCategoryColor } from './sop-category-icons';
+import { SOPCategory } from '@/types/database';
+import { toast } from '@/hooks/use-toast';
 
-// SOP Category data structure based on database schema
-export interface SOPCategory {
-  id: string;
-  code: string;
-  name: string;
-  name_th: string;
-  description: string;
-  description_th: string;
-  icon: string;
-  color: string;
-  sort_order: number;
-  is_active: boolean;
-  sop_count: number;
-  last_updated: string;
+// Enhanced SOPCategory interface with computed fields
+interface EnhancedSOPCategory extends SOPCategory {
+  sop_count?: number;
+  last_updated?: string;
+  is_favorite?: boolean;
 }
 
-// Mock data for the 16 SOP categories
-const mockCategories: SOPCategory[] = [
-  {
-    id: '1',
-    code: 'FOOD_SAFETY',
-    name: 'Food Safety & Hygiene',
-    name_th: 'ความปลอดภัยอาหารและสุขอนามัย',
-    description: 'Food handling, storage, and safety procedures',
-    description_th: 'ขั้นตอนการจัดการ เก็บรักษา และความปลอดภัยของอาหาร',
-    icon: 'shield-check',
-    color: '#E31B23',
-    sort_order: 1,
-    is_active: true,
-    sop_count: 12,
-    last_updated: '2024-01-15'
-  },
+interface SOPCategoriesDashboardProps {
+  locale: string;
+  onCategorySelect: (category: SOPCategory) => void;
+  className?: string;
+}
   {
     id: '2',
     code: 'KITCHEN_OPERATIONS',
@@ -254,55 +239,103 @@ const mockCategories: SOPCategory[] = [
   }
 ];
 
-interface SOPCategoriesDashboardProps {
-  locale: string;
-  onCategorySelect: (category: SOPCategory) => void;
-}
-
 export default function SOPCategoriesDashboard({ 
   locale, 
-  onCategorySelect 
+  onCategorySelect,
+  className
 }: SOPCategoriesDashboardProps) {
   const t = useTranslations();
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedTab, setSelectedTab] = useState('all');
+  
+  // Fetch categories from Supabase
+  const {
+    data: categoriesData,
+    isLoading,
+    error,
+    refetch
+  } = useCategoriesWithCounts({
+    includeInactive: false
+  });
+  
+  // Favorites management
+  const { favoriteIds, toggleFavorite } = useFavorites('category');
+
+  // Process categories data
+  const categories: EnhancedSOPCategory[] = useMemo(() => {
+    if (!categoriesData) return [];
+    
+    return categoriesData.map(category => ({
+      ...category,
+      is_favorite: favoriteIds.includes(category.id),
+      sop_count: category.sop_count || 0,
+      last_updated: category.updated_at
+    }));
+  }, [categoriesData, favoriteIds]);
 
   // Filter categories based on search query
   const filteredCategories = useMemo(() => {
-    if (!searchQuery) return mockCategories;
+    if (!searchQuery) return categories;
     
     const query = searchQuery.toLowerCase();
-    return mockCategories.filter(category => {
+    return categories.filter(category => {
       const name = locale === 'th' ? category.name_th : category.name;
       const description = locale === 'th' ? category.description_th : category.description;
       return (
-        name.toLowerCase().includes(query) ||
-        description.toLowerCase().includes(query) ||
+        name?.toLowerCase().includes(query) ||
+        description?.toLowerCase().includes(query) ||
         category.code.toLowerCase().includes(query)
       );
     });
-  }, [searchQuery, locale]);
+  }, [searchQuery, locale, categories]);
 
   // Get categories by tab
   const getCategoriesByTab = (tab: string) => {
     switch (tab) {
       case 'favorites':
-        // Mock favorites - in real app this would come from localStorage or API
-        return filteredCategories.filter(cat => ['FOOD_SAFETY', 'KITCHEN_OPERATIONS', 'SERVICE_STANDARDS'].includes(cat.code));
+        return filteredCategories.filter(cat => cat.is_favorite);
       case 'recent':
-        // Mock recent - sort by last_updated
-        return [...filteredCategories].sort((a, b) => new Date(b.last_updated).getTime() - new Date(a.last_updated).getTime()).slice(0, 6);
+        // Sort by last_updated
+        return [...filteredCategories]
+          .sort((a, b) => {
+            const dateA = new Date(a.last_updated || a.updated_at).getTime();
+            const dateB = new Date(b.last_updated || b.updated_at).getTime();
+            return dateB - dateA;
+          })
+          .slice(0, 8);
       default:
-        return filteredCategories;
+        return filteredCategories.sort((a, b) => a.sort_order - b.sort_order);
     }
   };
 
   const displayCategories = getCategoriesByTab(selectedTab);
+  
+  // Handle category favorite toggle
+  const handleToggleFavorite = async (categoryId: string, event: React.MouseEvent) => {
+    event.stopPropagation();
+    
+    try {
+      await toggleFavorite(categoryId);
+      toast({
+        title: t('common.success'),
+        description: favoriteIds.includes(categoryId) ? 
+          t('sopCategories.removedFromFavorites') : 
+          t('sopCategories.addedToFavorites')
+      });
+    } catch (error) {
+      toast({
+        title: t('common.error'),
+        description: t('errors.general'),
+        variant: 'destructive'
+      });
+    }
+  };
 
-  const CategoryCard = ({ category, isGridView = true }: { category: SOPCategory; isGridView?: boolean }) => {
+  const CategoryCard = ({ category, isGridView = true }: { category: EnhancedSOPCategory; isGridView?: boolean }) => {
     const name = locale === 'th' ? category.name_th : category.name;
     const description = locale === 'th' ? category.description_th : category.description;
+    const categoryColor = getCategoryColor(category.code);
 
     return (
       <Card 
@@ -321,29 +354,42 @@ export default function SOPCategoriesDashboard({
         onClick={() => onCategorySelect(category)}
       >
         <CardHeader className={cn("pb-2", isGridView ? "text-center" : "flex-row items-center space-y-0 gap-4")}>
-          <div 
-            className={cn(
-              "rounded-full p-3 mb-2 flex items-center justify-center",
-              isGridView ? "w-12 h-12 mx-auto" : "w-10 h-10"
-            )}
-            style={{ backgroundColor: `${category.color}15` }}
-          >
-            {/* Icon placeholder - in real app, use proper icon library */}
-            <div 
-              className="w-6 h-6 rounded-full"
-              style={{ backgroundColor: category.color }}
+          <div className="relative">
+            <CategoryIconWithBackground
+              categoryCode={category.code}
+              color={categoryColor}
+              size={isGridView ? "md" : "sm"}
+              className={isGridView ? "mx-auto mb-2" : ""}
             />
+            {category.is_favorite && (
+              <Star 
+                className="w-4 h-4 absolute -top-1 -right-1 text-yellow-500 fill-current" 
+                onClick={(e) => handleToggleFavorite(category.id, e)}
+              />
+            )}
           </div>
           <div className={cn("flex-1", !isGridView && "min-w-0")}>
-            <CardTitle className={cn(
-              "text-sm md:text-base font-semibold text-brand-black group-hover:text-brand-red transition-colors",
-              // Thai font support
-              locale === 'th' && "font-thai",
-              !isGridView && "truncate"
-            )}>
-              {name}
-            </CardTitle>
-            {isGridView && (
+            <div className="flex items-center gap-2">
+              <CardTitle className={cn(
+                "text-sm md:text-base font-semibold text-brand-black group-hover:text-brand-red transition-colors",
+                // Thai font support
+                locale === 'th' && "font-thai",
+                !isGridView && "truncate"
+              )}>
+                {name}
+              </CardTitle>
+              {!category.is_favorite && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="p-1 h-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={(e) => handleToggleFavorite(category.id, e)}
+                >
+                  <Star className="w-4 h-4" />
+                </Button>
+              )}
+            </div>
+            {isGridView && description && (
               <p className={cn(
                 "text-xs text-gray-600 mt-1 line-clamp-2",
                 locale === 'th' && "font-thai"
@@ -359,20 +405,24 @@ export default function SOPCategoriesDashboard({
             <Badge 
               variant="secondary" 
               className="text-xs px-2 py-1"
-              style={{ backgroundColor: `${category.color}15`, color: category.color }}
+              style={{ backgroundColor: `${categoryColor}15`, color: categoryColor }}
             >
-              {t('sopCategories.totalSops', { count: category.sop_count })}
+              {t('sopCategories.totalSops', { count: category.sop_count || 0 })}
             </Badge>
-            {!isGridView && (
+            {!isGridView && category.last_updated && (
               <span className="text-xs text-gray-500">
-                {t('sopCategories.lastUpdated', { date: category.last_updated })}
+                {t('sopCategories.lastUpdated', { 
+                  date: new Date(category.last_updated).toLocaleDateString(locale === 'th' ? 'th-TH' : 'en-US')
+                })}
               </span>
             )}
           </div>
           
-          {isGridView && (
+          {isGridView && category.last_updated && (
             <div className="mt-2 text-xs text-gray-500">
-              {t('sopCategories.lastUpdated', { date: category.last_updated })}
+              {t('sopCategories.lastUpdated', { 
+                date: new Date(category.last_updated).toLocaleDateString(locale === 'th' ? 'th-TH' : 'en-US')
+              })}
             </div>
           )}
           
@@ -384,8 +434,42 @@ export default function SOPCategoriesDashboard({
     );
   };
 
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className={cn("min-h-screen bg-gray-50 flex items-center justify-center", className)}>
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 animate-spin text-brand-red mx-auto mb-4" />
+          <p className={cn("text-gray-600", locale === 'th' && "font-thai")}>
+            {t('sop.loading')}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
+  // Error state
+  if (error) {
+    return (
+      <div className={cn("min-h-screen bg-gray-50 flex items-center justify-center", className)}>
+        <div className="text-center">
+          <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
+          <h2 className={cn("text-xl font-semibold text-gray-900 mb-2", locale === 'th' && "font-thai")}>
+            {t('common.error')}
+          </h2>
+          <p className={cn("text-gray-600 mb-4", locale === 'th' && "font-thai")}>
+            {error.message || t('errors.general')}
+          </p>
+          <Button onClick={() => refetch()} variant="outline">
+            {t('common.retry')}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+  
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6">
+    <div className={cn("min-h-screen bg-gray-50 p-4 md:p-6", className)}>
       {/* Header */}
       <div className="mb-6">
         <h1 className={cn(
