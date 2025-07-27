@@ -186,7 +186,7 @@ export const UpdateProgressSchema = z.object({
 // File Upload validation
 export const FileUploadSchema = z.object({
   sopId: UUIDSchema.optional(),
-  category: z.enum(['sop_attachment', 'sop_step_image', 'user_avatar', 'restaurant_logo']),
+  category: z.enum(['sop_attachment', 'sop_step_image', 'user_avatar', 'restaurant_logo'], { message: 'Invalid file category' }),
   metadata: z.record(z.unknown()).optional(),
 });
 
