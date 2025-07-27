@@ -320,7 +320,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
               {locale === 'en' ? 'Restaurant Krong Thai' : 'ร้านอาหารโครงไทย'}
             </h1>
             <p className="text-gray-600 text-lg">
-              {locale === 'en' ? 'SOP Management System' : 'ระบบจัดการขั้นตอนการปฏิบัติงาน'}
+              {locale === 'en' ? 'SOP Management System' : 'Système de Gestion des POS'}
             </p>
             
             {authMode === 'manager' && (
