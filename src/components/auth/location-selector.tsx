@@ -43,6 +43,9 @@ export function LocationSelector({
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [loadingRestaurants, setLoadingRestaurants] = useState(true);
   const [error, setError] = useState<string>('');
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string>('');
 
   useEffect(() => {
     loadRestaurants();
