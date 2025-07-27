@@ -525,7 +525,7 @@ export function SOPAnalyticsDashboard({ className }: SOPAnalyticsDashboardProps)
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={categoryPerformance}>
+                  <ComposedChart data={categoryPerformance}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="category" />
                     <YAxis yAxisId="left" orientation="left" />
@@ -546,7 +546,7 @@ export function SOPAnalyticsDashboard({ className }: SOPAnalyticsDashboardProps)
                       strokeWidth={3}
                       name={t('analytics.compliance_rate')}
                     />
-                  </BarChart>
+                  </ComposedChart>
                 </ResponsiveContainer>
               </CardContent>
             </Card>
