@@ -157,7 +157,7 @@ export async function POST(request: NextRequest) {
         ip: request.headers.get('x-forwarded-for') || 'unknown'
       });
       
-      const errorInfo = getAuthErrorMessage('USER_NOT_FOUND', 'en');
+      const errorInfo = getAuthErrorMessage('USER_NOT_FOUND', locale);
       return NextResponse.json(
         { 
           success: false, 
