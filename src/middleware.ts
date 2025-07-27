@@ -276,6 +276,12 @@ function handleAPIRoute(request: NextRequest): NextResponse {
 
   // Apply stricter rate limiting for auth endpoints
   if (pathname.startsWith('/api/auth/')) {
+    // Bypass auth rate limiting for Cypress tests
+    const userAgent = request.headers.get('user-agent') || '';
+    if (userAgent.includes('Cypress') && process.env.NODE_ENV === 'development') {
+      return NextResponse.next();
+    }
+
     const ip = getClientIP(request);
     const key = `auth_rate_limit:${ip}`;
     const now = Date.now();
