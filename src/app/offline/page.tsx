@@ -21,8 +21,9 @@ import {
   Download
 } from 'lucide-react';
 
-interface OfflinePage {
-  locale?: string;
+interface OfflinePageProps {
+  params?: Promise<{ locale?: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const CRITICAL_SOPS = [
