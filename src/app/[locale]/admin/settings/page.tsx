@@ -30,14 +30,14 @@ export default function AdminSettingsPage() {
         <div>
           <h1 className="text-3xl font-heading font-bold flex items-center gap-3">
             <Settings size={32} className="text-primary" />
-            {t('admin.settings.title')}
+            Admin Settings
           </h1>
           <p className="text-muted-foreground mt-1">
-            {t('admin.settings.subtitle')}
+            Manage system settings and configuration
           </p>
         </div>
         <Badge variant="outline" className="px-3 py-1">
-          {t('admin.settings.adminOnly')}
+          Admin Only
         </Badge>
       </div>
 
