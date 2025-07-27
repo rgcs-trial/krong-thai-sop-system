@@ -10,13 +10,14 @@ import { getTranslations } from 'next-intl/server';
 import { TrainingAnalyticsDashboard } from '@/components/training/training-analytics-dashboard';
 
 interface TrainingAnalyticsPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: TrainingAnalyticsPageProps): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
   
   return {
     title: t('training_analytics'),
@@ -25,9 +26,11 @@ export async function generateMetadata({ params }: TrainingAnalyticsPageProps): 
 }
 
 export default async function TrainingAnalyticsPage({ params }: TrainingAnalyticsPageProps) {
+  const resolvedParams = await params;
+  
   // Validate locale
   const validLocales = ['en', 'fr', 'th'];
-  if (!validLocales.includes(params.locale)) {
+  if (!validLocales.includes(resolvedParams.locale)) {
     notFound();
   }
 
