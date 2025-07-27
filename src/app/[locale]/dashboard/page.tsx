@@ -30,12 +30,12 @@ import {
 } from 'lucide-react';
 
 interface DashboardPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
-export default function DashboardPage({ params: { locale } }: DashboardPageProps) {
+export default function DashboardPage({ params }: DashboardPageProps) {
   const t = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const tAuth = useTranslations('auth');
