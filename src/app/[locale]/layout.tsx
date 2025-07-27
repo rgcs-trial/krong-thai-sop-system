@@ -66,7 +66,7 @@ export default async function LocaleLayout({
       className={`
         ${fontClasses}
         antialiased 
-        ${locale === 'th' ? 'font-thai' : 'font-ui'}
+        ${locale === 'fr' ? 'font-french' : 'font-ui'}
         bg-background 
         text-foreground
         touch-manipulation

@@ -62,14 +62,14 @@ Cypress.Commands.add('fillRestaurantForm', (restaurantData) => {
   if (restaurantData.name) {
     cy.get('input[name="name"]').type(restaurantData.name)
   }
-  if (restaurantData.name_th) {
-    cy.get('input[name="name_th"]').type(restaurantData.name_th)
+  if (restaurantData.name_fr) {
+    cy.get('input[name="name_fr"]').type(restaurantData.name_fr)
   }
   if (restaurantData.address) {
     cy.get('input[name="address"]').type(restaurantData.address)
   }
-  if (restaurantData.address_th) {
-    cy.get('input[name="address_th"]').type(restaurantData.address_th)
+  if (restaurantData.address_fr) {
+    cy.get('input[name="address_fr"]').type(restaurantData.address_fr)
   }
   if (restaurantData.phone) {
     cy.get('input[name="phone"]').type(restaurantData.phone)

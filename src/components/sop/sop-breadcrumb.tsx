@@ -62,7 +62,7 @@ export default function SOPBreadcrumb({
       <div className="flex items-center space-x-1 min-w-0">
         {allItems.map((item, index) => {
           const isLast = index === allItems.length - 1;
-          const label = locale === 'th' ? item.label_th : item.label;
+          const label = locale === 'fr' ? item.label_th : item.label;
 
           return (
             <div key={item.id} className="flex items-center space-x-1">
@@ -86,7 +86,7 @@ export default function SOPBreadcrumb({
                   isLast || item.isActive
                     ? "text-brand-black cursor-default pointer-events-none"
                     : "text-gray-600 cursor-pointer",
-                  locale === 'th' && "font-thai"
+                  locale === 'fr' && "font-thai"
                 )}
                 aria-current={isLast ? "page" : undefined}
               >

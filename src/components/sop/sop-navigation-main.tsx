@@ -644,7 +644,7 @@ export default function SOPNavigationMain({
                         <div className="flex items-center gap-2">
                           <Icon className={cn("w-4 h-4", item.color)} />
                           <span className="font-medium text-sm">
-                            {locale === 'th' ? item.title_th : item.title}
+                            {locale === 'fr' ? item.title_th : item.title}
                           </span>
                         </div>
                         {item.count > 0 && (
@@ -685,10 +685,10 @@ export default function SOPNavigationMain({
                     style={{ backgroundColor: viewState.category.color }}
                   />
                 </div>
-                {locale === 'th' ? viewState.category.name_th : viewState.category.name}
+                {locale === 'fr' ? viewState.category.name_th : viewState.category.name}
               </h1>
               <p className="text-gray-600">
-                {locale === 'th' ? viewState.category.description_th : viewState.category.description}
+                {locale === 'fr' ? viewState.category.description_th : viewState.category.description}
               </p>
             </div>
 
@@ -698,7 +698,7 @@ export default function SOPNavigationMain({
                 locale={locale}
                 onSearch={handleSearch}
                 onClear={handleSearchClear}
-                placeholder={`${t('common.search')} ${locale === 'th' ? viewState.category.name_th : viewState.category.name}...`}
+                placeholder={`${t('common.search')} ${locale === 'fr' ? viewState.category.name_th : viewState.category.name}...`}
               />
             </div>
 
@@ -706,7 +706,7 @@ export default function SOPNavigationMain({
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {mockCategorySOPs.map((sop) => {
                 const isFav = isFavorite(sop.id, 'document');
-                const title = locale === 'th' ? sop.title_th : sop.title;
+                const title = locale === 'fr' ? sop.title_th : sop.title;
                 
                 return (
                   <div
@@ -741,7 +741,7 @@ export default function SOPNavigationMain({
                       </Button>
                     </div>
                     <p className="text-sm text-gray-600 line-clamp-3 mb-3">
-                      {locale === 'th' ? sop.content_th : sop.content}
+                      {locale === 'fr' ? sop.content_th : sop.content}
                     </p>
                     <div className="flex items-center justify-between text-xs text-gray-500">
                       <span>v{sop.version}</span>
@@ -791,7 +791,7 @@ export default function SOPNavigationMain({
                 {recentlyViewedDocuments.slice(0, 12).map((item) => {
                   // In real app, fetch document details
                   const mockDoc = mockCategorySOPs[0];
-                  const title = locale === 'th' ? mockDoc.title_th : mockDoc.title;
+                  const title = locale === 'fr' ? mockDoc.title_th : mockDoc.title;
                   const timeAgo = new Date(item.viewedAt).toLocaleDateString();
                   
                   return (
@@ -843,8 +843,8 @@ export default function SOPNavigationMain({
             {/* Critical SOPs would be fetched here */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[mockCategorySOPs[0]].map((sop) => {
-                const title = locale === 'th' ? sop.title_th : sop.title;
-                const content = locale === 'th' ? sop.content_th : sop.content;
+                const title = locale === 'fr' ? sop.title_th : sop.title;
+                const content = locale === 'fr' ? sop.content_th : sop.content;
                 
                 return (
                   <Card
@@ -925,8 +925,8 @@ export default function SOPNavigationMain({
                       : "space-y-3"
                   )}>
                     {searchResults.map((result) => {
-                      const title = locale === 'th' ? result.title_th : result.title_en;
-                      const content = locale === 'th' ? result.content_th : result.content_en;
+                      const title = locale === 'fr' ? result.title_th : result.title_en;
+                      const content = locale === 'fr' ? result.content_th : result.content_en;
                       
                       return (
                         <Card

@@ -162,7 +162,7 @@ export default function OfflinePage({ params, searchParams }: OfflinePageProps) 
     window.location.href = `/sop/documents/${sopId}`;
   };
 
-  const isThaiLocale = locale === 'th';
+  const isThaiLocale = locale === 'fr';
 
   const text = {
     title: isThaiLocale ? 'คุณอยู่ในโหมดออฟไลน์' : 'You\'re Offline',

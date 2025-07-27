@@ -142,8 +142,8 @@ describe('Training System', () => {
     
     // Test language switching in training context
     cy.get('body').then(($body) => {
-      if ($body.text().includes('EN') || $body.text().includes('TH')) {
-        cy.get('button, [role="button"]').contains(/EN|TH|ไทย/).first().click({ force: true })
+      if ($body.text().includes('EN') || $body.text().includes('FR')) {
+        cy.get('button, [role="button"]').contains(/EN|FR|Français/).first().click({ force: true })
         cy.wait(1000)
         cy.get('body').should('be.visible')
       }

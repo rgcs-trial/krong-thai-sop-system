@@ -44,7 +44,7 @@ export default function SOPFavoritesDashboard({
     if (!searchQuery) return true;
     
     const query = searchQuery.toLowerCase();
-    const title = locale === 'th' ? item.title_th : item.title;
+    const title = locale === 'fr' ? item.title_th : item.title;
     
     return title.toLowerCase().includes(query);
   });
@@ -84,8 +84,8 @@ export default function SOPFavoritesDashboard({
   };
 
   const FavoriteCard = ({ item, isGridView = true }: { item: FavoriteItem; isGridView?: boolean }) => {
-    const title = locale === 'th' ? item.title_th : item.title;
-    const addedDate = new Date(item.added_at).toLocaleDateString(locale === 'th' ? 'th-TH' : 'en-US');
+    const title = locale === 'fr' ? item.title_th : item.title;
+    const addedDate = new Date(item.added_at).toLocaleDateString(locale === 'fr' ? 'th-TH' : 'en-US');
 
     return (
       <Card 
@@ -116,7 +116,7 @@ export default function SOPFavoritesDashboard({
           <div className={cn("flex-1", !isGridView && "min-w-0")}>
             <CardTitle className={cn(
               "text-sm md:text-base font-semibold text-brand-black group-hover:text-brand-red transition-colors",
-              locale === 'th' && "font-thai",
+              locale === 'fr' && "font-thai",
               !isGridView && "truncate"
             )}>
               {title}
@@ -194,7 +194,7 @@ export default function SOPFavoritesDashboard({
       <div className={cn("flex items-center justify-center py-12", className)}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-red mx-auto mb-4"></div>
-          <p className={cn("text-gray-500", locale === 'th' && "font-thai")}>
+          <p className={cn("text-gray-500", locale === 'fr' && "font-thai")}>
             {t('common.loading')}
           </p>
         </div>
@@ -208,14 +208,14 @@ export default function SOPFavoritesDashboard({
       <div className="mb-6">
         <h1 className={cn(
           "text-2xl md:text-3xl font-bold text-brand-black mb-2 flex items-center gap-2",
-          locale === 'th' && "font-thai"
+          locale === 'fr' && "font-thai"
         )}>
           <Heart className="w-8 h-8 text-brand-red" />
           {t('sopCategories.favorites')}
         </h1>
         <p className={cn(
           "text-gray-600 text-sm md:text-base",
-          locale === 'th' && "font-thai"
+          locale === 'fr' && "font-thai"
         )}>
           {t('sop.favoriteSops')}
         </p>
@@ -322,13 +322,13 @@ export default function SOPFavoritesDashboard({
                 <Heart className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className={cn(
                   "text-lg font-semibold text-gray-600 mb-2",
-                  locale === 'th' && "font-thai"
+                  locale === 'fr' && "font-thai"
                 )}>
                   {t('sop.noFavorites')}
                 </h3>
                 <p className={cn(
                   "text-gray-500 text-sm",
-                  locale === 'th' && "font-thai"
+                  locale === 'fr' && "font-thai"
                 )}>
                   {t('sop.addToFavorites')}
                 </p>
@@ -336,7 +336,7 @@ export default function SOPFavoritesDashboard({
             </Card>
           ) : displayFavorites.length === 0 ? (
             <div className="text-center py-12">
-              <p className={cn("text-gray-500", locale === 'th' && "font-thai")}>
+              <p className={cn("text-gray-500", locale === 'fr' && "font-thai")}>
                 {t('sopCategories.noResults')}
               </p>
             </div>
@@ -360,7 +360,7 @@ export default function SOPFavoritesDashboard({
         <TabsContent value="categories" className="mt-6">
           {favoriteCategories.length === 0 ? (
             <div className="text-center py-12">
-              <p className={cn("text-gray-500", locale === 'th' && "font-thai")}>
+              <p className={cn("text-gray-500", locale === 'fr' && "font-thai")}>
                 {t('sop.noFavorites')}
               </p>
             </div>
@@ -384,7 +384,7 @@ export default function SOPFavoritesDashboard({
         <TabsContent value="documents" className="mt-6">
           {favoriteDocuments.length === 0 ? (
             <div className="text-center py-12">
-              <p className={cn("text-gray-500", locale === 'th' && "font-thai")}>
+              <p className={cn("text-gray-500", locale === 'fr' && "font-thai")}>
                 {t('sop.noFavorites')}
               </p>
             </div>
@@ -414,7 +414,7 @@ export default function SOPFavoritesDashboard({
               <div className="text-2xl font-bold text-brand-red">
                 {favorites.length}
               </div>
-              <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
+              <div className={cn("text-sm text-gray-600", locale === 'fr' && "font-thai")}>
                 {t('dashboard.totalSops')}
               </div>
             </div>
@@ -425,7 +425,7 @@ export default function SOPFavoritesDashboard({
               <div className="text-2xl font-bold text-brand-red">
                 {favoriteCategories.length}
               </div>
-              <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
+              <div className={cn("text-sm text-gray-600", locale === 'fr' && "font-thai")}>
                 {t('navigation.categories')}
               </div>
             </div>
@@ -436,7 +436,7 @@ export default function SOPFavoritesDashboard({
               <div className="text-2xl font-bold text-brand-red">
                 {favoriteDocuments.length}
               </div>
-              <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
+              <div className={cn("text-sm text-gray-600", locale === 'fr' && "font-thai")}>
                 {t('navigation.sops')}
               </div>
             </div>

@@ -329,8 +329,8 @@ export function TrainingAssessment({
 
   // Get question component based on type
   const renderQuestion = (question: TrainingQuestion, answer: string) => {
-    const questionText = locale === 'th' ? question.question_th : question.question;
-    const options = locale === 'th' ? question.options_th : question.options;
+    const questionText = locale === 'fr' ? question.question_th : question.question;
+    const options = locale === 'fr' ? question.options_th : question.options;
 
     switch (question.question_type) {
       case 'multiple_choice':
@@ -782,7 +782,7 @@ export function TrainingAssessment({
                   </h4>
                   <p className="text-sm text-red-700">
                     {feedbackQuestion.question_type === 'multiple_choice' && feedbackQuestion.options
-                      ? (locale === 'th' 
+                      ? (locale === 'fr' 
                           ? feedbackQuestion.options_th?.[parseInt(feedbackQuestion.correct_answer)]
                           : feedbackQuestion.options[parseInt(feedbackQuestion.correct_answer)])
                       : feedbackQuestion.correct_answer}
@@ -796,7 +796,7 @@ export function TrainingAssessment({
                     {t('training.explanation')}:
                   </h4>
                   <p className="text-sm text-blue-700">
-                    {locale === 'th' ? feedbackQuestion.explanation_th : feedbackQuestion.explanation}
+                    {locale === 'fr' ? feedbackQuestion.explanation_th : feedbackQuestion.explanation}
                   </p>
                 </div>
               )}

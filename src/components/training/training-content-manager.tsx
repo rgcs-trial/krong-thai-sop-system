@@ -196,8 +196,8 @@ export function TrainingContentManager({ className }: TrainingContentManagerProp
     // Apply search filter
     if (searchTerm) {
       filtered = filtered.filter(module => {
-        const title = locale === 'th' ? module.title_th : module.title;
-        const description = locale === 'th' ? module.description_th : module.description;
+        const title = locale === 'fr' ? module.title_th : module.title;
+        const description = locale === 'fr' ? module.description_th : module.description;
         
         return (
           title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -475,8 +475,8 @@ export function TrainingContentManager({ className }: TrainingContentManagerProp
       {filteredModules.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredModules.map((module) => {
-            const moduleTitle = locale === 'th' ? module.title_th : module.title;
-            const moduleDescription = locale === 'th' ? module.description_th : module.description;
+            const moduleTitle = locale === 'fr' ? module.title_th : module.title;
+            const moduleDescription = locale === 'fr' ? module.description_th : module.description;
 
             return (
               <Card key={module.id} className="hover:shadow-md transition-shadow">
@@ -672,7 +672,7 @@ export function TrainingContentManager({ className }: TrainingContentManagerProp
                   <SelectContent>
                     {availableSOPs.map((sop) => (
                       <SelectItem key={sop.id} value={sop.id}>
-                        {locale === 'th' ? sop.title_th : sop.title}
+                        {locale === 'fr' ? sop.title_th : sop.title}
                       </SelectItem>
                     ))}
                   </SelectContent>

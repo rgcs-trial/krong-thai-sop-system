@@ -182,7 +182,7 @@ export function TrainingSession({
       toast({
         title: t('training.section_completed'),
         description: t('training.section_completed_desc', { 
-          title: locale === 'th' ? currentSection.title_th : currentSection.title 
+          title: locale === 'fr' ? currentSection.title_th : currentSection.title 
         }),
         variant: 'default',
       });
@@ -293,9 +293,9 @@ export function TrainingSession({
 
   const progressPercentage = calculateProgress(currentModule.id);
   const sections = currentModule.sections || [];
-  const sectionTitle = locale === 'th' ? currentSection.title_th : currentSection.title;
-  const sectionContent = locale === 'th' ? currentSection.content_th : currentSection.content;
-  const moduleTitle = locale === 'th' ? currentModule.title_th : currentModule.title;
+  const sectionTitle = locale === 'fr' ? currentSection.title_th : currentSection.title;
+  const sectionContent = locale === 'fr' ? currentSection.content_th : currentSection.content;
+  const moduleTitle = locale === 'fr' ? currentModule.title_th : currentModule.title;
 
   return (
     <div className={cn('w-full max-w-6xl mx-auto space-y-6', className)}>
@@ -381,7 +381,7 @@ export function TrainingSession({
                   </div>
                   <div className="flex-1 text-left">
                     <div className="font-medium text-sm">
-                      {locale === 'th' ? section.title_th : section.title}
+                      {locale === 'fr' ? section.title_th : section.title}
                     </div>
                     <div className="text-xs text-muted-foreground">
                       {t('training.estimated_minutes', { minutes: section.estimated_minutes })}

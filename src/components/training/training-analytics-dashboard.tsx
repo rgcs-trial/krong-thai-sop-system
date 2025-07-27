@@ -414,7 +414,7 @@ export function TrainingAnalyticsDashboard({ className }: TrainingAnalyticsDashb
                 <SelectItem value="all">{t('training.all_modules')}</SelectItem>
                 {modules.map((module) => (
                   <SelectItem key={module.id} value={module.id}>
-                    {locale === 'th' ? module.title_th : module.title}
+                    {locale === 'fr' ? module.title_th : module.title}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -550,7 +550,7 @@ export function TrainingAnalyticsDashboard({ className }: TrainingAnalyticsDashb
                     <div className="flex-1">
                       <div className="flex items-center space-x-3">
                         <h4 className="font-semibold">
-                          {locale === 'th' ? performance.module.title_th : performance.module.title}
+                          {locale === 'fr' ? performance.module.title_th : performance.module.title}
                         </h4>
                         {performance.module.is_mandatory && (
                           <Badge variant="destructive">{t('training.mandatory')}</Badge>

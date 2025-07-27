@@ -597,7 +597,7 @@ export function TranslationManagementDashboard({
                     <TableCell className="max-w-[200px]">
                       {translation.translatedText ? (
                         <div>
-                          <div className={`truncate ${translation.targetLanguage === 'th' ? 'font-thai' : 'font-ui'}`} title={translation.translatedText}>
+                          <div className={`truncate ${translation.targetLanguage === 'th' ? 'font-french' : 'font-ui'}`} title={translation.translatedText}>
                             {translation.translatedText}
                           </div>
                           <div className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
@@ -730,7 +730,7 @@ export function TranslationManagementDashboard({
                     ...editingTranslation,
                     translatedText: e.target.value
                   })}
-                  className={`w-full h-32 p-3 border rounded-md ${editingTranslation.targetLanguage === 'th' ? 'font-thai' : 'font-ui'}`}
+                  className={`w-full h-32 p-3 border rounded-md ${editingTranslation.targetLanguage === 'th' ? 'font-french' : 'font-ui'}`}
                   placeholder={`Enter translation in ${localeNames[editingTranslation.targetLanguage]}...`}
                 />
               </div>

@@ -149,8 +149,8 @@ export function TrainingCertificates({
     // Apply search filter
     if (searchTerm) {
       filtered = filtered.filter(cert => {
-        const moduleTitle = locale === 'th' ? cert.module?.title_th : cert.module?.title;
-        const categoryName = locale === 'th' ? cert.module?.sop_document?.category?.name_th : cert.module?.sop_document?.category?.name;
+        const moduleTitle = locale === 'fr' ? cert.module?.title_th : cert.module?.title;
+        const categoryName = locale === 'fr' ? cert.module?.sop_document?.category?.name_th : cert.module?.sop_document?.category?.name;
         
         return (
           cert.certificate_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -359,8 +359,8 @@ export function TrainingCertificates({
       {filteredCertificates.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCertificates.map((certificate) => {
-            const moduleTitle = locale === 'th' ? certificate.module?.title_th : certificate.module?.title;
-            const categoryName = locale === 'th' 
+            const moduleTitle = locale === 'fr' ? certificate.module?.title_th : certificate.module?.title;
+            const categoryName = locale === 'fr' 
               ? certificate.module?.sop_document?.category?.name_th 
               : certificate.module?.sop_document?.category?.name;
 
@@ -479,10 +479,10 @@ export function TrainingCertificates({
               {/* Certificate Header */}
               <div className="text-center border-b pb-4">
                 <h3 className="text-xl font-bold">
-                  {locale === 'th' ? selectedCertificate.module?.title_th : selectedCertificate.module?.title}
+                  {locale === 'fr' ? selectedCertificate.module?.title_th : selectedCertificate.module?.title}
                 </h3>
                 <p className="text-muted-foreground">
-                  {locale === 'th' 
+                  {locale === 'fr' 
                     ? selectedCertificate.module?.sop_document?.category?.name_th
                     : selectedCertificate.module?.sop_document?.category?.name}
                 </p>

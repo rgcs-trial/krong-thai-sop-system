@@ -93,7 +93,7 @@ export default function SOPSearch({
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = locale === 'th' ? 'th-TH' : 'en-US';
+      recognitionRef.current.lang = locale === 'fr' ? 'th-TH' : 'en-US';
 
       recognitionRef.current.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
@@ -327,7 +327,7 @@ export default function SOPSearch({
                         placeholder={t('search.searchNamePlaceholder')}
                       />
                     </div>
-                    {locale === 'th' && (
+                    {locale === 'fr' && (
                       <div>
                         <Label htmlFor="search-name-th">{t('search.searchNameThai')}</Label>
                         <Input
@@ -392,8 +392,8 @@ export default function SOPSearch({
                           onClick={() => loadSavedSearch(item)}
                           className="flex-1 text-left px-2 py-1 rounded hover:bg-gray-100 transition-colors text-sm"
                         >
-                          <div className={cn(locale === 'th' && "font-thai")}>
-                            {locale === 'th' ? item.name_th : item.name}
+                          <div className={cn(locale === 'fr' && "font-thai")}>
+                            {locale === 'fr' ? item.name_th : item.name}
                           </div>
                           <div className="text-xs text-gray-400">{item.query}</div>
                         </button>
@@ -423,7 +423,7 @@ export default function SOPSearch({
                         onClick={() => handleSuggestionClick(suggestion)}
                         className={cn(
                           "w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-colors text-sm flex items-center gap-2",
-                          locale === 'th' && "font-thai"
+                          locale === 'fr' && "font-thai"
                         )}
                       >
                         <span className={cn(
@@ -449,8 +449,8 @@ export default function SOPSearch({
                       </span>
                     </div>
                     {results.slice(0, 3).map((result) => {
-                      const title = locale === 'th' ? result.title_th : result.title_en;
-                      const content = locale === 'th' ? result.content_th : result.content_en;
+                      const title = locale === 'fr' ? result.title_th : result.title_en;
+                      const content = locale === 'fr' ? result.content_th : result.content_en;
                       
                       return (
                         <button
@@ -458,7 +458,7 @@ export default function SOPSearch({
                           onClick={() => handleResultSelect(result)}
                           className={cn(
                             "w-full text-left p-2 rounded hover:bg-gray-50 transition-colors border-l-2 border-transparent hover:border-brand-red",
-                            locale === 'th' && "font-thai"
+                            locale === 'fr' && "font-thai"
                           )}
                         >
                           <div className="font-medium text-sm line-clamp-1">{title}</div>
@@ -549,7 +549,7 @@ export default function SOPSearch({
                           )}
                           className="text-xs h-6"
                         >
-                          {locale === 'th' ? category.name_th : category.name}
+                          {locale === 'fr' ? category.name_th : category.name}
                         </Button>
                       ))}
                     </div>
@@ -632,7 +632,7 @@ export default function SOPSearch({
                 <h4 className="text-sm font-medium mb-2">{t('navigation.categories')}</h4>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                   {categories.map((category) => {
-                    const name = locale === 'th' ? category.name_th : category.name;
+                    const name = locale === 'fr' ? category.name_th : category.name;
                     const isSelected = filters.categoryId === category.id;
                     
                     return (
@@ -643,7 +643,7 @@ export default function SOPSearch({
                         onClick={() => handleFilterChange('categoryId', isSelected ? '' : category.id)}
                         className={cn(
                           "text-xs justify-start h-auto p-2", 
-                          locale === 'th' && "font-thai"
+                          locale === 'fr' && "font-thai"
                         )}
                       >
                         <div 
@@ -725,13 +725,13 @@ export default function SOPSearch({
         <div className="flex flex-wrap gap-2">
           {filters.categoryId && (() => {
             const category = categories.find(c => c.id === filters.categoryId);
-            const name = category ? (locale === 'th' ? category.name_th : category.name) : filters.categoryId;
+            const name = category ? (locale === 'fr' ? category.name_th : category.name) : filters.categoryId;
             
             return (
               <Badge
                 key={filters.categoryId}
                 variant="secondary"
-                className={cn("flex items-center gap-1", locale === 'th' && "font-thai")}
+                className={cn("flex items-center gap-1", locale === 'fr' && "font-thai")}
               >
                 <div 
                   className="w-2 h-2 rounded-full"
@@ -789,7 +789,7 @@ export default function SOPSearch({
             <Badge
               key={tag}
               variant="secondary"
-              className={cn("flex items-center gap-1", locale === 'th' && "font-thai")}
+              className={cn("flex items-center gap-1", locale === 'fr' && "font-thai")}
             >
               {tag}
               <X 

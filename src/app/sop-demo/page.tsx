@@ -206,12 +206,12 @@ export default function SOPDemoPage() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div>
               <h1 className={`text-3xl font-bold ${
-                language === 'th' ? 'font-thai' : 'font-heading'
+                language === 'fr' ? 'font-french' : 'font-heading'
               }`}>
                 {language === 'en' ? 'SOP Design System Demo' : 'การสาธิต SOP Design System'}
               </h1>
               <p className={`text-krong-white/80 mt-2 ${
-                language === 'th' ? 'font-thai text-base' : 'font-body'
+                language === 'fr' ? 'font-thai text-base' : 'font-body'
               }`}>
                 {language === 'en' 
                   ? 'Comprehensive UI system for Restaurant Krong Thai SOP management' 
@@ -230,7 +230,7 @@ export default function SOPDemoPage() {
                 EN
               </Button>
               <Button
-                variant={language === 'th' ? 'default' : 'outline'}
+                variant={language === 'fr' ? 'default' : 'outline'}
                 onClick={() => setLanguage('th')}
                 className="h-12"
               >
@@ -283,7 +283,7 @@ export default function SOPDemoPage() {
               <Card>
                 <CardHeader>
                   <h2 className={`text-xl font-semibold ${
-                    language === 'th' ? 'font-thai' : 'font-heading'
+                    language === 'fr' ? 'font-french' : 'font-heading'
                   }`}>
                     {language === 'en' ? 'Status Indicators' : 'ตัวแสดงสถานะ'}
                   </h2>
@@ -291,7 +291,7 @@ export default function SOPDemoPage() {
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
                     <h3 className={`font-medium ${
-                      language === 'th' ? 'font-thai' : 'font-ui'
+                      language === 'fr' ? 'font-french' : 'font-ui'
                     }`}>
                       {language === 'en' ? 'Completion Status' : 'สถานะการทำให้สำเร็จ'}
                     </h3>
@@ -306,7 +306,7 @@ export default function SOPDemoPage() {
 
                   <div className="space-y-4">
                     <h3 className={`font-medium ${
-                      language === 'th' ? 'font-thai' : 'font-ui'
+                      language === 'fr' ? 'font-french' : 'font-ui'
                     }`}>
                       {language === 'en' ? 'Compliance Levels' : 'ระดับการปฏิบัติตาม'}
                     </h3>
@@ -320,7 +320,7 @@ export default function SOPDemoPage() {
 
                   <div className="space-y-4">
                     <h3 className={`font-medium ${
-                      language === 'th' ? 'font-thai' : 'font-ui'
+                      language === 'fr' ? 'font-french' : 'font-ui'
                     }`}>
                       {language === 'en' ? 'Priority Levels' : 'ระดับความสำคัญ'}
                     </h3>
@@ -338,7 +338,7 @@ export default function SOPDemoPage() {
               <Card>
                 <CardHeader>
                   <h2 className={`text-xl font-semibold ${
-                    language === 'th' ? 'font-thai' : 'font-heading'
+                    language === 'fr' ? 'font-french' : 'font-heading'
                   }`}>
                     {language === 'en' ? 'Progress Indicators' : 'ตัวแสดงความคืบหน้า'}
                   </h2>
@@ -372,7 +372,7 @@ export default function SOPDemoPage() {
               <Card>
                 <CardHeader>
                   <h2 className={`text-xl font-semibold ${
-                    language === 'th' ? 'font-thai' : 'font-heading'
+                    language === 'fr' ? 'font-french' : 'font-heading'
                   }`}>
                     {language === 'en' ? 'Tablet-Optimized Design Features' : 'คุณสมบัติการออกแบบที่เหมาะสำหรับแท็บเล็ต'}
                   </h2>
@@ -383,13 +383,13 @@ export default function SOPDemoPage() {
                       <div className="flex items-center gap-2">
                         <Smartphone className="h-5 w-5 text-krong-red" />
                         <h3 className={`font-medium ${
-                          language === 'th' ? 'font-thai' : 'font-ui'
+                          language === 'fr' ? 'font-french' : 'font-ui'
                         }`}>
                           {language === 'en' ? 'Touch-Friendly Interactions' : 'การโต้ตอบที่เป็นมิตรกับการสัมผัส'}
                         </h3>
                       </div>
                       <ul className={`space-y-2 text-sm text-krong-black/70 ${
-                        language === 'th' ? 'font-thai' : 'font-body'
+                        language === 'fr' ? 'font-french' : 'font-body'
                       }`}>
                         <li>• {language === 'en' ? 'Minimum 44px touch targets' : 'เป้าหมายการสัมผัสขั้นต่ำ 44px'}</li>
                         <li>• {language === 'en' ? 'Swipe gestures for navigation' : 'ท่าทางปัดสำหรับการนำทาง'}</li>
@@ -402,13 +402,13 @@ export default function SOPDemoPage() {
                       <div className="flex items-center gap-2">
                         <Globe className="h-5 w-5 text-golden-saffron" />
                         <h3 className={`font-medium ${
-                          language === 'th' ? 'font-thai' : 'font-ui'
+                          language === 'fr' ? 'font-french' : 'font-ui'
                         }`}>
                           {language === 'en' ? 'Bilingual Support' : 'การสนับสนุนสองภาษา'}
                         </h3>
                       </div>
                       <ul className={`space-y-2 text-sm text-krong-black/70 ${
-                        language === 'th' ? 'font-thai' : 'font-body'
+                        language === 'fr' ? 'font-french' : 'font-body'
                       }`}>
                         <li>• {language === 'en' ? 'Dynamic font switching' : 'การสลับฟอนต์แบบไดนามิก'}</li>
                         <li>• {language === 'en' ? 'Proper Thai text rendering' : 'การแสดงผลข้อความไทยที่เหมาะสม'}</li>
@@ -421,13 +421,13 @@ export default function SOPDemoPage() {
                       <div className="flex items-center gap-2">
                         <Palette className="h-5 w-5 text-jade-green" />
                         <h3 className={`font-medium ${
-                          language === 'th' ? 'font-thai' : 'font-ui'
+                          language === 'fr' ? 'font-french' : 'font-ui'
                         }`}>
                           {language === 'en' ? 'Brand Consistency' : 'ความสอดคล้องของแบรนด์'}
                         </h3>
                       </div>
                       <ul className={`space-y-2 text-sm text-krong-black/70 ${
-                        language === 'th' ? 'font-thai' : 'font-body'
+                        language === 'fr' ? 'font-french' : 'font-body'
                       }`}>
                         <li>• {language === 'en' ? 'Restaurant brand colors' : 'สีแบรนด์ของร้านอาหาร'}</li>
                         <li>• {language === 'en' ? 'Typography hierarchy' : 'ลำดับชั้นของการพิมพ์'}</li>
@@ -440,13 +440,13 @@ export default function SOPDemoPage() {
                       <div className="flex items-center gap-2">
                         <Users className="h-5 w-5 text-earthen-beige" />
                         <h3 className={`font-medium ${
-                          language === 'th' ? 'font-thai' : 'font-ui'
+                          language === 'fr' ? 'font-french' : 'font-ui'
                         }`}>
                           {language === 'en' ? 'Staff-Focused UX' : 'UX ที่เน้นพนักงาน'}
                         </h3>
                       </div>
                       <ul className={`space-y-2 text-sm text-krong-black/70 ${
-                        language === 'th' ? 'font-thai' : 'font-body'
+                        language === 'fr' ? 'font-french' : 'font-body'
                       }`}>
                         <li>• {language === 'en' ? 'Quick task completion' : 'การทำงานให้เสร็จอย่างรวดเร็ว'}</li>
                         <li>• {language === 'en' ? 'Clear visual hierarchy' : 'ลำดับชั้นการมองเห็นที่ชัดเจน'}</li>

@@ -62,12 +62,12 @@ function SOPCategoryCard({
         <div className="space-y-3">
           <div>
             <h3 className={`font-heading text-lg font-semibold text-krong-black line-clamp-2 ${
-              language === 'th' ? 'font-thai' : ''
+              language === 'fr' ? 'font-french' : ''
             }`}>
               {name}
             </h3>
             <p className={`text-sm text-krong-black/70 mt-1 line-clamp-2 ${
-              language === 'th' ? 'font-thai' : 'font-body'
+              language === 'fr' ? 'font-french' : 'font-body'
             }`}>
               {description}
             </p>
@@ -163,12 +163,12 @@ export function SOPCategoryDashboard({ language, onCategorySelect }: SOPCategory
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
             <h1 className={`text-3xl font-heading font-bold text-krong-black ${
-              language === 'th' ? 'font-thai' : ''
+              language === 'fr' ? 'font-french' : ''
             }`}>
               {language === 'en' ? 'Standard Operating Procedures' : 'ขั้นตอนการปฏิบัติงานมาตรฐาน'}
             </h1>
             <p className={`text-krong-black/70 mt-2 ${
-              language === 'th' ? 'font-thai text-base' : 'font-body'
+              language === 'fr' ? 'font-thai text-base' : 'font-body'
             }`}>
               {language === 'en' 
                 ? 'Comprehensive operational guidelines for Restaurant Krong Thai' 
@@ -194,12 +194,12 @@ export function SOPCategoryDashboard({ language, onCategorySelect }: SOPCategory
             </div>
             <div>
               <p className={`text-sm font-medium text-krong-black ${
-                language === 'th' ? 'font-thai' : 'font-ui'
+                language === 'fr' ? 'font-french' : 'font-ui'
               }`}>
                 {language === 'en' ? 'Overall Progress' : 'ความคืบหน้าโดยรวม'}
               </p>
               <p className={`text-xs text-krong-black/60 ${
-                language === 'th' ? 'font-thai' : 'font-body'
+                language === 'fr' ? 'font-french' : 'font-body'
               }`}>
                 {language === 'en' ? '16 Categories' : '16 หมวดหมู่'}
               </p>
@@ -214,12 +214,12 @@ export function SOPCategoryDashboard({ language, onCategorySelect }: SOPCategory
               <AlertCircle className="h-5 w-5 text-krong-red flex-shrink-0" />
               <div className="flex-1">
                 <h4 className={`font-medium text-krong-black ${
-                  language === 'th' ? 'font-thai' : 'font-ui'
+                  language === 'fr' ? 'font-french' : 'font-ui'
                 }`}>
                   {language === 'en' ? 'Critical SOPs Require Attention' : 'SOP สำคัญต้องการความสนใจ'}
                 </h4>
                 <p className={`text-sm text-krong-black/70 ${
-                  language === 'th' ? 'font-thai' : 'font-body'
+                  language === 'fr' ? 'font-french' : 'font-body'
                 }`}>
                   {language === 'en' 
                     ? 'Some critical procedures are incomplete. Please review immediately.'
@@ -307,12 +307,12 @@ export function SOPCategoryDashboard({ language, onCategorySelect }: SOPCategory
         <div className="text-center py-12">
           <Search className="h-12 w-12 mx-auto text-krong-black/30 mb-4" />
           <h3 className={`text-lg font-medium text-krong-black mb-2 ${
-            language === 'th' ? 'font-thai' : 'font-ui'
+            language === 'fr' ? 'font-french' : 'font-ui'
           }`}>
             {language === 'en' ? 'No SOPs Found' : 'ไม่พบ SOP'}
           </h3>
           <p className={`text-krong-black/60 ${
-            language === 'th' ? 'font-thai' : 'font-body'
+            language === 'fr' ? 'font-french' : 'font-body'
           }`}>
             {language === 'en' 
               ? 'Try adjusting your search or filter criteria'

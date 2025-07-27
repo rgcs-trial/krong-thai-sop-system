@@ -121,8 +121,8 @@ export function ServiceStatusError({
               <div className={`w-2 h-2 rounded-full ${isServiceDown ? 'bg-red-500' : 'bg-yellow-500'}`} />
               <span>
                 {isServiceDown 
-                  ? (locale === 'th' ? 'บริการออฟไลน์' : locale === 'fr' ? 'Service hors ligne' : 'Service Offline')
-                  : (locale === 'th' ? 'ปัญหาการเชื่อมต่อ' : locale === 'fr' ? 'Problème de connexion' : 'Connection Issue')
+                  ? (locale === 'fr' ? 'บริการออฟไลน์' : locale === 'fr' ? 'Service hors ligne' : 'Service Offline')
+                  : (locale === 'fr' ? 'ปัญหาการเชื่อมต่อ' : locale === 'fr' ? 'Problème de connexion' : 'Connection Issue')
                 }
               </span>
             </div>
@@ -131,7 +131,7 @@ export function ServiceStatusError({
 
         {/* Footer */}
         <div className="text-center mt-6 text-sm text-gray-500">
-          <p>&copy; 2025 Restaurant Krong Thai. {locale === 'th' ? 'สงวนลิขสิทธิ์ทุกประการ' : locale === 'fr' ? 'Tous droits réservés' : 'All rights reserved'}.</p>
+          <p>&copy; 2025 Restaurant Krong Thai. {locale === 'fr' ? 'สงวนลิขสิทธิ์ทุกประการ' : locale === 'fr' ? 'Tous droits réservés' : 'All rights reserved'}.</p>
         </div>
       </div>
     </div>

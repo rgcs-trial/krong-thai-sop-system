@@ -623,3 +623,794 @@
 
  ✓ Starting...
  ✓ Ready in 1515ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 560ms (263 modules)
+✅ Environment configuration validated for development
+ ○ Compiling /[locale]/login ...
+ ✓ Compiled /[locale]/login in 5.6s (945 modules)
+ GET /en/login?redirect=%2F 200 in 6245ms
+ ○ Compiling /api/auth/location-session/check ...
+ ✓ Compiled /api/auth/location-session/check in 808ms (999 modules)
+ ✓ Compiled /api/auth/login in 219ms (989 modules)
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 339ms
+ GET /en/login?redirect=%2F 200 in 371ms
+ GET /api/auth/location-session/check 200 in 1368ms
+ GET /api/auth/location-session/check 200 in 152ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 1003ms
+ ○ Compiling /[locale]/analytics ...
+ ✓ Compiled /[locale]/analytics in 2.3s (2240 modules)
+ GET /api/restaurants?active=true 200 in 2507ms
+ GET /api/restaurants?active=true 200 in 457ms
+ ⨯ Error: No locale was returned from `getRequestConfig`.
+
+See https://next-intl.dev/docs/usage/configuration#i18n-request
+    at async AnalyticsPage (src/app/[locale]/analytics/page.tsx:45:12)
+  43 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+  44 |   const resolvedParams = await params;
+> 45 |   const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
+     |            ^
+  46 |   
+  47 |   // Validate locale
+  48 |   const validLocales = ['en', 'fr', 'th']; {
+  digest: '2595071671'
+}
+ GET /en/analytics 500 in 3018ms
+ ✓ Compiled in 120ms (935 modules)
+ GET /en/login?redirect=%2F 200 in 82ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 12ms
+ GET /api/auth/location-session/check 200 in 1522ms
+ GET /api/auth/location-session/check 200 in 109ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 1167ms
+ GET /en/login?redirect=%2Fen%2Fanalytics%2Fexecutive 200 in 34ms
+ GET /api/restaurants?active=true 200 in 41ms
+ GET /en/login?redirect=%2F 200 in 29ms
+ GET /api/auth/location-session/check 200 in 103ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 19ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 496ms
+ GET /api/auth/location-session/check 200 in 388ms
+ GET /api/restaurants?active=true 200 in 96ms
+ GET /api/restaurants?active=true 200 in 79ms
+ ○ Compiling /[locale]/analytics/operations ...
+ ✓ Compiled /[locale]/analytics/operations in 696ms (2268 modules)
+ ⨯ Error: No intl context found. Have you configured the provider? See https://next-intl.dev/docs/usage/configuration#server-client-components
+    at useI18n (src/hooks/use-i18n.ts:23:26)
+    at OperationalInsightsDashboard (src/components/analytics/operational-insights-dashboard.tsx:146:31)
+  21 |  */
+  22 | export function useI18n() {
+> 23 |   const locale = useLocale() as Locale;
+     |                          ^
+  24 |   const t = useTranslations();
+  25 |   const router = useRouter();
+  26 |   const pathname = usePathname(); {
+  digest: '3866913199'
+}
+ GET /en/analytics/operations 500 in 1398ms
+ ✓ Compiled in 128ms (947 modules)
+ GET /en/login?redirect=%2F 200 in 58ms
+ GET /api/auth/location-session/check 200 in 135ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 12ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 386ms
+ GET /api/auth/location-session/check 200 in 74ms
+ GET /api/restaurants?active=true 200 in 119ms
+ GET /api/restaurants?active=true 200 in 107ms
+ ○ Compiling /[locale]/analytics/sop ...
+ ✓ Compiled /[locale]/analytics/sop in 509ms (2300 modules)
+ ⨯ Error: No intl context found. Have you configured the provider? See https://next-intl.dev/docs/usage/configuration#server-client-components
+    at useI18n (src/hooks/use-i18n.ts:23:26)
+    at SOPAnalyticsDashboard (src/components/analytics/sop-analytics-dashboard.tsx:135:31)
+  21 |  */
+  22 | export function useI18n() {
+> 23 |   const locale = useLocale() as Locale;
+     |                          ^
+  24 |   const t = useTranslations();
+  25 |   const router = useRouter();
+  26 |   const pathname = usePathname(); {
+  digest: '638822012'
+}
+ GET /en/analytics/sop 500 in 1150ms
+ ✓ Compiled in 123ms (961 modules)
+ GET /en/login?redirect=%2F 200 in 52ms
+ GET /api/auth/location-session/check 200 in 141ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 12ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 409ms
+ GET /api/auth/location-session/check 200 in 320ms
+ GET /api/restaurants?active=true 200 in 143ms
+ GET /api/restaurants?active=true 200 in 100ms
+ ✓ Compiled /[locale]/analytics/training in 479ms (2362 modules)
+ ⨯ Error: No intl context found. Have you configured the provider? See https://next-intl.dev/docs/usage/configuration#server-client-components
+    at useI18n (src/hooks/use-i18n.ts:23:26)
+    at TrainingAnalyticsDashboard (src/components/training/training-analytics-dashboard.tsx:140:31)
+  21 |  */
+  22 | export function useI18n() {
+> 23 |   const locale = useLocale() as Locale;
+     |                          ^
+  24 |   const t = useTranslations();
+  25 |   const router = useRouter();
+  26 |   const pathname = usePathname(); {
+  digest: '2540442601'
+}
+ GET /en/analytics/training 500 in 1109ms
+ ✓ Compiled in 126ms (990 modules)
+ GET /en/login?redirect=%2F 200 in 52ms
+ GET /api/auth/location-session/check 200 in 111ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 12ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 375ms
+ GET /api/auth/location-session/check 200 in 103ms
+ GET /api/restaurants?active=true 200 in 130ms
+ GET /api/restaurants?active=true 200 in 101ms
+ ✓ Compiled /[locale]/analytics/monitoring in 421ms (2392 modules)
+ ⨯ Error: No intl context found. Have you configured the provider? See https://next-intl.dev/docs/usage/configuration#server-client-components
+    at useI18n (src/hooks/use-i18n.ts:23:26)
+    at RealtimeMonitoringDashboard (src/components/analytics/realtime-monitoring-dashboard.tsx:151:31)
+  21 |  */
+  22 | export function useI18n() {
+> 23 |   const locale = useLocale() as Locale;
+     |                          ^
+  24 |   const t = useTranslations();
+  25 |   const router = useRouter();
+  26 |   const pathname = usePathname(); {
+  digest: '1644093725'
+}
+ GET /en/analytics/monitoring 500 in 1040ms
+ ✓ Compiled in 131ms (1003 modules)
+ GET /en/login?redirect=%2F 200 in 66ms
+ GET /api/auth/location-session/check 200 in 361ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 9ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /api/auth/location-session/check 200 in 340ms
+ POST /api/auth/login 200 in 618ms
+ GET /api/restaurants?active=true 200 in 137ms
+ GET /api/restaurants?active=true 200 in 74ms
+ ⨯ Error: No locale was returned from `getRequestConfig`.
+
+See https://next-intl.dev/docs/usage/configuration#i18n-request
+    at async AnalyticsPage (src/app/[locale]/analytics/page.tsx:45:12)
+  43 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+  44 |   const resolvedParams = await params;
+> 45 |   const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
+     |            ^
+  46 |   
+  47 |   // Validate locale
+  48 |   const validLocales = ['en', 'fr', 'th']; {
+  digest: '2595071671'
+}
+ GET /en/analytics 500 in 70ms
+ ✓ Compiled in 146ms (1003 modules)
+ GET /en/login?redirect=%2F 200 in 37ms
+ GET /en/login?redirect=%2F 200 in 28ms
+ GET /en/login?redirect=%2F 200 in 26ms
+ GET /api/auth/location-session/check 200 in 101ms
+ GET /en/login?redirect=%2F 200 in 39ms
+ GET /api/auth/location-session/check 200 in 110ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 58ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 239ms
+ GET /api/auth/location-session/check 200 in 111ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'manager@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: manager@krongthai.com
+ POST /api/auth/login 200 in 58ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 342ms
+ ✓ Compiled in 1693ms (2669 modules)
+✅ Environment configuration validated for development
+ GET /en/login?redirect=%2F 200 in 77ms
+ GET /api/auth/location-session/check 200 in 210ms
+ GET /api/auth/location-session/check 200 in 97ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'invalid@email.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: invalid@email.com
+ POST /api/auth/login 200 in 68ms
+[AUTH-DEBUG] Database query result: {
+  hasUser: false,
+  error: 'JSON object requested, multiple (or no) rows returned',
+  errorCode: 'PGRST116'
+}
+[AUTH-ERROR] 2025-07-27T16:38:00.161Z: {
+  "timestamp": "2025-07-27T16:38:00.161Z",
+  "context": "DATABASE_QUERY",
+  "error": {
+    "code": "PGRST116",
+    "details": "The result contains 0 rows",
+    "hint": null,
+    "message": "JSON object requested, multiple (or no) rows returned"
+  },
+  "metadata": {
+    "operation": "auth_users_lookup",
+    "email": "invalid@email.com",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+    "ip": "::ffff:127.0.0.1"
+  }
+}
+ GET /en/login?redirect=%2F 200 in 149ms
+ GET /api/auth/location-session/check 200 in 125ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'test@test.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: test@test.com
+ POST /api/auth/login 200 in 63ms
+[AUTH-DEBUG] Database query result: {
+  hasUser: false,
+  error: 'JSON object requested, multiple (or no) rows returned',
+  errorCode: 'PGRST116'
+}
+[AUTH-ERROR] 2025-07-27T16:38:01.561Z: {
+  "timestamp": "2025-07-27T16:38:01.561Z",
+  "context": "DATABASE_QUERY",
+  "error": {
+    "code": "PGRST116",
+    "details": "The result contains 0 rows",
+    "hint": null,
+    "message": "JSON object requested, multiple (or no) rows returned"
+  },
+  "metadata": {
+    "operation": "auth_users_lookup",
+    "email": "test@test.com",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/14.5.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36",
+    "ip": "::ffff:127.0.0.1"
+  }
+}
+ GET /en/login?redirect=%2F 200 in 42ms
+ GET /api/auth/location-session/check 200 in 90ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 41ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 249ms
+ GET /api/auth/location-session/check 200 in 115ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 75ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 77ms
+ GET /api/auth/location-session/check 200 in 414ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 61ms
+ GET /en/login?redirect=%2F 200 in 37ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /api/auth/location-session/check 200 in 277ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 57ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 33ms
+ GET /api/auth/location-session/check 200 in 209ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 48ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 327ms
+ GET /api/auth/location-session/check 200 in 176ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 53ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 324ms
+ GET /api/auth/location-session/check 200 in 173ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 61ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 36ms
+ GET /api/auth/location-session/check 200 in 115ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 53ms
+ GET /en/login?redirect=%2F 200 in 42ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /api/auth/location-session/check 200 in 105ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ POST /api/auth/login 200 in 68ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ GET /en/login?redirect=%2F 200 in 78ms
+ GET /api/auth/location-session/check 200 in 200ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 396ms
+ GET /api/restaurants?active=true 200 in 101ms
+ GET /api/restaurants?active=true 200 in 85ms
+ ✓ Compiled in 194ms (1003 modules)
+ GET /en/login?redirect=%2F 200 in 38ms
+ GET /api/auth/location-session/check 200 in 204ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 11ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 376ms
+ GET /api/auth/login 405 in 17ms
+ GET /api/auth/location-session/check 200 in 106ms
+ GET /api/restaurants?active=true 200 in 171ms
+ GET /api/restaurants 200 in 168ms
+ GET /api/restaurants?active=true 200 in 66ms
+ GET /api/auth/location-session/check 200 in 106ms
+ GET /en/login?redirect=%2F 200 in 43ms
+ GET /api/auth/location-session/check 200 in 136ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 19ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 398ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 33ms
+ GET /api/restaurants?active=true 200 in 13ms
+ GET /api/auth/location-session/check 200 in 347ms
+ GET /api/auth/location-session/check 200 in 65ms
+ GET /en/login?redirect=%2F 200 in 32ms
+ GET /api/auth/location-session/check 200 in 86ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 16ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 372ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 41ms
+ GET /api/restaurants?active=true 200 in 47ms
+ GET /api/auth/location-session/check 200 in 60ms
+ GET /api/auth/location-session/check 200 in 5ms
+ GET /en/login?redirect=%2F 200 in 32ms
+ GET /api/auth/location-session/check 200 in 79ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 374ms
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 311ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 35ms
+ GET /api/restaurants?active=true 200 in 7ms
+ GET /api/auth/location-session/check 200 in 7ms
+ ⨯ Error: No locale was returned from `getRequestConfig`.
+
+See https://next-intl.dev/docs/usage/configuration#i18n-request
+    at async AnalyticsPage (src/app/[locale]/analytics/page.tsx:45:12)
+  43 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+  44 |   const resolvedParams = await params;
+> 45 |   const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
+     |            ^
+  46 |   
+  47 |   // Validate locale
+  48 |   const validLocales = ['en', 'fr', 'th']; {
+  digest: '2595071671'
+}
+ GET /en/analytics 500 in 75ms
+ GET /api/auth/location-session/check 200 in 67ms
+ ✓ Compiled in 174ms (1003 modules)
+ GET /en/login?redirect=%2F 200 in 36ms
+ GET /api/auth/location-session/check 200 in 63ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 363ms
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 301ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 34ms
+ GET /api/auth/location-session/check 200 in 8ms
+ GET /api/restaurants?active=true 200 in 46ms
+ ⨯ Error: No locale was returned from `getRequestConfig`.
+
+See https://next-intl.dev/docs/usage/configuration#i18n-request
+    at async AnalyticsPage (src/app/[locale]/analytics/page.tsx:45:12)
+  43 | export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
+  44 |   const resolvedParams = await params;
+> 45 |   const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
+     |            ^
+  46 |   
+  47 |   // Validate locale
+  48 |   const validLocales = ['en', 'fr', 'th']; {
+  digest: '2595071671'
+}
+ GET /en/analytics 500 in 44ms
+ GET /api/auth/location-session/check 200 in 69ms
+ ✓ Compiled in 152ms (1003 modules)
+ GET /en/login?redirect=%2F 200 in 108ms
+ GET /api/auth/location-session/check 200 in 76ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 18ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 378ms
+ GET /en/login?redirect=%2Fen%2Fnonexistent-page 200 in 37ms
+ GET /api/restaurants?active=true 200 in 44ms
+ GET /api/auth/location-session/check 200 in 55ms
+ GET /api/auth/location-session/check 200 in 76ms
+ ✓ Compiled /_not-found in 324ms (2369 modules)
+ GET /en/invalid/route 404 in 452ms
+ GET /en/login?redirect=%2F 200 in 97ms
+ GET /api/auth/location-session/check 200 in 109ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 9ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 397ms
+ GET /api/auth/location-session/check 200 in 308ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 38ms
+ GET /api/restaurants?active=true 200 in 60ms
+ ○ Compiling /[locale]/dashboard ...
+ ✓ Compiled /[locale]/dashboard in 1692ms (3194 modules)
+ GET /api/auth/location-session/check 200 in 1814ms
+ GET /fr/dashboard 200 in 2226ms
+ GET /en/dashboard 200 in 55ms
+ GET /en/login?redirect=%2F 200 in 73ms
+ GET /api/auth/location-session/check 200 in 74ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 10ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 370ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 52ms
+ GET /api/auth/location-session/check 200 in 66ms
+ GET /api/restaurants?active=true 200 in 61ms
+ GET /api/auth/location-session/check 200 in 6ms
+ GET /en/login?redirect=%2F 200 in 32ms
+ GET /api/auth/location-session/check 200 in 74ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 392ms
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 326ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 31ms
+ GET /api/restaurants?active=true 200 in 7ms
+ GET /api/auth/location-session/check 200 in 10ms
+ GET /api/auth/location-session/check 200 in 5ms
+ GET /en/login?redirect=%2F 200 in 34ms
+ GET /api/auth/location-session/check 200 in 68ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 381ms
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 316ms
+ GET /en/login?redirect=%2Fen%2Fdashboard 200 in 32ms
+ GET /api/restaurants?active=true 200 in 6ms
+ GET /api/auth/location-session/check 200 in 7ms
+ GET /en/dashboard 200 in 26ms
+ GET /api/auth/location-session/check 200 in 10ms
+ GET /en/dashboard 200 in 34ms
+ GET /en/login?redirect=%2F 200 in 33ms
+ GET /api/auth/location-session/check 200 in 94ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 387ms
+ GET /api/restaurants?active=true 200 in 65ms
+ GET /api/restaurants?active=true 200 in 71ms
+ ✓ Compiled in 223ms (1416 modules)
+ GET /en/login?redirect=%2F 200 in 44ms
+ GET /api/auth/location-session/check 200 in 251ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 15ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 409ms
+ GET /api/restaurants?active=true 200 in 72ms
+ GET /api/auth/location-session/check 200 in 433ms
+ GET /api/restaurants?active=true 200 in 79ms
+ GET /en/dashboard 200 in 42ms
+ GET /en/login?redirect=%2F 200 in 30ms
+ GET /api/auth/location-session/check 200 in 78ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 373ms
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 309ms
+ GET /api/auth/location-session/check 200 in 68ms
+ GET /api/restaurants?active=true 200 in 123ms
+ GET /api/restaurants?active=true 200 in 66ms
+ GET /en/dashboard 200 in 38ms
+ GET /en/__/fonts/FiraCode-VF.woff2 404 in 38ms
+ ✓ Compiled in 237ms (1416 modules)
+ GET /en/login?redirect=%2F 200 in 157ms
+ GET /api/auth/location-session/check 200 in 175ms
+[AUTH-DEBUG] Environment check: {
+  hasSupabaseUrl: true,
+  hasServiceKey: true,
+  hasAnonKey: true,
+  nodeEnv: 'development',
+  supabaseUrl: 'https://blimbcomhmhlubqngben.s...'
+}
+[AUTH-DEBUG] Login attempt: { email: 'admin@krongthai.com', pinLength: 4, locale: 'en' }
+[AUTH-DEBUG] Supabase client created successfully
+[AUTH-DEBUG] Querying auth_users for: admin@krongthai.com
+ GET /en/login?redirect=%2Fth%2Flogin 200 in 15ms
+[AUTH-DEBUG] Database query result: { hasUser: true, error: undefined, errorCode: undefined }
+ POST /api/auth/login 200 in 397ms
+ GET /api/auth/location-session/check 200 in 390ms
+ GET /api/restaurants?active=true 200 in 108ms
+ GET /api/restaurants?active=true 200 in 89ms
+ GET /en/login 200 in 40ms
+ GET /api/auth/location-session/check 200 in 6ms
+ GET /en/login?redirect=%2F 200 in 29ms
+ GET /api/auth/location-session/check 200 in 103ms
+ ✓ Compiled in 1543ms (2738 modules)
+ ✓ Compiled in 183ms (1412 modules)
+ ✓ Compiled in 525ms (1412 modules)
+ ✓ Compiled in 182ms (1412 modules)
+ ✓ Compiled in 180ms (1412 modules)
+ ✓ Compiled in 302ms (1412 modules)

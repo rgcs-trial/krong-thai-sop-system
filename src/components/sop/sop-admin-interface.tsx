@@ -104,10 +104,10 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
     return (
       <div className={cn('p-4 text-center', className)}>
         <AlertTriangle className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-        <h2 className={cn('text-xl font-semibold mb-2', locale === 'th' && 'font-thai')}>
+        <h2 className={cn('text-xl font-semibold mb-2', locale === 'fr' && 'font-french')}>
           {t('errors.unauthorized')}
         </h2>
-        <p className={cn('text-gray-600', locale === 'th' && 'font-thai')}>
+        <p className={cn('text-gray-600', locale === 'fr' && 'font-french')}>
           {t('sop.admin.noPermission')}
         </p>
       </div>
@@ -302,10 +302,10 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className={cn('text-2xl font-bold text-brand-black', locale === 'th' && 'font-thai')}>
+          <h1 className={cn('text-2xl font-bold text-brand-black', locale === 'fr' && 'font-french')}>
             {t('sop.admin.title')}
           </h1>
-          <p className={cn('text-gray-600 mt-1', locale === 'th' && 'font-thai')}>
+          <p className={cn('text-gray-600 mt-1', locale === 'fr' && 'font-french')}>
             {t('sop.admin.subtitle')}
           </p>
         </div>
@@ -323,17 +323,17 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
         {isLoading ? (
           <div className="text-center py-8">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-red mx-auto mb-4"></div>
-            <p className={cn('text-gray-600', locale === 'th' && 'font-thai')}>
+            <p className={cn('text-gray-600', locale === 'fr' && 'font-french')}>
               {t('sop.loading')}
             </p>
           </div>
         ) : documents.length === 0 ? (
           <Card className="p-8 text-center">
             <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className={cn('text-lg font-medium text-gray-900 mb-2', locale === 'th' && 'font-thai')}>
+            <h3 className={cn('text-lg font-medium text-gray-900 mb-2', locale === 'fr' && 'font-french')}>
               {t('sop.admin.noDocuments')}
             </h3>
-            <p className={cn('text-gray-600 mb-4', locale === 'th' && 'font-thai')}>
+            <p className={cn('text-gray-600 mb-4', locale === 'fr' && 'font-french')}>
               {t('sop.admin.noDocumentsDesc')}
             </p>
             <Button onClick={handleCreateNew} variant="outline">
@@ -344,7 +344,7 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
         ) : (
           documents.map((document) => {
             const category = categories?.find(cat => cat.id === document.category_id);
-            const title = locale === 'th' ? document.title_th : document.title;
+            const title = locale === 'fr' ? document.title_th : document.title;
             
             return (
               <Card key={document.id} className="hover:shadow-lg transition-shadow">
@@ -361,7 +361,7 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
                       <div className="flex-1 min-w-0">
                         <CardTitle className={cn(
                           'text-lg font-semibold text-brand-black mb-1',
-                          locale === 'th' && 'font-thai'
+                          locale === 'fr' && 'font-french'
                         )}>
                           {title}
                         </CardTitle>
@@ -374,7 +374,7 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
                           </Badge>
                           {category && (
                             <Badge variant="outline">
-                              {locale === 'th' ? category.name_th : category.name}
+                              {locale === 'fr' ? category.name_th : category.name}
                             </Badge>
                           )}
                         </div>
@@ -425,10 +425,10 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className={cn(locale === 'th' && 'font-thai')}>
+            <DialogTitle className={cn(locale === 'fr' && 'font-french')}>
               {editingDocument ? t('sop.admin.editDocument') : t('sop.admin.createDocument')}
             </DialogTitle>
-            <DialogDescription className={cn(locale === 'th' && 'font-thai')}>
+            <DialogDescription className={cn(locale === 'fr' && 'font-french')}>
               {editingDocument ? t('sop.admin.editDocumentDesc') : t('sop.admin.createDocumentDesc')}
             </DialogDescription>
           </DialogHeader>
@@ -732,11 +732,11 @@ export function SOPAdminInterface({ locale, className }: SOPAdminInterfaceProps)
       <Dialog open={!!deleteConfirmId} onOpenChange={() => setDeleteConfirmId(null)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className={cn('flex items-center gap-2', locale === 'th' && 'font-thai')}>
+            <DialogTitle className={cn('flex items-center gap-2', locale === 'fr' && 'font-french')}>
               <AlertTriangle className="w-5 h-5 text-red-500" />
               {t('common.confirmDelete')}
             </DialogTitle>
-            <DialogDescription className={cn(locale === 'th' && 'font-thai')}>
+            <DialogDescription className={cn(locale === 'fr' && 'font-french')}>
               {t('sop.admin.confirmDeleteDesc')}
             </DialogDescription>
           </DialogHeader>

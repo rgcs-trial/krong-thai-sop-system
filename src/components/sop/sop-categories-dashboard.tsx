@@ -329,8 +329,8 @@ export default function SOPCategoriesDashboard({
     
     const query = searchQuery.toLowerCase();
     return categories.filter(category => {
-      const name = locale === 'th' ? category.name_th : category.name;
-      const description = locale === 'th' ? category.description_th : category.description;
+      const name = locale === 'fr' ? category.name_th : category.name;
+      const description = locale === 'fr' ? category.description_th : category.description;
       return (
         name?.toLowerCase().includes(query) ||
         description?.toLowerCase().includes(query) ||
@@ -382,8 +382,8 @@ export default function SOPCategoriesDashboard({
   };
 
   const CategoryCard = ({ category, isGridView = true }: { category: EnhancedSOPCategory; isGridView?: boolean }) => {
-    const name = locale === 'th' ? category.name_th : category.name;
-    const description = locale === 'th' ? category.description_th : category.description;
+    const name = locale === 'fr' ? category.name_th : category.name;
+    const description = locale === 'fr' ? category.description_th : category.description;
     const categoryColor = getCategoryColor(category.code);
 
     return (
@@ -422,7 +422,7 @@ export default function SOPCategoriesDashboard({
               <CardTitle className={cn(
                 "text-sm md:text-base font-semibold text-brand-black group-hover:text-brand-red transition-colors",
                 // Thai font support
-                locale === 'th' && "font-thai",
+                locale === 'fr' && "font-thai",
                 !isGridView && "truncate"
               )}>
                 {name}
@@ -441,7 +441,7 @@ export default function SOPCategoriesDashboard({
             {isGridView && description && (
               <p className={cn(
                 "text-xs text-gray-600 mt-1 line-clamp-2",
-                locale === 'th' && "font-thai"
+                locale === 'fr' && "font-thai"
               )}>
                 {description}
               </p>
@@ -461,7 +461,7 @@ export default function SOPCategoriesDashboard({
             {!isGridView && category.last_updated && (
               <span className="text-xs text-gray-500">
                 {t('sopCategories.lastUpdated', { 
-                  date: new Date(category.last_updated).toLocaleDateString(locale === 'th' ? 'th-TH' : 'en-US')
+                  date: new Date(category.last_updated).toLocaleDateString(locale === 'fr' ? 'th-TH' : 'en-US')
                 })}
               </span>
             )}
@@ -470,7 +470,7 @@ export default function SOPCategoriesDashboard({
           {isGridView && category.last_updated && (
             <div className="mt-2 text-xs text-gray-500">
               {t('sopCategories.lastUpdated', { 
-                date: new Date(category.last_updated).toLocaleDateString(locale === 'th' ? 'th-TH' : 'en-US')
+                date: new Date(category.last_updated).toLocaleDateString(locale === 'fr' ? 'th-TH' : 'en-US')
               })}
             </div>
           )}
@@ -489,7 +489,7 @@ export default function SOPCategoriesDashboard({
       <div className={cn("min-h-screen bg-gray-50 flex items-center justify-center", className)}>
         <div className="text-center">
           <Loader2 className="h-12 w-12 animate-spin text-brand-red mx-auto mb-4" />
-          <p className={cn("text-gray-600", locale === 'th' && "font-thai")}>
+          <p className={cn("text-gray-600", locale === 'fr' && "font-thai")}>
             {t('sop.loading')}
           </p>
         </div>
@@ -503,10 +503,10 @@ export default function SOPCategoriesDashboard({
       <div className={cn("min-h-screen bg-gray-50 flex items-center justify-center", className)}>
         <div className="text-center">
           <AlertTriangle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className={cn("text-xl font-semibold text-gray-900 mb-2", locale === 'th' && "font-thai")}>
+          <h2 className={cn("text-xl font-semibold text-gray-900 mb-2", locale === 'fr' && "font-thai")}>
             {t('common.error')}
           </h2>
-          <p className={cn("text-gray-600 mb-4", locale === 'th' && "font-thai")}>
+          <p className={cn("text-gray-600 mb-4", locale === 'fr' && "font-thai")}>
             {error.message || t('errors.general')}
           </p>
           <Button onClick={() => refetch()} variant="outline">
@@ -523,13 +523,13 @@ export default function SOPCategoriesDashboard({
       <div className="mb-6">
         <h1 className={cn(
           "text-2xl md:text-3xl font-bold text-brand-black mb-2",
-          locale === 'th' && "font-thai"
+          locale === 'fr' && "font-thai"
         )}>
           {t('sopCategories.title')}
         </h1>
         <p className={cn(
           "text-gray-600 text-sm md:text-base",
-          locale === 'th' && "font-thai"
+          locale === 'fr' && "font-thai"
         )}>
           {t('sopCategories.subtitle')}
         </p>
@@ -586,7 +586,7 @@ export default function SOPCategoriesDashboard({
         <TabsContent value="all" className="mt-6">
           {displayCategories.length === 0 ? (
             <div className="text-center py-12">
-              <p className={cn("text-gray-500", locale === 'th' && "font-thai")}>
+              <p className={cn("text-gray-500", locale === 'fr' && "font-thai")}>
                 {t('sopCategories.noResults')}
               </p>
             </div>
@@ -647,7 +647,7 @@ export default function SOPCategoriesDashboard({
             <div className="text-2xl font-bold text-brand-red">
               {categories.length}
             </div>
-            <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
+            <div className={cn("text-sm text-gray-600", locale === 'fr' && "font-thai")}>
               {t('navigation.categories')}
             </div>
           </div>
@@ -658,7 +658,7 @@ export default function SOPCategoriesDashboard({
             <div className="text-2xl font-bold text-brand-red">
               {categories.reduce((sum, cat) => sum + (cat.sop_count || 0), 0)}
             </div>
-            <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
+            <div className={cn("text-sm text-gray-600", locale === 'fr' && "font-thai")}>
               {t('dashboard.totalSops')}
             </div>
           </div>
@@ -669,7 +669,7 @@ export default function SOPCategoriesDashboard({
             <div className="text-2xl font-bold text-brand-red">
               {categories.filter(cat => cat.is_active).length}
             </div>
-            <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
+            <div className={cn("text-sm text-gray-600", locale === 'fr' && "font-thai")}>
               {t('dashboard.activeCategories')}
             </div>
           </div>
@@ -680,7 +680,7 @@ export default function SOPCategoriesDashboard({
             <div className="text-2xl font-bold text-brand-red">
               {displayCategories.length}
             </div>
-            <div className={cn("text-sm text-gray-600", locale === 'th' && "font-thai")}>
+            <div className={cn("text-sm text-gray-600", locale === 'fr' && "font-thai")}>
               {searchQuery ? t('common.search') : t('dashboard.viewAll')}
             </div>
           </div>

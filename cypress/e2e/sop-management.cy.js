@@ -41,8 +41,8 @@ describe('SOP Management System', () => {
   it('should test bilingual language toggle', () => {
     // Look for language toggle button
     cy.get('body').then(($body) => {
-      if ($body.text().includes('EN') || $body.text().includes('TH')) {
-        cy.get('button, [role="button"]').contains(/EN|TH|ไทย/).first().click({ force: true })
+      if ($body.text().includes('EN') || $body.text().includes('FR')) {
+        cy.get('button, [role="button"]').contains(/EN|FR|Français/).first().click({ force: true })
         cy.wait(1000)
         // Should change language
         cy.get('body').should('be.visible')
@@ -57,7 +57,7 @@ describe('SOP Management System', () => {
     cy.get('body').then(($body) => {
       const searchSelectors = [
         'input[placeholder*="search" i]',
-        'input[placeholder*="ค้นหา"]',
+        'input[placeholder*="rechercher"]',
         'input[type="search"]',
         '[data-testid="search"]'
       ]

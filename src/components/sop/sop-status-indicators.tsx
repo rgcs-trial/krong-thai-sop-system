@@ -86,7 +86,7 @@ export function StatusIndicator({ status, language, size = 'md', showText = true
     return (
       <Badge variant={config.badgeVariant} className="flex items-center gap-1">
         <Icon className={iconSize} />
-        <span className={language === 'th' ? 'font-thai' : 'font-ui'}>
+        <span className={language === 'fr' ? 'font-french' : 'font-ui'}>
           {config.text[language]}
         </span>
       </Badge>
@@ -152,7 +152,7 @@ export function ComplianceIndicator({
     <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${config.bgColor}`}>
       <div className={`w-2 h-2 rounded-full ${config.color}`} />
       <span className={`text-sm font-medium ${config.textColor} ${
-        language === 'th' ? 'font-thai' : 'font-ui'
+        language === 'fr' ? 'font-french' : 'font-ui'
       }`}>
         {config.text[language]}
         {showPercentage && percentage !== undefined && ` (${percentage}%)`}
@@ -202,7 +202,7 @@ export function PriorityIndicator({ priority, language, showText = true }: Prior
   if (showText) {
     return (
       <Badge className={config.color}>
-        <span className={language === 'th' ? 'font-thai' : 'font-ui'}>
+        <span className={language === 'fr' ? 'font-french' : 'font-ui'}>
           {config.text[language]}
         </span>
       </Badge>
@@ -298,7 +298,7 @@ export function TeamProgress({ teamStats, language, recentActivity }: TeamProgre
           {/* Header */}
           <div className="flex items-center justify-between">
             <h3 className={`font-semibold text-lg ${
-              language === 'th' ? 'font-thai' : 'font-heading'
+              language === 'fr' ? 'font-french' : 'font-heading'
             }`}>
               {language === 'en' ? 'Team Progress' : 'ความคืบหน้าทีม'}
             </h3>
@@ -310,7 +310,7 @@ export function TeamProgress({ teamStats, language, recentActivity }: TeamProgre
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">{teamStats.completed}</div>
               <div className={`text-sm text-krong-black/60 ${
-                language === 'th' ? 'font-thai' : 'font-ui'
+                language === 'fr' ? 'font-french' : 'font-ui'
               }`}>
                 {language === 'en' ? 'Completed' : 'เสร็จสิ้น'}
               </div>
@@ -318,7 +318,7 @@ export function TeamProgress({ teamStats, language, recentActivity }: TeamProgre
             <div className="text-center">
               <div className="text-2xl font-bold text-golden-saffron">{teamStats.inProgress}</div>
               <div className={`text-sm text-krong-black/60 ${
-                language === 'th' ? 'font-thai' : 'font-ui'
+                language === 'fr' ? 'font-french' : 'font-ui'
               }`}>
                 {language === 'en' ? 'In Progress' : 'กำลังดำเนินการ'}
               </div>
@@ -326,7 +326,7 @@ export function TeamProgress({ teamStats, language, recentActivity }: TeamProgre
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-500">{teamStats.notStarted}</div>
               <div className={`text-sm text-krong-black/60 ${
-                language === 'th' ? 'font-thai' : 'font-ui'
+                language === 'fr' ? 'font-french' : 'font-ui'
               }`}>
                 {language === 'en' ? 'Not Started' : 'ยังไม่เริ่ม'}
               </div>
@@ -334,7 +334,7 @@ export function TeamProgress({ teamStats, language, recentActivity }: TeamProgre
             <div className="text-center">
               <div className="text-2xl font-bold text-krong-black">{teamStats.total}</div>
               <div className={`text-sm text-krong-black/60 ${
-                language === 'th' ? 'font-thai' : 'font-ui'
+                language === 'fr' ? 'font-french' : 'font-ui'
               }`}>
                 {language === 'en' ? 'Total' : 'ทั้งหมด'}
               </div>
@@ -345,7 +345,7 @@ export function TeamProgress({ teamStats, language, recentActivity }: TeamProgre
           {recentActivity && recentActivity.length > 0 && (
             <div className="space-y-3">
               <h4 className={`font-medium ${
-                language === 'th' ? 'font-thai' : 'font-ui'
+                language === 'fr' ? 'font-french' : 'font-ui'
               }`}>
                 {language === 'en' ? 'Recent Activity' : 'กิจกรรมล่าสุด'}
               </h4>
@@ -355,18 +355,18 @@ export function TeamProgress({ teamStats, language, recentActivity }: TeamProgre
                     <User className="h-4 w-4 text-krong-black/40 flex-shrink-0" />
                     <div className="flex-1">
                       <span className={`font-medium ${
-                        language === 'th' ? 'font-thai' : 'font-ui'
+                        language === 'fr' ? 'font-french' : 'font-ui'
                       }`}>
                         {activity.name}
                       </span>
                       <span className={`text-krong-black/60 ml-1 ${
-                        language === 'th' ? 'font-thai' : 'font-body'
+                        language === 'fr' ? 'font-french' : 'font-body'
                       }`}>
                         {activity.action}
                       </span>
                     </div>
                     <span className={`text-xs text-krong-black/40 ${
-                      language === 'th' ? 'font-thai' : 'font-ui'
+                      language === 'fr' ? 'font-french' : 'font-ui'
                     }`}>
                       {activity.timestamp.toLocaleTimeString(
                         language === 'en' ? 'en-US' : 'th-TH',
@@ -426,7 +426,7 @@ export function TrendIndicator({ trend, value, label, language }: TrendIndicator
           {trend === 'up' ? '+' : trend === 'down' ? '-' : ''}{value}%
         </div>
         <div className={`text-xs text-krong-black/60 ${
-          language === 'th' ? 'font-thai' : 'font-ui'
+          language === 'fr' ? 'font-french' : 'font-ui'
         }`}>
           {label}
         </div>
