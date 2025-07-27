@@ -58,7 +58,12 @@ const CardDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn(
+      "text-sm text-muted-foreground",
+      // Tablet-optimized description text
+      "text-tablet-base font-body leading-relaxed text-muted-foreground",
+      className
+    )}
     {...props}
   />
 ))
