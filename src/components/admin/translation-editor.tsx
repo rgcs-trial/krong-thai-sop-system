@@ -342,7 +342,7 @@ export function TranslationEditor({
 
   // Handle save all
   const handleSaveAll = useCallback(() => {
-    const locales: Locale[] = ['en', 'fr', 'th'];
+    const locales: Locale[] = ['en', 'fr'];
     const promises = locales
       .filter(locale => editorState.translations[locale]?.value?.trim())
       .map(locale => 
