@@ -8,3 +8,18 @@
    - Environments: .env.local
 
  ✓ Starting...
+ ✓ Ready in 1487ms
+ ✓ Compiled /middleware in 236ms (264 modules)
+✅ Environment configuration validated for development
+🔒 Security Event: {
+  "timestamp": "2025-07-27T14:20:17.890Z",
+  "type": "suspicious_activity",
+  "source": "device_validation",
+  "details": {
+    "userAgent": "curl/8.7.1",
+    "fingerprint": null,
+    "reason": "suspicious_user_agent"
+  },
+  "userAgent": "curl/8.7.1",
+  "ip": "::1"
+}
