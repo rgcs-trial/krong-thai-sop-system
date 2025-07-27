@@ -365,7 +365,7 @@ export interface TrainingQuestion {
   section_id?: string;
   question_type: QuestionType;
   question: string;
-  question_th: string;
+  question_fr: string;
   options?: string[];
   options_th?: string[];
   correct_answer: string;
@@ -554,7 +554,7 @@ export interface CreateTrainingQuestionRequest {
   section_id?: string;
   question_type: QuestionType;
   question: string;
-  question_th: string;
+  question_fr: string;
   options?: string[];
   options_th?: string[];
   correct_answer: string;
