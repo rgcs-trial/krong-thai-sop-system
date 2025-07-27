@@ -56,7 +56,7 @@ The Restaurant Krong Thai SOP Management System is an enterprise-grade tablet-op
 - **Styling**: Tailwind CSS 4.1 with custom restaurant theme
 - **UI Components**: shadcn/ui with Radix UI primitives
 - **State Management**: Zustand v5.0.6 + TanStack Query v5.83.0
-- **Internationalization**: next-intl v4.3.4 (EN/FR support)
+- **Internationalization**: Database-driven translation system with next-intl v4.3.4 (EN/FR support)
 - **PWA Support**: next-pwa v5.6.0 with offline capability
 - **Forms**: React Hook Form with Zod validation
 - **Icons**: Lucide React v0.526.0
