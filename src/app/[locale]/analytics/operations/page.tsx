@@ -10,13 +10,14 @@ import { getTranslations } from 'next-intl/server';
 import { OperationalInsightsDashboard } from '@/components/analytics/operational-insights-dashboard';
 
 interface OperationalAnalyticsPageProps {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: OperationalAnalyticsPageProps): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'analytics' });
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'analytics' });
   
   return {
     title: t('operational_insights'),
@@ -25,9 +26,11 @@ export async function generateMetadata({ params }: OperationalAnalyticsPageProps
 }
 
 export default async function OperationalAnalyticsPage({ params }: OperationalAnalyticsPageProps) {
+  const resolvedParams = await params;
+  
   // Validate locale
   const validLocales = ['en', 'fr', 'th'];
-  if (!validLocales.includes(params.locale)) {
+  if (!validLocales.includes(resolvedParams.locale)) {
     notFound();
   }
 
