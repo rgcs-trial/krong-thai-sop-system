@@ -270,5 +270,3 @@ export function useRestaurantOperations(locale: 'en' | 'th') {
   };
 }
 
-// We need to import React for the hook
-import React from 'react';
