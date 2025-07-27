@@ -228,7 +228,7 @@ export const useTrainingStore = create<TrainingStore>()(
           // Load module details if not already loaded
           let module = get().modules.find(m => m.id === moduleId);
           if (!module) {
-            module = await get().loadModule(moduleId);
+            module = await get().loadModule(moduleId) || undefined;
             if (!module) {
               throw new Error('Module not found');
             }
