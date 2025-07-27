@@ -43,6 +43,8 @@ const CardTitle = forwardRef<
     ref={ref}
     className={cn(
       "text-2xl font-semibold leading-none tracking-tight",
+      // Tablet-optimized typography
+      "text-tablet-xl font-heading font-semibold leading-relaxed text-krong-black",
       className
     )}
     {...props}
