@@ -500,42 +500,108 @@ USING (
 );
 ```
 
-## Row Level Security (RLS) Policies
+### 7. Database Functions & Triggers
 
-### Enable RLS on all tables
+The schema includes custom functions for business logic and automation:
+
 ```sql
-ALTER TABLE restaurants ENABLE ROW LEVEL SECURITY;
-ALTER TABLE auth_users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE sop_categories ENABLE ROW LEVEL SECURITY;
-ALTER TABLE sop_documents ENABLE ROW LEVEL SECURITY;
-ALTER TABLE form_templates ENABLE ROW LEVEL SECURITY;
-ALTER TABLE form_submissions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
-```
+-- PIN validation function for secure authentication
+CREATE OR REPLACE FUNCTION validate_pin(user_email TEXT, pin_input TEXT)
+RETURNS TABLE(
+    user_id UUID,
+    is_valid BOOLEAN,
+    role user_role,
+    restaurant_id UUID,
+    full_name VARCHAR(255),
+    full_name_th VARCHAR(255)
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        u.id,
+        (u.pin_hash = crypt(pin_input, u.pin_hash)) as is_valid,
+        u.role,
+        u.restaurant_id,
+        u.full_name,
+        u.full_name_th
+    FROM auth_users u
+    WHERE u.email = user_email 
+    AND u.is_active = true
+    AND (u.locked_until IS NULL OR u.locked_until < NOW());
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
-### Restaurant-based isolation policies
-```sql
--- Restaurant SOP isolation
-CREATE POLICY "Restaurant SOP isolation"
-ON sop_documents FOR ALL
-TO authenticated
-USING (
-    restaurant_id = (
-        SELECT restaurant_id FROM auth_users 
-        WHERE auth_users.id = auth.uid()
-    )
-);
+-- Generate certificate number with restaurant and category codes
+CREATE OR REPLACE FUNCTION generate_certificate_number(
+    p_restaurant_id UUID,
+    p_module_id UUID,
+    p_user_id UUID
+)
+RETURNS VARCHAR AS $$
+DECLARE
+    restaurant_code VARCHAR(10);
+    module_code VARCHAR(10);
+    year_code VARCHAR(4);
+    sequence_num INTEGER;
+    cert_number VARCHAR(50);
+BEGIN
+    -- Get restaurant code (first 2 chars of name)
+    SELECT UPPER(LEFT(REPLACE(name, ' ', ''), 2)) INTO restaurant_code
+    FROM restaurants WHERE id = p_restaurant_id;
+    
+    -- Get module code from associated SOP category
+    SELECT UPPER(LEFT(sc.code, 2)) INTO module_code
+    FROM training_modules tm
+    JOIN sop_documents sd ON tm.sop_document_id = sd.id
+    JOIN sop_categories sc ON sd.category_id = sc.id
+    WHERE tm.id = p_module_id;
+    
+    -- Get current year and next sequence number
+    year_code := EXTRACT(YEAR FROM NOW())::VARCHAR;
+    
+    SELECT COALESCE(MAX(
+        CAST(SUBSTRING(certificate_number FROM '[0-9]+$') AS INTEGER)
+    ), 0) + 1 INTO sequence_num
+    FROM training_certificates tc
+    JOIN training_modules tm ON tc.module_id = tm.id
+    WHERE tm.restaurant_id = p_restaurant_id
+    AND EXTRACT(YEAR FROM tc.issued_at) = EXTRACT(YEAR FROM NOW());
+    
+    -- Format: KT-FS-2024-001
+    cert_number := restaurant_code || '-' || 
+                   COALESCE(module_code, 'XX') || '-' || 
+                   year_code || '-' || 
+                   LPAD(sequence_num::VARCHAR, 3, '0');
+    
+    RETURN cert_number;
+END;
+$$ LANGUAGE plpgsql;
 
--- Form Submissions: Restaurant isolation
-CREATE POLICY "Restaurant form submission isolation"
-ON form_submissions FOR ALL
-TO authenticated
-USING (
-    restaurant_id = (
-        SELECT restaurant_id FROM auth_users 
-        WHERE auth_users.id = auth.uid()
-    )
-);
+-- Auto-update timestamp triggers
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Apply to all tables with updated_at columns
+CREATE TRIGGER update_restaurants_updated_at 
+    BEFORE UPDATE ON restaurants 
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_auth_users_updated_at 
+    BEFORE UPDATE ON auth_users 
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_sop_documents_updated_at 
+    BEFORE UPDATE ON sop_documents 
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_training_modules_updated_at 
+    BEFORE UPDATE ON training_modules 
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 ```
 
 ## Sample Data
