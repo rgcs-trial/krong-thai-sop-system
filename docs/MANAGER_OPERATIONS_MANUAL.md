@@ -96,10 +96,10 @@ Next Review Date: [Date]
 #### **Team Performance Dashboards**
 
 **Department Comparison View:**
-- Kitchen Staff: Training completion, safety compliance
-- Front of House: Customer service standards, system usage
-- Management: Leadership training, system administration
-- Support Staff: Cleaning protocols, equipment maintenance
+- Kitchen Staff: Training completion, safety compliance, equipment SOPs
+- Front of House: Customer service standards, PIN system usage, bilingual support
+- Management: Leadership training, system administration, analytics review
+- Support Staff: Cleaning protocols, equipment maintenance, opening/closing procedures
 
 **Real-Time Monitoring Alerts:**
 - Staff member hasn't logged in for 3+ days
