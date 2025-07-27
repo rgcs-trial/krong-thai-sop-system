@@ -1,6 +1,6 @@
 /**
  * Restaurants API Route
- * Handles restaurant location data for authentication flow
+ * Handles restaurant location CRUD operations
  */
 
 export const runtime = 'nodejs';
@@ -8,6 +8,27 @@ export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { z } from 'zod';
+
+// Validation schemas
+const CreateRestaurantSchema = z.object({
+  name: z.string().min(1, 'Restaurant name is required').max(255),
+  name_th: z.string().min(1, 'Thai restaurant name is required').max(255),
+  address: z.string().optional(),
+  address_th: z.string().optional(),
+  phone: z.string().optional(),
+  email: z.string().email('Invalid email format').optional(),
+  timezone: z.string().min(1, 'Timezone is required'),
+  operational_hours: z.record(z.object({
+    open: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
+    close: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
+    closed: z.boolean().optional()
+  })).optional(),
+  capacity: z.number().min(1, 'Capacity must be at least 1').optional(),
+  settings: z.record(z.any()).optional()
+});
+
+const UpdateRestaurantSchema = CreateRestaurantSchema.partial();
 
 // Logger utility
 function logError(context: string, error: any, metadata?: any) {
