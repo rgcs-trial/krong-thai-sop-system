@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useDebounce } from './use-debounce';
 import { supabase } from '@/lib/supabase-client';
 import { useSOPStore } from '@/lib/stores/sop-store';
+import { searchCache } from '@/lib/search-cache';
 
 interface SearchFilters {
   categoryId?: string;
@@ -133,14 +134,47 @@ export function useSearch(locale: string = 'en') {
     });
   }, []);
 
-  // Full-text search function
+  // Check if online
+  const [isOnline, setIsOnline] = useState(typeof window !== 'undefined' ? navigator.onLine : true);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+  // Full-text search function with caching
   const performFullTextSearch = async (
     query: string,
     filters: SearchFilters = {},
-    sortOption: SortOption = { field: 'relevance', direction: 'desc' }
+    sortOption: SortOption = { field: 'relevance', direction: 'desc' },
+    useCache: boolean = true
   ): Promise<SearchResult[]> => {
     if (!query.trim()) return [];
 
+    // Check cache first
+    if (useCache) {
+      const cachedResults = await searchCache.getCachedResults(query, filters, sortOption, locale);
+      if (cachedResults) {
+        return cachedResults;
+      }
+    }
+
+    // If offline, use offline search
+    if (!isOnline && searchCache.isOfflineSearchAvailable()) {
+      return await searchCache.searchOffline(query, filters, locale);
+    }
+
+    // Online search
     let searchQuery = supabase
       .from('sop_documents')
       .select(`
@@ -234,6 +268,13 @@ export function useSearch(locale: string = 'en') {
 
     if (error) {
       console.error('Search error:', error);
+      
+      // Fallback to offline search if available
+      if (searchCache.isOfflineSearchAvailable()) {
+        console.log('Falling back to offline search');
+        return await searchCache.searchOffline(query, filters, locale);
+      }
+      
       throw error;
     }
 
@@ -248,6 +289,14 @@ export function useSearch(locale: string = 'en') {
     // Sort by relevance if using relevance sorting
     if (sortOption.field === 'relevance') {
       results.sort((a, b) => (b.rank || 0) - (a.rank || 0));
+    }
+
+    // Cache the results
+    if (useCache && results.length > 0) {
+      await searchCache.cacheResults(query, filters, sortOption, locale, results);
+      
+      // Add to offline index for future offline searches
+      await searchCache.addToOfflineIndex(results);
     }
 
     return results;
@@ -385,10 +434,14 @@ export function useSearch(locale: string = 'en') {
     staleTime: 30000 // 30 seconds
   });
 
-  // Main search query
+  // Main search query with enhanced error handling and caching
   const searchMutation = useMutation({
-    mutationFn: ({ query, filters, sort }: { query: string; filters: SearchFilters; sort: SortOption }) =>
-      performFullTextSearch(query, filters, sort),
+    mutationFn: ({ query, filters, sort, useCache = true }: { 
+      query: string; 
+      filters: SearchFilters; 
+      sort: SortOption;
+      useCache?: boolean;
+    }) => performFullTextSearch(query, filters, sort, useCache),
     onMutate: () => {
       setIsSearching(true);
     },
@@ -399,6 +452,19 @@ export function useSearch(locale: string = 'en') {
     },
     onError: (error) => {
       console.error('Search failed:', error);
+      
+      // Try offline search as fallback
+      if (searchCache.isOfflineSearchAvailable()) {
+        const { query, filters } = searchMutation.variables || { query: '', filters: {} };
+        searchCache.searchOffline(query, filters, locale).then(offlineResults => {
+          if (offlineResults.length > 0) {
+            setSearchResults(offlineResults as any);
+            saveSearchHistory(query, offlineResults.length, filters);
+          }
+        }).catch(offlineError => {
+          console.error('Offline search also failed:', offlineError);
+        });
+      }
     },
     onSettled: () => {
       setIsSearching(false);
@@ -416,8 +482,8 @@ export function useSearch(locale: string = 'en') {
     }
   }, [debouncedQuery, filters, sort]);
 
-  // Search function
-  const search = useCallback((query: string, newFilters: SearchFilters = {}, newSort: SortOption = sort) => {
+  // Enhanced search function with caching control
+  const search = useCallback((query: string, newFilters: SearchFilters = {}, newSort: SortOption = sort, useCache: boolean = true) => {
     setSearchQuery(query);
     setLocalFilters(newFilters);
     setSort(newSort);
@@ -426,12 +492,30 @@ export function useSearch(locale: string = 'en') {
       searchMutation.mutate({
         query,
         filters: newFilters,
-        sort: newSort
+        sort: newSort,
+        useCache
       });
     } else {
       setSearchResults([]);
     }
   }, [sort, searchMutation, setSearchQuery, setSearchResults]);
+
+  // Force refresh search (bypass cache)
+  const refreshSearch = useCallback(() => {
+    if (searchQuery.trim()) {
+      search(searchQuery, filters, sort, false);
+    }
+  }, [searchQuery, filters, sort, search]);
+
+  // Clear all search cache
+  const clearSearchCache = useCallback(async () => {
+    await searchCache.clearCache();
+  }, []);
+
+  // Get cache statistics
+  const getCacheStats = useCallback(() => {
+    return searchCache.getCacheStats();
+  }, []);
 
   // Clear search
   const clearSearch = useCallback(() => {
@@ -496,10 +580,14 @@ export function useSearch(locale: string = 'en') {
     suggestions,
     searchHistory,
     savedSearches,
+    isOnline,
+    isOfflineSearchAvailable: searchCache.isOfflineSearchAvailable(),
 
     // Actions
     search,
+    refreshSearch,
     clearSearch,
+    clearSearchCache,
     setFilters: setLocalFilters,
     setSort,
     saveSearch,
@@ -508,7 +596,8 @@ export function useSearch(locale: string = 'en') {
 
     // Utils
     error: searchMutation.error,
-    isError: searchMutation.isError
+    isError: searchMutation.isError,
+    getCacheStats
   };
 }
 
