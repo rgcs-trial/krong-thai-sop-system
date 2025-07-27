@@ -6,8 +6,23 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import dynamic from 'next/dynamic';
 
-import { TrainingAnalyticsDashboard } from '@/components/training/training-analytics-dashboard';
+const TrainingAnalyticsDashboard = dynamic(
+  () => import('@/components/training/training-analytics-dashboard').then(mod => ({ default: mod.TrainingAnalyticsDashboard })),
+  {
+    loading: () => (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <p className="mt-2 text-muted-foreground">Loading training analytics...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+);
 
 interface TrainingAnalyticsPageProps {
   params: Promise<{
@@ -29,7 +44,7 @@ export default async function TrainingAnalyticsPage({ params }: TrainingAnalytic
   const resolvedParams = await params;
   
   // Validate locale
-  const validLocales = ['en', 'fr'];
+  const validLocales = ['en', 'th'];
   if (!validLocales.includes(resolvedParams.locale)) {
     notFound();
   }
