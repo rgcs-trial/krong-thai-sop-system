@@ -75,11 +75,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_102',
     message: {
       en: 'User account not found',
-      th: 'ไม่พบบัญชีผู้ใช้'
+      fr: 'Compte utilisateur introuvable'
     },
     userMessage: {
       en: 'No account found with this email. Please contact your manager.',
-      th: 'ไม่พบบัญชีที่ใช้อีเมลนี้ กรุณาติดต่อผู้จัดการของคุณ'
+      fr: 'Aucun compte trouvé avec cet email. Veuillez contacter votre manager.'
     },
     severity: 'medium'
   },
@@ -88,11 +88,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_103',
     message: {
       en: 'User account is inactive',
-      th: 'บัญชีผู้ใช้ไม่ได้ใช้งาน'
+      fr: 'Compte utilisateur inactif'
     },
     userMessage: {
       en: 'Your account has been deactivated. Please contact your manager.',
-      th: 'บัญชีของคุณถูกปิดการใช้งาน กรุณาติดต่อผู้จัดการของคุณ'
+      fr: 'Votre compte a été désactivé. Veuillez contacter votre manager.'
     },
     severity: 'medium'
   },
@@ -101,11 +101,11 @@ export const AUTH_ERRORS: Record<string, AuthError> = {
     code: 'AUTH_104',
     message: {
       en: 'Incorrect PIN provided',
-      th: 'รหัส PIN ไม่ถูกต้อง'
+      fr: 'PIN incorrect fourni'
     },
     userMessage: {
       en: 'Incorrect PIN. Please try again.',
-      th: 'รหัส PIN ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง'
+      fr: 'PIN incorrect. Veuillez réessayer.'
     },
     severity: 'medium'
   },
