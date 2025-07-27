@@ -44,6 +44,12 @@ function checkRateLimit(request: NextRequest): { allowed: boolean; retryAfter?: 
     return { allowed: true };
   }
 
+  // Bypass rate limiting for Cypress tests
+  const userAgent = request.headers.get('user-agent') || '';
+  if (userAgent.includes('Cypress') && process.env.NODE_ENV === 'development') {
+    return { allowed: true };
+  }
+
   const ip = getClientIP(request);
   const key = `rate_limit:${ip}`;
   const now = Date.now();
