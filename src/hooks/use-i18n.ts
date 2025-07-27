@@ -86,8 +86,8 @@ export function useI18n() {
     return getLocaleErrorMessage(locale, errorType);
   };
 
-  // Check if current locale is Thai
-  const isThaiLocale = locale === 'th';
+  // Check if current locale is French
+  const isFrenchLocale = locale === 'fr';
 
   // Check if current locale is English
   const isEnglishLocale = locale === 'en';
@@ -150,7 +150,7 @@ export function useI18n() {
     locale,
     localeMetadata,
     direction,
-    isThaiLocale,
+    isFrenchLocale,
     isEnglishLocale,
     isPending,
 
@@ -183,7 +183,7 @@ export function useI18n() {
  * Hook for managing tablet-optimized UI preferences
  */
 export function useTabletOptimization() {
-  const { isThaiLocale } = useI18n();
+  const { isFrenchLocale } = useI18n();
 
   // Get touch target size based on content type
   const getTouchTargetSize = (contentType: 'button' | 'input' | 'card' | 'nav' = 'button') => {
@@ -199,8 +199,8 @@ export function useTabletOptimization() {
   // Get font size adjustments for tablet reading
   const getFontSizeClasses = (element: 'body' | 'heading' | 'ui' | 'small' = 'body') => {
     const sizes = {
-      body: isThaiLocale ? 'text-base leading-relaxed' : 'text-base',
-      heading: isThaiLocale ? 'text-2xl leading-tight' : 'text-2xl',
+      body: isFrenchLocale ? 'text-base leading-relaxed' : 'text-base',
+      heading: isFrenchLocale ? 'text-2xl leading-tight' : 'text-2xl',
       ui: 'text-sm',
       small: 'text-xs',
     };
@@ -222,6 +222,6 @@ export function useTabletOptimization() {
     getTouchTargetSize,
     getFontSizeClasses,
     getSpacingClasses,
-    isThaiLocale,
+    isFrenchLocale,
   };
 }
