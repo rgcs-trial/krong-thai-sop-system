@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 
 // Load environment variables
 require('dotenv').config({ path: '.env.local' });
@@ -24,6 +25,49 @@ const supabase = createClient(supabaseUrl, serviceRoleKey, {
     persistSession: false
   }
 });
+
+// Function to execute raw SQL using REST API
+async function executeSQL(sql) {
+  return new Promise((resolve, reject) => {
+    const postData = JSON.stringify({ query: sql });
+    const url = new URL(supabaseUrl);
+    
+    const options = {
+      hostname: url.hostname,
+      port: 443,
+      path: '/rest/v1/rpc/sql',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${serviceRoleKey}`,
+        'apikey': serviceRoleKey,
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(JSON.parse(data || '{}'));
+        } else {
+          reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+        }
+      });
+    });
+
+    req.on('error', (err) => {
+      reject(err);
+    });
+
+    req.write(postData);
+    req.end();
+  });
+}
 
 async function testConnection() {
   console.log('🔍 Testing database connection...');
