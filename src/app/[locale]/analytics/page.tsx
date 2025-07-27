@@ -46,7 +46,7 @@ export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
   
   // Validate locale
   const validLocales = ['en', 'fr', 'th'];
-  if (!validLocales.includes(params.locale)) {
+  if (!validLocales.includes(resolvedParams.locale)) {
     notFound();
   }
 
@@ -212,7 +212,7 @@ export default async function AnalyticsPage({ params }: AnalyticsPageProps) {
                   
                   <Button 
                     className="w-full mt-4" 
-                    onClick={() => window.location.href = `/${params.locale}${module.href}`}
+                    onClick={() => window.location.href = `/${resolvedParams.locale}${module.href}`}
                   >
                     {t('view_dashboard')}
                   </Button>
