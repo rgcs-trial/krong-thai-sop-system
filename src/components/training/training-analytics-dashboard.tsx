@@ -109,6 +109,33 @@ interface UserPerformance {
   riskLevel: 'low' | 'medium' | 'high';
 }
 
+interface ROIMetrics {
+  trainingCost: number;
+  timeSaved: number;
+  errorReduction: number;
+  complianceImprovement: number;
+  customerSatisfactionGain: number;
+  totalBenefit: number;
+  roiPercentage: number;
+}
+
+interface CompetencyGap {
+  category: string;
+  requiredLevel: number;
+  currentLevel: number;
+  gap: number;
+  priority: 'high' | 'medium' | 'low';
+}
+
+interface TrainingTrend {
+  date: string;
+  enrollments: number;
+  completions: number;
+  averageScore: number;
+  satisfaction: number;
+  cost: number;
+}
+
 export function TrainingAnalyticsDashboard({ className }: TrainingAnalyticsDashboardProps) {
   const { t, locale } = useI18n();
   
