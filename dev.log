@@ -1,0 +1,25 @@
+
+> krong-thai-sop-system@0.2.0 dev /Users/rgcs-admin/workspace/krong-thai-sop-system
+> NODE_ENV=development next dev
+
+   ▲ Next.js 15.4.4
+   - Local:        http://localhost:3000
+   - Network:      http://10.0.0.95:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1316ms
+ ✓ Compiled /middleware in 266ms (264 modules)
+✅ Environment configuration validated for development
+🔒 Security Event: {
+  "timestamp": "2025-07-27T13:37:49.703Z",
+  "type": "suspicious_activity",
+  "source": "device_validation",
+  "details": {
+    "userAgent": "curl/8.7.1",
+    "fingerprint": null,
+    "reason": "suspicious_user_agent"
+  },
+  "userAgent": "curl/8.7.1",
+  "ip": "::1"
+}
