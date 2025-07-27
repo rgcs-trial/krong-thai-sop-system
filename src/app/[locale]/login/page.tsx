@@ -221,7 +221,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
         router.push(`/${locale}/auth/restaurant-flow`);
       } else {
         const error = await response.json();
-        setError(error.message || (locale === 'en' ? 'Failed to set up location session' : 'ไม่สามารถตั้งค่าเซสชันสถานที่ได้'));
+        setError(error.message || (locale === 'en' ? 'Failed to set up location session' : 'Impossible de configurer la session de localisation'));
         setShowLocationSelector(false);
       }
     } catch (error) {
