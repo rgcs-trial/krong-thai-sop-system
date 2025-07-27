@@ -185,7 +185,7 @@ export function useSearch(locale: string = 'en') {
         content_en,
         content_fr,
         tags,
-        tags_th,
+        tags_fr,
         version,
         is_critical,
         is_published,
