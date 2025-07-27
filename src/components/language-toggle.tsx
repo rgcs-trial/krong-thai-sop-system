@@ -104,6 +104,7 @@ export function LanguageToggle({
             `}
             disabled={isPending}
             aria-label={t('switchLanguage')}
+          title={`Current: ${currentName} • Click to switch language`}
           >
             {showFlag ? (
               <span className="text-lg" role="img" aria-label={currentName}>
