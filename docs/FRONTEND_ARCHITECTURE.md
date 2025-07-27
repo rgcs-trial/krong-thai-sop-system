@@ -237,6 +237,9 @@ src/
 │   ├── database.ts                        # Database types (620+ lines)
 │   ├── api.ts                             # API interfaces
 │   ├── security.ts                        # Security types
+│   ├── translation.ts                     # Translation system types
+│   ├── translation-admin.ts               # Translation admin interface types
+│   └── translation-keys.ts                # Translation key definitions
 │   └── supabase.ts                        # Generated Supabase types
 ├── __tests__/                             # Unit test files
 │   └── components/                        # Component unit tests
