@@ -35,7 +35,7 @@ import {
   PieChart,
   LineChart,
   BarChart,
-  TrendingRight,
+  ArrowRight,
   AlertCircle,
   Info,
   XCircle
