@@ -181,7 +181,7 @@ export interface SettingsActions {
   // App settings actions
   updateAppSettings: (settings: Partial<AppSettings>) => Promise<void>;
   resetAppSettings: () => Promise<void>;
-  setLanguage: (language: 'en' | 'fr') => Promise<void>;
+  setLanguage: (language: 'en' | 'th' | 'fr') => Promise<void>;
   setTheme: (theme: 'light' | 'dark' | 'auto') => Promise<void>;
   toggleOfflineMode: () => Promise<void>;
   
