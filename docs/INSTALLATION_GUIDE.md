@@ -555,7 +555,13 @@ Update `src/app/globals.css`:
     "test:e2e": "playwright test",
     "db:generate-types": "npx supabase gen types typescript --project-id your-project-ref > src/types/supabase.ts",
     "db:reset": "npx supabase db reset",
-    "db:migrate": "npx supabase migration up"
+    "db:migrate": "npx supabase migration up",
+    "training:seed": "node scripts/seed-training-data.js",
+    "analytics:dashboard": "node scripts/generate-analytics-dashboard.js",
+    "certificates:generate": "node scripts/generate-certificates.js",
+    "voice:test": "node scripts/test-voice-recognition.js",
+    "performance:monitor": "node scripts/monitor-performance.js",
+    "dev:full": "concurrently \"pnpm dev\" \"pnpm performance:monitor\""
   }
 }
 ```
