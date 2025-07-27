@@ -57,12 +57,13 @@ node --version  # Should show v20.x.x
 npm --version   # Should show 10.x.x or later
 ```
 
-### 1.2 Install pnpm (Recommended)
+### 1.2 Install pnpm (Required)
 ```bash
-npm install -g pnpm@latest
+# Install specific version used by project
+npm install -g pnpm@9.0.0
 
 # Verify installation
-pnpm --version
+pnpm --version  # Should show 9.0.0
 ```
 
 ### 1.3 Install Global Development Tools
