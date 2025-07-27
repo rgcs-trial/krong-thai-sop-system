@@ -28,29 +28,29 @@ const intlMiddleware = createIntlMiddleware({
   }
 });
 
-// Create security middleware
-const securityMiddleware = createSecurityMiddleware({
-  requireAuth: true,
-  auditLog: true,
-  publicPaths: [
-    '/login',
-    '/api/auth/login',
-    '/api/health',
-    '/favicon.ico',
-    '/_next',
-    '/images',
-    '/locales',
-  ],
-  authPaths: [
-    '/dashboard',
-    '/sops',
-    '/api/auth/logout',
-    '/api/auth/refresh',
-    '/api/auth/validate',
-    '/api/sops',
-    '/api/forms',
-  ],
-});
+// Create security middleware (disabled during development)
+// const securityMiddleware = createSecurityMiddleware({
+//   requireAuth: true,
+//   auditLog: true,
+//   publicPaths: [
+//     '/login',
+//     '/api/auth/login',
+//     '/api/health',
+//     '/favicon.ico',
+//     '/_next',
+//     '/images',
+//     '/locales',
+//   ],
+//   authPaths: [
+//     '/dashboard',
+//     '/sops',
+//     '/api/auth/logout',
+//     '/api/auth/refresh',
+//     '/api/auth/validate',
+//     '/api/sops',
+//     '/api/forms',
+//   ],
+// });
 
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
