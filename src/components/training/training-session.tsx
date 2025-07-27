@@ -27,7 +27,8 @@ import {
   Download,
   Heart,
   Award,
-  Star
+  Star,
+  ExternalLink
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
