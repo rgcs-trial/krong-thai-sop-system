@@ -452,6 +452,79 @@ const NumberInput = ({ value, onChange, min = 0, max = 99 }) => {
 }
 ```
 
+## Component Domains
+
+### 1. Authentication Components
+- **PIN Input Components**: Tablet-optimized PIN entry with visual feedback
+- **Location Selector**: Restaurant location selection interface
+- **Restaurant Form**: Comprehensive restaurant setup and management forms
+- **Error Display**: User-friendly error messaging with severity levels and error codes
+
+### 2. Restaurant Management Components  
+- **Restaurant Creation Form**: Multi-step form with bilingual support and validation
+- **Location Management**: CRUD operations for restaurant locations
+- **Operational Settings**: Operating hours, capacity, and configuration management
+- **Success/Error Handling**: Specialized feedback components for restaurant operations
+
+### 3. SOP Management Components
+- **SOP Category Dashboard**: Visual category grid with icons and statistics
+- **Document Viewer**: Bilingual document display with interactive features
+- **Content Editor**: Rich text editing with translation support
+- **Search Interface**: Advanced search with voice capabilities
+
+### 4. Training System Components
+- **Training Modules**: Interactive training content delivery
+- **Assessment Components**: Quiz and evaluation interfaces
+- **Certificate Management**: Digital certificate display and verification
+- **Progress Tracking**: Visual progress indicators and analytics
+
+### 5. Analytics Components
+- **Executive Dashboard**: High-level analytics with charts and KPIs
+- **Real-time Monitoring**: Live system status and performance metrics
+- **Report Generators**: Export capabilities with multiple formats
+- **Data Visualizations**: Recharts integration with restaurant themes
+
+### 6. UI Foundation Components
+- **Form Controls**: Enhanced shadcn/ui components with Thai support
+- **Navigation**: Tablet-optimized navigation patterns
+- **Layout Components**: Responsive grid and container systems
+- **Feedback Components**: Toasts, alerts, and status indicators
+
+## Recent Additions (v0.2.0)
+
+### Enhanced Error Handling System
+```tsx
+<ErrorDisplay
+  error={{
+    message: "Please enter both your email and 4-digit PIN",
+    errorCode: "AUTH_001", 
+    severity: "low"
+  }}
+  locale="en"
+/>
+```
+
+### Restaurant Management Forms
+```tsx
+<RestaurantForm
+  onSubmit={handleSubmit}
+  onSuccess={handleSuccess}
+  locale="th"
+  className="tablet-optimized"
+/>
+```
+
+### Bilingual Success Messages
+```tsx
+<SuccessDisplay
+  message={{
+    en: "Restaurant location created successfully!",
+    th: "สร้างสาขาร้านอาหารเรียบร้อยแล้ว!"
+  }}
+  locale={currentLocale}
+/>
+```
+
 ## Accessibility Guidelines
 
 ### ARIA Labels for Bilingual Content
