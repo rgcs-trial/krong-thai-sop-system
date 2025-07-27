@@ -18,6 +18,34 @@ Cypress.Commands.add('loginAsManager', () => {
   cy.login(Cypress.env('MANAGER_EMAIL'), Cypress.env('MANAGER_PIN'))
 })
 
+Cypress.Commands.add('handleRestaurantSelection', () => {
+  cy.get('body').then(($body) => {
+    if ($body.text().includes('restaurant') || $body.text().includes('location')) {
+      // Look for any clickable restaurant selection element
+      const selectors = [
+        'button:contains("Setup")',
+        'button:contains("Confirm")', 
+        'button:contains("Continue")',
+        'button:contains("Select")',
+        '[role="button"]:first',
+        'button:enabled:first'
+      ]
+      
+      let clicked = false
+      selectors.forEach(selector => {
+        if (!clicked && $body.find(selector).length > 0) {
+          cy.get(selector).first().click({ force: true })
+          clicked = true
+        }
+      })
+      
+      if (!clicked) {
+        cy.log('No restaurant selection button found - may already be selected')
+      }
+    }
+  })
+})
+
 Cypress.Commands.add('checkForErrorMessage', (message) => {
   cy.get('[class*="error"], .alert-error, [role="alert"]')
     .should('be.visible')
