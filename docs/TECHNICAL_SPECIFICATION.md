@@ -367,7 +367,96 @@ src/app/api/
         └── users/[userId]/route.ts # User-specific analytics
 ```
 
-### 5.2 Authentication Strategy
+### 5.2 Translation System API
+
+#### Public Translation Endpoints
+```typescript
+// GET /api/translations/[locale] - Get all translations for locale
+interface TranslationResponse {
+  locale: string;
+  translations: Record<string, string>;
+  metadata: {
+    totalKeys: number;
+    lastUpdated: string;
+    cacheVersion: string;
+  };
+}
+
+// GET /api/translations/[locale]/key/[...keyPath] - Get specific translation
+interface KeyTranslationResponse {
+  key: string;
+  value: string;
+  locale: string;
+  metadata?: {
+    interpolationVars?: string[];
+    context?: string;
+  };
+}
+
+// GET /api/translations/usage - Translation usage analytics
+interface UsageAnalyticsResponse {
+  keyUsage: Array<{
+    key: string;
+    viewCount: number;
+    lastViewed: string;
+  }>;
+  localeDistribution: Record<string, number>;
+  performance: {
+    avgLoadTime: number;
+    errorRate: number;
+  };
+}
+```
+
+#### Admin Translation Management
+```typescript
+// POST /api/admin/translations - Create new translation
+interface CreateTranslationRequest {
+  translationKeyId: string;
+  locale: 'en' | 'fr';
+  value: string;
+  icuMessage?: string;
+  translatorNotes?: string;
+}
+
+// PUT /api/admin/translations/[id] - Update translation
+interface UpdateTranslationRequest {
+  value?: string;
+  icuMessage?: string;
+  translatorNotes?: string;
+  reviewerNotes?: string;
+}
+
+// PUT /api/admin/translations/[id]/status - Update translation status
+interface UpdateTranslationStatusRequest {
+  status: 'draft' | 'review' | 'approved' | 'published' | 'deprecated';
+  reviewerNotes?: string;
+}
+
+// POST /api/admin/translations/bulk - Bulk operations
+interface BulkTranslationRequest {
+  operation: 'create' | 'update' | 'delete' | 'approve' | 'publish';
+  translations: Array<{
+    id?: string;
+    translationKeyId?: string;
+    locale?: 'en' | 'fr';
+    value?: string;
+  }>;
+}
+
+// Translation Key Management
+// POST /api/admin/translation-keys - Create translation key
+interface CreateTranslationKeyRequest {
+  keyName: string;
+  category: 'common' | 'auth' | 'sop' | 'navigation' | 'errors' | 'dashboard';
+  description?: string;
+  contextNotes?: string;
+  interpolationVars?: string[];
+  supportsPluralization?: boolean;
+}
+```
+
+### 5.3 Authentication Strategy
 
 #### PIN-Based Authentication Flow
 ```typescript
