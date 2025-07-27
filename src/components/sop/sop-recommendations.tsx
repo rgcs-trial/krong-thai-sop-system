@@ -311,8 +311,8 @@ export default function SOPRecommendations({
         {recommendations.map((item, index) => {
           const reasonInfo = getReasonInfo(item.reason);
           const Icon = reasonInfo.icon;
-          const title = locale === 'th' ? item.title_th : item.title;
-          const description = locale === 'th' ? item.description_th : item.description;
+          const title = locale === 'fr' ? item.title_fr : item.title;
+          const description = locale === 'fr' ? item.description_fr : item.description;
           
           return (
             <div key={item.id}>
@@ -349,7 +349,7 @@ export default function SOPRecommendations({
                       <h3 className={cn(
                         "font-semibold text-gray-900 line-clamp-1",
                         compact ? "text-sm" : "text-base",
-                        locale === 'th' && "font-thai"
+                        locale === 'fr' && "font-ui"
                       )}>
                         {title}
                       </h3>
@@ -365,9 +365,9 @@ export default function SOPRecommendations({
                         />
                         <span className={cn(
                           "text-xs text-gray-600",
-                          locale === 'th' && "font-thai"
+                          locale === 'fr' && "font-ui"
                         )}>
-                          {locale === 'th' ? item.category.name_th : item.category.name}
+                          {locale === 'fr' ? item.category.name_fr : item.category.name}
                         </span>
                       </div>
                     )}
@@ -376,7 +376,7 @@ export default function SOPRecommendations({
                     {description && !compact && (
                       <p className={cn(
                         "text-sm text-gray-600 line-clamp-2 mb-2",
-                        locale === 'th' && "font-thai"
+                        locale === 'fr' && "font-ui"
                       )}>
                         {description}
                       </p>
