@@ -439,47 +439,64 @@ CREATE TYPE assessment_status AS ENUM ('pending', 'passed', 'failed', 'retake_re
 CREATE TYPE certificate_status AS ENUM ('active', 'expired', 'revoked');
 ```
 
-### 6. Audit & Logging
+### 6. Row Level Security (RLS) & Policies
 
-#### `audit_logs`
-Comprehensive audit trail for all system operations.
+All tables implement Row Level Security for multi-tenant isolation and role-based access:
 
 ```sql
-CREATE TABLE audit_logs (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    restaurant_id UUID NOT NULL,
-    user_id UUID,
-    action audit_action NOT NULL,
-    resource_type VARCHAR(100) NOT NULL, -- Table name
-    resource_id UUID, -- Record ID
-    old_values JSONB,
-    new_values JSONB,
-    metadata JSONB DEFAULT '{}', -- Additional context
-    ip_address INET,
-    user_agent TEXT,
-    session_id VARCHAR(255),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    
-    CONSTRAINT fk_audit_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
-    CONSTRAINT fk_audit_user FOREIGN KEY (user_id) REFERENCES auth_users(id)
+-- Enable RLS on all tables
+ALTER TABLE restaurants ENABLE ROW LEVEL SECURITY;
+ALTER TABLE auth_users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sop_categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sop_documents ENABLE ROW LEVEL SECURITY;
+ALTER TABLE training_modules ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_training_progress ENABLE ROW LEVEL SECURITY;
+ALTER TABLE location_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_bookmarks ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_logs ENABLE ROW LEVEL SECURITY;
+
+-- Restaurant isolation policy (core multi-tenant security)
+CREATE POLICY "Restaurant isolation"
+ON sop_documents FOR ALL
+TO authenticated
+USING (
+    restaurant_id = (
+        SELECT restaurant_id FROM auth_users 
+        WHERE auth_users.id = auth.uid()
+    )
 );
 
--- Indexes
-CREATE INDEX idx_audit_logs_restaurant ON audit_logs(restaurant_id);
-CREATE INDEX idx_audit_logs_user ON audit_logs(user_id);
-CREATE INDEX idx_audit_logs_action ON audit_logs(action);
-CREATE INDEX idx_audit_logs_resource ON audit_logs(resource_type, resource_id);
-CREATE INDEX idx_audit_logs_created ON audit_logs(created_at);
+-- Training progress policy (users see own, managers see all in restaurant)
+CREATE POLICY "Training progress access"
+ON user_training_progress FOR ALL
+TO authenticated
+USING (
+    user_id = auth.uid() 
+    OR EXISTS (
+        SELECT 1 FROM auth_users 
+        WHERE auth_users.id = auth.uid() 
+        AND auth_users.role IN ('admin', 'manager')
+        AND auth_users.restaurant_id = (
+            SELECT restaurant_id FROM auth_users u2 
+            WHERE u2.id = user_training_progress.user_id
+        )
+    )
+);
 
--- Partition by month for performance
-CREATE INDEX idx_audit_logs_created_month ON audit_logs(date_trunc('month', created_at));
-```
-
-#### Audit Action Enum
-```sql
-CREATE TYPE audit_action AS ENUM (
-    'CREATE', 'UPDATE', 'DELETE', 'LOGIN', 'LOGOUT', 
-    'VIEW', 'DOWNLOAD', 'UPLOAD', 'APPROVE', 'REJECT'
+-- Location sessions policy (managers only)
+CREATE POLICY "Location sessions management"
+ON location_sessions FOR ALL
+TO authenticated
+USING (
+    restaurant_id = (
+        SELECT restaurant_id FROM auth_users 
+        WHERE auth_users.id = auth.uid()
+    )
+    AND auth.uid() IN (
+        SELECT id FROM auth_users 
+        WHERE restaurant_id = location_sessions.restaurant_id
+        AND role IN ('admin', 'manager')
+    )
 );
 ```
 
