@@ -9,8 +9,24 @@ const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
 const path = require('path');
 
-// Load environment variables
-require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') });
+// Load environment variables manually
+function loadEnvFile() {
+  const envPath = path.join(__dirname, '..', '.env.local');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    const lines = envContent.split('\n');
+    
+    lines.forEach(line => {
+      const match = line.match(/^([A-Z_][A-Z0-9_]*)\s*=\s*(.*)$/);
+      if (match) {
+        const [, key, value] = match;
+        process.env[key] = value.replace(/^['"]|['"]$/g, ''); // Remove quotes
+      }
+    });
+  }
+}
+
+loadEnvFile();
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
