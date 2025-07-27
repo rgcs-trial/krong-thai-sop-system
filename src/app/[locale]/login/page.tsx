@@ -147,7 +147,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
     e.preventDefault();
     
     if (!email.trim() || pin.length !== 4) {
-      setError(locale === 'en' ? 'Please enter valid email and 4-digit PIN' : 'กรุณากรอกอีเมลและรหัส PIN 4 หลักให้ถูกต้อง');
+      setError(locale === 'en' ? 'Please enter valid email and 4-digit PIN' : 'Veuillez saisir un email valide et un code PIN à 4 chiffres');
       return;
     }
 
