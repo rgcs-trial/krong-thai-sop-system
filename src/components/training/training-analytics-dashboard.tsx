@@ -161,6 +161,43 @@ export function TrainingAnalyticsDashboard({ className }: TrainingAnalyticsDashb
     to: new Date(),
   });
 
+  // Enhanced analytics data
+  const roiMetrics = useMemo<ROIMetrics>(() => ({
+    trainingCost: 125000, // THB spent on training
+    timeSaved: 285000, // THB value of time saved
+    errorReduction: 95000, // THB saved from reduced errors
+    complianceImprovement: 150000, // THB value of compliance gains
+    customerSatisfactionGain: 75000, // THB value of customer satisfaction
+    totalBenefit: 605000,
+    roiPercentage: 384, // 384% ROI
+  }), []);
+
+  const competencyGaps = useMemo<CompetencyGap[]>(() => [
+    { category: 'Food Safety', requiredLevel: 95, currentLevel: 87, gap: 8, priority: 'high' },
+    { category: 'Customer Service', requiredLevel: 90, currentLevel: 82, gap: 8, priority: 'high' },
+    { category: 'Kitchen Operations', requiredLevel: 85, currentLevel: 91, gap: -6, priority: 'low' },
+    { category: 'Cleaning', requiredLevel: 90, currentLevel: 95, gap: -5, priority: 'low' },
+    { category: 'Emergency', requiredLevel: 100, currentLevel: 73, gap: 27, priority: 'high' },
+    { category: 'Inventory', requiredLevel: 80, currentLevel: 76, gap: 4, priority: 'medium' },
+  ], []);
+
+  const trainingTrends = useMemo<TrainingTrend[]>(() => [
+    { date: '2024-01-01', enrollments: 25, completions: 18, averageScore: 78, satisfaction: 4.2, cost: 15000 },
+    { date: '2024-01-08', enrollments: 32, completions: 28, averageScore: 82, satisfaction: 4.4, cost: 18000 },
+    { date: '2024-01-15', enrollments: 28, completions: 25, averageScore: 85, satisfaction: 4.6, cost: 16000 },
+    { date: '2024-01-22', enrollments: 35, completions: 31, averageScore: 87, satisfaction: 4.7, cost: 19500 },
+    { date: '2024-01-29', enrollments: 42, completions: 38, averageScore: 89, satisfaction: 4.8, cost: 22000 },
+  ], []);
+
+  const learningEfficiencyData = useMemo(() => [
+    { subject: 'Food Safety', A: 92, B: 87, fullMark: 100 },
+    { subject: 'Customer Service', A: 78, B: 82, fullMark: 100 },
+    { subject: 'Kitchen Ops', A: 91, B: 85, fullMark: 100 },
+    { subject: 'Cleaning', A: 95, B: 90, fullMark: 100 },
+    { subject: 'Emergency', A: 73, B: 100, fullMark: 100 },
+    { subject: 'Inventory', A: 76, B: 80, fullMark: 100 },
+  ], []);
+
   // Load initial data
   useEffect(() => {
     const loadAnalyticsData = async () => {
