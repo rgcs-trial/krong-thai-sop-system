@@ -768,7 +768,7 @@ export const useUIStore = create<UIStore>()(
         set((state) => {
           if (category) {
             state.notifications.notifications = state.notifications.notifications.filter(
-              n => n.category !== category
+              (n: any) => n.category !== category
             );
           } else {
             state.notifications.notifications = [];
