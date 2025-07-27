@@ -35,7 +35,7 @@ import {
   Bell,
   ChevronUp,
   ChevronDown,
-  TrendingRight
+  ArrowRight
 } from 'lucide-react';
 
 import {
