@@ -63,8 +63,18 @@ function createSupabaseClient(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('[AUTH-DEBUG] Environment check:', {
+      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      hasAnonKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      nodeEnv: process.env.NODE_ENV,
+      supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 30) + '...'
+    });
+
     const body = await request.json();
     const { email, pin, deviceFingerprint } = body;
+    
+    console.log('[AUTH-DEBUG] Login attempt:', { email, pinLength: pin?.length });
 
     // Validate input
     if (!email || !pin) {
