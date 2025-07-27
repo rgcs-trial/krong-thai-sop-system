@@ -12,11 +12,11 @@ describe('Restaurant Management', () => {
 
   it('should display restaurant management interface', () => {
     cy.contains('restaurant', { matchCase: false }).should('be.visible')
-    cy.contains('add location', { matchCase: false }).should('be.visible')
+    cy.contains('Add Location', { matchCase: false }).should('be.visible')
   })
 
   it('should open restaurant creation form', () => {
-    cy.contains('add location', { matchCase: false }).click()
+    cy.contains('Add Location', { matchCase: false }).click()
     
     // Should show restaurant form
     cy.get('input[name="name"]').should('be.visible')
