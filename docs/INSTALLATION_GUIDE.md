@@ -1010,7 +1010,7 @@ mkdir -p src/hooks/i18n
 module.exports = {
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'th'],
+    locales: ['en', 'fr'],
     localePath: './public/locales',
     defaultNS: 'common',
     keySeparator: '.',
