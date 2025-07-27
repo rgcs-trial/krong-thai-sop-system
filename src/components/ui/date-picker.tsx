@@ -68,7 +68,7 @@ export function DatePicker({
 // Range date picker for date ranges
 interface DateRangePickerProps {
   dateRange?: { from: Date; to?: Date }
-  onDateRangeChange?: (range: { from: Date; to?: Date } | undefined) => void
+  onDateRangeChange?: (range: any) => void
   placeholder?: string
   disabled?: boolean
   className?: string
