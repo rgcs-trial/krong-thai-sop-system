@@ -9,3 +9,9 @@
 
  ✓ Starting...
  ✓ Ready in 1323ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 508ms (264 modules)
+✅ Environment configuration validated for development
+ ○ Compiling /[locale]/login ...
+ ✓ Compiled /[locale]/login in 3s (946 modules)
+ GET /en/login 200 in 3674ms
