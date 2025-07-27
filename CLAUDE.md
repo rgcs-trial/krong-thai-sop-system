@@ -116,7 +116,11 @@ supabase/         # 17 database migrations including translation system
 
 ## Database Schema (Supabase)
 
-**Tables**: `restaurants` (location management), `auth_users` (PIN auth), `sop_categories` (16 categories), `sop_documents` (bilingual EN/FR SOPs), `training_modules`, `training_progress`, `training_assessments`, `training_certificates`, `form_submissions`, `audit_logs`, `performance_metrics`, `realtime_subscriptions`
+**Core Tables**: `restaurants`, `auth_users`, `sop_categories`, `sop_documents`, `training_modules`, `training_progress`, `training_assessments`, `training_certificates`, `form_submissions`, `audit_logs`, `performance_metrics`, `realtime_subscriptions`
+
+**Translation System (7 Tables)**: `translation_keys`, `translations`, `translation_history`, `translation_projects`, `translation_project_assignments`, `translation_cache`, `translation_analytics`
+
+**Total**: 19 tables with 17 migrations, RLS policies, real-time subscriptions
 
 ## Development Workflow
 
