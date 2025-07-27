@@ -430,25 +430,112 @@ export function TrainingSession({
                 <div dangerouslySetInnerHTML={{ __html: sectionContent }} />
               </div>
 
-              {/* Media Attachments */}
+              {/* Interactive Media Content */}
               {currentSection.media_urls && currentSection.media_urls.length > 0 && (
                 <div className="space-y-4">
                   <Separator />
                   <h4 className="font-semibold">{t('training.media_resources')}</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {currentSection.media_urls.map((url, index) => (
-                      <Button
-                        key={index}
-                        variant="outline"
-                        className="h-auto p-4 flex flex-col items-center space-y-2"
-                        onClick={() => window.open(url, '_blank')}
-                      >
-                        {getMediaIcon(url)}
-                        <span className="text-xs text-center break-all">
-                          {url.split('/').pop()?.substring(0, 20)}...
+                  <div className="space-y-4">
+                    {currentSection.media_urls.map((url, index) => {
+                      const extension = url.split('.').pop()?.toLowerCase();
+                      const isVideo = ['mp4', 'webm', 'mov'].includes(extension || '');
+                      const isImage = ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension || '');
+                      const isPdf = extension === 'pdf';
+
+                      if (isVideo) {
+                        return (
+                          <div key={index} className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Video className="h-4 w-4" />
+                              <span className="text-sm font-medium">{t('training.training_video')} {index + 1}</span>
+                            </div>
+                            <div className="relative bg-black rounded-lg overflow-hidden">
+                              <video
+                                controls
+                                className="w-full max-h-96"
+                                preload="metadata"
+                                playsInline
+                              >
+                                <source src={url} type={`video/${extension}`} />
+                                {t('training.video_not_supported')}
+                              </video>
+                            </div>
+                          </div>
+                        );
+                      } else if (isImage) {
+                        return (
+                          <div key={index} className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <ImageIcon className="h-4 w-4" />
+                              <span className="text-sm font-medium">{t('training.reference_image')} {index + 1}</span>
+                            </div>
+                            <div className="rounded-lg overflow-hidden border">
+                              <img
+                                src={url}
+                                alt={`Training reference ${index + 1}`}
+                                className="w-full max-h-96 object-contain bg-gray-50"
+                                loading="lazy"
+                              />
+                            </div>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div key={index} className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              {getMediaIcon(url)}
+                              <span className="text-sm font-medium">
+                                {isPdf ? t('training.reference_document') : t('training.resource')} {index + 1}
+                              </span>
+                            </div>
+                            <Button
+                              variant="outline"
+                              className="w-full justify-start"
+                              onClick={() => window.open(url, '_blank')}
+                            >
+                              <ExternalLink className="h-4 w-4 mr-2" />
+                              {t('training.open_resource')}
+                            </Button>
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Interactive Practice Section */}
+              {currentSection.is_required && (
+                <div className="space-y-4">
+                  <Separator />
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-blue-800 mb-2 flex items-center">
+                      <Star className="h-4 w-4 mr-2" />
+                      {t('training.practice_checkpoint')}
+                    </h4>
+                    <p className="text-sm text-blue-700 mb-3">
+                      {t('training.practice_checkpoint_desc')}
+                    </p>
+                    <div className="space-y-2">
+                      <label className="flex items-center space-x-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="rounded border-blue-300 text-blue-600 focus:ring-blue-500"
+                          onChange={(e) => {
+                            // Track practice completion
+                            if (e.target.checked) {
+                              toast({
+                                title: t('training.practice_completed'),
+                                description: t('training.practice_completed_desc'),
+                              });
+                            }
+                          }}
+                        />
+                        <span className="text-sm text-blue-800">
+                          {t('training.practice_understanding_confirmed')}
                         </span>
-                      </Button>
-                    ))}
+                      </label>
+                    </div>
                   </div>
                 </div>
               )}
