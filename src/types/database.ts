@@ -618,7 +618,7 @@ export interface TrainingSearchParams {
   tags?: string[];
 }
 
-// Database schema type for Supabase
+// Database schema type for Supabase (Use the generated type from supabase.ts instead)
 export interface Database {
   public: {
     Tables: {
@@ -642,9 +642,30 @@ export interface Database {
         Insert: Omit<SOPDocument, 'id' | 'created_at' | 'updated_at'>;
         Update: Partial<Omit<SOPDocument, 'id' | 'created_at' | 'updated_at'>>;
       };
+      form_templates: {
+        Row: FormTemplate;
+        Insert: Omit<FormTemplate, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<FormTemplate, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      form_submissions: {
+        Row: FormSubmission;
+        Insert: Omit<FormSubmission, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<FormSubmission, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      audit_logs: {
+        Row: AuditLog;
+        Insert: Omit<AuditLog, 'id' | 'created_at'>;
+        Update: Partial<Omit<AuditLog, 'id' | 'created_at'>>;
+      };
     };
     Views: {};
     Functions: {};
-    Enums: {};
+    Enums: {
+      user_role: UserRole;
+      sop_status: SOPStatus;
+      sop_priority: SOPPriority;
+      submission_status: SubmissionStatus;
+      audit_action: AuditAction;
+    };
   };
 }
