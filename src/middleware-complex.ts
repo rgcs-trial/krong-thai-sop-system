@@ -110,7 +110,7 @@ export default async function middleware(request: NextRequest) {
   let locale = defaultLocale;
 
   if (isValidLocale) {
-    locale = firstSegment;
+    locale = firstSegment as 'en' | 'fr';
     pathWithoutLocale = '/' + pathSegments.slice(1).join('/');
     if (pathWithoutLocale === '/') {
       pathWithoutLocale = '/';
