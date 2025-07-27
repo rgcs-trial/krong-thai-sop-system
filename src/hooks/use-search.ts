@@ -421,8 +421,8 @@ export function useSearch(locale: string = 'en') {
       documents?.forEach(doc => {
         suggestions.push({
           type: 'document',
-          text: locale === 'th' ? doc.title_th : doc.title_en,
-          text_th: doc.title_th,
+          text: locale === 'fr' ? doc.title_fr : doc.title_en,
+          text_fr: doc.title_fr,
           id: doc.id,
           category: doc.category_id
         });
