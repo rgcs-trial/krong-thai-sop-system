@@ -317,7 +317,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
             </div>
             
             <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              {locale === 'en' ? 'Restaurant Krong Thai' : 'ร้านอาหารโครงไทย'}
+              {locale === 'en' ? 'Restaurant Krong Thai' : 'Restaurant Krong Thaï'}
             </h1>
             <p className="text-gray-600 text-lg">
               {locale === 'en' ? 'SOP Management System' : 'Système de Gestion des POS'}
