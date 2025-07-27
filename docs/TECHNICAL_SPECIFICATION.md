@@ -386,7 +386,64 @@ interface SecurityFeatures {
 }
 ```
 
-### 5.3 State Management Architecture
+### 5.2 Restaurant Management API
+
+#### Restaurant CRUD Operations
+```typescript
+// GET /api/restaurants - List all restaurants (filtered by access)
+interface RestaurantListResponse {
+  restaurants: Restaurant[];
+  total: number;
+  filtered: number;
+}
+
+// POST /api/restaurants - Create new restaurant location
+interface CreateRestaurantRequest {
+  name: string;
+  name_th?: string;
+  address?: string;
+  address_th?: string;
+  phone?: string;
+  email?: string;
+  timezone?: string;
+  settings?: {
+    capacity?: number;
+    operatingHours?: {
+      [day: string]: { open: string; close: string; closed: boolean };
+    };
+  };
+}
+
+// PUT /api/restaurants?id=<uuid> - Update restaurant
+// DELETE /api/restaurants?id=<uuid> - Soft delete (deactivate)
+```
+
+### 5.3 Enhanced Error Handling System
+
+#### Error Code Architecture
+```typescript
+// Comprehensive error management with bilingual support
+interface AuthError {
+  code: string;           // AUTH_001, SYS_302, etc.
+  message: {
+    en: string;
+    th: string;
+  };
+  userMessage: {
+    en: string;
+    th: string;
+  };
+  severity: 'low' | 'medium' | 'high' | 'critical';
+}
+
+// Error categories:
+// AUTH_001-003: Input validation
+// AUTH_101-104: Authentication failures  
+// AUTH_201-203: Security issues
+// SYS_301-304: System errors
+```
+
+### 5.4 State Management Architecture
 
 #### Zustand Stores Implementation
 ```typescript
