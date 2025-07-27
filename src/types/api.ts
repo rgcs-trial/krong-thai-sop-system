@@ -309,7 +309,7 @@ export interface MiddlewareContext {
   timestamp: string;
   ipAddress?: string;
   userAgent?: string;
-  locale: 'en' | 'th';
+  locale: 'en' | 'fr';
 }
 
 // Rate limiting types

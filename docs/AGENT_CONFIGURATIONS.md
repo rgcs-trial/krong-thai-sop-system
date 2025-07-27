@@ -31,7 +31,7 @@ This document provides comprehensive descriptions for recreating all specialized
 - **Internationalization:** Bilingual EN/TH support
 - **Device Target:** Tablet-optimized interface
 - **Brand Colors:** Primary: #E31B23 (red), #231F20 (black), #FCFCFC (white)
-- **Typography:** EB Garamond SC (headings), Source Serif Pro (body), Inter (UI), Noto Sans Thai
+- **Typography:** EB Garamond SC (headings), Source Serif Pro (body), Inter (UI), Inter
 
 **Current Project Status**: Development phase with critical issues (Health Score: 4/10)
 - Build failures requiring immediate attention

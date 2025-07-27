@@ -55,7 +55,7 @@ A comprehensive design system for Krong Thai restaurant management platform, bui
 ```css
 --font-serif: 'EB Garamond', serif; /* Headlines, elegant text */
 --font-sans: 'Inter', sans-serif; /* Body text, UI elements */
---font-thai: 'Noto Sans Thai', sans-serif; /* Thai text */
+--font-thai: 'Inter', sans-serif; /* Thai text */
 ```
 
 #### Font Scale
