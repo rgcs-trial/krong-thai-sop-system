@@ -101,10 +101,83 @@ button, input, select, textarea {
   min-height: 44px;
 }
 
-/* Thai text styling */
-.text-thai {
+/* Thai text styling and language-specific classes */
+.text-thai, .font-thai {
   font-family: "Noto Sans Thai", sans-serif;
   line-height: 1.6; /* Better line spacing for Thai characters */
+  word-wrap: break-word; /* Handle long Thai words */
+  overflow-wrap: break-word;
+}
+
+/* Language-specific document root classes for enhanced font rendering */
+html.lang-thai {
+  --primary-font: "Noto Sans Thai", sans-serif;
+}
+
+html.lang-thai .font-ui {
+  font-family: "Noto Sans Thai", "Inter", sans-serif;
+}
+
+html.lang-thai .font-body {
+  font-family: "Noto Sans Thai", "Source Serif Pro", serif;
+}
+
+html.lang-thai .font-heading {
+  font-family: "Noto Sans Thai", "EB Garamond SC", serif;
+}
+
+/* French language optimizations */
+html.lang-french .font-ui {
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.01em; /* Slightly tighter for French */
+}
+
+/* Mixed language content styling */
+.bilingual-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.bilingual-content.side-by-side {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .bilingual-content.side-by-side {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Content language indicators */
+.lang-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* Thai-specific input and textarea styling */
+input.font-thai,
+textarea.font-thai {
+  font-family: "Noto Sans Thai", sans-serif;
+  line-height: 1.5;
+}
+
+/* Font optimization for different text lengths */
+.thai-short {
+  font-weight: 400;
+}
+
+.thai-medium {
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.thai-long {
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
 }
 
 /* Restaurant brand utility classes */
