@@ -56,7 +56,7 @@ The database supports a comprehensive bilingual (English/French) restaurant SOP 
 
 ## Enterprise Database Migration Architecture
 
-The database schema is built using an 8-migration enterprise approach:
+The database schema is built using a comprehensive 17-migration enterprise approach including complete translation system:
 
 ### Migration 001: Core Foundation
 - **Tables**: restaurants, auth_users, sop_categories, sop_documents, form_templates, form_submissions, audit_logs
