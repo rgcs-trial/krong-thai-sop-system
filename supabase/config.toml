@@ -12,21 +12,15 @@ max_rows = 1000
 
 [auth]
 enabled = true
-port = 54324
-site_url = "http://localhost:3000"
-
 # JWT settings for PIN-based authentication
-[auth.jwt]
-aud = "authenticated"
-role_claim_key = ".role"
 default_role = "authenticated"
+site_url = "http://localhost:3000"
 
 # PIN-based authentication settings
 [auth.email]
-enabled = true
+enable_signup = true
 double_confirm_changes = false
 enable_confirmations = false
-secure_email_change_enabled = false
 
 # External auth providers disabled for PIN-only system
 [auth.external.apple]
@@ -84,7 +78,7 @@ enabled = false
 enabled = false
 
 [auth.sms]
-enabled = false
+enable_signup = false
 
 [db]
 port = 54322
@@ -101,18 +95,23 @@ max_client_conn = 100
 
 [realtime]
 enabled = true
-port = 54323
-ip_version = "dual"
+ip_version = "IPv4"
 
 [storage]
 enabled = true
-port = 54324
 file_size_limit = "50MiB"
-buckets = [
-  { name = "sop-attachments", public = false },
-  { name = "form-attachments", public = false },
-  { name = "user-avatars", public = true }
-]
+
+[[storage.buckets]]
+name = "sop-attachments"
+public = false
+
+[[storage.buckets]]
+name = "form-attachments"
+public = false
+
+[[storage.buckets]]
+name = "user-avatars"
+public = true
 
 [inbucket]
 enabled = true
@@ -123,12 +122,6 @@ pop3_port = 54327
 
 [functions]
 enabled = true
-port = 54324
 
 [analytics]
 enabled = false
-
-[edge_runtime]
-enabled = true
-port = 54326
-ip_version = "dual"
