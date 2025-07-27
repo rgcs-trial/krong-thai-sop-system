@@ -84,10 +84,31 @@ export interface UserPreferences {
   pinnedDocuments: string[];
   recentlyViewed: string[];
   
+  // Language-specific preferences
+  languagePreferences: {
+    primaryLanguage: 'en' | 'th' | 'fr';
+    secondaryLanguage?: 'en' | 'th' | 'fr';
+    showTranslations: boolean;
+    autoTranslate: boolean;
+    translationQuality: 'fast' | 'balanced' | 'accurate';
+    preferredLanguageForContent: 'auto' | 'en' | 'th' | 'fr';
+    fallbackLanguage: 'en' | 'th' | 'fr';
+  };
+  
+  // Content management preferences
+  contentEditing: {
+    defaultEditMode: 'single' | 'bilingual' | 'side-by-side';
+    showTranslationHints: boolean;
+    validateTranslations: boolean;
+    requireBothLanguages: boolean;
+    autoSaveInterval: number; // in seconds
+  };
+  
   // Search preferences
   searchHistory: string[];
   searchFilters: Record<string, any>;
   saveSearchHistory: boolean;
+  searchLanguages: ('en' | 'th' | 'fr')[];
   
   // Training preferences
   preferredLearningPath: string | null;
