@@ -365,9 +365,6 @@ src/app/api/
         ├── dashboard/route.ts     # Analytics dashboard data
         ├── modules/[id]/route.ts  # Module-specific analytics
         └── users/[userId]/route.ts # User-specific analytics
-├── analytics/                     # System analytics API (5+ endpoints)
-│   ├── executive/route.ts         # Executive dashboard data
-│   ├── operational/route.ts       # Operational insights
 │   ├── performance/route.ts       # Performance metrics
 │   ├── alerts/route.ts            # System alerts
 │   └── sop/route.ts               # SOP analytics
