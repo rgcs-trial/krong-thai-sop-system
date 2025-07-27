@@ -73,8 +73,9 @@
 2. **Search Functionality:**
    - Basic keyword search
    - Category filtering
-   - Language-specific search (EN/TH)
+   - Language-specific search (EN/FR)
    - Recent searches history
+   - Offline search capabilities
 
 3. **Document Interaction:**
    - Opening SOPs and procedures
