@@ -1,6 +1,6 @@
-# Installation Guide - Restaurant Krong Thai SOP Website
+# Installation Guide - Restaurant Krong Thai SOP Management System
 
-Complete setup instructions for the Restaurant Krong Thai Standard Operating Procedures website using the latest 2025 technology stack with Next.js 15.4.4, React 19.1.0, and shadcn/ui.
+Complete setup instructions for the Restaurant Krong Thai Standard Operating Procedures management system using Next.js 15.4.4, React 19.1.0, and Supabase, optimized for tablet-based restaurant operations.
 
 ## ✅ PRODUCTION READY STATUS
 
