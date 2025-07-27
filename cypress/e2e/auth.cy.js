@@ -101,6 +101,6 @@ describe('Restaurant Selection', () => {
     cy.get('button[type="submit"]').click()
     
     // Admin should see add location option
-    cy.contains('add location', { matchCase: false }).should('be.visible')
+    cy.contains('Add Location', { matchCase: false }).should('be.visible')
   })
 })
