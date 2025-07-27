@@ -404,8 +404,8 @@ export function useSearch(locale: string = 'en') {
       categories?.forEach(category => {
         suggestions.push({
           type: 'category',
-          text: locale === 'th' ? category.name_th : category.name_en,
-          text_th: category.name_th,
+          text: locale === 'fr' ? category.name_fr : category.name_en,
+          text_fr: category.name_fr,
           id: category.id
         });
       });

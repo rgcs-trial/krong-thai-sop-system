@@ -133,19 +133,19 @@ export function SOPDocumentViewer({
   } = useFavorites('document', documentId);
 
   // Get localized content
-  const title = document ? (locale === 'th' ? document.title_th : document.title) : '';
-  const content = document ? (locale === 'th' ? document.content_th : document.content) : '';
-  const steps = document ? (locale === 'th' ? document.steps_th : document.steps) : [];
-  const tags = document ? (locale === 'th' ? document.tags_th : document.tags) : [];
+  const title = document ? (locale === 'fr' ? document.title_fr : document.title) : '';
+  const content = document ? (locale === 'fr' ? document.content_fr : document.content) : '';
+  const steps = document ? (locale === 'fr' ? document.steps_fr : document.steps) : [];
+  const tags = document ? (locale === 'fr' ? document.tags_fr : document.tags) : [];
   const category = document?.category;
   
   // Get creator and approver names
   const creatorName = document?.creator ? 
-    (locale === 'th' ? document.creator.full_name_th || document.creator.full_name : document.creator.full_name) : 
+    (locale === 'fr' ? document.creator.full_name_fr || document.creator.full_name : document.creator.full_name) : 
     document?.created_by || '';
     
   const approverName = document?.approver ? 
-    (locale === 'th' ? document.approver.full_name_th || document.approver.full_name : document.approver.full_name) : 
+    (locale === 'fr' ? document.approver.full_name_fr || document.approver.full_name : document.approver.full_name) : 
     document?.approved_by || '';
 
   // Format file size
