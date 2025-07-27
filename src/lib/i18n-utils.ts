@@ -195,11 +195,11 @@ export function getSearchPlaceholder(locale: Locale, context?: string): string {
       categories: 'Search categories...',
       help: 'Search help...',
     },
-    th: {
-      default: 'ค้นหา...',
-      sops: 'ค้นหามาตรฐานการปฏิบัติงาน...',
-      categories: 'ค้นหาหมวดหมู่...',
-      help: 'ค้นหาความช่วยเหลือ...',
+    fr: {
+      default: 'Rechercher...',
+      sops: 'Rechercher des POS...',
+      categories: 'Rechercher des catégories...',
+      help: 'Rechercher de l\'aide...',
     },
   };
 
@@ -253,13 +253,13 @@ export function getLocaleErrorMessage(locale: Locale, errorType: string): string
       serverError: 'Server error. Please try again later.',
       general: 'Something went wrong. Please try again.',
     },
-    th: {
-      network: 'ข้อผิดพลาดเครือข่าย กรุณาตรวจสอบการเชื่อมต่อ',
-      timeout: 'หมดเวลาการร้องขอ กรุณาลองใหม่อีกครั้ง',
-      unauthorized: 'คุณไม่มีสิทธิ์ในการดูหน้านี้',
-      notFound: 'ไม่พบหน้าที่ต้องการ',
-      serverError: 'เกิดข้อผิดพลาดเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
-      general: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
+    fr: {
+      network: 'Erreur réseau. Veuillez vérifier votre connexion.',
+      timeout: 'Délai d\'attente de la demande. Veuillez réessayer.',
+      unauthorized: 'Vous n\'êtes pas autorisé à voir cette page.',
+      notFound: 'Page non trouvée.',
+      serverError: 'Erreur du serveur. Veuillez réessayer plus tard.',
+      general: 'Quelque chose s\'est mal passé. Veuillez réessayer.',
     },
   };
 
