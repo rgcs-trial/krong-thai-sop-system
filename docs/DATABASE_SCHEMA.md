@@ -307,64 +307,100 @@ CREATE TABLE user_training_progress (
 );
 ```
 
-### 4. SOP Documents
+### 4. Session Management & Progress Tracking
 
-#### `sop_documents`
-Bilingual SOP content and procedures.
-
+#### `location_sessions` - Tablet Location Binding
 ```sql
-CREATE TABLE sop_documents (
+CREATE TABLE location_sessions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    category_id UUID NOT NULL,
     restaurant_id UUID NOT NULL,
-    title VARCHAR(500) NOT NULL,
-    title_th VARCHAR(500) NOT NULL, -- Thai title
-    content TEXT NOT NULL,
-    content_th TEXT NOT NULL, -- Thai content
-    steps JSONB, -- Structured step-by-step procedures
-    steps_th JSONB, -- Thai structured steps
-    attachments JSONB DEFAULT '[]', -- File attachments
-    tags VARCHAR(255)[], -- Searchable tags
-    tags_th VARCHAR(255)[], -- Thai tags
-    version INTEGER DEFAULT 1,
-    status sop_status DEFAULT 'draft',
-    priority sop_priority DEFAULT 'medium',
-    effective_date DATE,
-    review_date DATE,
-    created_by UUID NOT NULL,
-    updated_by UUID,
-    approved_by UUID,
-    approved_at TIMESTAMPTZ,
+    tablet_device_id VARCHAR(255) NOT NULL,     -- Device fingerprint
+    session_token VARCHAR(255) NOT NULL,        -- Secure session identifier
+    name VARCHAR(255) NOT NULL,                 -- "Kitchen Station #1", "Front Counter"
+    location VARCHAR(255),                      -- Physical location description
+    ip_address INET,
+    user_agent TEXT,
+    is_active BOOLEAN DEFAULT true,
+    expires_at TIMESTAMPTZ NOT NULL,            -- 24-hour expiry
+    last_staff_login_at TIMESTAMPTZ,            -- Last successful staff login
+    last_staff_user_id UUID,                    -- Last staff member to use
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_location_session_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
+    CONSTRAINT fk_location_session_last_user FOREIGN KEY (last_staff_user_id) REFERENCES auth_users(id)
+);
+
+-- Ensure only one active session per device
+CREATE UNIQUE INDEX idx_location_sessions_active_device 
+    ON location_sessions(tablet_device_id) WHERE is_active = true;
+```
+
+#### `user_bookmarks` - SOP Bookmarks & Favorites
+```sql
+CREATE TABLE user_bookmarks (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    sop_id UUID NOT NULL,
+    restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
+    notes TEXT,                             -- User notes for bookmark
+    notes_th TEXT,                          -- Thai notes
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     
-    CONSTRAINT fk_sop_category FOREIGN KEY (category_id) REFERENCES sop_categories(id),
-    CONSTRAINT fk_sop_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
-    CONSTRAINT fk_sop_created_by FOREIGN KEY (created_by) REFERENCES auth_users(id),
-    CONSTRAINT fk_sop_updated_by FOREIGN KEY (updated_by) REFERENCES auth_users(id),
-    CONSTRAINT fk_sop_approved_by FOREIGN KEY (approved_by) REFERENCES auth_users(id)
+    CONSTRAINT fk_bookmark_user FOREIGN KEY (user_id) REFERENCES auth_users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_bookmark_sop FOREIGN KEY (sop_id) REFERENCES sop_documents(id) ON DELETE CASCADE,
+    CONSTRAINT fk_bookmark_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
+    CONSTRAINT unique_user_sop_bookmark UNIQUE (user_id, sop_id)
 );
-
--- Indexes
-CREATE INDEX idx_sop_documents_category ON sop_documents(category_id);
-CREATE INDEX idx_sop_documents_restaurant ON sop_documents(restaurant_id);
-CREATE INDEX idx_sop_documents_status ON sop_documents(status);
-CREATE INDEX idx_sop_documents_priority ON sop_documents(priority);
-CREATE INDEX idx_sop_documents_active ON sop_documents(is_active);
-CREATE INDEX idx_sop_documents_created_by ON sop_documents(created_by);
-CREATE INDEX idx_sop_documents_tags ON sop_documents USING GIN(tags);
-CREATE INDEX idx_sop_documents_tags_th ON sop_documents USING GIN(tags_th);
-
--- Full-text search indexes
-CREATE INDEX idx_sop_documents_search_en ON sop_documents USING GIN(to_tsvector('english', title || ' ' || content));
-CREATE INDEX idx_sop_documents_search_th ON sop_documents USING GIN(to_tsvector('thai', title_th || ' ' || content_th));
 ```
 
-#### SOP Enums
+#### `user_progress_summary` - User Activity Tracking
 ```sql
-CREATE TYPE sop_status AS ENUM ('draft', 'review', 'approved', 'archived');
-CREATE TYPE sop_priority AS ENUM ('low', 'medium', 'high', 'critical');
+CREATE TABLE user_progress_summary (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    sop_id UUID NOT NULL,
+    restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
+    viewed_at TIMESTAMPTZ,                  -- When SOP was first viewed
+    completed_at TIMESTAMPTZ,               -- When marked as completed
+    downloaded_at TIMESTAMPTZ,              -- When downloaded for offline
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_progress_summary_user FOREIGN KEY (user_id) REFERENCES auth_users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_progress_summary_sop FOREIGN KEY (sop_id) REFERENCES sop_documents(id) ON DELETE CASCADE,
+    CONSTRAINT fk_progress_summary_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
+    CONSTRAINT unique_user_sop_summary UNIQUE (user_id, sop_id)
+);
+```
+
+#### `uploaded_files` - File Attachment Management
+```sql
+CREATE TABLE uploaded_files (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    filename VARCHAR(255) NOT NULL,          -- Generated filename
+    original_name VARCHAR(255) NOT NULL,     -- User's original filename
+    mime_type VARCHAR(100) NOT NULL,         -- File MIME type
+    size BIGINT NOT NULL,                    -- File size in bytes
+    url TEXT NOT NULL,                       -- Supabase Storage URL
+    thumbnail_url TEXT,                      -- Thumbnail for images/videos
+    bucket VARCHAR(100) NOT NULL,            -- Storage bucket name
+    path TEXT NOT NULL,                      -- Storage path
+    category VARCHAR(100) NOT NULL,          -- File category (sop_attachment, training_media, etc.)
+    sop_id UUID,                            -- Associated SOP document
+    restaurant_id UUID NOT NULL,            -- Multi-tenant isolation
+    uploaded_by UUID NOT NULL,              -- Uploader
+    metadata JSONB DEFAULT '{}',             -- Additional file metadata
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    
+    CONSTRAINT fk_file_sop FOREIGN KEY (sop_id) REFERENCES sop_documents(id) ON DELETE SET NULL,
+    CONSTRAINT fk_file_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE,
+    CONSTRAINT fk_file_uploader FOREIGN KEY (uploaded_by) REFERENCES auth_users(id)
+);
 ```
 
 ### 5. Form Management
