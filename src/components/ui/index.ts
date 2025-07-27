@@ -68,6 +68,7 @@ export { Toaster } from "./toaster"
 // Form Components
 export { RadioGroup, RadioGroupItem } from "./radio-group"
 export { Checkbox } from "./checkbox"
+export { Switch } from "./switch"
 
 // Additional Components  
 export { Progress } from "./progress"
