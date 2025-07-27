@@ -351,7 +351,7 @@ export default function LoginPage({ params, searchParams }: LoginPageProps) {
               {authMode === 'manager' && (
                 <div className="space-y-2">
                   <label htmlFor="email" className="text-sm font-medium text-gray-700 block">
-                    {locale === 'en' ? 'Manager Email Address' : 'ที่อยู่อีเมลผู้จัดการ'}
+                    {locale === 'en' ? 'Manager Email Address' : 'Adresse Email du Gestionnaire'}
                   </label>
                   <input
                     id="email"
