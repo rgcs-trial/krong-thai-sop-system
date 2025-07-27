@@ -105,7 +105,107 @@ The database schema is built using a comprehensive 17-migration enterprise appro
 - **Functions**: Translation validation and content synchronization
 - **Integration**: Professional translation management with version control
 
+### Migration 009-013: Thai to French Migration
+- **Migration 009**: Missing analytics tables for comprehensive monitoring
+- **Migration 010-013**: Thai to French language conversion for bilingual support
+
+### Migration 014: Translation System Schema
+- **Tables**: translation_keys, translations, translation_history, translation_projects, translation_project_assignments, translation_cache, translation_analytics
+- **Features**: Complete database-driven translation system with workflow management
+- **Enums**: translation_status, translation_category, supported_locale, translation_priority
+
+### Migration 015: Translation RLS Policies
+- **Security**: Row Level Security policies for translation access control
+- **Functions**: Helper functions for translation permissions and access control
+- **Policies**: Granular access control for translation workflow and admin functions
+
+### Migration 016: Translation Sample Data
+- **Data**: Sample translation keys and content for system initialization
+- **Categories**: 16 translation categories covering all system areas
+- **Content**: Initial EN/FR translations for core system functionality
+
+### Migration 017: Translation Utility Functions
+- **Functions**: Utility functions for translation management and cache operations
+- **Triggers**: Automated triggers for cache invalidation and audit logging
+- **Performance**: Optimized functions for translation retrieval and caching
+
 ## Database Tables
+
+### Translation System Tables (7 Tables)
+
+#### `translation_keys` - Translation Key Registry
+```sql
+CREATE TABLE translation_keys (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    key_name VARCHAR(255) NOT NULL UNIQUE,
+    category translation_category NOT NULL,
+    description TEXT,
+    context_notes TEXT,
+    interpolation_vars JSONB DEFAULT '[]',
+    supports_pluralization BOOLEAN DEFAULT false,
+    pluralization_rules JSONB DEFAULT '{}',
+    namespace VARCHAR(100),
+    feature_area VARCHAR(100),
+    priority translation_priority DEFAULT 'medium',
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    created_by UUID REFERENCES auth_users(id),
+    updated_by UUID REFERENCES auth_users(id)
+);
+```
+
+#### `translations` - Translation Values
+```sql
+CREATE TABLE translations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    translation_key_id UUID NOT NULL REFERENCES translation_keys(id) ON DELETE CASCADE,
+    locale supported_locale NOT NULL,
+    value TEXT NOT NULL,
+    icu_message TEXT,
+    character_count INTEGER GENERATED ALWAYS AS (LENGTH(value)) STORED,
+    word_count INTEGER,
+    status translation_status DEFAULT 'draft',
+    version INTEGER DEFAULT 1,
+    previous_value TEXT,
+    is_reviewed BOOLEAN DEFAULT false,
+    reviewed_at TIMESTAMPTZ,
+    reviewed_by UUID REFERENCES auth_users(id),
+    is_approved BOOLEAN DEFAULT false,
+    approved_at TIMESTAMPTZ,
+    approved_by UUID REFERENCES auth_users(id),
+    published_at TIMESTAMPTZ,
+    published_by UUID REFERENCES auth_users(id),
+    translator_notes TEXT,
+    reviewer_notes TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    created_by UUID REFERENCES auth_users(id),
+    updated_by UUID REFERENCES auth_users(id),
+    UNIQUE(translation_key_id, locale, version)
+);
+```
+
+#### `translation_cache` - Performance Cache
+```sql
+CREATE TABLE translation_cache (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    locale supported_locale NOT NULL,
+    namespace VARCHAR(100),
+    translations_json JSONB NOT NULL,
+    cache_version VARCHAR(50) NOT NULL,
+    generated_at TIMESTAMPTZ DEFAULT NOW(),
+    expires_at TIMESTAMPTZ,
+    generation_time_ms INTEGER,
+    compression_ratio DECIMAL(5,2),
+    is_valid BOOLEAN DEFAULT true,
+    invalidated_at TIMESTAMPTZ,
+    invalidation_reason VARCHAR(255),
+    UNIQUE(locale, namespace)
+);
+```
+
+### Core System Tables (12 Tables)
 
 ### 1. Core Authentication & Multi-tenancy
 
