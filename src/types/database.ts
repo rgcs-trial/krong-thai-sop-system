@@ -52,9 +52,9 @@ export interface SOPCategory {
   id: string;
   code: string;
   name: string;
-  name_th: string;
+  name_fr: string;
   description?: string;
-  description_th?: string;
+  description_fr?: string;
   icon?: string;
   color?: string;
   sort_order: number;

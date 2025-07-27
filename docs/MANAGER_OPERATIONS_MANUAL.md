@@ -58,7 +58,7 @@
 - [ ] Confirm offline mode content is synchronized across all tablets
 - [ ] Verify real-time analytics dashboard displays current data
 - [ ] Check certificate generation and progress tracking
-- [ ] Test bilingual content switching functionality
+- [ ] Test bilingual content switching functionality (EN/FR)
 - [ ] Verify performance monitoring alerts are operational
 
 ---
@@ -114,7 +114,7 @@ Certificate Renewal Due: [Date]
 
 **Department Comparison View:**
 - Kitchen Staff: Training completion, safety compliance, equipment SOPs
-- Front of House: Customer service standards, PIN system usage, bilingual support
+- Front of House: Customer service standards, PIN system usage, bilingual support (EN/FR)
 - Management: Leadership training, system administration, analytics review
 - Support Staff: Cleaning protocols, equipment maintenance, opening/closing procedures
 
@@ -140,7 +140,7 @@ Certificate Renewal Due: [Date]
 - [ ] Review training module completion rates across all departments
 - [ ] Monitor assessment scores and identify struggling learners
 - [ ] Check certificate generation and validation processes
-- [ ] Verify training content loads properly in both EN/TH languages
+- [ ] Verify training content loads properly in both EN/FR languages
 - [ ] Review voice-guided training session effectiveness
 
 **Weekly Training Analytics Review:**
@@ -151,7 +151,7 @@ Certificate Renewal Due: [Date]
 - [ ] Generate training effectiveness reports for management
 
 **Training Content Quality Management:**
-- [ ] Verify bilingual training content synchronization (EN/TH)
+- [ ] Verify bilingual training content synchronization (EN/FR)
 - [ ] Test interactive elements and multimedia content
 - [ ] Review and approve new training modules before activation
 - [ ] Monitor learner feedback and satisfaction scores
