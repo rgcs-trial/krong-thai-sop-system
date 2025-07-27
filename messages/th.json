@@ -95,7 +95,29 @@
     "low": "ต่ำ",
     "medium": "ปานกลาง",
     "high": "สูง",
-    "critical": "วิกฤต"
+    "critical": "วิกฤต",
+    "admin": {
+      "title": "การจัดการ SOP",
+      "subtitle": "สร้าง แก้ไข และจัดการมาตรฐานการปฏิบัติงาน",
+      "createNew": "สร้าง SOP ใหม่",
+      "editDocument": "แก้ไขเอกสาร",
+      "createDocument": "สร้างเอกสาร",
+      "editDocumentDesc": "อัปเดตข้อมูลและเนื้อหาเอกสาร",
+      "createDocumentDesc": "สร้างมาตรฐานการปฏิบัติงานใหม่",
+      "noPermission": "คุณไม่มีสิทธิ์ในการจัดการ SOP",
+      "requiredFields": "กรุณากรอกข้อมูลที่จำเป็นทั้งหมด",
+      "documentUpdated": "อัปเดตเอกสารสำเร็จ",
+      "documentCreated": "สร้างเอกสารสำเร็จ",
+      "documentDeleted": "ลบเอกสารสำเร็จ",
+      "noDocuments": "ไม่พบเอกสาร",
+      "noDocumentsDesc": "เริ่มต้นด้วยการสร้างเอกสาร SOP แรกของคุณ",
+      "createFirst": "สร้าง SOP แรก",
+      "titlePlaceholder": "กรอกชื่อเอกสาร",
+      "contentPlaceholder": "กรอกเนื้อหาและภาพรวมของเอกสาร",
+      "selectCategory": "เลือกหมวดหมู่",
+      "addStep": "เพิ่มขั้นตอน",
+      "confirmDeleteDesc": "การดำเนินการนี้ไม่สามารถย้อนกลับได้ เอกสารจะถูกลบอย่างถาวร"
+    }
   },
   "sopCategories": {
     "title": "หมวดหมู่มาตรฐานการปฏิบัติงาน",
