@@ -311,29 +311,45 @@ export function LocationSelector({
               ))}
             </div>
 
-            <div className="flex gap-3 justify-end">
-              <Button onClick={onCancel} variant="outline" disabled={isLoading}>
-                {locale === 'en' ? 'Cancel' : 'ยกเลิก'}
-              </Button>
-              <Button 
-                onClick={handleConfirm} 
-                disabled={!selectedRestaurant || isLoading}
-                className="bg-red-600 hover:bg-red-700"
-              >
-                {isLoading ? (
-                  <>
-                    <div className="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full" />
-                    {locale === 'en' ? 'Setting up...' : 'กำลังตั้งค่า...'}
-                  </>
-                ) : (
-                  <>
+            <div className="flex gap-3 justify-between">
+              <div className="flex gap-2">
+                {userRole === 'admin' && (
+                  <Button 
+                    onClick={() => setShowAddForm(true)} 
+                    variant="outline"
+                    disabled={isLoading}
+                  >
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
-                    {locale === 'en' ? 'Confirm Location' : 'ยืนยันสถานที่'}
-                  </>
+                    {locale === 'en' ? 'Add Location' : 'เพิ่มสถานที่'}
+                  </Button>
                 )}
-              </Button>
+              </div>
+              <div className="flex gap-3">
+                <Button onClick={onCancel} variant="outline" disabled={isLoading}>
+                  {locale === 'en' ? 'Cancel' : 'ยกเลิก'}
+                </Button>
+                <Button 
+                  onClick={handleConfirm} 
+                  disabled={!selectedRestaurant || isLoading}
+                  className="bg-red-600 hover:bg-red-700"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full" />
+                      {locale === 'en' ? 'Setting up...' : 'กำลังตั้งค่า...'}
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {locale === 'en' ? 'Confirm Location' : 'ยืนยันสถานที่'}
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </>
         )}
