@@ -143,7 +143,7 @@ const nextConfig: NextConfig = {
     },
     {
       // Dashboard and SOP routes with session-based caching
-      source: '/(en|th)/(dashboard|sop)/(.*)',
+      source: '/(en|fr)/(dashboard|sop)/(.*)',
       headers: [
         {
           key: 'Cache-Control',

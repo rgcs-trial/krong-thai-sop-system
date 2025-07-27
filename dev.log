@@ -615,3 +615,11 @@
  ✓ Compiled in 75ms (366 modules)
  ✓ Compiled in 174ms (366 modules)
  ✓ Compiled in 110ms (366 modules)
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.4.4
+   - Local:        http://localhost:3000
+   - Network:      http://10.0.0.95:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1515ms
