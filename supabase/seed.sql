@@ -255,36 +255,36 @@ SELECT log_audit_event(
 -- ===========================================
 
 -- Create additional sample users for testing
-INSERT INTO auth_users (email, pin_hash, role, full_name, full_name_th, position, position_th, restaurant_id, is_active) VALUES
-('chef@krongthai.com', crypt('2468', gen_salt('bf')), 'staff', 'Narong Chomchai', 'ณรงค์ โฉมฉาย', 'Head Chef', 'หัวหน้าเชฟ', '550e8400-e29b-41d4-a716-446655440000', true),
-('server1@krongthai.com', crypt('1357', gen_salt('bf')), 'staff', 'Siriporn Thanakit', 'ศิริพร ธนกิจ', 'Senior Server', 'พนักงานเสิร์ฟอาวุโส', '550e8400-e29b-41d4-a716-446655440000', true),
-('server2@krongthai.com', crypt('3579', gen_salt('bf')), 'staff', 'Kamon Jittra', 'กมล จิตรา', 'Server', 'พนักงานเสิร์ฟ', '550e8400-e29b-41d4-a716-446655440000', true),
-('cashier@krongthai.com', crypt('4680', gen_salt('bf')), 'staff', 'Pensiri Moonsom', 'เพ็ญศิริ มูลส้ม', 'Cashier', 'แคชเชียร์', '550e8400-e29b-41d4-a716-446655440000', true);
+INSERT INTO auth_users (email, pin_hash, role, full_name, full_name_fr, position, position_fr, restaurant_id, is_active) VALUES
+('chef@krongthai.com', crypt('2468', gen_salt('bf')), 'staff', 'Narong Chomchai', 'Narong Chomchai', 'Head Chef', 'Chef principal', '550e8400-e29b-41d4-a716-446655440000', true),
+('server1@krongthai.com', crypt('1357', gen_salt('bf')), 'staff', 'Siriporn Thanakit', 'Siriporn Thanakit', 'Senior Server', 'Serveur/Serveuse senior', '550e8400-e29b-41d4-a716-446655440000', true),
+('server2@krongthai.com', crypt('3579', gen_salt('bf')), 'staff', 'Kamon Jittra', 'Kamon Jittra', 'Server', 'Serveur/Serveuse', '550e8400-e29b-41d4-a716-446655440000', true),
+('cashier@krongthai.com', crypt('4680', gen_salt('bf')), 'staff', 'Pensiri Moonsom', 'Pensiri Moonsom', 'Cashier', 'Caissier/Caissière', '550e8400-e29b-41d4-a716-446655440000', true);
 
 -- Create sample SOP documents for other categories
 INSERT INTO sop_documents (
-    category_id, restaurant_id, title, title_th,
-    content, content_th, status, priority, created_by
+    category_id, restaurant_id, title, title_fr,
+    content, content_fr, status, priority, created_by
 ) VALUES
 -- Cleaning SOP
 ((SELECT id FROM sop_categories WHERE code = 'CLEANING'), '550e8400-e29b-41d4-a716-446655440000',
- 'End of Day Cleaning Checklist', 'รายการทำความสะอาดปิดวัน',
+ 'End of Day Cleaning Checklist', 'Liste de Nettoyage de Fin de Journée',
  'Comprehensive cleaning procedures to be completed at the end of each service day.',
- 'ขั้นตอนการทำความสะอาดครบถ้วนที่ต้องทำเมื่อสิ้นสุดการบริการแต่ละวัน',
+ 'Procédures de nettoyage complètes à effectuer à la fin de chaque jour de service.',
  'approved', 'high', '770e8400-e29b-41d4-a716-446655440000'),
 
 -- Kitchen Operations SOP  
 ((SELECT id FROM sop_categories WHERE code = 'KITCHEN_OPS'), '550e8400-e29b-41d4-a716-446655440000',
- 'Pad Thai Preparation Standard', 'มาตรฐานการทำผัดไทย',
+ 'Pad Thai Preparation Standard', 'Standard de Préparation du Pad Thaï',
  'Step-by-step guide for preparing authentic Pad Thai according to restaurant standards.',
- 'คู่มือทำผัดไทยแท้ตามมาตรฐานร้านอาหารทีละขั้นตอน',
+ 'Guide étape par étape pour préparer un Pad Thaï authentique selon les standards du restaurant.',
  'approved', 'medium', '660e8400-e29b-41d4-a716-446655440000'),
 
 -- Cash Handling SOP
 ((SELECT id FROM sop_categories WHERE code = 'CASH_HANDLING'), '550e8400-e29b-41d4-a716-446655440000',
- 'Point of Sale System Operation', 'การใช้งานระบบขายหน้าร้าน',
+ 'Point of Sale System Operation', 'Utilisation du Système de Point de Vente',
  'Complete guide for operating the POS system including payment processing and reporting.',
- 'คู่มือการใช้งานระบบ POS รวมถึงการประมวลผลการชำระเงินและการรายงาน',
+ 'Guide complet pour utiliser le système PDV incluant le traitement des paiements et les rapports.',
  'approved', 'medium', '770e8400-e29b-41d4-a716-446655440000');
 
 COMMENT ON TABLE restaurants IS 'Multi-tenant restaurant information with bilingual support';
