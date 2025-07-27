@@ -241,6 +241,16 @@ export function RestaurantForm({
           </p>
         </div>
 
+        {/* Display submit error */}
+        {submitError && (
+          <RestaurantErrorDisplay
+            error={submitError}
+            locale={locale}
+            onDismiss={() => setSubmitError(null)}
+            className="mb-6"
+          />
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <Tabs value={currentTab} onValueChange={setCurrentTab}>
             <TabsList className="grid w-full grid-cols-3">
