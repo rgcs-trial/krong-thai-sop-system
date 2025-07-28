@@ -31,12 +31,27 @@ import {
   Save
 } from 'lucide-react';
 
+interface Annotation {
+  id: string;
+  type: 'arrow' | 'circle' | 'square' | 'text';
+  x: number;
+  y: number;
+  width?: number;
+  height?: number;
+  text?: string;
+  color: string;
+  strokeWidth: number;
+}
+
 interface CapturedPhoto {
   id: string;
   dataUrl: string;
   timestamp: string;
   filename: string;
   size: number;
+  annotations?: Annotation[];
+  verificationStatus?: 'pending' | 'approved' | 'rejected';
+  verificationNotes?: string;
 }
 
 interface PhotoCaptureModalProps {
