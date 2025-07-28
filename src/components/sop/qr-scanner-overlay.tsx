@@ -17,12 +17,38 @@ import {
   AlertTriangle
 } from 'lucide-react';
 
+interface EquipmentTag {
+  id: string;
+  name: string;
+  type: 'kitchen' | 'cleaning' | 'safety' | 'dining' | 'storage';
+  location: string;
+  lastMaintenance?: string;
+  nextMaintenance?: string;
+  status: 'operational' | 'maintenance_required' | 'out_of_order';
+  specifications?: Record<string, any>;
+  qrCode: string;
+}
+
 interface QRScanResult {
   data: string;
+  type: 'sop' | 'equipment' | 'location' | 'user' | 'unknown';
   sopId?: string;
   sopTitle?: string;
   category?: string;
+  equipment?: EquipmentTag;
+  location?: {
+    id: string;
+    name: string;
+    zone: string;
+    floor: number;
+  };
+  user?: {
+    id: string;
+    name: string;
+    role: string;
+  };
   isValid: boolean;
+  confidence: number; // 0-1 detection confidence
 }
 
 interface QRScannerOverlayProps {
