@@ -1035,6 +1035,500 @@ export interface TaskAnalytics {
   created_at: string;
 }
 
+// IoT System Types
+export type IoTDeviceType = 
+  | 'temperature_sensor'
+  | 'humidity_sensor'
+  | 'pressure_sensor'
+  | 'door_sensor'
+  | 'motion_sensor'
+  | 'weight_scale'
+  | 'refrigerator'
+  | 'freezer'
+  | 'oven'
+  | 'grill'
+  | 'fryer'
+  | 'dishwasher'
+  | 'ventilation_fan'
+  | 'ice_machine'
+  | 'coffee_maker'
+  | 'pos_terminal'
+  | 'camera'
+  | 'beacon'
+  | 'gateway'
+  | 'other';
+
+export type IoTDeviceStatus = 'active' | 'inactive' | 'maintenance' | 'error' | 'offline' | 'updating';
+export type IoTAlertSeverity = 'info' | 'warning' | 'critical' | 'emergency';
+export type IoTMaintenanceStatus = 'scheduled' | 'due' | 'overdue' | 'in_progress' | 'completed' | 'cancelled';
+
+export interface IoTDevice {
+  id: string;
+  restaurant_id: string;
+  device_type: IoTDeviceType;
+  device_name: string;
+  device_name_fr?: string;
+  description?: string;
+  description_fr?: string;
+  
+  // Device identification
+  mac_address?: string;
+  serial_number?: string;
+  manufacturer?: string;
+  model?: string;
+  firmware_version?: string;
+  
+  // Location and installation
+  location?: string;
+  location_fr?: string;
+  zone?: string;
+  coordinates?: { x: number; y: number; z?: number };
+  installation_date?: string;
+  
+  // Status and connectivity
+  status: IoTDeviceStatus;
+  is_online: boolean;
+  last_seen_at?: string;
+  ip_address?: string;
+  
+  // Configuration
+  config: Record<string, any>;
+  thresholds: Record<string, any>;
+  calibration_data: Record<string, any>;
+  
+  // Maintenance
+  maintenance_schedule: Record<string, any>;
+  warranty_expires_at?: string;
+  
+  // Audit fields
+  created_by?: string;
+  updated_by?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  restaurant?: Restaurant;
+  creator?: AuthUser;
+  updater?: AuthUser;
+}
+
+export interface IoTSensorData {
+  id: string;
+  device_id: string;
+  
+  // Sensor readings
+  temperature?: number;
+  humidity?: number;
+  pressure?: number;
+  motion_detected?: boolean;
+  door_open?: boolean;
+  weight?: number;
+  
+  // Generic sensor data
+  sensor_type?: string;
+  value?: number;
+  unit?: string;
+  metadata: Record<string, any>;
+  
+  // Data quality
+  quality_score: number;
+  is_anomaly: boolean;
+  
+  // Timestamps
+  recorded_at: string;
+  received_at: string;
+  created_at: string;
+  
+  // Relations
+  device?: IoTDevice;
+}
+
+export interface IoTEquipmentStatus {
+  id: string;
+  device_id: string;
+  
+  // Equipment state
+  is_running: boolean;
+  power_consumption?: number;
+  cycle_count: number;
+  runtime_hours: number;
+  
+  // Performance metrics
+  efficiency_percentage?: number;
+  temperature_avg?: number;
+  vibration_level?: number;
+  error_count: number;
+  
+  // Predictive maintenance
+  health_score: number;
+  remaining_life_days?: number;
+  next_maintenance_date?: string;
+  
+  // Status data
+  status_data: Record<string, any>;
+  error_codes: string[];
+  
+  // Timestamps
+  status_at: string;
+  created_at: string;
+  
+  // Relations
+  device?: IoTDevice;
+}
+
+export interface IoTAlert {
+  id: string;
+  device_id: string;
+  restaurant_id: string;
+  
+  // Alert details
+  alert_type: string;
+  severity: IoTAlertSeverity;
+  title: string;
+  title_fr?: string;
+  message: string;
+  message_fr?: string;
+  
+  // Alert conditions
+  threshold_value?: number;
+  actual_value?: number;
+  condition_met?: string;
+  
+  // Status and resolution
+  is_acknowledged: boolean;
+  acknowledged_by?: string;
+  acknowledged_at?: string;
+  is_resolved: boolean;
+  resolved_by?: string;
+  resolved_at?: string;
+  resolution_notes?: string;
+  resolution_notes_fr?: string;
+  
+  // Escalation
+  escalation_level: number;
+  escalated_at?: string;
+  escalated_to?: string;
+  
+  // Notification tracking
+  notifications_sent: any[];
+  
+  // Alert data
+  alert_data: Record<string, any>;
+  
+  // Timestamps
+  triggered_at: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  device?: IoTDevice;
+  restaurant?: Restaurant;
+  acknowledged_by_user?: AuthUser;
+  resolved_by_user?: AuthUser;
+  escalated_to_user?: AuthUser;
+}
+
+export interface IoTMaintenanceSchedule {
+  id: string;
+  device_id: string;
+  restaurant_id: string;
+  
+  // Maintenance details
+  maintenance_type: string;
+  title: string;
+  title_fr?: string;
+  description?: string;
+  description_fr?: string;
+  
+  // Scheduling
+  scheduled_date: string;
+  estimated_duration_minutes: number;
+  recurrence_pattern?: string;
+  recurrence_config: Record<string, any>;
+  
+  // Assignment
+  assigned_to?: string;
+  assigned_team: string[];
+  
+  // Status
+  status: IoTMaintenanceStatus;
+  priority: string;
+  
+  // Completion
+  started_at?: string;
+  completed_at?: string;
+  actual_duration_minutes?: number;
+  completion_notes?: string;
+  completion_notes_fr?: string;
+  parts_used: any[];
+  cost_estimate?: number;
+  actual_cost?: number;
+  
+  // Next maintenance prediction
+  next_due_date?: string;
+  predictive_score?: number;
+  
+  // Audit fields
+  created_by?: string;
+  updated_by?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  device?: IoTDevice;
+  restaurant?: Restaurant;
+  assignee?: AuthUser;
+  creator?: AuthUser;
+  updater?: AuthUser;
+}
+
+export interface IoTAnalyticsData {
+  id: string;
+  restaurant_id: string;
+  device_id?: string;
+  
+  // Analytics period
+  date_period: string;
+  hour_period?: number;
+  
+  // Aggregated metrics
+  avg_temperature?: number;
+  min_temperature?: number;
+  max_temperature?: number;
+  avg_humidity?: number;
+  min_humidity?: number;
+  max_humidity?: number;
+  
+  // Equipment metrics
+  total_runtime_minutes: number;
+  power_consumption_kwh: number;
+  cycle_count: number;
+  efficiency_score?: number;
+  
+  // Alert metrics
+  total_alerts: number;
+  critical_alerts: number;
+  avg_response_time_minutes?: number;
+  
+  // Performance metrics
+  uptime_percentage: number;
+  health_score: number;
+  anomaly_count: number;
+  
+  // Custom metrics
+  custom_metrics: Record<string, any>;
+  
+  // Timestamps
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  restaurant?: Restaurant;
+  device?: IoTDevice;
+}
+
+export interface IoTFirmwareUpdate {
+  id: string;
+  
+  // Firmware details
+  manufacturer: string;
+  model: string;
+  version: string;
+  previous_version?: string;
+  
+  // Update package
+  package_url?: string;
+  package_size_bytes?: number;
+  package_checksum?: string;
+  encryption_key?: string;
+  
+  // Release information
+  release_notes?: string;
+  release_notes_fr?: string;
+  security_fixes: string[];
+  bug_fixes: string[];
+  new_features: string[];
+  
+  // Deployment
+  is_mandatory: boolean;
+  is_rollback: boolean;
+  rollback_from_version?: string;
+  
+  // Status
+  is_published: boolean;
+  published_at?: string;
+  deprecated_at?: string;
+  
+  // Validation
+  test_results: Record<string, any>;
+  approved_by?: string;
+  approved_at?: string;
+  
+  // Audit fields
+  created_by?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  approver?: AuthUser;
+  creator?: AuthUser;
+}
+
+export interface IoTDeviceUpdate {
+  id: string;
+  device_id: string;
+  firmware_update_id: string;
+  
+  // Update process
+  status: string;
+  progress_percentage: number;
+  
+  // Scheduling
+  scheduled_at?: string;
+  started_at?: string;
+  completed_at?: string;
+  
+  // Results
+  success?: boolean;
+  error_message?: string;
+  error_code?: string;
+  
+  // Backup
+  backup_created: boolean;
+  backup_location?: string;
+  
+  // Validation
+  pre_update_version?: string;
+  post_update_version?: string;
+  validation_tests: Record<string, any>;
+  
+  // Rollback capability
+  can_rollback: boolean;
+  rollback_performed: boolean;
+  rollback_reason?: string;
+  
+  // Retry logic
+  retry_count: number;
+  max_retries: number;
+  next_retry_at?: string;
+  
+  // Audit fields
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  device?: IoTDevice;
+  firmware_update?: IoTFirmwareUpdate;
+}
+
+// IoT API Request/Response Types
+export interface CreateIoTDeviceRequest {
+  device_type: IoTDeviceType;
+  device_name: string;
+  device_name_fr?: string;
+  description?: string;
+  description_fr?: string;
+  mac_address?: string;
+  serial_number?: string;
+  manufacturer?: string;
+  model?: string;
+  location?: string;
+  location_fr?: string;
+  zone?: string;
+  coordinates?: { x: number; y: number; z?: number };
+  config?: Record<string, any>;
+  thresholds?: Record<string, any>;
+}
+
+export interface IoTSensorDataRequest {
+  device_id: string;
+  temperature?: number;
+  humidity?: number;
+  pressure?: number;
+  motion_detected?: boolean;
+  door_open?: boolean;
+  weight?: number;
+  sensor_type?: string;
+  value?: number;
+  unit?: string;
+  metadata?: Record<string, any>;
+  recorded_at?: string;
+}
+
+export interface IoTAlertRequest {
+  device_id: string;
+  alert_type: string;
+  severity: IoTAlertSeverity;
+  title: string;
+  title_fr?: string;
+  message: string;
+  message_fr?: string;
+  threshold_value?: number;
+  actual_value?: number;
+  condition_met?: string;
+  alert_data?: Record<string, any>;
+}
+
+export interface IoTMaintenanceRequest {
+  device_id: string;
+  maintenance_type: string;
+  title: string;
+  title_fr?: string;
+  description?: string;
+  description_fr?: string;
+  scheduled_date: string;
+  estimated_duration_minutes?: number;
+  assigned_to?: string;
+  priority?: string;
+  recurrence_pattern?: string;
+  recurrence_config?: Record<string, any>;
+}
+
+export interface IoTDashboardStats {
+  total_devices: number;
+  active_devices: number;
+  offline_devices: number;
+  devices_in_maintenance: number;
+  total_alerts: number;
+  unresolved_alerts: number;
+  critical_alerts: number;
+  scheduled_maintenance: number;
+  overdue_maintenance: number;
+  average_uptime: number;
+  power_consumption_today: number;
+  efficiency_score: number;
+}
+
+export interface IoTSearchParams {
+  device_type?: IoTDeviceType[];
+  status?: IoTDeviceStatus[];
+  zone?: string;
+  manufacturer?: string;
+  search?: string;
+  is_online?: boolean;
+  has_alerts?: boolean;
+  maintenance_due?: boolean;
+}
+
+export interface IoTAlertFilters {
+  device_id?: string;
+  severity?: IoTAlertSeverity[];
+  is_resolved?: boolean;
+  date_from?: string;
+  date_to?: string;
+  alert_type?: string;
+}
+
+export interface IoTMaintenanceFilters {
+  device_id?: string;
+  status?: IoTMaintenanceStatus[];
+  assigned_to?: string;
+  priority?: string;
+  date_from?: string;
+  date_to?: string;
+  maintenance_type?: string;
+}
+
 // Database schema type for Supabase (Use the generated type from supabase.ts instead)
 export interface Database {
   public: {
