@@ -14,7 +14,17 @@ import {
   Flashlight,
   FlashlightOff,
   CheckCircle,
-  AlertTriangle
+  AlertTriangle,
+  Package,
+  MapPin,
+  User,
+  Settings,
+  Calendar,
+  Tool,
+  Shield,
+  ChefHat,
+  Utensils,
+  Archive
 } from 'lucide-react';
 
 interface EquipmentTag {
