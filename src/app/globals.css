@@ -254,3 +254,24 @@ textarea.font-french {
 .bg-earthen-beige {
   background-color: rgb(210 180 140);
 }
+
+/* Touch-friendly utility classes for tablets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.touch-target-sm {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.touch-target-md {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+.touch-target-lg {
+  min-height: 56px;
+  min-width: 56px;
+}
