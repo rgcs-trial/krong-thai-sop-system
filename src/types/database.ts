@@ -1529,6 +1529,455 @@ export interface IoTMaintenanceFilters {
   maintenance_type?: string;
 }
 
+// Global Operations Types
+export type RegionStatus = 'active' | 'inactive' | 'expansion' | 'consolidation';
+export type ComplianceStatus = 'compliant' | 'non_compliant' | 'pending_review' | 'exempt';
+export type SupplyChainStatus = 'active' | 'disrupted' | 'critical' | 'optimal';
+export type VendorStatus = 'approved' | 'pending' | 'suspended' | 'blacklisted';
+export type IntegrationType = 'pos' | 'accounting' | 'inventory' | 'hr' | 'marketing' | 'delivery';
+
+export interface GlobalRegion {
+  id: string;
+  name: string;
+  name_fr?: string;
+  code: string;
+  country_codes: string[];
+  currencies: string[];
+  languages: string[];
+  timezone_groups: string[];
+  status: RegionStatus;
+  
+  // Configuration
+  operational_config: Record<string, any>;
+  compliance_requirements: Record<string, any>;
+  localization_settings: Record<string, any>;
+  
+  // Management
+  regional_manager_id?: string;
+  headquarters_location?: string;
+  
+  // Metrics
+  total_restaurants: number;
+  total_revenue?: number;
+  performance_score?: number;
+  
+  // Audit
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  regional_manager?: AuthUser;
+  restaurants?: Restaurant[];
+}
+
+export interface ComplianceFramework {
+  id: string;
+  region_id: string;
+  country_code: string;
+  framework_name: string;
+  framework_name_fr?: string;
+  version: string;
+  
+  // Requirements
+  food_safety_requirements: Record<string, any>;
+  labor_regulations: Record<string, any>;
+  environmental_standards: Record<string, any>;
+  data_protection_rules: Record<string, any>;
+  financial_reporting: Record<string, any>;
+  
+  // Implementation
+  mandatory_certifications: string[];
+  inspection_frequency_days: number;
+  penalty_structure: Record<string, any>;
+  
+  // Status
+  status: ComplianceStatus;
+  effective_date: string;
+  review_date: string;
+  
+  // Audit
+  created_by?: string;
+  approved_by?: string;
+  approved_at?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  region?: GlobalRegion;
+  creator?: AuthUser;
+  approver?: AuthUser;
+}
+
+export interface SupplyChainVendor {
+  id: string;
+  vendor_code: string;
+  company_name: string;
+  contact_name: string;
+  contact_email: string;
+  contact_phone?: string;
+  
+  // Location
+  address: string;
+  city: string;
+  state_province?: string;
+  country_code: string;
+  postal_code?: string;
+  
+  // Business Details
+  business_type: string;
+  tax_id?: string;
+  certifications: string[];
+  product_categories: string[];
+  
+  // Status and Performance
+  status: VendorStatus;
+  quality_rating: number;
+  delivery_rating: number;
+  price_competitiveness: number;
+  reliability_score: number;
+  
+  // Contract Information
+  contract_start_date?: string;
+  contract_end_date?: string;
+  payment_terms: string;
+  minimum_order_value?: number;
+  lead_time_days: number;
+  
+  // Financial
+  credit_limit?: number;
+  current_balance?: number;
+  payment_history_score: number;
+  
+  // Audit
+  created_by?: string;
+  last_reviewed_at?: string;
+  reviewed_by?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  creator?: AuthUser;
+  reviewer?: AuthUser;
+  supply_orders?: SupplyOrder[];
+}
+
+export interface SupplyOrder {
+  id: string;
+  order_number: string;
+  vendor_id: string;
+  restaurant_id: string;
+  
+  // Order Details
+  order_date: string;
+  delivery_date: string;
+  total_amount: number;
+  currency: string;
+  
+  // Items
+  order_items: SupplyOrderItem[];
+  
+  // Status Tracking
+  status: string;
+  tracking_number?: string;
+  delivery_status: string;
+  
+  // Quality Control
+  quality_check_passed?: boolean;
+  quality_notes?: string;
+  received_by?: string;
+  received_at?: string;
+  
+  // Financial
+  payment_status: string;
+  payment_due_date?: string;
+  paid_at?: string;
+  
+  // Audit
+  created_by: string;
+  approved_by?: string;
+  approved_at?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  vendor?: SupplyChainVendor;
+  restaurant?: Restaurant;
+  creator?: AuthUser;
+  approver?: AuthUser;
+  receiver?: AuthUser;
+}
+
+export interface SupplyOrderItem {
+  id: string;
+  order_id: string;
+  product_code: string;
+  product_name: string;
+  quantity_ordered: number;
+  quantity_received?: number;
+  unit_price: number;
+  total_price: number;
+  unit_of_measure: string;
+  
+  // Quality
+  expiry_date?: string;
+  batch_number?: string;
+  quality_grade?: string;
+  
+  created_at: string;
+}
+
+export interface BusinessIntelligenceReport {
+  id: string;
+  report_type: string;
+  report_name: string;
+  report_name_fr?: string;
+  
+  // Scope
+  region_ids: string[];
+  restaurant_ids: string[];
+  date_range_start: string;
+  date_range_end: string;
+  
+  // Data
+  report_data: Record<string, any>;
+  metrics: Record<string, number>;
+  insights: string[];
+  insights_fr?: string[];
+  recommendations: string[];
+  recommendations_fr?: string[];
+  
+  // Visualization
+  chart_config: Record<string, any>;
+  dashboard_widgets: Record<string, any>;
+  
+  // Scheduling
+  is_scheduled: boolean;
+  schedule_frequency?: string;
+  next_generation?: string;
+  
+  // Access Control
+  visibility: 'public' | 'restricted' | 'confidential';
+  authorized_roles: string[];
+  authorized_users: string[];
+  
+  // Status
+  generation_status: string;
+  last_generated_at?: string;
+  generation_duration_ms?: number;
+  
+  // Audit
+  created_by: string;
+  shared_with?: string[];
+  accessed_by?: string[];
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  creator?: AuthUser;
+  regions?: GlobalRegion[];
+  restaurants?: Restaurant[];
+}
+
+export interface ExternalIntegration {
+  id: string;
+  integration_name: string;
+  integration_type: IntegrationType;
+  provider: string;
+  
+  // Configuration
+  api_endpoint: string;
+  authentication_type: string;
+  configuration: Record<string, any>;
+  field_mappings: Record<string, any>;
+  
+  // Scope
+  restaurant_ids: string[];
+  region_ids: string[];
+  
+  // Status
+  is_active: boolean;
+  last_sync_at?: string;
+  sync_frequency_minutes: number;
+  sync_status: string;
+  
+  // Error Handling
+  error_count_24h: number;
+  last_error?: string;
+  last_error_at?: string;
+  retry_count: number;
+  
+  // Performance
+  avg_response_time_ms: number;
+  success_rate_percentage: number;
+  data_volume_daily: number;
+  
+  // Security
+  api_key_expires_at?: string;
+  last_key_rotation?: string;
+  security_settings: Record<string, any>;
+  
+  // Audit
+  created_by: string;
+  last_tested_by?: string;
+  last_tested_at?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  creator?: AuthUser;
+  tester?: AuthUser;
+  restaurants?: Restaurant[];
+  regions?: GlobalRegion[];
+}
+
+export interface SystemAlert {
+  id: string;
+  alert_type: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  title: string;
+  title_fr?: string;
+  message: string;
+  message_fr?: string;
+  
+  // Scope
+  restaurant_id?: string;
+  region_id?: string;
+  system_component?: string;
+  
+  // Alert Data
+  alert_data: Record<string, any>;
+  threshold_value?: number;
+  current_value?: number;
+  
+  // Status
+  is_acknowledged: boolean;
+  acknowledged_by?: string;
+  acknowledged_at?: string;
+  is_resolved: boolean;
+  resolved_by?: string;
+  resolved_at?: string;
+  resolution_notes?: string;
+  resolution_notes_fr?: string;
+  
+  // Escalation
+  escalation_level: number;
+  escalated_to?: string;
+  escalated_at?: string;
+  
+  // Notification
+  notification_channels: string[];
+  notifications_sent: any[];
+  
+  // Auto-Resolution
+  auto_resolve_after_minutes?: number;
+  auto_resolution_attempted?: boolean;
+  
+  // Audit
+  triggered_at: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  restaurant?: Restaurant;
+  region?: GlobalRegion;
+  acknowledged_by_user?: AuthUser;
+  resolved_by_user?: AuthUser;
+  escalated_to_user?: AuthUser;
+}
+
+export interface MonitoringMetric {
+  id: string;
+  metric_name: string;
+  metric_category: string;
+  
+  // Scope
+  restaurant_id?: string;
+  region_id?: string;
+  system_component?: string;
+  
+  // Value
+  metric_value: number;
+  unit: string;
+  timestamp: string;
+  
+  // Context
+  metadata: Record<string, any>;
+  tags: string[];
+  
+  // Quality
+  quality_score: number;
+  is_anomaly: boolean;
+  confidence_level: number;
+  
+  // Aggregation
+  aggregation_period?: string;
+  aggregation_function?: string;
+  
+  created_at: string;
+  
+  // Relations
+  restaurant?: Restaurant;
+  region?: GlobalRegion;
+}
+
+// Global Operations API Types
+export interface GlobalDashboardStats {
+  total_regions: number;
+  total_restaurants: number;
+  active_integrations: number;
+  compliance_score: number;
+  supply_chain_health: number;
+  alert_count_24h: number;
+  critical_alerts: number;
+  revenue_today: number;
+  performance_score: number;
+}
+
+export interface CreateRegionRequest {
+  name: string;
+  name_fr?: string;
+  code: string;
+  country_codes: string[];
+  currencies: string[];
+  languages: string[];
+  timezone_groups: string[];
+  operational_config?: Record<string, any>;
+  compliance_requirements?: Record<string, any>;
+  localization_settings?: Record<string, any>;
+  regional_manager_id?: string;
+  headquarters_location?: string;
+}
+
+export interface CreateVendorRequest {
+  vendor_code: string;
+  company_name: string;
+  contact_name: string;
+  contact_email: string;
+  contact_phone?: string;
+  address: string;
+  city: string;
+  state_province?: string;
+  country_code: string;
+  postal_code?: string;
+  business_type: string;
+  product_categories: string[];
+  certifications?: string[];
+  payment_terms: string;
+  lead_time_days: number;
+}
+
+export interface CreateIntegrationRequest {
+  integration_name: string;
+  integration_type: IntegrationType;
+  provider: string;
+  api_endpoint: string;
+  authentication_type: string;
+  configuration: Record<string, any>;
+  restaurant_ids: string[];
+  region_ids?: string[];
+  sync_frequency_minutes?: number;
+}
+
 // Database schema type for Supabase (Use the generated type from supabase.ts instead)
 export interface Database {
   public: {
