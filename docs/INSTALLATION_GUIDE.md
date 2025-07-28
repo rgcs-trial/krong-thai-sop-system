@@ -793,6 +793,49 @@ If critical issues persist:
 4. Consider downgrading problematic packages
 5. Document all error messages for debugging
 
+## Translation System Access
+
+### Accessing the Translation Admin Interface
+
+After successful installation, the translation management system is available through:
+
+```bash
+# Access translation admin interface
+http://localhost:3000/admin/settings
+
+# Admin credentials (default):
+# Email: admin@krongthai.com
+# PIN: 1234
+
+# Translation management features:
+# - Edit translations with workflow approval
+# - Manage translation keys and categories
+# - Bulk translation operations
+# - Real-time preview and validation
+# - Translation analytics and usage tracking
+# - Project management for organized translation work
+```
+
+### Translation System Features
+
+1. **Database-Driven Translations**: All translations stored in 7 specialized database tables
+2. **Workflow Approval**: Draft → Review → Approved → Published workflow
+3. **Version Control**: Complete audit trail and rollback capabilities
+4. **Real-time Updates**: Live translation updates via WebSocket integration
+5. **Intelligent Caching**: Automatic cache invalidation for optimal performance
+6. **Analytics Dashboard**: Translation usage metrics and performance tracking
+
+### Managing Translations
+
+```bash
+# Key translation management tasks:
+1. Navigate to /admin/settings for translation dashboard
+2. Use translation editor for individual key management
+3. Bulk operations for efficient content updates
+4. Monitor translation analytics for usage insights
+5. Manage workflow approval for content quality
+```
+
 ## Next Steps
 
 After successful installation:
