@@ -736,52 +736,234 @@ const PhotoCaptureModal: React.FC<PhotoCaptureModalProps> = ({
           </div>
         </div>
 
-        {/* Photo Preview Modal */}
+        {/* Enhanced Photo Preview Modal with Annotations */}
         {selectedPhotoId && (
-          <Dialog open={!!selectedPhotoId} onOpenChange={() => setSelectedPhotoId(null)}>
-            <DialogContent className="max-w-3xl w-[90vw] h-[80vh] p-4">
+          <Dialog open={!!selectedPhotoId} onOpenChange={() => {
+            setSelectedPhotoId(null);
+            setIsAnnotating(false);
+            setAnnotations([]);
+          }}>
+            <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 flex flex-col">
               {(() => {
                 const photo = photos.find(p => p.id === selectedPhotoId);
                 if (!photo) return null;
                 
                 return (
-                  <div className="flex flex-col h-full">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-tablet-lg font-heading font-semibold">
-                        {photo.filename}
-                      </h3>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setSelectedPhotoId(null)}
-                      >
-                        <X className="w-5 h-5" />
-                      </Button>
+                  <>
+                    {/* Header */}
+                    <div className="flex items-center justify-between p-4 border-b">
+                      <div className="flex items-center gap-3">
+                        <h3 className="text-tablet-lg font-heading font-semibold">
+                          {photo.filename}
+                        </h3>
+                        {enableVerification && photo.verificationStatus && (
+                          <Badge 
+                            variant={photo.verificationStatus === 'approved' ? 'default' : 'destructive'}
+                            className="text-tablet-sm"
+                          >
+                            {t(`verification.${photo.verificationStatus}`)}
+                          </Badge>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        {enableAnnotations && (
+                          <Button
+                            variant={isAnnotating ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setIsAnnotating(!isAnnotating)}
+                          >
+                            <Edit3 className="w-4 h-4 mr-2" />
+                            {isAnnotating ? t('annotations.exit') : t('annotations.add')}
+                          </Button>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => {
+                            setSelectedPhotoId(null);
+                            setIsAnnotating(false);
+                            setAnnotations([]);
+                          }}
+                        >
+                          <X className="w-5 h-5" />
+                        </Button>
+                      </div>
                     </div>
+
+                    {/* Annotation Toolbar */}
+                    {isAnnotating && enableAnnotations && (
+                      <div className="p-4 bg-gray-50 border-b">
+                        <div className="flex items-center justify-between gap-4">
+                          {/* Tools */}
+                          <div className="flex items-center gap-2">
+                            <span className="text-tablet-sm font-medium mr-2">{t('annotations.tools')}:</span>
+                            <Button
+                              variant={currentTool === 'arrow' ? 'default' : 'outline'}
+                              size="sm"
+                              onClick={() => setCurrentTool('arrow')}
+                            >
+                              <ArrowRight className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant={currentTool === 'circle' ? 'default' : 'outline'}
+                              size="sm"
+                              onClick={() => setCurrentTool('circle')}
+                            >
+                              <Circle className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant={currentTool === 'square' ? 'default' : 'outline'}
+                              size="sm"
+                              onClick={() => setCurrentTool('square')}
+                            >
+                              <Square className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant={currentTool === 'text' ? 'default' : 'outline'}
+                              size="sm"
+                              onClick={() => setCurrentTool('text')}
+                            >
+                              <Type className="w-4 h-4" />
+                            </Button>
+                          </div>
+
+                          {/* Color Picker */}
+                          <div className="flex items-center gap-2">
+                            <span className="text-tablet-sm font-medium">{t('annotations.color')}:</span>
+                            <input
+                              type="color"
+                              value={currentColor}
+                              onChange={(e) => setCurrentColor(e.target.value)}
+                              className="w-8 h-8 rounded border cursor-pointer"
+                            />
+                          </div>
+
+                          {/* Stroke Width */}
+                          <div className="flex items-center gap-2">
+                            <span className="text-tablet-sm font-medium">{t('annotations.width')}:</span>
+                            <input
+                              type="range"
+                              min="1"
+                              max="10"
+                              value={strokeWidth}
+                              onChange={(e) => setStrokeWidth(Number(e.target.value))}
+                              className="w-16"
+                            />
+                            <span className="text-tablet-xs w-6">{strokeWidth}</span>
+                          </div>
+
+                          {/* History Controls */}
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={undo}
+                              disabled={historyIndex <= 0}
+                            >
+                              <Undo className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={redo}
+                              disabled={historyIndex >= annotationHistory.length - 1}
+                            >
+                              <Redo className="w-4 h-4" />
+                            </Button>
+                          </div>
+
+                          {/* Save Annotations */}
+                          <Button
+                            variant="default"
+                            size="sm"
+                            onClick={saveAnnotations}
+                            disabled={annotations.length === 0}
+                          >
+                            <Save className="w-4 h-4 mr-2" />
+                            {t('annotations.save')}
+                          </Button>
+                        </div>
+                      </div>
+                    )}
                     
-                    <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden">
-                      <img
-                        src={photo.dataUrl}
-                        alt={photo.filename}
-                        className="max-w-full max-h-full object-contain"
-                      />
+                    {/* Image Container */}
+                    <div className="flex-1 relative bg-gray-100 overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="relative max-w-full max-h-full">
+                          <img
+                            src={photo.dataUrl}
+                            alt={photo.filename}
+                            className="max-w-full max-h-full object-contain"
+                            style={{ maxHeight: 'calc(100vh - 200px)' }}
+                          />
+                          
+                          {/* Annotation Canvas Overlay */}
+                          {isAnnotating && enableAnnotations && (
+                            <canvas
+                              ref={annotationCanvasRef}
+                              className="absolute inset-0 cursor-crosshair"
+                              width={800}
+                              height={600}
+                              onMouseDown={startAnnotation}
+                              onMouseMove={updateAnnotation}
+                              onMouseUp={finishAnnotation}
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain'
+                              }}
+                            />
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    
-                    <div className="flex justify-center gap-2 mt-4">
-                      <Button variant="outline" size="icon">
-                        <ZoomOut className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="icon">
-                        <ZoomIn className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="icon">
-                        <FlipHorizontal className="w-4 h-4" />
-                      </Button>
-                      <Button variant="outline" size="icon">
-                        <Download className="w-4 h-4" />
-                      </Button>
+
+                    {/* Bottom Controls */}
+                    <div className="p-4 border-t bg-white">
+                      <div className="flex items-center justify-between">
+                        {/* Basic Controls */}
+                        <div className="flex items-center gap-2">
+                          <Button variant="outline" size="sm">
+                            <ZoomOut className="w-4 h-4 mr-2" />
+                            {t('zoom.out')}
+                          </Button>
+                          <Button variant="outline" size="sm">
+                            <ZoomIn className="w-4 h-4 mr-2" />
+                            {t('zoom.in')}
+                          </Button>
+                          <Button variant="outline" size="sm">
+                            <Download className="w-4 h-4 mr-2" />
+                            {t('download')}
+                          </Button>
+                        </div>
+
+                        {/* Verification Controls */}
+                        {enableVerification && (
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleVerificationStatusChange(photo.id, 'rejected')}
+                              className="text-red-600 hover:text-red-700"
+                            >
+                              <X className="w-4 h-4 mr-2" />
+                              {t('verification.reject')}
+                            </Button>
+                            <Button
+                              variant="default"
+                              size="sm"
+                              onClick={() => handleVerificationStatusChange(photo.id, 'approved')}
+                              className="bg-jade-green hover:bg-jade-green/90"
+                            >
+                              <Check className="w-4 h-4 mr-2" />
+                              {t('verification.approve')}
+                            </Button>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  </>
                 );
               })()}
             </DialogContent>
