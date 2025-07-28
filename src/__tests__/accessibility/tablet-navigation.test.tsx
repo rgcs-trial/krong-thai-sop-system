@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState, useRef } from 'react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { TestWrapper } from '../utils/test-utils';
 
