@@ -126,6 +126,10 @@ const QRScannerOverlay: React.FC<QRScannerOverlayProps> = ({
   const [isFlashlightOn, setIsFlashlightOn] = useState(false);
   const [scanError, setScanError] = useState<string | null>(null);
   const [lastScanTime, setLastScanTime] = useState(0);
+  const [scanHistory, setScanHistory] = useState<QRScanResult[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [detectedCode, setDetectedCode] = useState<string | null>(null);
+  const [scanConfidence, setScanConfidence] = useState(0);
   
   // Initialize camera
   useEffect(() => {
