@@ -76,6 +76,10 @@ export { Progress } from "./progress"
 export { Calendar } from "./calendar"
 export { DatePicker, DateRangePicker } from "./date-picker"
 export { Popover, PopoverTrigger, PopoverContent } from "./popover"
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./accordion"
+export { Slider } from "./slider"
+export { Avatar, AvatarImage, AvatarFallback } from "./avatar"
+export { ScrollArea, ScrollBar } from "./scroll-area"
 
 // Hooks
 export { useToast, toast } from "../../hooks/use-toast"
