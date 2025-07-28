@@ -79,6 +79,14 @@ interface PhotoCaptureModalProps {
   onPhotosCapture: (stepId: string, photos: CapturedPhoto[]) => void;
   /** Callback when photo is deleted */
   onPhotoDelete?: (photoId: string) => void;
+  /** Callback when photo annotations are updated */
+  onAnnotationsUpdate?: (photoId: string, annotations: Annotation[]) => void;
+  /** Callback when photo verification status changes */
+  onVerificationStatusChange?: (photoId: string, status: 'approved' | 'rejected', notes?: string) => void;
+  /** Enable annotation tools */
+  enableAnnotations?: boolean;
+  /** Enable step-by-step verification */
+  enableVerification?: boolean;
   /** Custom CSS classes */
   className?: string;
 }
