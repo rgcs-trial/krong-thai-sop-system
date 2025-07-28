@@ -220,31 +220,238 @@ const QRScannerOverlay: React.FC<QRScannerOverlayProps> = ({
     scanFrame();
   }, [isOpen, hasCamera]);
 
-  const detectQRCode = useCallback((canvas: HTMLCanvasElement) => {
+  // Process and classify QR code data
+  const processQRCode = useCallback(async (qrData: string): Promise<QRScanResult> => {
+    setIsProcessing(true);
+    
+    try {
+      // Parse different QR code formats
+      let result: QRScanResult = {
+        data: qrData,
+        type: 'unknown',
+        isValid: false,
+        confidence: 0.7
+      };
+
+      // SOP QR codes (sop://krong-thai/procedures/...)
+      if (qrData.startsWith('sop://krong-thai/')) {
+        const match = qrData.match(/sop:\/\/krong-thai\/procedures\/(.+)/);
+        if (match) {
+          result = {
+            ...result,
+            type: 'sop',
+            sopId: match[1],
+            sopTitle: 'Food Safety Procedure', // In real app, fetch from database
+            category: 'Food Safety',
+            isValid: true,
+            confidence: 0.95
+          };
+        }
+      }
+      
+      // Equipment QR codes (eq://krong-thai/equipment/...)
+      else if (qrData.startsWith('eq://krong-thai/') && enableEquipmentTags) {
+        const match = qrData.match(/eq:\/\/krong-thai\/equipment\/(.+)/);
+        if (match) {
+          const equipmentId = match[1];
+          
+          // Mock equipment data - in real app, fetch from database
+          const mockEquipment: EquipmentTag = {
+            id: equipmentId,
+            name: 'Commercial Oven #3',
+            type: 'kitchen',
+            location: 'Kitchen - Station 3',
+            status: 'operational',
+            lastMaintenance: '2024-01-15',
+            nextMaintenance: '2024-04-15',
+            qrCode: qrData,
+            specifications: {
+              model: 'TurboChef NGC',
+              capacity: '20L',
+              maxTemp: '500°F'
+            }
+          };
+          
+          result = {
+            ...result,
+            type: 'equipment',
+            equipment: mockEquipment,
+            isValid: true,
+            confidence: 0.92
+          };
+        }
+      }
+      
+      // Location QR codes (loc://krong-thai/location/...)
+      else if (qrData.startsWith('loc://krong-thai/') && enableLocationScanning) {
+        const match = qrData.match(/loc:\/\/krong-thai\/location\/(.+)/);
+        if (match) {
+          const locationId = match[1];
+          
+          result = {
+            ...result,
+            type: 'location',
+            location: {
+              id: locationId,
+              name: 'Kitchen Station 3',
+              zone: 'Food Preparation',
+              floor: 1
+            },
+            isValid: true,
+            confidence: 0.90
+          };
+        }
+      }
+      
+      // User QR codes (user://krong-thai/staff/...)
+      else if (qrData.startsWith('user://krong-thai/') && enableUserScanning) {
+        const match = qrData.match(/user:\/\/krong-thai\/staff\/(.+)/);
+        if (match) {
+          const userId = match[1];
+          
+          result = {
+            ...result,
+            type: 'user',
+            user: {
+              id: userId,
+              name: 'Chef Michel',
+              role: 'head_chef'
+            },
+            isValid: true,
+            confidence: 0.88
+          };
+        }
+      }
+      
+      // Generic QR codes (try to parse as JSON)
+      else {
+        try {
+          const parsed = JSON.parse(qrData);
+          if (parsed.type && allowedTypes.includes(parsed.type)) {
+            result = {
+              ...result,
+              type: parsed.type,
+              isValid: true,
+              confidence: 0.75,
+              ...parsed
+            };
+          }
+        } catch {
+          // Not JSON, treat as unknown
+          result.confidence = 0.3;
+        }
+      }
+
+      // Filter by allowed types
+      if (!allowedTypes.includes(result.type)) {
+        result.isValid = false;
+        result.confidence = 0;
+      }
+
+      return result;
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [enableEquipmentTags, enableLocationScanning, enableUserScanning, allowedTypes]);
+
+  const detectQRCode = useCallback(async (canvas: HTMLCanvasElement) => {
     // Throttle scanning to avoid multiple rapid scans
     const now = Date.now();
-    if (now - lastScanTime < 1000) return;
+    if (now - lastScanTime < 1000 || isProcessing) return;
     
-    // Simulated QR detection - in real implementation, use jsQR or similar
-    // This would analyze the canvas data for QR codes
-    const simulateQRDetection = () => {
-      // For demo purposes, we'll randomly "detect" a QR code
-      if (Math.random() > 0.98) { // 2% chance per frame
-        const mockResult: QRScanResult = {
-          data: 'sop://krong-thai/procedures/food-safety-001',
-          sopId: 'food-safety-001',
-          sopTitle: 'Hand Washing Procedure',
-          category: 'Food Safety',
-          isValid: true
-        };
+    // In real implementation, use jsQR library
+    // const imageData = canvas.getContext('2d')?.getImageData(0, 0, canvas.width, canvas.height);
+    // const code = jsQR(imageData.data, imageData.width, imageData.height);
+    
+    // Simulated QR detection with multiple types
+    const simulateAdvancedQRDetection = async () => {
+      const detectionChance = Math.random();
+      
+      if (detectionChance > 0.97) { // 3% chance per frame
+        const qrTypes = [
+          'sop://krong-thai/procedures/food-safety-001',
+          'eq://krong-thai/equipment/oven-003',
+          'loc://krong-thai/location/kitchen-station-3',
+          'user://krong-thai/staff/chef-michel'
+        ];
         
-        setLastScanTime(now);
-        onScanComplete(mockResult);
+        // Filter by allowed types
+        const allowedQRs = qrTypes.filter(qr => {
+          if (qr.startsWith('sop://') && allowedTypes.includes('sop')) return true;
+          if (qr.startsWith('eq://') && allowedTypes.includes('equipment')) return true;
+          if (qr.startsWith('loc://') && allowedTypes.includes('location')) return true;
+          if (qr.startsWith('user://') && allowedTypes.includes('user')) return true;
+          return false;
+        });
+        
+        if (allowedQRs.length > 0) {
+          const randomQR = allowedQRs[Math.floor(Math.random() * allowedQRs.length)];
+          setDetectedCode(randomQR);
+          
+          const result = await processQRCode(randomQR);
+          setScanConfidence(result.confidence);
+          
+          // Add to scan history
+          if (showScanHistory) {
+            setScanHistory(prev => [result, ...prev.slice(0, 9)]); // Keep last 10 scans
+          }
+          
+          setLastScanTime(now);
+          
+          // Call appropriate callbacks
+          if (result.type === 'equipment' && result.equipment && onEquipmentScanned) {
+            onEquipmentScanned(result.equipment);
+          }
+          
+          if (result.type === 'location' && result.location && onLocationScanned) {
+            onLocationScanned(result.location);
+          }
+          
+          onScanComplete(result);
+          
+          // If not allowing multiple scans, close scanner
+          if (!allowMultipleScan) {
+            setTimeout(() => onClose(), 500);
+          }
+        }
       }
     };
     
-    simulateQRDetection();
-  }, [lastScanTime, onScanComplete]);
+    await simulateAdvancedQRDetection();
+  }, [lastScanTime, isProcessing, processQRCode, allowedTypes, showScanHistory, onEquipmentScanned, onLocationScanned, onScanComplete, allowMultipleScan, onClose]);
+
+  // Get icon for scan type
+  const getTypeIcon = useCallback((type: QRScanResult['type']) => {
+    switch (type) {
+      case 'sop': return <QrCode className="w-4 h-4" />;
+      case 'equipment': return <Package className="w-4 h-4" />;
+      case 'location': return <MapPin className="w-4 h-4" />;
+      case 'user': return <User className="w-4 h-4" />;
+      default: return <AlertTriangle className="w-4 h-4" />;
+    }
+  }, []);
+
+  // Get equipment type icon
+  const getEquipmentTypeIcon = useCallback((type: EquipmentTag['type']) => {
+    switch (type) {
+      case 'kitchen': return <ChefHat className="w-4 h-4" />;
+      case 'cleaning': return <Shield className="w-4 h-4" />;
+      case 'safety': return <Shield className="w-4 h-4" />;
+      case 'dining': return <Utensils className="w-4 h-4" />;
+      case 'storage': return <Archive className="w-4 h-4" />;
+      default: return <Tool className="w-4 h-4" />;
+    }
+  }, []);
+
+  // Get status color for equipment
+  const getStatusColor = useCallback((status: EquipmentTag['status']) => {
+    switch (status) {
+      case 'operational': return 'text-jade-green';
+      case 'maintenance_required': return 'text-golden-saffron';
+      case 'out_of_order': return 'text-red-500';
+      default: return 'text-muted-foreground';
+    }
+  }, []);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
