@@ -107,8 +107,16 @@ interface QRScannerOverlayProps {
 const QRScannerOverlay: React.FC<QRScannerOverlayProps> = ({
   isOpen,
   isLoading = false,
+  enableEquipmentTags = true,
+  enableLocationScanning = true,
+  enableUserScanning = false,
+  allowMultipleScan = false,
+  showScanHistory = true,
+  allowedTypes = ['sop', 'equipment', 'location'],
   onClose,
   onScanComplete,
+  onEquipmentScanned,
+  onLocationScanned,
   className
 }) => {
   const t = useTranslations('sop.qrScanner');
