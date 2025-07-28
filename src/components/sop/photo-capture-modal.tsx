@@ -314,6 +314,203 @@ const PhotoCaptureModal: React.FC<PhotoCaptureModalProps> = ({
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   }, []);
 
+  // Annotation functions
+  const saveAnnotationState = useCallback(() => {
+    const newHistory = annotationHistory.slice(0, historyIndex + 1);
+    newHistory.push([...annotations]);
+    setAnnotationHistory(newHistory);
+    setHistoryIndex(newHistory.length - 1);
+  }, [annotations, annotationHistory, historyIndex]);
+
+  const undo = useCallback(() => {
+    if (historyIndex > 0) {
+      setHistoryIndex(historyIndex - 1);
+      setAnnotations([...annotationHistory[historyIndex - 1]]);
+    }
+  }, [historyIndex, annotationHistory]);
+
+  const redo = useCallback(() => {
+    if (historyIndex < annotationHistory.length - 1) {
+      setHistoryIndex(historyIndex + 1);
+      setAnnotations([...annotationHistory[historyIndex + 1]]);
+    }
+  }, [historyIndex, annotationHistory]);
+
+  const startAnnotation = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!isAnnotating) return;
+    
+    const canvas = annotationCanvasRef.current;
+    if (!canvas) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const newAnnotation: Annotation = {
+      id: `annotation_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      type: currentTool,
+      x,
+      y,
+      color: currentColor,
+      strokeWidth,
+      ...(currentTool === 'text' && { text: 'Edit text' })
+    };
+    
+    setCurrentAnnotation(newAnnotation);
+    setIsDrawing(true);
+  }, [isAnnotating, currentTool, currentColor, strokeWidth]);
+
+  const updateAnnotation = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!isDrawing || !currentAnnotation) return;
+    
+    const canvas = annotationCanvasRef.current;
+    if (!canvas) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    if (currentTool === 'circle' || currentTool === 'square') {
+      const width = Math.abs(x - currentAnnotation.x);
+      const height = Math.abs(y - currentAnnotation.y);
+      setCurrentAnnotation({
+        ...currentAnnotation,
+        width,
+        height
+      });
+    }
+  }, [isDrawing, currentAnnotation, currentTool]);
+
+  const finishAnnotation = useCallback(() => {
+    if (!currentAnnotation) return;
+    
+    saveAnnotationState();
+    setAnnotations(prev => [...prev, currentAnnotation]);
+    setCurrentAnnotation(null);
+    setIsDrawing(false);
+  }, [currentAnnotation, saveAnnotationState]);
+
+  const deleteAnnotation = useCallback((annotationId: string) => {
+    saveAnnotationState();
+    setAnnotations(prev => prev.filter(a => a.id !== annotationId));
+  }, [saveAnnotationState]);
+
+  const saveAnnotations = useCallback(() => {
+    if (selectedPhotoId && onAnnotationsUpdate) {
+      onAnnotationsUpdate(selectedPhotoId, annotations);
+      
+      // Update the photo with annotations
+      setPhotos(prev => prev.map(photo => 
+        photo.id === selectedPhotoId 
+          ? { ...photo, annotations }
+          : photo
+      ));
+    }
+    setIsAnnotating(false);
+    setAnnotations([]);
+    setAnnotationHistory([]);
+    setHistoryIndex(-1);
+  }, [selectedPhotoId, annotations, onAnnotationsUpdate]);
+
+  const handleVerificationStatusChange = useCallback((photoId: string, status: 'approved' | 'rejected', notes?: string) => {
+    onVerificationStatusChange?.(photoId, status, notes);
+    setPhotos(prev => prev.map(photo => 
+      photo.id === photoId 
+        ? { ...photo, verificationStatus: status, verificationNotes: notes }
+        : photo
+    ));
+  }, [onVerificationStatusChange]);
+
+  // Load annotations when photo is selected
+  useEffect(() => {
+    if (selectedPhotoId) {
+      const photo = photos.find(p => p.id === selectedPhotoId);
+      if (photo?.annotations) {
+        setAnnotations(photo.annotations);
+        setAnnotationHistory([photo.annotations]);
+        setHistoryIndex(0);
+      } else {
+        setAnnotations([]);
+        setAnnotationHistory([]);
+        setHistoryIndex(-1);
+      }
+    }
+  }, [selectedPhotoId, photos]);
+
+  // Draw annotations on canvas
+  useEffect(() => {
+    const canvas = annotationCanvasRef.current;
+    if (!canvas || !isAnnotating) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw existing annotations
+    [...annotations, ...(currentAnnotation ? [currentAnnotation] : [])].forEach(annotation => {
+      ctx.strokeStyle = annotation.color;
+      ctx.lineWidth = annotation.strokeWidth;
+      ctx.setLineDash([]);
+      
+      switch (annotation.type) {
+        case 'circle':
+          if (annotation.width && annotation.height) {
+            ctx.beginPath();
+            ctx.ellipse(
+              annotation.x + annotation.width / 2,
+              annotation.y + annotation.height / 2,
+              annotation.width / 2,
+              annotation.height / 2,
+              0, 0, 2 * Math.PI
+            );
+            ctx.stroke();
+          }
+          break;
+        case 'square':
+          if (annotation.width && annotation.height) {
+            ctx.strokeRect(annotation.x, annotation.y, annotation.width, annotation.height);
+          }
+          break;
+        case 'arrow':
+          if (annotation.width && annotation.height) {
+            const endX = annotation.x + annotation.width;
+            const endY = annotation.y + annotation.height;
+            
+            // Draw line
+            ctx.beginPath();
+            ctx.moveTo(annotation.x, annotation.y);
+            ctx.lineTo(endX, endY);
+            ctx.stroke();
+            
+            // Draw arrowhead
+            const angle = Math.atan2(annotation.height, annotation.width);
+            const arrowLength = 15;
+            ctx.beginPath();
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(
+              endX - arrowLength * Math.cos(angle - Math.PI / 6),
+              endY - arrowLength * Math.sin(angle - Math.PI / 6)
+            );
+            ctx.moveTo(endX, endY);
+            ctx.lineTo(
+              endX - arrowLength * Math.cos(angle + Math.PI / 6),
+              endY - arrowLength * Math.sin(angle + Math.PI / 6)
+            );
+            ctx.stroke();
+          }
+          break;
+        case 'text':
+          if (annotation.text) {
+            ctx.font = `${annotation.strokeWidth * 8}px Inter`;
+            ctx.fillStyle = annotation.color;
+            ctx.fillText(annotation.text, annotation.x, annotation.y);
+          }
+          break;
+      }
+    });
+  }, [annotations, currentAnnotation, isAnnotating]);
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={cn(
