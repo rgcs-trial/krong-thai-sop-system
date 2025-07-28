@@ -120,6 +120,10 @@ const PhotoCaptureModal: React.FC<PhotoCaptureModalProps> = ({
   onClose,
   onPhotosCapture,
   onPhotoDelete,
+  onAnnotationsUpdate,
+  onVerificationStatusChange,
+  enableAnnotations = true,
+  enableVerification = true,
   className
 }) => {
   const t = useTranslations('sop.photoCapture');
