@@ -545,14 +545,259 @@ export function TrainingAnalyticsDashboard({ className }: TrainingAnalyticsDashb
       )}
 
       {/* Detailed Analytics */}
-      <Tabs defaultValue="modules" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-5">
+      <Tabs defaultValue="performance" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-6">
+          <TabsTrigger value="performance">{t('training.performance_metrics')}</TabsTrigger>
           <TabsTrigger value="modules">{t('training.module_performance')}</TabsTrigger>
           <TabsTrigger value="users">{t('training.user_performance')}</TabsTrigger>
           <TabsTrigger value="roi">{t('training.roi_analysis')}</TabsTrigger>
           <TabsTrigger value="competency">{t('training.competency_gaps')}</TabsTrigger>
           <TabsTrigger value="trends">{t('training.trends_insights')}</TabsTrigger>
         </TabsList>
+
+        {/* Enhanced Performance Metrics Tab */}
+        <TabsContent value="performance" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Real-time Performance Indicators */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Activity className="h-5 w-5 mr-2 text-krong-red" />
+                  {t('training.performance_indicators')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>{t('training.learning_velocity')}</span>
+                      <span className="font-medium">{performanceMetrics.learningVelocity}%</span>
+                    </div>
+                    <Progress value={performanceMetrics.learningVelocity} className="h-2" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>{t('training.knowledge_retention')}</span>
+                      <span className="font-medium">{performanceMetrics.knowledgeRetention}%</span>
+                    </div>
+                    <Progress value={performanceMetrics.knowledgeRetention} className="h-2" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>{t('training.skill_application')}</span>
+                      <span className="font-medium">{performanceMetrics.skillApplication}%</span>
+                    </div>
+                    <Progress value={performanceMetrics.skillApplication} className="h-2" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>{t('training.engagement_score')}</span>
+                      <span className="font-medium">{performanceMetrics.engagementScore}%</span>
+                    </div>
+                    <Progress value={performanceMetrics.engagementScore} className="h-2" />
+                  </div>
+                </div>
+                
+                <Separator />
+                
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div className="p-3 bg-green-50 rounded-lg">
+                    <div className="text-2xl font-bold text-green-600">
+                      +{performanceMetrics.competencyGrowth}%
+                    </div>
+                    <div className="text-sm text-green-700">{t('training.competency_growth')}</div>
+                  </div>
+                  
+                  <div className="p-3 bg-blue-50 rounded-lg">
+                    <div className="text-2xl font-bold text-blue-600">
+                      {performanceMetrics.trainingEfficiency}%
+                    </div>
+                    <div className="text-sm text-blue-700">{t('training.training_efficiency')}</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Learning Analytics Insights */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Brain className="h-5 w-5 mr-2 text-purple-500" />
+                  {t('training.learning_analytics')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 gap-3">
+                  <div className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <Clock className="h-5 w-5 text-blue-500" />
+                      <div>
+                        <div className="font-medium text-sm">{t('training.optimal_learning_time')}</div>
+                        <div className="text-xs text-muted-foreground">{t('training.best_completion_time')}</div>
+                      </div>
+                    </div>
+                    <div className="text-lg font-bold text-blue-600">
+                      {learningAnalytics.optimalLearningTime}
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <Target className="h-5 w-5 text-green-500" />
+                      <div>
+                        <div className="font-medium text-sm">{t('training.attention_span')}</div>
+                        <div className="text-xs text-muted-foreground">{t('training.focused_learning_duration')}</div>
+                      </div>
+                    </div>
+                    <div className="text-lg font-bold text-green-600">
+                      {learningAnalytics.averageAttentionSpan}m
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <TrendingDown className="h-5 w-5 text-orange-500" />
+                      <div>
+                        <div className="font-medium text-sm">{t('training.knowledge_decay')}</div>
+                        <div className="text-xs text-muted-foreground">{t('training.knowledge_loss_rate')}</div>
+                      </div>
+                    </div>
+                    <div className="text-lg font-bold text-orange-600">
+                      {learningAnalytics.knowledgeDecayRate}%
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <ArrowRight className="h-5 w-5 text-purple-500" />
+                      <div>
+                        <div className="font-medium text-sm">{t('training.skill_transfer')}</div>
+                        <div className="text-xs text-muted-foreground">{t('training.job_performance_transfer')}</div>
+                      </div>
+                    </div>
+                    <div className="text-lg font-bold text-purple-600">
+                      {learningAnalytics.skillTransferRate}%
+                    </div>
+                  </div>
+                </div>
+                
+                <Separator />
+                
+                <div className="text-center p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg">
+                  <div className="text-3xl font-bold text-orange-600 mb-1">
+                    {learningAnalytics.microlearningEffectiveness}%
+                  </div>
+                  <div className="text-sm font-medium text-orange-700">
+                    {t('training.microlearning_boost')}
+                  </div>
+                  <div className="text-xs text-orange-600 mt-1">
+                    {t('training.vs_traditional_training')}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+          
+          {/* Performance Trends Chart */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <TrendingUp className="h-5 w-5 mr-2 text-jade-green" />
+                {t('training.performance_trends')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={trainingTrends}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip 
+                    formatter={(value: any, name: any) => [
+                      `${value}${name === 'satisfaction' ? '/5' : name === 'averageScore' ? '%' : ''}`,
+                      name === 'averageScore' ? t('training.avg_score') :
+                      name === 'satisfaction' ? t('training.satisfaction') :
+                      name === 'completions' ? t('training.completions') : name
+                    ]}
+                  />
+                  <Legend />
+                  <Area 
+                    type="monotone" 
+                    dataKey="averageScore" 
+                    stackId="1"
+                    stroke="#E31B23" 
+                    fill="#E31B23"
+                    fillOpacity={0.6}
+                    name={t('training.avg_score')}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="completions" 
+                    stackId="2"
+                    stroke="#008B8B" 
+                    fill="#008B8B"
+                    fillOpacity={0.6}
+                    name={t('training.completions')}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="satisfaction" 
+                    stackId="3"
+                    stroke="#D4AF37" 
+                    fill="#D4AF37"
+                    fillOpacity={0.6}
+                    name={t('training.satisfaction')}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+          
+          {/* Advanced Insights */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card className="border-green-200 bg-green-50">
+              <CardContent className="p-4 text-center">
+                <CheckCircle2 className="w-8 h-8 mx-auto text-green-600 mb-2" />
+                <h3 className="font-semibold text-green-800 mb-1">
+                  {t('training.high_performers')}
+                </h3>
+                <div className="text-2xl font-bold text-green-600 mb-1">23</div>
+                <p className="text-xs text-green-700">
+                  {t('training.staff_above_90_percent')}
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-yellow-200 bg-yellow-50">
+              <CardContent className="p-4 text-center">
+                <AlertTriangle className="w-8 h-8 mx-auto text-yellow-600 mb-2" />
+                <h3 className="font-semibold text-yellow-800 mb-1">
+                  {t('training.needs_attention')}
+                </h3>
+                <div className="text-2xl font-bold text-yellow-600 mb-1">7</div>
+                <p className="text-xs text-yellow-700">
+                  {t('training.staff_below_threshold')}
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-blue-200 bg-blue-50">
+              <CardContent className="p-4 text-center">
+                <Users className="w-8 h-8 mx-auto text-blue-600 mb-2" />
+                <h3 className="font-semibold text-blue-800 mb-1">
+                  {t('training.peer_learning')}
+                </h3>
+                <div className="text-2xl font-bold text-blue-600 mb-1">+{learningAnalytics.collaborativeLearningBoost}%</div>
+                <p className="text-xs text-blue-700">
+                  {t('training.collaborative_boost')}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
 
         {/* Module Performance */}
         <TabsContent value="modules" className="space-y-6">
