@@ -66,10 +66,26 @@ interface QRScannerOverlayProps {
   isOpen: boolean;
   /** Loading state */
   isLoading?: boolean;
+  /** Enable equipment tag scanning */
+  enableEquipmentTags?: boolean;
+  /** Enable location scanning */
+  enableLocationScanning?: boolean;
+  /** Enable user identification */
+  enableUserScanning?: boolean;
+  /** Scan multiple codes in sequence */
+  allowMultipleScan?: boolean;
+  /** Show scan history */
+  showScanHistory?: boolean;
+  /** Filter scan types */
+  allowedTypes?: ('sop' | 'equipment' | 'location' | 'user')[];
   /** Callback when scanner closes */
   onClose: () => void;
   /** Callback when QR code is scanned */
   onScanComplete: (result: QRScanResult) => void;
+  /** Callback when equipment is scanned */
+  onEquipmentScanned?: (equipment: EquipmentTag) => void;
+  /** Callback when location is scanned */
+  onLocationScanned?: (location: { id: string; name: string; zone: string; floor: number }) => void;
   /** Custom CSS classes */
   className?: string;
 }
