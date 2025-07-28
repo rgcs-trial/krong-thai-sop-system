@@ -639,11 +639,28 @@ const PhotoCaptureModal: React.FC<PhotoCaptureModalProps> = ({
                   >
                     <CardContent className="p-3">
                       <div className="flex items-center gap-3">
-                        <img
-                          src={photo.dataUrl}
-                          alt={photo.filename}
-                          className="w-16 h-16 object-cover rounded border"
-                        />
+                        <div className="relative">
+                          <img
+                            src={photo.dataUrl}
+                            alt={photo.filename}
+                            className="w-16 h-16 object-cover rounded border"
+                          />
+                          {/* Verification Status Badge */}
+                          {enableVerification && photo.verificationStatus && (
+                            <div className={cn(
+                              "absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-white",
+                              photo.verificationStatus === 'approved' && "bg-jade-green",
+                              photo.verificationStatus === 'rejected' && "bg-red-500",
+                              photo.verificationStatus === 'pending' && "bg-golden-saffron"
+                            )} />
+                          )}
+                          {/* Annotation Indicator */}
+                          {photo.annotations && photo.annotations.length > 0 && (
+                            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-krong-red rounded-full border-2 border-white flex items-center justify-center">
+                              <Edit3 className="w-2 h-2 text-white" />
+                            </div>
+                          )}
+                        </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-tablet-sm font-body font-medium truncate">
                             {photo.filename}
@@ -654,6 +671,15 @@ const PhotoCaptureModal: React.FC<PhotoCaptureModalProps> = ({
                           <p className="text-tablet-xs text-muted-foreground">
                             {new Date(photo.timestamp).toLocaleTimeString()}
                           </p>
+                          {/* Verification Status */}
+                          {enableVerification && photo.verificationStatus && (
+                            <Badge 
+                              variant={photo.verificationStatus === 'approved' ? 'default' : 'destructive'}
+                              className="text-tablet-xs mt-1"
+                            >
+                              {t(`verification.${photo.verificationStatus}`)}
+                            </Badge>
+                          )}
                         </div>
                         <Button
                           variant="ghost"
