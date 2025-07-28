@@ -692,5 +692,303 @@ describe('SOP Completion Workflow Integration Tests', () => {
         expect(mockSupabase.from).toHaveBeenCalled();
       });
     });
+
+    it('maintains sub-100ms response times under concurrent load', async () => {
+      const startTime = performance.now();
+      
+      // Simulate 20 concurrent completion requests
+      const concurrentCompletions = Array.from({ length: 20 }, (_, i) => 
+        render(
+          <TestWrapper key={i}>
+            <MockSOPDocumentViewer documentId={`sop-doc-${i}`} />
+          </TestWrapper>
+        )
+      );
+
+      await Promise.all(concurrentCompletions);
+      
+      const endTime = performance.now();
+      const totalTime = endTime - startTime;
+      
+      // Should maintain performance under load
+      expect(totalTime).toBeLessThan(2000); // 2 second threshold for 20 concurrent renders
+      expect(totalTime / 20).toBeLessThan(100); // Average under 100ms per completion
+    });
+  });
+
+  describe('Enhanced Task Management Integration', () => {
+    it('automatically creates follow-up tasks upon SOP completion', async () => {
+      const user = userEvent.setup();
+      
+      // Mock task creation API
+      const mockTaskResponse = {
+        id: 'auto-task-123',
+        title: 'Follow-up maintenance check',
+        status: 'pending',
+        priority: 'medium',
+        scheduled_for: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+      };
+
+      mockSupabase.from.mockImplementation((table) => {
+        if (table === 'tasks') {
+          return {
+            insert: vi.fn(() => Promise.resolve({ data: mockTaskResponse, error: null })),
+            select: vi.fn(() => ({
+              eq: vi.fn(() => Promise.resolve({ data: [mockTaskResponse], error: null }))
+            }))
+          };
+        }
+        return mockSupabase.from(table);
+      });
+
+      render(
+        <TestWrapper>
+          <MockSOPDocumentViewer documentId="sop-doc-123" />
+        </TestWrapper>
+      );
+
+      const completeSopButton = screen.getByTestId('complete-sop');
+      await user.click(completeSopButton);
+
+      await waitFor(() => {
+        expect(mockSupabase.from).toHaveBeenCalledWith('tasks');
+        expect(mockSupabase.from('tasks').insert).toHaveBeenCalledWith({
+          title: expect.stringContaining('Follow-up'),
+          sop_document_id: 'sop-doc-123',
+          assigned_to: 'test-user-123',
+          priority: 'medium',
+          type: 'sop_follow_up'
+        });
+      });
+    });
+
+    it('creates escalation tasks for overdue SOPs', async () => {
+      const user = userEvent.setup();
+      
+      // Mock overdue SOP scenario
+      const overdueCompletion = {
+        ...mockSOPCompletion,
+        started_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
+        status: 'in_progress'
+      };
+
+      mockSupabase.from.mockImplementation((table) => {
+        if (table === 'sop_completions') {
+          return {
+            select: vi.fn(() => ({
+              eq: vi.fn(() => ({
+                single: vi.fn(() => Promise.resolve({ data: overdueCompletion, error: null }))
+              }))
+            }))
+          };
+        }
+        if (table === 'tasks') {
+          return {
+            insert: vi.fn(() => Promise.resolve({ data: { id: 'escalation-task' }, error: null }))
+          };
+        }
+        return mockSupabase.from(table);
+      });
+
+      render(
+        <TestWrapper>
+          <MockSOPDocumentViewer documentId="sop-doc-123" />
+        </TestWrapper>
+      );
+
+      // Simulate escalation trigger
+      await waitFor(() => {
+        expect(mockSupabase.from('tasks').insert).toHaveBeenCalledWith({
+          title: expect.stringContaining('Overdue SOP'),
+          type: 'escalation',
+          priority: 'high',
+          assigned_to: expect.any(String)
+        });
+      });
+    });
+  });
+
+  describe('Enhanced Security and Audit Trail', () => {
+    it('validates user permissions before allowing SOP completion', async () => {
+      const user = userEvent.setup();
+      
+      const restrictedDocument = {
+        ...mockSOPDocument,
+        security_level: 'manager_only',
+        required_role: 'manager'
+      };
+
+      // Mock staff user (insufficient permissions)
+      mockSupabase.auth.getUser.mockResolvedValue({
+        data: { user: { ...mockUser, role: 'staff' } },
+        error: null
+      });
+
+      mockSupabase.from.mockImplementation((table) => {
+        if (table === 'sop_documents') {
+          return {
+            select: vi.fn(() => ({
+              eq: vi.fn(() => ({
+                single: vi.fn(() => Promise.resolve({ data: restrictedDocument, error: null }))
+              }))
+            }))
+          };
+        }
+        return mockSupabase.from(table);
+      });
+
+      render(
+        <TestWrapper>
+          <MockSOPDocumentViewer documentId="sop-doc-123" />
+        </TestWrapper>
+      );
+
+      expect(screen.getByText('sop.insufficientPermissions')).toBeInTheDocument();
+      expect(screen.queryByTestId('complete-sop')).not.toBeInTheDocument();
+    });
+
+    it('creates comprehensive audit logs for all SOP actions', async () => {
+      const user = userEvent.setup();
+      
+      mockSupabase.from.mockImplementation((table) => {
+        if (table === 'audit_logs') {
+          return {
+            insert: vi.fn(() => Promise.resolve({ data: {}, error: null }))
+          };
+        }
+        return mockSupabase.from(table);
+      });
+
+      render(
+        <TestWrapper>
+          <MockSOPDocumentViewer documentId="sop-doc-123" />
+        </TestWrapper>
+      );
+
+      // Perform various actions
+      await user.click(screen.getByTestId('complete-step-1'));
+      await user.click(screen.getByTestId('add-photo'));
+      await user.click(screen.getByTestId('complete-sop'));
+
+      await waitFor(() => {
+        expect(mockSupabase.from('audit_logs').insert).toHaveBeenCalledTimes(3);
+        expect(mockSupabase.from('audit_logs').insert).toHaveBeenCalledWith({
+          action: 'sop_step_completed',
+          resource_type: 'sop_document',
+          resource_id: 'sop-doc-123',
+          user_id: 'test-user-123',
+          metadata: expect.objectContaining({
+            step_number: 1,
+            timestamp: expect.any(String)
+          })
+        });
+      });
+    });
+  });
+
+  describe('Advanced Real-time Collaboration', () => {
+    it('shows active users working on the same SOP', async () => {
+      const user = userEvent.setup();
+      
+      const mockActiveUsers = [
+        { id: 'user-2', name: 'Jane Smith', step: 1, last_activity: '2024-01-15T08:01:00Z' },
+        { id: 'user-3', name: 'Bob Johnson', step: 2, last_activity: '2024-01-15T08:02:00Z' }
+      ];
+
+      // Mock real-time subscription for active users
+      mockSupabase.from.mockImplementation((table) => {
+        if (table === 'sop_active_users') {
+          return {
+            select: vi.fn(() => ({
+              eq: vi.fn(() => Promise.resolve({ data: mockActiveUsers, error: null })),
+              on: vi.fn(() => ({
+                subscribe: vi.fn()
+              }))
+            }))
+          };
+        }
+        return mockSupabase.from(table);
+      });
+
+      render(
+        <TestWrapper>
+          <MockSOPDocumentViewer documentId="sop-doc-123" />
+        </TestWrapper>
+      );
+
+      await waitFor(() => {
+        expect(screen.getByText('sop.activeUsers')).toBeInTheDocument();
+        expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+        expect(screen.getByText('Bob Johnson')).toBeInTheDocument();
+      });
+    });
+
+    it('prevents conflicting step completions by multiple users', async () => {
+      const user = userEvent.setup();
+      
+      // Mock conflict scenario
+      mockSupabase.from.mockImplementation((table) => {
+        if (table === 'sop_step_completions') {
+          return {
+            insert: vi.fn(() => Promise.reject({
+              code: '23505', // Unique constraint violation
+              message: 'Step already completed by another user'
+            }))
+          };
+        }
+        return mockSupabase.from(table);
+      });
+
+      render(
+        <TestWrapper>
+          <MockSOPDocumentViewer documentId="sop-doc-123" />
+        </TestWrapper>
+      );
+
+      const step1Button = screen.getByTestId('complete-step-1');
+      await user.click(step1Button);
+
+      await waitFor(() => {
+        expect(screen.getByText('sop.stepAlreadyCompleted')).toBeInTheDocument();
+        expect(screen.getByText('sop.refreshToSeeUpdates')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('Advanced Offline Capabilities', () => {
+    it('queues completion data when offline and syncs when online', async () => {
+      const user = userEvent.setup();
+      
+      // Mock offline state
+      Object.defineProperty(navigator, 'onLine', {
+        value: false,
+        writable: true
+      });
+
+      render(
+        <TestWrapper>
+          <MockSOPDocumentViewer documentId="sop-doc-123" />
+        </TestWrapper>
+      );
+
+      const step1Button = screen.getByTestId('complete-step-1');
+      await user.click(step1Button);
+
+      // Should queue completion offline
+      expect(screen.getByText('common.savedOffline')).toBeInTheDocument();
+
+      // Go back online
+      Object.defineProperty(navigator, 'onLine', {
+        value: true,
+        writable: true
+      });
+      
+      window.dispatchEvent(new Event('online'));
+
+      // Should attempt to sync queued data
+      await waitFor(() => {
+        expect(mockSupabase.from).toHaveBeenCalledWith('sop_completions');
+      });
+    });
   });
 });
