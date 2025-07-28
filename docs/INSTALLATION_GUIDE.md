@@ -328,10 +328,15 @@ INSERT INTO sop_categories (slug, name_en, name_fr, description_en, description_
 ('service', 'Customer Service', 'Service clientèle', 'Service standards', 'Standards de service', 'users', 3);
 ```
 
-### 4.5 Run Database Migration
+### 4.5 Run Database Migrations
 ```bash
-# Apply the migration
+# Apply all 17 migrations including translation system
 npx supabase db push
+
+# Note: The system includes 17 migrations:
+# - Migrations 001-008: Core system and performance optimization
+# - Migrations 009-013: Language conversion and analytics
+# - Migrations 014-017: Complete translation system with 7 tables
 
 # Generate TypeScript types
 npx supabase gen types typescript --project-id your-project-ref > src/types/supabase.ts
