@@ -19,7 +19,16 @@ import {
   Trash2,
   ZoomIn,
   ZoomOut,
-  FlipHorizontal
+  FlipHorizontal,
+  Edit3,
+  Square,
+  Circle,
+  ArrowRight,
+  Type,
+  Palette,
+  Undo,
+  Redo,
+  Save
 } from 'lucide-react';
 
 interface CapturedPhoto {
