@@ -618,6 +618,423 @@ export interface TrainingSearchParams {
   tags?: string[];
 }
 
+// Task Management Types
+export type TaskStatus = 'pending' | 'in_progress' | 'completed' | 'cancelled' | 'overdue' | 'delegated';
+export type TaskPriority = 'low' | 'medium' | 'high' | 'critical' | 'urgent';
+export type TaskType = 'sop_execution' | 'training' | 'maintenance' | 'inspection' | 'cleaning' | 'custom';
+export type TaskRecurrence = 'none' | 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'annually';
+export type EscalationLevel = 'none' | 'supervisor' | 'manager' | 'regional' | 'corporate';
+export type DifficultyRating = 'beginner' | 'intermediate' | 'advanced' | 'expert';
+
+export interface Task {
+  id: string;
+  restaurant_id: string;
+  created_by: string;
+  assigned_to?: string;
+  delegated_by?: string;
+  title: string;
+  title_fr: string;
+  description?: string;
+  description_fr?: string;
+  type: TaskType;
+  status: TaskStatus;
+  priority: TaskPriority;
+  difficulty: DifficultyRating;
+  
+  // SOP integration
+  sop_document_id?: string;
+  sop_category_id?: string;
+  
+  // Scheduling
+  scheduled_date?: string;
+  due_date?: string;
+  estimated_duration_minutes?: number;
+  actual_duration_minutes?: number;
+  
+  // Dependencies and prerequisites
+  prerequisite_task_ids: string[];
+  dependent_task_ids: string[];
+  prerequisite_skills: string[];
+  required_equipment: string[];
+  
+  // Collaboration
+  team_task: boolean;
+  team_members: string[];
+  max_team_size?: number;
+  
+  // Recurrence
+  recurrence: TaskRecurrence;
+  recurrence_config?: TaskRecurrenceConfig;
+  parent_template_id?: string;
+  
+  // Progress tracking
+  progress_percentage: number;
+  checklist_completed: number;
+  checklist_total: number;
+  
+  // Performance
+  performance_score?: number;
+  performance_notes?: string;
+  performance_notes_fr?: string;
+  
+  // Escalation
+  escalation_level: EscalationLevel;
+  escalation_triggered_at?: string;
+  escalation_reason?: string;
+  
+  // Timestamps
+  started_at?: string;
+  completed_at?: string;
+  cancelled_at?: string;
+  last_activity_at?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  restaurant?: Restaurant;
+  creator?: AuthUser;
+  assignee?: AuthUser;
+  delegator?: AuthUser;
+  sop_document?: SOPDocument;
+  sop_category?: SOPCategory;
+  team_member_users?: AuthUser[];
+  comments?: TaskComment[];
+  notifications?: TaskNotification[];
+  checklist_items?: TaskChecklistItem[];
+  time_entries?: TaskTimeEntry[];
+}
+
+export interface TaskRecurrenceConfig {
+  interval: number;
+  days_of_week?: number[]; // 0-6, Sunday = 0
+  day_of_month?: number;
+  end_date?: string;
+  max_occurrences?: number;
+  timezone?: string;
+}
+
+export interface TaskTemplate {
+  id: string;
+  restaurant_id: string;
+  created_by: string;
+  name: string;
+  name_fr: string;
+  description?: string;
+  description_fr?: string;
+  type: TaskType;
+  priority: TaskPriority;
+  difficulty: DifficultyRating;
+  estimated_duration_minutes: number;
+  
+  // Template configuration
+  sop_document_id?: string;
+  prerequisite_skills: string[];
+  required_equipment: string[];
+  checklist_template: TaskChecklistTemplate[];
+  
+  // Default recurrence
+  default_recurrence: TaskRecurrence;
+  default_recurrence_config?: TaskRecurrenceConfig;
+  
+  // Usage stats
+  usage_count: number;
+  last_used_at?: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  restaurant?: Restaurant;
+  creator?: AuthUser;
+  sop_document?: SOPDocument;
+}
+
+export interface TaskChecklistTemplate {
+  id: string;
+  step_number: number;
+  title: string;
+  title_fr: string;
+  description?: string;
+  description_fr?: string;
+  is_required: boolean;
+  estimated_minutes?: number;
+  verification_required: boolean;
+  photo_required: boolean;
+}
+
+export interface TaskChecklistItem {
+  id: string;
+  task_id: string;
+  template_id?: string;
+  step_number: number;
+  title: string;
+  title_fr: string;
+  description?: string;
+  description_fr?: string;
+  is_required: boolean;
+  is_completed: boolean;
+  verification_required: boolean;
+  verified_by?: string;
+  verified_at?: string;
+  photo_required: boolean;
+  photo_url?: string;
+  notes?: string;
+  notes_fr?: string;
+  completed_by?: string;
+  completed_at?: string;
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  task?: Task;
+  template?: TaskChecklistTemplate;
+  completed_by_user?: AuthUser;
+  verified_by_user?: AuthUser;
+}
+
+export interface TaskComment {
+  id: string;
+  task_id: string;
+  user_id: string;
+  comment: string;
+  comment_fr?: string;
+  is_internal: boolean;
+  is_system_generated: boolean;
+  reply_to_id?: string;
+  attachments: string[];
+  created_at: string;
+  updated_at: string;
+  
+  // Relations
+  task?: Task;
+  user?: AuthUser;
+  reply_to?: TaskComment;
+  replies?: TaskComment[];
+}
+
+export interface TaskNotification {
+  id: string;
+  task_id: string;
+  user_id: string;
+  type: TaskNotificationType;
+  title: string;
+  title_fr: string;
+  message: string;
+  message_fr: string;
+  scheduled_for?: string;
+  sent_at?: string;
+  read_at?: string;
+  action_url?: string;
+  is_dismissed: boolean;
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  created_at: string;
+  
+  // Relations
+  task?: Task;
+  user?: AuthUser;
+}
+
+export type TaskNotificationType = 
+  | 'task_assigned'
+  | 'task_due_soon'
+  | 'task_overdue'
+  | 'task_completed'
+  | 'task_cancelled'
+  | 'task_delegated'
+  | 'task_escalated'
+  | 'comment_added'
+  | 'prerequisite_completed'
+  | 'team_member_added'
+  | 'schedule_changed';
+
+export interface TaskTimeEntry {
+  id: string;
+  task_id: string;
+  user_id: string;
+  started_at: string;
+  ended_at?: string;
+  duration_minutes?: number;
+  is_break: boolean;
+  break_reason?: string;
+  notes?: string;
+  notes_fr?: string;
+  created_at: string;
+  
+  // Relations
+  task?: Task;
+  user?: AuthUser;
+}
+
+export interface TaskDependency {
+  id: string;
+  prerequisite_task_id: string;
+  dependent_task_id: string;
+  dependency_type: 'finish_to_start' | 'start_to_start' | 'finish_to_finish' | 'start_to_finish';
+  lag_minutes?: number;
+  is_critical: boolean;
+  created_at: string;
+  
+  // Relations
+  prerequisite_task?: Task;
+  dependent_task?: Task;
+}
+
+export interface TaskAssignment {
+  id: string;
+  task_id: string;
+  assigned_by: string;
+  assigned_to: string;
+  assigned_at: string;
+  accepted_at?: string;
+  declined_at?: string;
+  decline_reason?: string;
+  decline_reason_fr?: string;
+  delegation_notes?: string;
+  delegation_notes_fr?: string;
+  
+  // Relations
+  task?: Task;
+  assigner?: AuthUser;
+  assignee?: AuthUser;
+}
+
+export interface TaskCalendarEvent {
+  id: string;
+  task_id: string;
+  title: string;
+  title_fr: string;
+  start_date: string;
+  end_date: string;
+  all_day: boolean;
+  calendar_type: 'scheduled' | 'due' | 'reminder';
+  reminder_minutes?: number;
+  location?: string;
+  created_at: string;
+  
+  // Relations
+  task?: Task;
+}
+
+// API Request/Response Types
+export interface CreateTaskRequest {
+  title: string;
+  title_fr: string;
+  description?: string;
+  description_fr?: string;
+  type: TaskType;
+  priority: TaskPriority;
+  difficulty: DifficultyRating;
+  assigned_to?: string;
+  sop_document_id?: string;
+  scheduled_date?: string;
+  due_date?: string;
+  estimated_duration_minutes?: number;
+  prerequisite_task_ids?: string[];
+  team_task?: boolean;
+  team_members?: string[];
+  recurrence?: TaskRecurrence;
+  recurrence_config?: TaskRecurrenceConfig;
+  checklist_items?: CreateTaskChecklistItemRequest[];
+}
+
+export interface CreateTaskChecklistItemRequest {
+  title: string;
+  title_fr: string;
+  description?: string;
+  description_fr?: string;
+  is_required?: boolean;
+  verification_required?: boolean;
+  photo_required?: boolean;
+  step_number?: number;
+}
+
+export interface UpdateTaskRequest {
+  title?: string;
+  title_fr?: string;
+  description?: string;
+  description_fr?: string;
+  status?: TaskStatus;
+  priority?: TaskPriority;
+  assigned_to?: string;
+  scheduled_date?: string;
+  due_date?: string;
+  estimated_duration_minutes?: number;
+  progress_percentage?: number;
+}
+
+export interface TaskBulkOperation {
+  task_ids: string[];
+  operation: 'assign' | 'complete' | 'cancel' | 'reschedule' | 'change_priority';
+  parameters: Record<string, any>;
+}
+
+export interface TaskSearchParams {
+  status?: TaskStatus[];
+  priority?: TaskPriority[];
+  type?: TaskType[];
+  assigned_to?: string;
+  created_by?: string;
+  sop_category_id?: string;
+  team_task?: boolean;
+  due_date_from?: string;
+  due_date_to?: string;
+  search?: string;
+  tags?: string[];
+  difficulty?: DifficultyRating[];
+  overdue_only?: boolean;
+  my_tasks_only?: boolean;
+}
+
+export interface TaskCalendarParams {
+  start_date: string;
+  end_date: string;
+  view_type: 'month' | 'week' | 'day';
+  include_completed?: boolean;
+  user_id?: string;
+  team_tasks_only?: boolean;
+}
+
+export interface TaskDashboardStats {
+  total_tasks: number;
+  pending_tasks: number;
+  in_progress_tasks: number;
+  completed_today: number;
+  overdue_tasks: number;
+  high_priority_tasks: number;
+  team_tasks: number;
+  my_tasks: number;
+  completion_rate: number;
+  average_completion_time: number;
+  escalated_tasks: number;
+}
+
+export interface TaskPerformanceMetrics {
+  task_id: string;
+  completion_time_minutes: number;
+  quality_score: number;
+  efficiency_rating: number;
+  teammate_rating?: number;
+  supervisor_rating?: number;
+  notes?: string;
+  notes_fr?: string;
+  improvement_suggestions: string[];
+  improvement_suggestions_fr: string[];
+  created_at: string;
+}
+
+export interface TaskAnalytics {
+  restaurant_id: string;
+  date: string;
+  total_tasks: number;
+  completed_tasks: number;
+  overdue_tasks: number;
+  average_completion_time: number;
+  efficiency_metrics: Record<string, number>;
+  user_performance: Record<string, TaskPerformanceMetrics>;
+  category_performance: Record<string, number>;
+  created_at: string;
+}
+
 // Database schema type for Supabase (Use the generated type from supabase.ts instead)
 export interface Database {
   public: {
@@ -657,6 +1074,37 @@ export interface Database {
         Insert: Omit<AuditLog, 'id' | 'created_at'>;
         Update: Partial<Omit<AuditLog, 'id' | 'created_at'>>;
       };
+      // Task Management Tables
+      tasks: {
+        Row: Task;
+        Insert: Omit<Task, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<Task, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      task_templates: {
+        Row: TaskTemplate;
+        Insert: Omit<TaskTemplate, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<TaskTemplate, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      task_checklist_items: {
+        Row: TaskChecklistItem;
+        Insert: Omit<TaskChecklistItem, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<TaskChecklistItem, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      task_comments: {
+        Row: TaskComment;
+        Insert: Omit<TaskComment, 'id' | 'created_at' | 'updated_at'>;
+        Update: Partial<Omit<TaskComment, 'id' | 'created_at' | 'updated_at'>>;
+      };
+      task_notifications: {
+        Row: TaskNotification;
+        Insert: Omit<TaskNotification, 'id' | 'created_at'>;
+        Update: Partial<Omit<TaskNotification, 'id' | 'created_at'>>;
+      };
+      task_time_entries: {
+        Row: TaskTimeEntry;
+        Insert: Omit<TaskTimeEntry, 'id' | 'created_at'>;
+        Update: Partial<Omit<TaskTimeEntry, 'id' | 'created_at'>>;
+      };
     };
     Views: {};
     Functions: {};
@@ -666,6 +1114,13 @@ export interface Database {
       sop_priority: SOPPriority;
       submission_status: SubmissionStatus;
       audit_action: AuditAction;
+      task_status: TaskStatus;
+      task_priority: TaskPriority;
+      task_type: TaskType;
+      task_recurrence: TaskRecurrence;
+      escalation_level: EscalationLevel;
+      difficulty_rating: DifficultyRating;
+      task_notification_type: TaskNotificationType;
     };
   };
 }
