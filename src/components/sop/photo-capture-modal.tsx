@@ -136,6 +136,18 @@ const PhotoCaptureModal: React.FC<PhotoCaptureModalProps> = ({
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [selectedPhotoId, setSelectedPhotoId] = useState<string | null>(null);
   const [isCapturing, setIsCapturing] = useState(false);
+  
+  // Annotation states
+  const [isAnnotating, setIsAnnotating] = useState(false);
+  const [currentTool, setCurrentTool] = useState<'arrow' | 'circle' | 'square' | 'text'>('arrow');
+  const [currentColor, setCurrentColor] = useState('#E31B23'); // Krong Thai red
+  const [strokeWidth, setStrokeWidth] = useState(3);
+  const [annotations, setAnnotations] = useState<Annotation[]>([]);
+  const [annotationHistory, setAnnotationHistory] = useState<Annotation[][]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [currentAnnotation, setCurrentAnnotation] = useState<Annotation | null>(null);
+  const annotationCanvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize camera when modal opens
   useEffect(() => {
