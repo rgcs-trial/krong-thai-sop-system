@@ -570,25 +570,175 @@ const QRScannerOverlay: React.FC<QRScannerOverlayProps> = ({
           )}
         </div>
 
+        {/* Detection Status */}
+        {detectedCode && (
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+            <Card className="bg-black/80 text-white border-krong-red">
+              <CardContent className="p-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <CheckCircle className="w-6 h-6 text-jade-green" />
+                  <span className="text-tablet-lg font-semibold">{t('detected')}</span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-center gap-2">
+                    {getTypeIcon(scanHistory[0]?.type || 'unknown')}
+                    <span className="text-tablet-sm capitalize">
+                      {t(`types.${scanHistory[0]?.type || 'unknown'}`)}
+                    </span>
+                  </div>
+                  <div className="text-tablet-xs opacity-80">
+                    {t('confidence')}: {Math.round(scanConfidence * 100)}%
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
         {/* Bottom Controls */}
         <div className="relative z-10 p-4 bg-black/70">
-          <div className="flex items-center justify-center gap-4">
-            <Button
-              variant="ghost"
-              onClick={initializeCamera}
-              className="text-white hover:bg-white/20"
-              disabled={!scanError}
-            >
-              <Camera className="w-5 h-5 mr-2" />
-              {t('retryCamera')}
-            </Button>
+          <div className="flex items-center justify-between">
+            {/* Left: Camera Controls */}
+            <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                onClick={initializeCamera}
+                className="text-white hover:bg-white/20"
+                disabled={!scanError}
+              >
+                <Camera className="w-5 h-5 mr-2" />
+                {t('retryCamera')}
+              </Button>
+            </div>
             
+            {/* Center: Info */}
             <div className="text-center text-white text-tablet-sm opacity-80">
               <QrCode className="w-6 h-6 mx-auto mb-1" />
-              <p>{t('qrCodeRequired')}</p>
+              <p>{t('scanInstruction')}</p>
+              {allowedTypes.length < 4 && (
+                <p className="text-tablet-xs mt-1">
+                  {t('allowedTypes')}: {allowedTypes.map(type => t(`types.${type}`)).join(', ')}
+                </p>
+              )}
             </div>
+
+            {/* Right: Scan History */}
+            {showScanHistory && scanHistory.length > 0 && (
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary" className="text-tablet-xs">
+                  {scanHistory.length} {t('scanned')}
+                </Badge>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  className="text-white hover:bg-white/20"
+                  onClick={() => setScanHistory([])}
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Scan History Panel */}
+        {showScanHistory && scanHistory.length > 0 && (
+          <div className="absolute bottom-20 right-4 w-80 max-h-96 z-20">
+            <Card className="bg-black/90 text-white border-white/20">
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-tablet-sm font-semibold">{t('scanHistory')}</h3>
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    onClick={() => setScanHistory([])}
+                    className="text-white hover:bg-white/20"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              </CardHeader>
+              
+              <CardContent className="p-0 max-h-64 overflow-y-auto">
+                <div className="space-y-2 p-4">
+                  {scanHistory.map((scan, index) => (
+                    <div key={`${scan.data}-${index}`} className="p-3 bg-white/10 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        {getTypeIcon(scan.type)}
+                        <span className="text-tablet-sm font-medium capitalize">
+                          {t(`types.${scan.type}`)}
+                        </span>
+                        <Badge 
+                          variant={scan.isValid ? "default" : "destructive"}
+                          className="text-xs"
+                        >
+                          {Math.round(scan.confidence * 100)}%
+                        </Badge>
+                      </div>
+                      
+                      {scan.type === 'sop' && scan.sopTitle && (
+                        <p className="text-tablet-xs opacity-80">{scan.sopTitle}</p>
+                      )}
+                      
+                      {scan.type === 'equipment' && scan.equipment && (
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            {getEquipmentTypeIcon(scan.equipment.type)}
+                            <span className="text-tablet-xs font-medium">
+                              {scan.equipment.name}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className={cn("w-2 h-2 rounded-full", {
+                              'bg-jade-green': scan.equipment.status === 'operational',
+                              'bg-golden-saffron': scan.equipment.status === 'maintenance_required',
+                              'bg-red-500': scan.equipment.status === 'out_of_order'
+                            })} />
+                            <span className="text-tablet-xs opacity-80 capitalize">
+                              {scan.equipment.status.replace('_', ' ')}
+                            </span>
+                          </div>
+                          <p className="text-tablet-xs opacity-60">{scan.equipment.location}</p>
+                          
+                          {scan.equipment.nextMaintenance && (
+                            <div className="flex items-center gap-1 mt-1">
+                              <Calendar className="w-3 h-3" />
+                              <span className="text-tablet-xs opacity-60">
+                                {t('nextMaintenance')}: {scan.equipment.nextMaintenance}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      
+                      {scan.type === 'location' && scan.location && (
+                        <div className="space-y-1">
+                          <p className="text-tablet-xs font-medium">{scan.location.name}</p>
+                          <p className="text-tablet-xs opacity-80">
+                            {scan.location.zone} - Floor {scan.location.floor}
+                          </p>
+                        </div>
+                      )}
+                      
+                      {scan.type === 'user' && scan.user && (
+                        <div className="space-y-1">
+                          <p className="text-tablet-xs font-medium">{scan.user.name}</p>
+                          <p className="text-tablet-xs opacity-80 capitalize">
+                            {scan.user.role.replace('_', ' ')}
+                          </p>
+                        </div>
+                      )}
+                      
+                      <p className="text-tablet-xs opacity-40 mt-2 truncate">
+                        {scan.data}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );
