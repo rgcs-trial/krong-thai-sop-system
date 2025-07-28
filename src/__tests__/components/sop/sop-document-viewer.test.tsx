@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 import { SOPDocumentViewer } from '@/components/sop/sop-document-viewer';
 import { TestWrapper } from '@/src/__tests__/utils/test-utils';
 
