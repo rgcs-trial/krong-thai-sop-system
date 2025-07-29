@@ -14,7 +14,7 @@ import {
   Filter,
   Grid3X3,
   List,
-  Sort,
+  ArrowUpAZ,
   ChevronDown,
   Eye,
   Download,
@@ -304,7 +304,7 @@ export default function SOPCategoryPage({ params }: SOPCategoryPageProps) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" className="gap-2">
-                    <Sort className="w-4 h-4" />
+                    <ArrowUpAZ className="w-4 h-4" />
                     {t('sort.title')}
                     <ChevronDown className="w-4 h-4" />
                   </Button>
