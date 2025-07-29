@@ -273,6 +273,11 @@ export const dbHelpers = {
 };
 
 /**
+ * Export createClient function for API routes that need to create their own clients
+ */
+export { createClient } from '@supabase/supabase-js';
+
+/**
  * Type exports for use throughout the application
  */
 export type SupabaseClient = typeof supabase;
