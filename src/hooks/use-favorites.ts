@@ -52,10 +52,13 @@ export function useFavorites() {
   }, [favorites, isLoaded]);
 
   // Add item to favorites
-  const addToFavorites = useCallback((item: Omit<FavoriteItem, 'added_at'>) => {
+  const addToFavorites = useCallback((item: Omit<FavoriteItem, 'added_at' | 'lastAccessed' | 'addedAt'>) => {
+    const now = new Date().toISOString();
     const favoriteItem: FavoriteItem = {
       ...item,
-      added_at: new Date().toISOString()
+      added_at: now,
+      addedAt: now,
+      lastAccessed: now
     };
 
     setFavorites(prev => {
