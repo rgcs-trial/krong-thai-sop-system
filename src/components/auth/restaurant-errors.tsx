@@ -118,12 +118,12 @@ export function RestaurantErrorDisplay({
   const { title, description } = getErrorMessage(errorObj.code, errorObj.message);
 
   return (
-    <Alert variant="destructive" className={`border-red-200 bg-red-50 ${className}`}>
-      <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <Alert variant="destructive" className={`border-red-600 bg-red-50 ring-1 ring-red-200 ${className}`}>
+      <svg className="w-4 h-4 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
       </svg>
-      <AlertTitle className="text-red-800">{title}</AlertTitle>
-      <AlertDescription className="text-red-700 mt-2">
+      <AlertTitle className="text-red-900 font-bold">{title}</AlertTitle>
+      <AlertDescription className="text-red-800 mt-2">
         {description}
         
         {/* Show validation details if available */}
@@ -132,9 +132,9 @@ export function RestaurantErrorDisplay({
             {Object.entries(errorObj.details).map(([field, fieldErrors]: [string, any]) => {
               if (fieldErrors && typeof fieldErrors === 'object' && fieldErrors._errors) {
                 return (
-                  <div key={field} className="text-sm">
-                    <span className="font-medium capitalize">{field.replace('_', ' ')}:</span>{' '}
-                    {fieldErrors._errors.join(', ')}
+                  <div key={field} className="text-sm bg-red-100 p-2 rounded border-l-4 border-red-600">
+                    <span className="font-semibold capitalize text-red-900">{field.replace('_', ' ')}:</span>{' '}
+                    <span className="text-red-800">{fieldErrors._errors.join(', ')}</span>
                   </div>
                 );
               }
@@ -151,12 +151,12 @@ export function RestaurantErrorDisplay({
                 size="sm"
                 variant="outline"
                 onClick={onRetry}
-                className="border-red-300 text-red-700 hover:bg-red-100"
+                className="border-red-600 text-red-800 hover:bg-red-100 hover:text-red-900 focus:ring-red-500"
               >
                 <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                {locale === 'en' ? 'Retry' : 'ลองใหม่'}
+                {locale === 'en' ? 'Retry' : locale === 'fr' ? 'Réessayer' : 'ลองใหม่'}
               </Button>
             )}
             {onDismiss && (
@@ -164,9 +164,9 @@ export function RestaurantErrorDisplay({
                 size="sm"
                 variant="outline"
                 onClick={onDismiss}
-                className="border-red-300 text-red-700 hover:bg-red-100"
+                className="border-red-600 text-red-800 hover:bg-red-100 hover:text-red-900 focus:ring-red-500"
               >
-                {locale === 'en' ? 'Dismiss' : 'ปิด'}
+                {locale === 'en' ? 'Dismiss' : locale === 'fr' ? 'Fermer' : 'ปิด'}
               </Button>
             )}
           </div>
@@ -191,14 +191,14 @@ export function RestaurantSuccessDisplay({
   className = ''
 }: RestaurantSuccessDisplayProps) {
   return (
-    <Alert className={`border-green-200 bg-green-50 ${className}`}>
-      <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <Alert className={`border-green-600 bg-green-50 ring-1 ring-green-200 ${className}`}>
+      <svg className="w-4 h-4 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <AlertTitle className="text-green-800">
-        {locale === 'en' ? 'Success' : 'สำเร็จ'}
+      <AlertTitle className="text-green-900 font-bold">
+        {locale === 'en' ? 'Success' : locale === 'fr' ? 'Succès' : 'สำเร็จ'}
       </AlertTitle>
-      <AlertDescription className="text-green-700 mt-2">
+      <AlertDescription className="text-green-800 mt-2">
         {message}
         
         {onDismiss && (
@@ -206,9 +206,9 @@ export function RestaurantSuccessDisplay({
             size="sm"
             variant="outline"
             onClick={onDismiss}
-            className="mt-3 border-green-300 text-green-700 hover:bg-green-100"
+            className="mt-3 border-green-600 text-green-800 hover:bg-green-100 hover:text-green-900 focus:ring-green-500"
           >
-            {locale === 'en' ? 'Dismiss' : 'ปิด'}
+            {locale === 'en' ? 'Dismiss' : locale === 'fr' ? 'Fermer' : 'ปิด'}
           </Button>
         )}
       </AlertDescription>
