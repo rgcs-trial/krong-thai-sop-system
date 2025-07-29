@@ -322,5 +322,35 @@ export type ListQueryResult<T> = {
   error: string | null;
 };
 
+/**
+ * Export createClient function for API routes that need client-side supabase clients
+ * This creates a new client with the same configuration as our main client
+ */
+export function createClient() {
+  if (!supabaseUrl) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable');
+  }
+  
+  if (!supabaseAnonKey) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
+  }
+  
+  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false, // We handle sessions manually with PIN auth
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+    },
+    db: {
+      schema: 'public',
+    },
+    global: {
+      headers: {
+        'X-Client-Info': 'krong-thai-sop-system@1.0.0',
+      },
+    },
+  });
+}
+
 // Export types for external use
 export * from '@/types/supabase';
