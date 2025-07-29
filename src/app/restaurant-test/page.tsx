@@ -25,7 +25,7 @@ interface Restaurant {
 
 export default function RestaurantTestPage() {
   const [currentView, setCurrentView] = useState<'selector' | 'form' | 'test'>('test');
-  const [locale, setLocale] = useState<'en' | 'th'>('en');
+  const [locale, setLocale] = useState<'en' | 'fr'>('en');
   const [userRole, setUserRole] = useState<'admin' | 'manager'>('admin');
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
   const [testResult, setTestResult] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
