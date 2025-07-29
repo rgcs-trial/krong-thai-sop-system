@@ -447,6 +447,8 @@ class SearchCacheManager {
    * Clear oldest cache entries
    */
   private async clearOldestEntries(count: number): Promise<void> {
+    if (typeof window === 'undefined') return;
+    
     const cacheKeys = Object.keys(localStorage)
       .filter(key => key.startsWith(this.CACHE_PREFIX));
 
