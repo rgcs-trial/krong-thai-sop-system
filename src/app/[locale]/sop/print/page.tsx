@@ -158,7 +158,8 @@ const DEFAULT_PRINT_SETTINGS: PrintSettings = {
   colorMode: 'color',
 };
 
-export default function SOPPrintPage({ params }: SOPPrintPageProps) {
+// Main component that uses useSearchParams
+function SOPPrintContent({ params }: SOPPrintPageProps) {
   const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
   const [printSettings, setPrintSettings] = useState<PrintSettings>(DEFAULT_PRINT_SETTINGS);
   const [zoom, setZoom] = useState(100);
