@@ -142,17 +142,24 @@ export default function SOPAnalyticsPage({ params }: SOPAnalyticsPageProps) {
   const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
   const [timeRange, setTimeRange] = useState<'week' | 'month' | 'quarter' | 'year'>('month');
   const [analytics, setAnalytics] = useState<AnalyticsData>(MOCK_ANALYTICS);
+  const [isClient, setIsClient] = useState(false);
 
   const router = useRouter();
   const t = useTranslations('sop');
   const { user } = useAuthStore();
+
+  // Track client-side mounting
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Resolve params
   useEffect(() => {
     params.then(setResolvedParams);
   }, [params]);
 
-  if (!resolvedParams) {
+  // Show loading while params are resolving or client is not ready
+  if (!resolvedParams || !isClient) {
     return <div className="flex items-center justify-center min-h-screen">
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
     </div>;
