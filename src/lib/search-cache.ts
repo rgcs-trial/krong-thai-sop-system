@@ -350,7 +350,7 @@ class SearchCacheManager {
    * Save offline index to localStorage
    */
   private async saveOfflineIndex(): Promise<void> {
-    if (!this.offlineIndex) return;
+    if (!this.offlineIndex || typeof window === 'undefined') return;
 
     try {
       const serializable = {
