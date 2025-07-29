@@ -166,6 +166,7 @@ export default function SOPNotificationsPage({ params }: SOPNotificationsPagePro
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [showUnreadOnly, setShowUnreadOnly] = useState(false);
   const [activeTab, setActiveTab] = useState('all');
+  const [isClient, setIsClient] = useState(false);
 
   const router = useRouter();
   const t = useTranslations('sop');
