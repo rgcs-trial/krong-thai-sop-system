@@ -76,22 +76,24 @@ class SearchCacheManager {
       return memoryEntry.data;
     }
 
-    // Check localStorage cache
-    try {
-      const cachedData = localStorage.getItem(cacheKey);
-      if (cachedData) {
-        const entry: SearchCacheEntry = JSON.parse(cachedData);
-        if (this.isValidEntry(entry)) {
-          // Update memory cache
-          this.memoryCache.set(cacheKey, entry);
-          return entry.data;
-        } else {
-          // Remove expired entry
-          localStorage.removeItem(cacheKey);
+    // Check localStorage cache (only on client-side)
+    if (typeof window !== 'undefined') {
+      try {
+        const cachedData = localStorage.getItem(cacheKey);
+        if (cachedData) {
+          const entry: SearchCacheEntry = JSON.parse(cachedData);
+          if (this.isValidEntry(entry)) {
+            // Update memory cache
+            this.memoryCache.set(cacheKey, entry);
+            return entry.data;
+          } else {
+            // Remove expired entry
+            localStorage.removeItem(cacheKey);
+          }
         }
+      } catch (error) {
+        console.warn('Failed to read from search cache:', error);
       }
-    } catch (error) {
-      console.warn('Failed to read from search cache:', error);
     }
 
     return null;
