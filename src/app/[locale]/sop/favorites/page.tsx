@@ -94,17 +94,24 @@ export default function SOPFavoritesPage({ params }: SOPFavoritesPageProps) {
   const [selectedFavorites, setSelectedFavorites] = useState<Set<string>>(new Set());
   const [showCollections, setShowCollections] = useState(false);
   const [collections, setCollections] = useState<FavoriteCollection[]>(MOCK_COLLECTIONS);
+  const [isClient, setIsClient] = useState(false);
 
   const router = useRouter();
   const t = useTranslations('sop');
-  const { favorites, removeFavorite, toggleFavorite } = useFavorites();
+  const { favorites, removeFavorite, toggleFavorite, isLoaded } = useFavorites();
+
+  // Track client-side mounting
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Resolve params
   useEffect(() => {
     params.then(setResolvedParams);
   }, [params]);
 
-  if (!resolvedParams) {
+  // Show loading while params are resolving or client is not ready
+  if (!resolvedParams || !isClient || !isLoaded) {
     return <div className="flex items-center justify-center min-h-screen">
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
     </div>;
