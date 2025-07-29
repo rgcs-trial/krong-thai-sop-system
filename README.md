@@ -41,10 +41,11 @@ Use these credentials to test the PIN authentication system:
 - **Frontend**: Next.js 15.4.4 App Router, React 19.1.0, TypeScript 5.8.3
 - **Styling**: Tailwind CSS 4.1, shadcn/ui components, Recharts visualizations
 - **Database**: Supabase PostgreSQL with RLS, Real-time subscriptions (17 migrations)
-- **Auth**: Custom PIN-based system (4-digit PINs, 8-hour sessions) with comprehensive error handling
+- **Auth**: Custom PIN-based system (4-digit PINs, 8-hour sessions) with enhanced error handling
 - **State**: Zustand + TanStack Query + WebSocket integration
 - **Translation**: Database-driven bilingual EN/FR system with admin management interface
-- **Features**: Translation admin interface, Training system, Analytics dashboards, Restaurant management
+- **Accessibility**: WCAG AA compliant with enhanced contrast ratios and field-specific validation
+- **Features**: Restaurant management, Training system, Analytics dashboards, Real-time error feedback
 
 ## Key Features
 
