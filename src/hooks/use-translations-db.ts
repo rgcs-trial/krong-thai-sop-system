@@ -606,6 +606,9 @@ export function useTranslationLoader() {
   };
 }
 
+// Alias for useTranslations for backward compatibility with task components
+export const useTranslationsDB = useTranslations;
+
 // Utility for development and debugging
 export const translationDevUtils = {
   /**
