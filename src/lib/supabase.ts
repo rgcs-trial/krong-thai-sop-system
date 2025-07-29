@@ -23,7 +23,7 @@ if (!supabaseAnonKey) {
  * Client-side Supabase client (public, anonymous key)
  * Use this in client components and API routes that don't require elevated permissions
  */
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+export const supabase = createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     // Disable automatic auth since we're using custom PIN authentication
     autoRefreshToken: false,
