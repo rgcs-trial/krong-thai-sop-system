@@ -411,6 +411,8 @@ class SearchCacheManager {
    * Clean up old cache entries
    */
   private async cleanupOldEntries(): Promise<void> {
+    if (typeof window === 'undefined') return;
+    
     const cacheKeys = Object.keys(localStorage)
       .filter(key => key.startsWith(this.CACHE_PREFIX));
 
