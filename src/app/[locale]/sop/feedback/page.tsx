@@ -148,8 +148,6 @@ function FeedbackContent({ locale }: { locale: string }) {
     }
   }, [searchParams]);
 
-  const { locale } = resolvedParams;
-
   const handleStepToggle = (stepId: string) => {
     const newSteps = feedback.steps_affected.includes(stepId)
       ? feedback.steps_affected.filter(id => id !== stepId)
