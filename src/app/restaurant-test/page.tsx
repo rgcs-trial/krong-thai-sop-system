@@ -295,7 +295,8 @@ export default function RestaurantTestPage() {
                   variant="outline"
                   onClick={() => testApiEndpoint('POST', '/api/restaurants', {
                     name: '', // Missing required field
-                    name_th: 'ร้านทดสอบ'
+                    name_fr: 'Restaurant de Test',
+                    timezone: 'America/New_York'
                   })}
                 >
                   Test Missing Name
@@ -305,8 +306,20 @@ export default function RestaurantTestPage() {
                   variant="outline"
                   onClick={() => testApiEndpoint('POST', '/api/restaurants', {
                     name: 'Test Restaurant',
-                    name_th: 'ร้านทดสอบ',
-                    email: 'invalid-email' // Invalid email
+                    name_fr: '', // Missing required French name
+                    timezone: 'America/New_York'
+                  })}
+                >
+                  Test Missing French Name
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => testApiEndpoint('POST', '/api/restaurants', {
+                    name: 'Test Restaurant',
+                    name_fr: 'Restaurant de Test',
+                    email: 'invalid-email', // Invalid email
+                    timezone: 'America/New_York'
                   })}
                 >
                   Test Invalid Email
@@ -316,8 +329,21 @@ export default function RestaurantTestPage() {
                   variant="outline"
                   onClick={() => testApiEndpoint('POST', '/api/restaurants', {
                     name: 'Test Restaurant',
-                    name_th: 'ร้านทดสอบ',
-                    capacity: -5 // Invalid capacity
+                    name_fr: 'Restaurant de Test',
+                    phone: 'invalid-phone-format', // Invalid phone
+                    timezone: 'America/New_York'
+                  })}
+                >
+                  Test Invalid Phone
+                </Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => testApiEndpoint('POST', '/api/restaurants', {
+                    name: 'Test Restaurant',
+                    name_fr: 'Restaurant de Test',
+                    capacity: -5, // Invalid capacity
+                    timezone: 'America/New_York'
                   })}
                 >
                   Test Invalid Capacity
