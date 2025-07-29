@@ -36,7 +36,10 @@ class SearchCacheManager {
   private offlineIndex: OfflineSearchIndex | null = null;
 
   constructor() {
-    this.initializeOfflineIndex();
+    // Only initialize on client-side
+    if (typeof window !== 'undefined') {
+      this.initializeOfflineIndex();
+    }
   }
 
   /**
