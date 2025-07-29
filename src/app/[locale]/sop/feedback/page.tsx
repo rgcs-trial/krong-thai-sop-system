@@ -620,7 +620,7 @@ function FeedbackContent({ locale }: { locale: string }) {
   );
 }
 
-export default function SOPFeedbackPage({ params }: SOPFeedbackPageProps) {
+function SOPFeedbackContent({ params }: SOPFeedbackPageProps) {
   const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
   const [isClient, setIsClient] = useState(false);
 
