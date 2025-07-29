@@ -45,7 +45,7 @@ export const supabase = createSupabaseClient<Database>(supabaseUrl, supabaseAnon
  * Only available on the server side
  */
 export const supabaseAdmin = supabaseServiceKey
-  ? createClient<Database>(supabaseUrl, supabaseServiceKey, {
+  ? createSupabaseClient<Database>(supabaseUrl, supabaseServiceKey, {
       auth: {
         autoRefreshToken: false,
         persistSession: false,
