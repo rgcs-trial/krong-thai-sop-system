@@ -463,6 +463,7 @@ export function RestaurantForm({
                     placeholder={locale === 'en' ? 'restaurant@example.com' : 'restaurant@example.com'}
                     error={errors.email}
                     helpText={locale === 'en' ? 'Primary contact email for the restaurant' : 'E-mail de contact principal du restaurant'}
+                    success={formData.email && !errors.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)}
                   />
                 </FormGrid>
               </FormSection>
