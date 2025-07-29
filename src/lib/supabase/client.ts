@@ -47,7 +47,7 @@ export const supabaseAdmin: SupabaseClient<Database> = (() => {
     return supabase; // Fallback to regular client
   }
 
-  return createClient(supabaseUrl, supabaseServiceKey, {
+  return createSupabaseClient(supabaseUrl, supabaseServiceKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
