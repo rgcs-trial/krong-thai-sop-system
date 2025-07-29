@@ -250,7 +250,7 @@ export function RestaurantSuccessDisplay({
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       <AlertTitle className="text-green-900 font-bold">
-        {locale === 'en' ? 'Success' : locale === 'fr' ? 'Succès' : 'สำเร็จ'}
+        {locale === 'en' ? 'Success' : 'Succès'}
       </AlertTitle>
       <AlertDescription className="text-green-800 mt-2">
         {message}
