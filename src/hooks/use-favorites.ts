@@ -88,7 +88,7 @@ export function useFavorites() {
   }, [favorites, addToFavorites, removeFromFavorites]);
 
   // Check if item is favorite
-  const isFavorite = useCallback((id: string, type: 'category' | 'document') => {
+  const isFavorite = useCallback((id: string, type: 'category' | 'document' | 'sop') => {
     return favorites.some(fav => fav.id === id && fav.type === type);
   }, [favorites]);
 
