@@ -189,6 +189,11 @@ export function useFavorites() {
     });
   }, []);
 
+  // Remove favorite by ID (for compatibility with existing page)
+  const removeFavorite = useCallback((id: string) => {
+    setFavorites(prev => prev.filter(fav => fav.id !== id));
+  }, []);
+
   return {
     favorites,
     favoriteCategories,
@@ -196,6 +201,7 @@ export function useFavorites() {
     isLoaded,
     addToFavorites,
     removeFromFavorites,
+    removeFavorite,
     toggleFavorite,
     isFavorite,
     getFavoritesByType,
