@@ -132,17 +132,25 @@ export default function SOPOfflinePage({ params }: SOPOfflinePageProps) {
   const [storageUsed, setStorageUsed] = useState(16.4); // MB
   const [isDownloading, setIsDownloading] = useState<Set<string>>(new Set());
   const [isSyncing, setIsSyncing] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   const router = useRouter();
   const t = useTranslations('sop');
+
+  // Track client-side mounting
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Resolve params
   useEffect(() => {
     params.then(setResolvedParams);
   }, [params]);
 
-  // Monitor online status
+  // Monitor online status - only on client
   useEffect(() => {
+    if (!isClient || typeof window === 'undefined' || typeof navigator === 'undefined') return;
+    
     const handleOnlineStatus = () => setIsOnline(navigator.onLine);
     handleOnlineStatus(); // Set initial state
     window.addEventListener('online', handleOnlineStatus);
@@ -151,9 +159,10 @@ export default function SOPOfflinePage({ params }: SOPOfflinePageProps) {
       window.removeEventListener('online', handleOnlineStatus);
       window.removeEventListener('offline', handleOnlineStatus);
     };
-  }, []);
+  }, [isClient]);
 
-  if (!resolvedParams) {
+  // Show loading while params are resolving or client is not ready
+  if (!resolvedParams || !isClient) {
     return <div className="flex items-center justify-center min-h-screen">
       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
     </div>;
