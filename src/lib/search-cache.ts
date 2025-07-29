@@ -125,22 +125,24 @@ class SearchCacheManager {
     // Update memory cache
     this.memoryCache.set(cacheKey, entry);
 
-    // Update localStorage cache
-    try {
-      localStorage.setItem(cacheKey, JSON.stringify(entry));
-      
-      // Cleanup old entries if we exceed max entries
-      await this.cleanupOldEntries();
-    } catch (error) {
-      console.warn('Failed to write to search cache:', error);
-      
-      // If localStorage is full, try to free some space
-      if (error instanceof DOMException && error.code === 22) {
-        await this.clearOldestEntries(10);
-        try {
-          localStorage.setItem(cacheKey, JSON.stringify(entry));
-        } catch (retryError) {
-          console.error('Failed to cache search results after cleanup:', retryError);
+    // Update localStorage cache (only on client-side)
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify(entry));
+        
+        // Cleanup old entries if we exceed max entries
+        await this.cleanupOldEntries();
+      } catch (error) {
+        console.warn('Failed to write to search cache:', error);
+        
+        // If localStorage is full, try to free some space
+        if (error instanceof DOMException && error.code === 22) {
+          await this.clearOldestEntries(10);
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify(entry));
+          } catch (retryError) {
+            console.error('Failed to cache search results after cleanup:', retryError);
+          }
         }
       }
     }
