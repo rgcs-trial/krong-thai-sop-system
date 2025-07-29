@@ -60,6 +60,7 @@ export function FormLabel({ required, children, className, ...props }: FormLabel
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
+  success?: boolean;
   required?: boolean;
   helpText?: string;
 }
@@ -67,6 +68,7 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export function FormInput({ 
   label, 
   error, 
+  success, 
   required, 
   helpText, 
   className,
@@ -74,7 +76,7 @@ export function FormInput({
   ...props 
 }: FormInputProps) {
   return (
-    <FormField error={error}>
+    <FormField error={error} success={success}>
       <FormLabel htmlFor={id} required={required}>
         {label}
       </FormLabel>
@@ -82,6 +84,7 @@ export function FormInput({
         id={id}
         className={cn(
           error && "border-red-500 focus:border-red-500 focus:ring-red-500",
+          success && !error && "border-green-500 focus:border-green-500 focus:ring-green-500",
           className
         )}
         aria-describedby={helpText ? `${id}-help` : undefined}
