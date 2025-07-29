@@ -115,42 +115,42 @@ export function RestaurantErrorDisplay({
           description: fallbackMessage || 'An unexpected error occurred.'
         }
       },
-      th: {
+      fr: {
         VALIDATION_ERROR: {
-          title: 'ข้อมูลไม่ถูกต้อง',
-          description: 'กรุณาตรวจสอบแบบฟอร์มและแก้ไขข้อมูลที่ไม่ถูกต้อง'
+          title: 'Erreur de validation',
+          description: 'Veuillez vérifier le formulaire et corriger les champs invalides.'
         },
         CREATE_FAILED: {
-          title: 'สร้างไม่สำเร็จ',
-          description: 'ไม่สามารถสร้างสถานที่ร้านอาหารได้ กรุณาลองใหม่อีกครั้ง'
+          title: 'Échec de la création',
+          description: 'Impossible de créer l\'emplacement du restaurant. Veuillez réessayer.'
         },
         UPDATE_FAILED: {
-          title: 'อัปเดตไม่สำเร็จ',
-          description: 'ไม่สามารถอัปเดตสถานที่ร้านอาหารได้ กรุณาลองใหม่อีกครั้ง'
+          title: 'Échec de la mise à jour',
+          description: 'Impossible de mettre à jour l\'emplacement du restaurant. Veuillez réessayer.'
         },
         DELETE_FAILED: {
-          title: 'ลบไม่สำเร็จ',
-          description: 'ไม่สามารถลบสถานที่ร้านอาหารได้ กรุณาลองใหม่อีกครั้ง'
+          title: 'Échec de la suppression',
+          description: 'Impossible de supprimer l\'emplacement du restaurant. Veuillez réessayer.'
         },
         SERVICE_DOWN: {
-          title: 'บริการไม่พร้อมใช้งาน',
-          description: 'บริการไม่พร้อมใช้งานชั่วคราว กรุณาลองใหม่ภายหลัง'
+          title: 'Service indisponible',
+          description: 'Le service est temporairement indisponible. Veuillez réessayer plus tard.'
         },
         MISSING_ID: {
-          title: 'คำขอไม่ถูกต้อง',
-          description: 'ต้องระบุรหัสร้านอาหารสำหรับการดำเนินการนี้'
+          title: 'Demande invalide',
+          description: 'L\'ID du restaurant est requis pour cette opération.'
         },
         NETWORK_ERROR: {
-          title: 'ข้อผิดพลาดเครือข่าย',
-          description: 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่อ'
+          title: 'Erreur réseau',
+          description: 'Impossible de se connecter au serveur. Veuillez vérifier votre connexion.'
         },
         PERMISSION_DENIED: {
-          title: 'ไม่มีสิทธิ์เข้าถึง',
-          description: 'คุณไม่มีสิทธิ์ในการดำเนินการนี้'
+          title: 'Autorisation refusée',
+          description: 'Vous n\'avez pas l\'autorisation d\'effectuer cette action.'
         },
         UNKNOWN: {
-          title: 'เกิดข้อผิดพลาด',
-          description: fallbackMessage || 'เกิดข้อผิดพลาดที่ไม่คาดคิด'
+          title: 'Erreur',
+          description: fallbackMessage || 'Une erreur inattendue s\'est produite.'
         }
       }
     };
