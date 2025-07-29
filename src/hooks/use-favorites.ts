@@ -4,11 +4,16 @@ import { useState, useEffect, useCallback } from 'react';
 
 export interface FavoriteItem {
   id: string;
-  type: 'category' | 'document';
+  type: 'category' | 'document' | 'sop';
   title: string;
-  title_th: string;
+  title_th?: string;
+  category?: string;
   category_id?: string;
-  added_at: string;
+  difficulty?: 'easy' | 'medium' | 'hard';
+  collection_id?: string;
+  lastAccessed: string;
+  addedAt: string;
+  added_at: string; // Keep for backward compatibility
 }
 
 const FAVORITES_STORAGE_KEY = 'krong-thai-sop-favorites';
