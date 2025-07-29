@@ -335,7 +335,7 @@ export function createClient() {
     throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
   }
   
-  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: false, // We handle sessions manually with PIN auth
       autoRefreshToken: false,
