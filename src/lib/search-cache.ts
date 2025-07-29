@@ -152,6 +152,12 @@ class SearchCacheManager {
    * Initialize offline search index for local search capability
    */
   private async initializeOfflineIndex(): Promise<void> {
+    // Only initialize on client-side
+    if (typeof window === 'undefined') {
+      this.createEmptyIndex();
+      return;
+    }
+
     try {
       const indexData = localStorage.getItem(this.INDEX_KEY);
       if (indexData) {
