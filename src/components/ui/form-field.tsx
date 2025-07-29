@@ -21,7 +21,7 @@ export function FormField({ children, error, className }: FormFieldProps) {
     <div className={cn("space-y-2", className)}>
       {children}
       {error && (
-        <p className="text-sm text-red-600 mt-1" role="alert">
+        <p className="text-sm text-red-800 bg-red-50 px-2 py-1 rounded border-l-4 border-red-500 mt-1" role="alert">
           {error}
         </p>
       )}
@@ -38,11 +38,11 @@ interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
 export function FormLabel({ required, children, className, ...props }: FormLabelProps) {
   return (
     <Label 
-      className={cn("text-sm font-medium text-gray-900 dark:text-gray-100", className)}
+      className={cn("text-sm font-semibold text-krong-black dark:text-krong-white", className)}
       {...props}
     >
       {children}
-      {required && <span className="text-red-500 ml-1">*</span>}
+      {required && <span className="text-krong-red ml-1 font-bold">*</span>}
     </Label>
   );
 }
@@ -81,7 +81,7 @@ export function FormInput({
         {...props}
       />
       {helpText && (
-        <p id={`${id}-help`} className="text-sm text-gray-500">
+        <p id={`${id}-help`} className="text-sm text-slate-600 dark:text-slate-400">
           {helpText}
         </p>
       )}
@@ -153,7 +153,7 @@ export function FormSelect({
         </SelectContent>
       </Select>
       {helpText && (
-        <p id={`${id}-help`} className="text-sm text-gray-500">
+        <p id={`${id}-help`} className="text-sm text-slate-600 dark:text-slate-400">
           {helpText}
         </p>
       )}
@@ -195,11 +195,11 @@ export function FormSection({ title, description, children, className }: FormSec
   return (
     <div className={cn("space-y-4", className)}>
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+        <h3 className="text-lg font-bold text-krong-black dark:text-krong-white">
           {title}
         </h3>
         {description && (
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-sm text-slate-700 dark:text-slate-300 mt-1">
             {description}
           </p>
         )}
@@ -247,7 +247,7 @@ export function FormTextarea({
         {...props}
       />
       {helpText && (
-        <p id={`${id}-help`} className="text-sm text-gray-500">
+        <p id={`${id}-help`} className="text-sm text-slate-600 dark:text-slate-400">
           {helpText}
         </p>
       )}
