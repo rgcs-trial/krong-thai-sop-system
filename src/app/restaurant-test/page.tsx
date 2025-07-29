@@ -257,12 +257,18 @@ export default function RestaurantTestPage() {
                 variant="outline"
                 onClick={() => testApiEndpoint('POST', '/api/restaurants', {
                   name: 'Test Restaurant',
-                  name_th: 'ร้านทดสอบ',
-                  address: '123 Test Street',
-                  address_th: '123 ถนนทดสอบ',
-                  phone: '+66123456789',
+                  name_fr: 'Restaurant de Test',
+                  street_address: '123 Test Street',
+                  street_address_fr: '123 Rue de Test',
+                  city: 'Test City',
+                  city_fr: 'Ville de Test',
+                  state_province: 'Test State',
+                  state_province_fr: 'État de Test',
+                  postal_code: '12345',
+                  country: 'US',
+                  phone: '+1 (555) 123-4567',
                   email: 'test@restaurant.com',
-                  timezone: 'Asia/Bangkok',
+                  timezone: 'America/New_York',
                   capacity: 50,
                   operational_hours: {
                     monday: { open: '09:00', close: '22:00', closed: false },
