@@ -220,7 +220,7 @@ export default function SOPNotificationsPage({ params }: SOPNotificationsPagePro
     });
   };
 
-  const handleNotificationClick = (notification: Notification) => {
+  const handleNotificationClick = (notification: SOPNotification) => {
     if (!notification.is_read) {
       handleMarkAsRead(notification.id);
     }
