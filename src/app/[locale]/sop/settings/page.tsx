@@ -153,10 +153,11 @@ export default function SOPSettingsPage({ params }: SOPSettingsPageProps) {
       const savedSettings = localStorage.getItem('sop-settings');
       if (savedSettings) {
         try {
-        const parsed = JSON.parse(savedSettings);
-        setSettings({ ...DEFAULT_SETTINGS, ...parsed });
-      } catch (error) {
-        console.error('Error loading settings:', error);
+          const parsed = JSON.parse(savedSettings);
+          setSettings({ ...DEFAULT_SETTINGS, ...parsed });
+        } catch (error) {
+          console.error('Error loading settings:', error);
+        }
       }
     }
   }, []);
