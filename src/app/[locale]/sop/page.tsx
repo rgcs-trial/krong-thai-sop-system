@@ -51,25 +51,34 @@ export default function SOPMainHub({ params }: SOPMainHubProps) {
   const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isOnline, setIsOnline] = useState(true);
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const t = useTranslations('sop');
   const { user } = useAuthStore();
+
+  // Track client-side mounting
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Resolve params
   useEffect(() => {
     params.then(setResolvedParams);
   }, [params]);
 
-  // Monitor online status
+  // Monitor online status - only on client
   useEffect(() => {
+    if (!isClient || typeof window === 'undefined' || typeof navigator === 'undefined') return;
+    
     const handleOnlineStatus = () => setIsOnline(navigator.onLine);
+    handleOnlineStatus(); // Set initial state
     window.addEventListener('online', handleOnlineStatus);
     window.addEventListener('offline', handleOnlineStatus);
     return () => {
       window.removeEventListener('online', handleOnlineStatus);
       window.removeEventListener('offline', handleOnlineStatus);
     };
-  }, []);
+  }, [isClient]);
 
   if (!resolvedParams) {
     return <div className="flex items-center justify-center min-h-screen">
