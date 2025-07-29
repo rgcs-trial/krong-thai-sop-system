@@ -480,14 +480,17 @@ class SearchCacheManager {
     // Clear memory cache
     this.memoryCache.clear();
 
-    // Clear localStorage cache
-    const cacheKeys = Object.keys(localStorage)
-      .filter(key => key.startsWith(this.CACHE_PREFIX));
-    
-    cacheKeys.forEach(key => localStorage.removeItem(key));
+    // Clear localStorage cache (only on client-side)
+    if (typeof window !== 'undefined') {
+      const cacheKeys = Object.keys(localStorage)
+        .filter(key => key.startsWith(this.CACHE_PREFIX));
+      
+      cacheKeys.forEach(key => localStorage.removeItem(key));
 
-    // Clear offline index
-    localStorage.removeItem(this.INDEX_KEY);
+      // Clear offline index
+      localStorage.removeItem(this.INDEX_KEY);
+    }
+    
     this.createEmptyIndex();
   }
 
