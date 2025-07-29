@@ -295,7 +295,7 @@ export function useRestaurantOperations(locale: 'en' | 'fr') {
     } catch (err: any) {
       const errorObj: RestaurantError = {
         code: err.code || 'UNKNOWN',
-        message: err.message || (locale === 'en' ? 'An unexpected error occurred' : 'เกิดข้อผิดพลาดที่ไม่คาดคิด'),
+        message: err.message || (locale === 'en' ? 'An unexpected error occurred' : 'Une erreur inattendue s\'est produite'),
         details: err.details
       };
       
