@@ -4,6 +4,11 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./src/lib/i18n.ts');
 
 const nextConfig: NextConfig = {
+  // Skip static optimization for client-heavy pages
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  generateBuildId: async () => {
+    return 'krong-thai-build-' + new Date().toISOString().slice(0, 10);
+  },
   experimental: {
     // Enable React Compiler for better performance (disabled temporarily for build test)
     // reactCompiler: true,
