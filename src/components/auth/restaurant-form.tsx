@@ -452,6 +452,7 @@ export function RestaurantForm({
                     placeholder={locale === 'en' ? '+1 (555) 123-4567' : '+1 (555) 123-4567'}
                     error={errors.phone}
                     helpText={locale === 'en' ? 'Include country and area code' : 'Inclure le code pays et régional'}
+                    success={formData.phone && !errors.phone && /^\+?[\d\s-()]+$/.test(formData.phone)}
                   />
 
                   <FormInput
