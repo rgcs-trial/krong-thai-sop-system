@@ -37,7 +37,7 @@ export function useFavorites() {
 
   // Save favorites to localStorage whenever favorites change
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && typeof window !== 'undefined') {
       try {
         localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
       } catch (error) {
