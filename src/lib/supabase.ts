@@ -3,7 +3,7 @@
  * Handles database connections and type-safe queries
  */
 
-import { createClient } from '@supabase/supabase-js';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/types/supabase';
 
 // Environment variables validation
