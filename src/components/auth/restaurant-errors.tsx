@@ -262,7 +262,7 @@ export function RestaurantSuccessDisplay({
             onClick={onDismiss}
             className="mt-3 border-green-600 text-green-800 hover:bg-green-100 hover:text-green-900 focus:ring-green-500"
           >
-            {locale === 'en' ? 'Dismiss' : locale === 'fr' ? 'Fermer' : 'ปิด'}
+            {locale === 'en' ? 'Dismiss' : 'Fermer'}
           </Button>
         )}
       </AlertDescription>
