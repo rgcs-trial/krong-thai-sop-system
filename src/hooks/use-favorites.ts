@@ -20,10 +20,13 @@ export function useFavorites() {
   // Load favorites from localStorage on mount
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(FAVORITES_STORAGE_KEY);
-      if (stored) {
-        const parsedFavorites = JSON.parse(stored) as FavoriteItem[];
-        setFavorites(parsedFavorites);
+      // Check if we're in the browser before accessing localStorage
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem(FAVORITES_STORAGE_KEY);
+        if (stored) {
+          const parsedFavorites = JSON.parse(stored) as FavoriteItem[];
+          setFavorites(parsedFavorites);
+        }
       }
     } catch (error) {
       console.error('Error loading favorites from localStorage:', error);
