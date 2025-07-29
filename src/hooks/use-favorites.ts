@@ -93,7 +93,7 @@ export function useFavorites() {
   }, [favorites]);
 
   // Get favorites by type
-  const getFavoritesByType = useCallback((type: 'category' | 'document') => {
+  const getFavoritesByType = useCallback((type: 'category' | 'document' | 'sop') => {
     return favorites
       .filter(fav => fav.type === type)
       .sort((a, b) => new Date(b.added_at).getTime() - new Date(a.added_at).getTime());
