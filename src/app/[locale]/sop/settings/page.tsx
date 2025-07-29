@@ -178,7 +178,9 @@ export default function SOPSettingsPage({ params }: SOPSettingsPageProps) {
     setIsSaving(true);
     try {
       // In a real app, save to API
-      localStorage.setItem('sop-settings', JSON.stringify(settings));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('sop-settings', JSON.stringify(settings));
+      }
       setHasChanges(false);
       toast({
         title: t('settings.saved'),
