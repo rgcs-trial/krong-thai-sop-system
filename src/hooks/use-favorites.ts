@@ -77,7 +77,7 @@ export function useFavorites() {
   }, []);
 
   // Toggle favorite status
-  const toggleFavorite = useCallback((item: Omit<FavoriteItem, 'added_at'>) => {
+  const toggleFavorite = useCallback((item: Omit<FavoriteItem, 'added_at' | 'lastAccessed' | 'addedAt'>) => {
     const exists = favorites.some(fav => fav.id === item.id && fav.type === item.type);
     
     if (exists) {
