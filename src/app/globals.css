@@ -45,14 +45,14 @@ html {
   --primary-foreground: var(--krong-white);
   --secondary: var(--earthen-beige);
   --secondary-foreground: var(--krong-black);
-  --muted: 210 40% 95%;
-  --muted-foreground: var(--krong-black);
+  --muted: 0 0% 96%; /* Improved light background for better contrast */
+  --muted-foreground: 0 0% 20%; /* Much darker text for better readability (WCAG AA) */
   --accent: var(--golden-saffron);
   --accent-foreground: var(--krong-black);
-  --destructive: 0 84.2% 60.2%;
+  --destructive: 0 60% 45%; /* Darker red for better contrast */
   --destructive-foreground: var(--krong-white);
-  --border: 210 40% 85%;
-  --input: 210 40% 90%;
+  --border: 0 0% 75%; /* Darker border for better visibility */
+  --input: 0 0% 88%; /* Slightly darker input background */
   --ring: var(--krong-red);
   --radius: 0.75rem;
 }
@@ -70,13 +70,13 @@ html {
     --secondary: 30 25% 15%;
     --secondary-foreground: var(--krong-white);
     --muted: 30 25% 15%;
-    --muted-foreground: var(--krong-white);
+    --muted-foreground: 0 0% 85%; /* Better contrast in dark mode */
     --accent: var(--golden-saffron);
     --accent-foreground: var(--krong-black);
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 75% 60%; /* Brighter red for dark mode visibility */
     --destructive-foreground: var(--krong-white);
-    --border: 30 25% 25%;
-    --input: 30 25% 20%;
+    --border: 30 25% 35%; /* Lighter border for dark mode */
+    --input: 30 25% 25%; /* Better input contrast in dark mode */
     --ring: var(--krong-red);
   }
 }
