@@ -269,6 +269,13 @@ export const useAuthStore = create<AuthStore>()(
       // Device actions
       generateDeviceFingerprint: async (): Promise<string> => {
         try {
+          // Check if we're in the browser environment
+          if (typeof window === 'undefined' || typeof navigator === 'undefined' || typeof screen === 'undefined') {
+            const ssrFingerprint = 'ssr-fingerprint';
+            set({ deviceFingerprint: ssrFingerprint });
+            return ssrFingerprint;
+          }
+
           // Security disabled during development
           const fingerprint = 'development-fingerprint'; /*Security.Device.createFingerprint({
             screenWidth: screen.width,
@@ -291,7 +298,13 @@ export const useAuthStore = create<AuthStore>()(
 
         } catch (error) {
           console.error('Error generating device fingerprint:', error);
-          // Fallback to a simple fingerprint
+          // Fallback to a simple fingerprint - safe for SSR
+          if (typeof window === 'undefined') {
+            const ssrFallback = 'ssr-fallback';
+            set({ deviceFingerprint: ssrFallback });
+            return ssrFallback;
+          }
+          
           const simple = `${screen.width}x${screen.height}-${navigator.platform}-${Date.now()}`;
           const fallbackHash = btoa(simple);
           set({ deviceFingerprint: fallbackHash });
