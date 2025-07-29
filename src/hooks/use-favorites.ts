@@ -111,7 +111,7 @@ export function useFavorites() {
   }, []);
 
   // Clear favorites by type
-  const clearFavoritesByType = useCallback((type: 'category' | 'document') => {
+  const clearFavoritesByType = useCallback((type: 'category' | 'document' | 'sop') => {
     setFavorites(prev => prev.filter(fav => fav.type !== type));
   }, []);
 
