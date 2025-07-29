@@ -499,8 +499,9 @@ class SearchCacheManager {
    */
   getCacheStats() {
     const memoryCacheSize = this.memoryCache.size;
-    const localStorageCacheSize = Object.keys(localStorage)
-      .filter(key => key.startsWith(this.CACHE_PREFIX)).length;
+    const localStorageCacheSize = typeof window !== 'undefined' 
+      ? Object.keys(localStorage).filter(key => key.startsWith(this.CACHE_PREFIX)).length
+      : 0;
     const offlineDocuments = this.offlineIndex?.documents.size || 0;
     const offlineIndexSize = this.offlineIndex ? 
       this.offlineIndex.titleIndex.size + 
