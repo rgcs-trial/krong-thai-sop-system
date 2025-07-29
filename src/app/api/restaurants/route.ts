@@ -12,19 +12,25 @@ import { z } from 'zod';
 
 // Validation schemas
 const CreateRestaurantSchema = z.object({
-  name: z.string().min(1, 'Restaurant name is required').max(255),
-  name_th: z.string().min(1, 'Thai restaurant name is required').max(255),
-  address: z.string().optional(),
-  address_th: z.string().optional(),
-  phone: z.string().optional(),
-  email: z.string().email('Invalid email format').optional(),
+  name: z.string().min(1, 'Restaurant name (English) is required').max(255, 'Restaurant name must be less than 255 characters'),
+  name_fr: z.string().min(1, 'Restaurant name (French) is required').max(255, 'French restaurant name must be less than 255 characters'),
+  street_address: z.string().optional(),
+  street_address_fr: z.string().optional(),
+  city: z.string().optional(),
+  city_fr: z.string().optional(),
+  state_province: z.string().optional(),
+  state_province_fr: z.string().optional(),
+  postal_code: z.string().optional(),
+  country: z.string().optional(),
+  phone: z.string().regex(/^\+?[\d\s\-()]+$/, 'Invalid phone number format').optional().or(z.literal('')),
+  email: z.string().email('Invalid email address format').optional().or(z.literal('')),
   timezone: z.string().min(1, 'Timezone is required'),
   operational_hours: z.record(z.string(), z.object({
-    open: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
-    close: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format'),
+    open: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format (use HH:MM)'),
+    close: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid time format (use HH:MM)'),
     closed: z.boolean().optional()
   })).optional(),
-  capacity: z.number().min(1, 'Capacity must be at least 1').optional(),
+  capacity: z.number().min(1, 'Capacity must be at least 1').max(1000, 'Capacity cannot exceed 1000').optional(),
   settings: z.record(z.string(), z.any()).optional()
 });
 
@@ -180,6 +186,15 @@ export async function POST(request: NextRequest) {
 
     const restaurantData = validationResult.data;
 
+    // Build address from components
+    const address = [restaurantData.street_address, restaurantData.city, restaurantData.state_province, restaurantData.postal_code, restaurantData.country]
+      .filter(Boolean)
+      .join(', ');
+    
+    const address_fr = [restaurantData.street_address_fr, restaurantData.city_fr, restaurantData.state_province_fr, restaurantData.postal_code, restaurantData.country]
+      .filter(Boolean)
+      .join(', ');
+
     // Build settings object
     const settings = {
       operational_hours: restaurantData.operational_hours || {},
@@ -192,11 +207,11 @@ export async function POST(request: NextRequest) {
       .from('restaurants')
       .insert({
         name: restaurantData.name,
-        name_th: restaurantData.name_th,
-        address: restaurantData.address,
-        address_th: restaurantData.address_th,
-        phone: restaurantData.phone,
-        email: restaurantData.email,
+        name_th: restaurantData.name_fr, // Store French name in name_th field for now
+        address: address || null,
+        address_th: address_fr || null,
+        phone: restaurantData.phone || null,
+        email: restaurantData.email || null,
         timezone: restaurantData.timezone,
         settings,
         is_active: true
@@ -294,11 +309,28 @@ export async function PUT(request: NextRequest) {
     const updateData: any = {};
     
     if (restaurantData.name) updateData.name = restaurantData.name;
-    if (restaurantData.name_th) updateData.name_th = restaurantData.name_th;
-    if (restaurantData.address !== undefined) updateData.address = restaurantData.address;
-    if (restaurantData.address_th !== undefined) updateData.address_th = restaurantData.address_th;
-    if (restaurantData.phone !== undefined) updateData.phone = restaurantData.phone;
-    if (restaurantData.email !== undefined) updateData.email = restaurantData.email;
+    if (restaurantData.name_fr) updateData.name_th = restaurantData.name_fr; // Store French name in name_th field
+    
+    // Build address from components if provided
+    if (restaurantData.street_address !== undefined || restaurantData.city !== undefined || 
+        restaurantData.state_province !== undefined || restaurantData.postal_code !== undefined || 
+        restaurantData.country !== undefined) {
+      const address = [restaurantData.street_address, restaurantData.city, restaurantData.state_province, restaurantData.postal_code, restaurantData.country]
+        .filter(Boolean)
+        .join(', ');
+      updateData.address = address || null;
+    }
+    
+    if (restaurantData.street_address_fr !== undefined || restaurantData.city_fr !== undefined || 
+        restaurantData.state_province_fr !== undefined) {
+      const address_fr = [restaurantData.street_address_fr, restaurantData.city_fr, restaurantData.state_province_fr, restaurantData.postal_code, restaurantData.country]
+        .filter(Boolean)
+        .join(', ');
+      updateData.address_th = address_fr || null;
+    }
+    
+    if (restaurantData.phone !== undefined) updateData.phone = restaurantData.phone || null;
+    if (restaurantData.email !== undefined) updateData.email = restaurantData.email || null;
     if (restaurantData.timezone) updateData.timezone = restaurantData.timezone;
     
     // Handle settings updates
