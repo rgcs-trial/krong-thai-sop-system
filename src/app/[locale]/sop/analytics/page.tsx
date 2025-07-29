@@ -32,23 +32,24 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/lib/stores/auth-store';
-import { 
-  LineChart, 
-  Line, 
-  AreaChart, 
-  Area, 
-  BarChart, 
-  Bar, 
-  PieChart, 
-  Pie, 
-  Cell,
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  Legend, 
-  ResponsiveContainer 
-} from 'recharts';
+import dynamic from 'next/dynamic';
+
+// Dynamically import Recharts to avoid SSR issues
+const LineChart = dynamic(() => import('recharts').then(mod => ({ default: mod.LineChart })), { ssr: false });
+const Line = dynamic(() => import('recharts').then(mod => ({ default: mod.Line })), { ssr: false });
+const AreaChart = dynamic(() => import('recharts').then(mod => ({ default: mod.AreaChart })), { ssr: false });
+const Area = dynamic(() => import('recharts').then(mod => ({ default: mod.Area })), { ssr: false });
+const BarChart = dynamic(() => import('recharts').then(mod => ({ default: mod.BarChart })), { ssr: false });
+const Bar = dynamic(() => import('recharts').then(mod => ({ default: mod.Bar })), { ssr: false });
+const PieChart = dynamic(() => import('recharts').then(mod => ({ default: mod.PieChart })), { ssr: false });
+const Pie = dynamic(() => import('recharts').then(mod => ({ default: mod.Pie })), { ssr: false });
+const Cell = dynamic(() => import('recharts').then(mod => ({ default: mod.Cell })), { ssr: false });
+const XAxis = dynamic(() => import('recharts').then(mod => ({ default: mod.XAxis })), { ssr: false });
+const YAxis = dynamic(() => import('recharts').then(mod => ({ default: mod.YAxis })), { ssr: false });
+const CartesianGrid = dynamic(() => import('recharts').then(mod => ({ default: mod.CartesianGrid })), { ssr: false });
+const Tooltip = dynamic(() => import('recharts').then(mod => ({ default: mod.Tooltip })), { ssr: false });
+const Legend = dynamic(() => import('recharts').then(mod => ({ default: mod.Legend })), { ssr: false });
+const ResponsiveContainer = dynamic(() => import('recharts').then(mod => ({ default: mod.ResponsiveContainer })), { ssr: false });
 
 interface SOPAnalyticsPageProps {
   params: Promise<{ locale: string }>;
