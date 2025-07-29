@@ -268,7 +268,7 @@ export const createConnectionPool = (maxConnections: number = 10) => {
   const connections: SupabaseClient<Database>[] = [];
   
   for (let i = 0; i < maxConnections; i++) {
-    connections.push(createClient(supabaseUrl, supabaseAnonKey, {
+    connections.push(createSupabaseClient(supabaseUrl, supabaseAnonKey, {
       auth: {
         persistSession: false,
         autoRefreshToken: false,
