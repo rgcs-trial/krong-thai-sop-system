@@ -20,7 +20,7 @@ import {
   User,
   Settings,
   Calendar,
-  Tool,
+  Wrench,
   Shield,
   ChefHat,
   Utensils,
@@ -439,7 +439,7 @@ const QRScannerOverlay: React.FC<QRScannerOverlayProps> = ({
       case 'safety': return <Shield className="w-4 h-4" />;
       case 'dining': return <Utensils className="w-4 h-4" />;
       case 'storage': return <Archive className="w-4 h-4" />;
-      default: return <Tool className="w-4 h-4" />;
+      default: return <Wrench className="w-4 h-4" />;
     }
   }, []);
 
