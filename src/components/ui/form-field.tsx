@@ -9,20 +9,29 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-// Base form field wrapper with consistent spacing and error handling
+// Base form field wrapper with consistent spacing and error/success handling
 interface FormFieldProps {
   children: React.ReactNode;
   error?: string;
+  success?: boolean;
   className?: string;
 }
 
-export function FormField({ children, error, className }: FormFieldProps) {
+export function FormField({ children, error, success, className }: FormFieldProps) {
   return (
     <div className={cn("space-y-2", className)}>
       {children}
       {error && (
         <p className="text-sm text-red-800 bg-red-50 px-2 py-1 rounded border-l-4 border-red-500 mt-1" role="alert">
           {error}
+        </p>
+      )}
+      {success && !error && (
+        <p className="text-sm text-green-800 bg-green-50 px-2 py-1 rounded border-l-4 border-green-500 mt-1 flex items-center gap-1">
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+          Valid
         </p>
       )}
     </div>
