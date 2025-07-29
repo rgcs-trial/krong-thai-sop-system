@@ -23,6 +23,49 @@ interface RestaurantErrorDisplayProps {
   className?: string;
 }
 
+// Helper function to get user-friendly field names
+function getFieldDisplayName(field: string, locale: 'en' | 'fr'): string {
+  const fieldNames = {
+    en: {
+      name: 'Restaurant Name (English)',
+      name_fr: 'Restaurant Name (French)',
+      street_address: 'Street Address (English)',
+      street_address_fr: 'Street Address (French)',
+      city: 'City (English)',
+      city_fr: 'City (French)',
+      state_province: 'State/Province (English)',
+      state_province_fr: 'State/Province (French)',
+      postal_code: 'ZIP/Postal Code',
+      country: 'Country',
+      phone: 'Phone Number',
+      email: 'Email Address',
+      timezone: 'Timezone',
+      capacity: 'Seating Capacity',
+      operational_hours: 'Operating Hours'
+    },
+    fr: {
+      name: 'Nom du restaurant (Anglais)',
+      name_fr: 'Nom du restaurant (Français)',
+      street_address: 'Adresse civique (Anglais)',
+      street_address_fr: 'Adresse civique (Français)',
+      city: 'Ville (Anglais)',
+      city_fr: 'Ville (Français)',
+      state_province: 'État/Province (Anglais)',
+      state_province_fr: 'État/Province (Français)',
+      postal_code: 'Code postal',
+      country: 'Pays',
+      phone: 'Numéro de téléphone',
+      email: 'Adresse e-mail',
+      timezone: 'Fuseau horaire',
+      capacity: 'Capacité d\'accueil',
+      operational_hours: 'Heures d\'ouverture'
+    }
+  };
+
+  return fieldNames[locale][field as keyof typeof fieldNames[typeof locale]] || 
+         field.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
 export function RestaurantErrorDisplay({
   error,
   locale,
@@ -128,13 +171,24 @@ export function RestaurantErrorDisplay({
         
         {/* Show validation details if available */}
         {errorObj.code === 'VALIDATION_ERROR' && errorObj.details && (
-          <div className="mt-3 space-y-1">
+          <div className="mt-4 space-y-2">
+            <div className="text-sm font-semibold text-red-900 mb-2">
+              {locale === 'en' ? 'Please fix the following issues:' : 'Veuillez corriger les problèmes suivants :'}
+            </div>
             {Object.entries(errorObj.details).map(([field, fieldErrors]: [string, any]) => {
               if (fieldErrors && typeof fieldErrors === 'object' && fieldErrors._errors) {
+                const fieldName = getFieldDisplayName(field, locale);
                 return (
-                  <div key={field} className="text-sm bg-red-100 p-2 rounded border-l-4 border-red-600">
-                    <span className="font-semibold capitalize text-red-900">{field.replace('_', ' ')}:</span>{' '}
-                    <span className="text-red-800">{fieldErrors._errors.join(', ')}</span>
+                  <div key={field} className="text-sm bg-red-100 p-3 rounded-lg border-l-4 border-red-600">
+                    <div className="flex items-start gap-2">
+                      <svg className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                      </svg>
+                      <div>
+                        <span className="font-semibold text-red-900">{fieldName}:</span>{' '}
+                        <span className="text-red-800">{fieldErrors._errors.join(', ')}</span>
+                      </div>
+                    </div>
                   </div>
                 );
               }
