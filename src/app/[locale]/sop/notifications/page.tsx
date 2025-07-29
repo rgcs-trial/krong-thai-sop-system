@@ -42,7 +42,7 @@ interface SOPNotificationsPageProps {
   params: Promise<{ locale: string }>;
 }
 
-interface Notification {
+interface SOPNotification {
   id: string;
   type: 'info' | 'warning' | 'success' | 'reminder' | 'update';
   title: string;
