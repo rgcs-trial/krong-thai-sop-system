@@ -160,7 +160,7 @@ const DEFAULT_SETTINGS: NotificationSettings = {
 
 export default function SOPNotificationsPage({ params }: SOPNotificationsPageProps) {
   const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
-  const [notifications, setNotifications] = useState<Notification[]>(MOCK_NOTIFICATIONS);
+  const [notifications, setNotifications] = useState<SOPNotification[]>(MOCK_NOTIFICATIONS);
   const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>(DEFAULT_SETTINGS);
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState<string>('all');
