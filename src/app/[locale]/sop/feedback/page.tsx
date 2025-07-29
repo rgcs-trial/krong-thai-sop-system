@@ -117,8 +117,8 @@ const MOCK_FEEDBACK: ExistingFeedback[] = [
   }
 ];
 
-export default function SOPFeedbackPage({ params }: SOPFeedbackPageProps) {
-  const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
+// Inner component that uses useSearchParams
+function FeedbackContent({ locale }: { locale: string }) {
   const [sop, setSop] = useState<SOPDocument>(MOCK_SOP);
   const [feedback, setFeedback] = useState<FeedbackSubmission>({
     rating: 5,
@@ -140,11 +140,6 @@ export default function SOPFeedbackPage({ params }: SOPFeedbackPageProps) {
   const t = useTranslations('sop');
   const { user } = useAuthStore();
 
-  // Resolve params
-  useEffect(() => {
-    params.then(setResolvedParams);
-  }, [params]);
-
   // Get SOP ID from query params
   useEffect(() => {
     const sopId = searchParams.get('sop');
@@ -152,12 +147,6 @@ export default function SOPFeedbackPage({ params }: SOPFeedbackPageProps) {
       // In a real app, fetch SOP data by ID
     }
   }, [searchParams]);
-
-  if (!resolvedParams) {
-    return <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-    </div>;
-  }
 
   const { locale } = resolvedParams;
 
