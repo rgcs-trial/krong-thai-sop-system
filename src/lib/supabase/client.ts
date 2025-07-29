@@ -72,7 +72,7 @@ export const createAuthenticatedClient = async (
   userId: string,
   restaurantId: string
 ): Promise<SupabaseClient<Database>> => {
-  const client = createClient(supabaseUrl, supabaseAnonKey, {
+  const client = createSupabaseClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
