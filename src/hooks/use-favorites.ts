@@ -72,8 +72,8 @@ export function useFavorites() {
   }, []);
 
   // Remove item from favorites
-  const removeFromFavorites = useCallback((id: string, type: 'category' | 'document') => {
-    setFavorites(prev => prev.filter(fav => !(fav.id === id && fav.type === type)));
+  const removeFromFavorites = useCallback((id: string, type?: 'category' | 'document' | 'sop') => {
+    setFavorites(prev => prev.filter(fav => type ? !(fav.id === id && fav.type === type) : fav.id !== id));
   }, []);
 
   // Toggle favorite status
