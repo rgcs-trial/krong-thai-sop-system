@@ -616,3 +616,37 @@ function FeedbackContent({ locale }: { locale: string }) {
     </div>
   );
 }
+
+export default function SOPFeedbackPage({ params }: SOPFeedbackPageProps) {
+  const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  // Track client-side mounting
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Resolve params
+  useEffect(() => {
+    params.then(setResolvedParams);
+  }, [params]);
+
+  // Show loading while params are resolving or client is not ready
+  if (!resolvedParams || !isClient) {
+    return <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+    </div>;
+  }
+
+  const { locale } = resolvedParams;
+
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+      </div>
+    }>
+      <FeedbackContent locale={locale} />
+    </Suspense>
+  );
+}
