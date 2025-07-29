@@ -134,9 +134,9 @@ export default function RestaurantTestPage() {
               <Button
                 size="sm"
                 variant={locale === 'fr' ? 'default' : 'outline'}
-                onClick={() => setLocale('th')}
+                onClick={() => setLocale('fr')}
               >
-                TH
+                FR
               </Button>
             </div>
 
