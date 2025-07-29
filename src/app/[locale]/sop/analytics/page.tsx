@@ -32,11 +32,15 @@ import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/lib/stores/auth-store';
 import dynamic from 'next/dynamic';
 
-// Create a wrapper component that loads all chart components
-const ChartComponents = dynamic(() => import('recharts'), { 
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center h-48">Loading chart...</div>
-});
+// Simple chart placeholder component for SSR compatibility
+const ChartPlaceholder = ({ height = 200 }: { height?: number }) => (
+  <div className="flex items-center justify-center bg-gray-50 rounded-lg" style={{ height }}>
+    <div className="text-center">
+      <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-2 animate-pulse"></div>
+      <p className="text-sm text-gray-500">Chart loading...</p>
+    </div>
+  </div>
+);
 
 interface SOPAnalyticsPageProps {
   params: Promise<{ locale: string }>;
