@@ -215,6 +215,35 @@ export function RestaurantForm({
         [field]: ''
       }));
     }
+
+    // Real-time validation for specific fields
+    if (field === 'email' && value && value.trim()) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        setErrors(prev => ({
+          ...prev,
+          email: locale === 'en' ? 'Invalid email format' : 'Format d\'email invalide'
+        }));
+      }
+    }
+
+    if (field === 'phone' && value && value.trim()) {
+      if (!/^\+?[\d\s-()]+$/.test(value)) {
+        setErrors(prev => ({
+          ...prev,
+          phone: locale === 'en' ? 'Invalid phone format' : 'Format de téléphone invalide'
+        }));
+      }
+    }
+
+    if (field === 'capacity' && value !== undefined && value !== '') {
+      const numValue = typeof value === 'string' ? parseInt(value) : value;
+      if (isNaN(numValue) || numValue < 1) {
+        setErrors(prev => ({
+          ...prev,
+          capacity: locale === 'en' ? 'Capacity must be at least 1' : 'La capacité doit être d\'au moins 1'
+        }));
+      }
+    }
   };
 
   const handleOperationalHoursChange = (day: string, field: 'open' | 'close' | 'closed', value: string | boolean) => {
