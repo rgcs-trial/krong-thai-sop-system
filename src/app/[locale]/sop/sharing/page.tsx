@@ -140,7 +140,7 @@ const MOCK_ACTIVITIES: ShareActivity[] = [
   },
 ];
 
-export default function SOPSharingPage({ params }: SOPSharingPageProps) {
+function SOPSharingContent({ params }: SOPSharingPageProps) {
   const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
   const [sop, setSop] = useState<SOPDocument>(MOCK_SOP);
   const [selectedRecipients, setSelectedRecipients] = useState<Set<string>>(new Set());
