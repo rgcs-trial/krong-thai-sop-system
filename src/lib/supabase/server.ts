@@ -3,7 +3,7 @@
  * For use in API routes, server actions, and middleware
  */
 
-import { createClient } from '@supabase/supabase-js';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/types/supabase';
 
 export { supabaseAdmin as default, supabaseAdmin, getSupabaseClient } from '../supabase';
@@ -25,7 +25,7 @@ export function createClient() {
     throw new Error('Missing SUPABASE_SERVICE_ROLE_KEY environment variable');
   }
   
-  return createClient<Database>(supabaseUrl, supabaseServiceKey, {
+  return createSupabaseClient<Database>(supabaseUrl, supabaseServiceKey, {
     auth: {
       persistSession: false,
       autoRefreshToken: false,
