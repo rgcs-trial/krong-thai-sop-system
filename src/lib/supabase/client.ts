@@ -20,7 +20,7 @@ if (!supabaseAnonKey) {
 }
 
 // Client-side Supabase client (with RLS)
-export const supabase: SupabaseClient<Database> = createClient(
+export const supabase: SupabaseClient<Database> = createSupabaseClient(
   supabaseUrl,
   supabaseAnonKey,
   {
