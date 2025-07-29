@@ -220,7 +220,7 @@ export function RestaurantErrorDisplay({
                 onClick={onDismiss}
                 className="border-red-600 text-red-800 hover:bg-red-100 hover:text-red-900 focus:ring-red-500"
               >
-                {locale === 'en' ? 'Dismiss' : locale === 'fr' ? 'Fermer' : 'ปิด'}
+                {locale === 'en' ? 'Dismiss' : 'Fermer'}
               </Button>
             )}
           </div>
