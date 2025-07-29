@@ -259,7 +259,7 @@ export function RestaurantForm({
               : (locale === 'en' ? 'Edit Restaurant Location' : 'Modifier le restaurant')
             }
           </h1>
-          <p className="text-gray-600">
+          <p className="text-slate-700">
             {locale === 'en' 
               ? 'Enter restaurant details and operational settings' 
               : 'Entrez les détails du restaurant et les paramètres opérationnels'
@@ -467,13 +467,13 @@ export function RestaurantForm({
                   const dayHours = formData.operational_hours?.[day.key] || { open: '09:00', close: '22:00', closed: false };
                   
                   return (
-                    <div key={day.key} className="p-4 border border-gray-200 rounded-lg bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                    <div key={day.key} className="p-4 border-2 border-slate-300 rounded-lg bg-slate-50/80 hover:bg-slate-100/90 hover:border-slate-400 transition-all duration-200">
                       <div className="flex items-center justify-between mb-3">
-                        <h4 className="font-medium text-gray-900">
+                        <h4 className="font-semibold text-krong-black text-base">
                           {locale === 'en' ? day.en : day.fr}
                         </h4>
                         <div className="flex items-center space-x-2">
-                          <FormLabel htmlFor={`${day.key}_closed`} className="text-sm font-normal">
+                          <FormLabel htmlFor={`${day.key}_closed`} className="text-sm font-medium text-krong-black">
                             {locale === 'en' ? 'Closed' : 'Fermé'}
                           </FormLabel>
                           <Switch
@@ -495,7 +495,7 @@ export function RestaurantForm({
                               type="time"
                               value={dayHours.open || '09:00'}
                               onChange={(e) => handleOperationalHoursChange(day.key, 'open', e.target.value)}
-                              className={errors[`${day.key}_hours`] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                              className={errors[`${day.key}_hours`] ? 'border-red-600 focus:border-red-600 focus:ring-red-500 bg-red-50' : 'border-slate-400 focus:border-krong-red bg-white'}
                               aria-invalid={errors[`${day.key}_hours`] ? 'true' : 'false'}
                             />
                           </FormField>
@@ -508,7 +508,7 @@ export function RestaurantForm({
                               type="time"
                               value={dayHours.close || '22:00'}
                               onChange={(e) => handleOperationalHoursChange(day.key, 'close', e.target.value)}
-                              className={errors[`${day.key}_hours`] ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}
+                              className={errors[`${day.key}_hours`] ? 'border-red-600 focus:border-red-600 focus:ring-red-500 bg-red-50' : 'border-slate-400 focus:border-krong-red bg-white'}
                               aria-invalid={errors[`${day.key}_hours`] ? 'true' : 'false'}
                             />
                           </FormField>
