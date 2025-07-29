@@ -16,7 +16,7 @@ import { Separator } from '@/components/ui/separator';
 interface Restaurant {
   id: string;
   name: string;
-  name_th: string;
+  name_th: string; // Note: API still uses name_th for storage
   address?: string;
   address_th?: string;
   phone?: string;
