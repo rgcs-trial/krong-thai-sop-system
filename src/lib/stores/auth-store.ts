@@ -416,6 +416,11 @@ export const useAuthStore = create<AuthStore>()(
 // Generate canvas fingerprint for device identification
 async function generateCanvasFingerprint(): Promise<string> {
   try {
+    // Check if we're in the browser environment
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return 'ssr-canvas';
+    }
+    
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     
