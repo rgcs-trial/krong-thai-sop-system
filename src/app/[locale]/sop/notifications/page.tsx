@@ -75,7 +75,7 @@ interface NotificationSettings {
 }
 
 // Mock notifications
-const MOCK_NOTIFICATIONS: Notification[] = [
+const MOCK_NOTIFICATIONS: SOPNotification[] = [
   {
     id: '1',
     type: 'reminder',
