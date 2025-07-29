@@ -274,8 +274,42 @@ export const dbHelpers = {
 
 /**
  * Export createClient function for API routes that need to create their own clients
+ * This exports the raw createClient from Supabase - most API routes should use the server version
  */
 export { createClient } from '@supabase/supabase-js';
+
+/**
+ * Configured createClient function that returns a client with our app settings
+ * Use this when you need a new client instance with the same configuration as the main client
+ */
+export function createConfiguredClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable');
+  }
+  
+  if (!supabaseAnonKey) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
+  }
+  
+  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      // Disable automatic auth since we're using custom PIN authentication
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+    db: {
+      schema: 'public',
+    },
+    global: {
+      headers: {
+        'x-application-name': 'krong-thai-sop-system',
+      },
+    },
+  });
+}
 
 /**
  * Type exports for use throughout the application
