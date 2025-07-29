@@ -149,9 +149,10 @@ export default function SOPSettingsPage({ params }: SOPSettingsPageProps) {
   // Load user settings
   useEffect(() => {
     // In a real app, load settings from API or localStorage
-    const savedSettings = localStorage.getItem('sop-settings');
-    if (savedSettings) {
-      try {
+    if (typeof window !== 'undefined') {
+      const savedSettings = localStorage.getItem('sop-settings');
+      if (savedSettings) {
+        try {
         const parsed = JSON.parse(savedSettings);
         setSettings({ ...DEFAULT_SETTINGS, ...parsed });
       } catch (error) {
