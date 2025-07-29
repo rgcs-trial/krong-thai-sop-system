@@ -116,6 +116,8 @@ export function useFavorites() {
 
   // Export favorites (for backup)
   const exportFavorites = useCallback(() => {
+    if (typeof window === 'undefined') return;
+    
     const dataStr = JSON.stringify(favorites, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     
