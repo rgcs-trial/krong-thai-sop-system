@@ -45,7 +45,7 @@ export function LocationSelector({
   const [error, setError] = useState<string>('');
   const [showAddForm, setShowAddForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string>('');
+  const [submitError, setSubmitError] = useState<any>(null);
 
   useEffect(() => {
     loadRestaurants();
@@ -111,7 +111,13 @@ export function LocationSelector({
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to create restaurant');
+        // Create structured error object for detailed error display
+        const errorObj = {
+          code: result.code || 'CREATE_FAILED',
+          message: result.error || 'Failed to create restaurant',
+          details: result.details || null
+        };
+        throw errorObj;
       }
 
       // Refresh restaurants list
@@ -123,13 +129,23 @@ export function LocationSelector({
         setSelectedRestaurant(result.restaurant);
       }
 
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
-      setSubmitError(locale === 'en' 
-        ? `Failed to create restaurant: ${errorMessage}`
-        : `ไม่สามารถสร้างร้านอาหารได้: ${errorMessage}`
-      );
+    } catch (err: any) {
       console.error('Error creating restaurant:', err);
+      
+      // If it's a structured error object, throw it for RestaurantErrorDisplay
+      if (err.code && err.message) {
+        throw err;
+      }
+      
+      // Otherwise create a generic error
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      throw {
+        code: 'CREATE_FAILED',
+        message: locale === 'en' 
+          ? `Failed to create restaurant: ${errorMessage}`
+          : `ไม่สามารถสร้างร้านอาหารได้: ${errorMessage}`,
+        details: null
+      };
     } finally {
       setIsSubmitting(false);
     }
@@ -137,23 +153,14 @@ export function LocationSelector({
 
   const handleCancelAdd = () => {
     setShowAddForm(false);
-    setSubmitError('');
+    setSubmitError(null);
   };
 
   // Show add restaurant form
   if (showAddForm) {
     return (
       <>
-        {submitError && (
-          <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md">
-            <Alert variant="destructive">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-              <AlertDescription>{submitError}</AlertDescription>
-            </Alert>
-          </div>
-        )}
+        {/* Removed - error display now handled by RestaurantForm internally */}
         <RestaurantForm
           mode="create"
           onSubmit={handleAddRestaurant}
