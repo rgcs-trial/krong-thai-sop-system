@@ -152,7 +152,7 @@ const CATEGORIES = [
   { id: '4', name: 'Kitchen Operations', name_fr: 'Opérations de Cuisine' },
 ];
 
-export default function SOPSearchPage({ params }: SOPSearchPageProps) {
+function SOPSearchContent({ params }: SOPSearchPageProps) {
   const [resolvedParams, setResolvedParams] = useState<{ locale: string } | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SOPSearchResult[]>([]);
