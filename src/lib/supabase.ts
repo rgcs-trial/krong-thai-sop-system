@@ -294,7 +294,7 @@ export function createConfiguredClient() {
     throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
   }
   
-  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey, {
     auth: {
       // Disable automatic auth since we're using custom PIN authentication
       autoRefreshToken: false,
