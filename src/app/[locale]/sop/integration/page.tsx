@@ -11,7 +11,7 @@ import {
   ArrowLeft,
   CheckCircle,
   AlertTriangle,
-  Refresh,
+  RefreshCw,
   Plus,
   Trash2,
   Eye,
@@ -345,7 +345,7 @@ export default function SOPIntegrationPage({ params }: SOPIntegrationPageProps) 
     switch (status) {
       case 'connected': return CheckCircle;
       case 'error': return AlertTriangle;
-      case 'pending': return Refresh;
+      case 'pending': return RefreshCw;
       default: return AlertTriangle;
     }
   };
@@ -500,7 +500,7 @@ export default function SOPIntegrationPage({ params }: SOPIntegrationPageProps) 
                               onClick={() => handleSyncIntegration(integration.id)}
                               className="flex-1 gap-1"
                             >
-                              <Refresh className="w-3 h-3" />
+                              <RefreshCw className="w-3 h-3" />
                               {t('integration.sync')}
                             </Button>
                             <Button
